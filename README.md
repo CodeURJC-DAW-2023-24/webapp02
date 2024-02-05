@@ -1,7 +1,7 @@
 # webapp02
 
 ## Nombre de la Aplicación
-C&R
+C&Read
 ## Integrantes
 - Javier Vallejo Fernandez - j.vallejo.2019@alumnos.urjc.es - Javier-Vallejo
 - David Rubio Caballero - d.rubio.2019@alumnos.urjc.es - David-Rubio-Caballlero
