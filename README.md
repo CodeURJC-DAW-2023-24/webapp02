@@ -10,7 +10,10 @@
 Link al tablero de trello: https://trello.com/b/3sUtM4Yb
 ## Descripción de la APP
 ### - Entidades
-
+* Usuario
+* Libro
+* Serie
+* Comentario o Categoría
 ### - Tipos y Permisos de los usuarios
 * Usuario anónimo: Podrá visualizar el catálogo de libros de la web, pero no podrá registrar cuáles tiene adquiridos ni recibir ningún tipo de noticia.
 * Usuario registrado: Posee un perfil en el que puede registrar que libros posee, recibir noticias de aquellos libros que indicó que le interesaban y están a punto de publicarse, comentar en los foros, y escribir reseñas en los libros.
