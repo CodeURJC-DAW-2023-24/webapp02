@@ -25,5 +25,9 @@ Link al tablero de trello: https://trello.com/b/3sUtM4Yb
 * Utilizaremos gráficos en los prefiles para mostrarle a los usuarios su spropias estadíasticas. Estos gráficos serán un gráfico circular o un gráfico de tabla. 
 ### - Tecnología complementaria
 * Se utilizará tecnología de API REST para las bibliotecas de libros, series o películas.
+* APIs a utilizar:
+** OpenLibrary para los libros (https://openlibrary.org/dev/docs/api/search)
+** AniList para anime y manga
+** Series y peliculas (https://apimovieseries-explication.vercel.app/)
 ### - Algoritmo o consulta avanzada
-* Se implementará un algoritmo que modifique el contenido mostrado teniendo en cuenta las valoraciónes de cada elemento.
+* Se implementará un algoritmo en la fase de búsqueda que modifique el contenido mostrado teniendo en cuenta las valoraciones de cada elemento. Además, habrá un algoritmo de recomendaciones personalizadas en base a la similitud de reseñas con otros usuarios (si otro usuario coincide en valoraciones altas con la mitad de nuestro contenido, se considerará que tiene gustos similares).
