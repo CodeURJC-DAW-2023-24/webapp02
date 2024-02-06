@@ -1,0 +1,8 @@
+
+
+body {
+    background-color: #e6e6fa; 
+    background-image: url('ImagenesPaginaPrincipal/undeadunluck177CP.png');
+    background-size: cover; /* Para cubrir toda la pantalla */
+    background-repeat: no-repeat; /* Para evitar que la imagen se repita */
+}
