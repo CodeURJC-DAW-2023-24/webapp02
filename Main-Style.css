@@ -1,0 +1,224 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body{
+  /* background-color: #F6F2FF; */
+  /* background: linear-gradient(45deg, rgb(235, 191, 235), rgb(176, 179, 246)); */
+  background: linear-gradient(90deg, rgb(199, 202, 253), rgb(238, 232, 242));
+  width: 100%;
+  min-height: 100vh;
+
+}
+
+
+
+.box_filters{
+  margin-top: 20px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+.line{
+  margin-top: px;
+  background-color: #5B4A84;
+  width: 75%;
+  height: 5px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+#filter{
+  font-size: 130%;
+  text-align: center;
+}
+
+.filter-container{
+  float: right;
+  width: 25%;
+  margin-top: 20px;
+  margin: 20px;
+  border: 20cm #5B4A84;
+  background-color: white;
+}
+
+.books-container{
+  width: 70%;
+  margin-top: 20px;
+  margin: 20px;
+  justify-content: left;
+
+}
+
+#row{
+  display: flex;
+  flex-wrap: wrap;
+
+}
+.card-img-top {
+  width: 100%;
+  height: 15vw;
+  object-fit:fill;
+}
+.card{
+  flex: 0 0 max-content;
+  margin: 10px 20px;
+  
+}
+#book-btn{
+  background-color: #5B4A84;
+  color: #F6F2FF;
+}
+
+.modal-img{
+  width: 30%;
+  height: 10cm;
+  object-fit:fill;
+  display: block;
+}
+.modal{
+  height: 30cm;
+}
+
+
+
+
+
+
+/* boton favorito */
+
+/* Estilos para el input de checkbox */
+.favorite-checkbox {
+  display: none; /* Oculta el checkbox */
+}
+
+/* Estilos para el contenedor del botón de favorito */
+.favorite-container {
+  display: inline-block;
+  position: relative;
+}
+
+/* Estilos para el botón de favorito */
+.favourite {
+  margin: 6px;
+  align-items: center;
+  border-radius: 5px;
+  background: red;
+  color: white;
+  cursor: pointer;
+  display: flex;
+  font-weight: 800;
+  height: 35px;
+  justify-content: center;
+  padding: 0 14px;
+  transition: .2s;
+}
+
+.valoracion {
+  margin-top: 5px; /* Espacio superior */
+  margin-bottom: 5px; /* Espacio inferior */
+  padding: 5px 10px; /* Espaciado interno */
+  border-radius: 5px; /* Borde redondeado */
+}
+
+.btn {
+  margin: 5px;
+}
+.favourite svg {
+  align-self: right;
+  width: 20px; 
+}
+
+/* Estilos para el botón de favorito cuando está marcado */
+.favorite-checkbox:checked + .favorite-container .favourite {
+  color: rgb(255, 174, 188)
+   /* Cambia el color del fondo cuando el checkbox está marcado */
+}
+
+
+.col-md-4  {
+  align-self: center;
+  justify-self: center;
+}
+
+
+.col-md-5{
+  margin-left: auto;
+  background-color: white;
+  border: 3px solid #ced4da;
+  
+}
+.col-md-6{
+  align-self: right;
+  margin: auto;  
+  background-color: white;
+  border: 3px solid #ced4da;
+  
+}
+
+.col-md-3{
+  align-self: right;
+  margin: auto;  
+  background-color: white;
+  border: 3px solid #ced4da;
+  
+}
+
+
+#modal-row {
+  background-color: white;
+}
+
+.campo {
+  margin: 8px;
+  background-color: rgb(222, 156, 77);
+  border: 3px solid rgb(222, 156, 77);
+}
+
+
+
+/* Estilo para la reseña */
+.reseña {
+  display: flex;
+  
+  align-items: flex-start;
+  border: 3px solid #ced4da; 
+  border-radius: 5px; 
+  margin: 5px;
+
+}
+
+/* Estilo para la reseña */
+
+
+
+/* Estilo para la imagen de perfil */
+.perfil img {
+  width: 50px; /* Ajusta el tamaño de la imagen según sea necesario */
+  height: 50px; /* Hace que la altura se ajuste automáticamente para mantener la proporción */
+  border-radius: 50%; /* Para hacerla circular */
+  margin-right: 10px;
+  margin: 5px;
+}
+
+
+
+/* Estilo para las estrellas (iconos) */
+.fa-star{
+  font-size: 20px; /* Tamaño de las estrellas */
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
