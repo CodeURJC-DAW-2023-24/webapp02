@@ -4,17 +4,19 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
-    /*background: linear-gradient(to bottom right, #ffcccb, #c1c1ff);*/
-    background: url('Imagenes/fondosuave.jpg') center center fixed; /* Ruta de la imagen de fondo*/
+    background: url('Imagenes/fondosuave.jpg') center center fixed;
     background-size: cover;
 }
 
 form {
     text-align: center;
-    background-color: rgba(255, 255, 255, 0.8); /* Fondo blanco semi-transparente dentro del formulario */
-    padding: 40px; /* Tamaño caja */
-    border-radius: 10px; /* Bordes redondeados */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra */
+    background-color: rgba(255, 255, 255, 0.8);
+    padding: 80px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    height: 400px;
+    max-width: 80%;
 }
 
 .circle-container {
@@ -22,8 +24,8 @@ form {
     border: 2px solid #000;
     border-radius: 50%;
     display: inline-block;
-    padding: 20px; /* Ajusta el espaciado según sea necesario */
-    margin-bottom: 10px;
+    padding: 20px;
+    margin-bottom: 20px;
 }
 
 .avatar-container {
@@ -31,15 +33,15 @@ form {
 }
 
 .avatar {
-    width: 80px; /* Ajusta el tamaño según sea necesario */
-    height: 80px;
+    width: 120px; 
+    height: 120px;
     border-radius: 50%;
     overflow: hidden;
 }
 
 input {
-    width: 200px; /* Ajusta el ancho según sea necesario */
-    padding: 8px;
+    width: 100%; 
+    padding: 12px; 
     margin-bottom: 16px;
     box-sizing: border-box;
 }
@@ -47,9 +49,9 @@ input {
 input[type="submit"] {
     background-color: #f57926;
     color: #fff;
-    padding: 10px;
+    padding: 14px; 
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
 }
 
