@@ -4,9 +4,9 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
-    background: linear-gradient(to bottom right, #ffcccb, #c1c1ff);
-    /*background: url('Imagenes/fondoanime.jpg') center center fixed; /* Ruta de la imagen de fondo 
-    background-size: cover;*/
+    /*background: linear-gradient(to bottom right, #ffcccb, #c1c1ff);*/
+    background: url('Imagenes/fondosuave.jpg') center center fixed; /* Ruta de la imagen de fondo*/
+    background-size: cover;
 }
 
 form {
