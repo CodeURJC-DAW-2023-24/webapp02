@@ -1,0 +1,139 @@
+
+
+body{
+    background-color: #EFEFEF;
+    background-blend-mode: multiply;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-y: auto
+}
+
+/* CAROUSEL */
+#carouselSection{
+    margin:30px;
+    margin-top: 105px;
+}
+
+#carouselTitle{
+    background-color: #DD8825;
+    color:white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 1px;
+    border-top-left-radius:5px;
+    border-top-right-radius:5px;
+    width: max-content;
+    font-size: 30px;
+}
+.carousel-inner{
+    border-top-right-radius:10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border:3px;
+    border-color: #DD8825;
+    border-style: solid;
+}
+.carousel-item{
+    height: 13rem;
+    background-color: #D4D8FF;
+}
+
+
+
+/* TOP FILMS */
+#tops
+{
+    float: left;
+    width: fit-content;
+}
+
+#topSection{
+    width: fit-content;
+    margin:30px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 10px;
+    border:3px;
+    border-color: #D4D8FF;
+    border-style: solid;
+}
+
+#topTitle{
+    background-color: #DD8825;
+    color:white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 1px;
+    border-radius: 5px;
+    width: max-content;
+    font-size: 30px;
+}
+
+#topList{
+    margin: 15px;
+}
+
+
+
+/* NEWS */
+#news
+{
+    width : max-content;
+    float: left;
+    margin:30px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    border:3px;
+    border-color: #D4D8FF;
+    border-style: solid;
+
+}
+
+#newsTitle{
+    background-color: #DD8825;
+    color:white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 1px;
+    border-radius: 5px;
+    width: max-content;
+}
+
+#new{
+    background-color:#EFEFEF;
+    margin: 20px;
+    width:40rem;
+    padding: 10px;
+    border-color: #D4D8FF;
+    border-style: solid;
+    border-radius: 10px;
+    
+}
+
+#newTitle{
+    background-color: #DD8825;
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 1px;
+    border-radius: 5px;
+}
+
+#newDescription{
+    padding: 15px;
+    background-color: white;
+    margin: 10px;
+    border-radius: 5px;
+}
+
+#newLink{
+    padding: 10px;
+    background-color: #494F87;
+    
+    color: white;
+    border-radius: 5px;
+    width: max-content;
+}
+
