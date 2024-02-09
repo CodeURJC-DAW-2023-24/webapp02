@@ -1,0 +1,45 @@
+/* STADISTICS */
+#stadisticSection{
+    margin-top: 30px;
+    margin-right: 20px;
+    float: right;
+    width: fit-content;
+    background-color: white;
+    border-radius: 10px;
+    border:3px;
+    border-color: #b4e2ff;
+    border-style: solid;
+}
+#stadisticTitle{
+    background-color: #257edd;
+    color:white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 1px;
+    padding-top: 5px;
+    border-radius: 5px;
+    width: max-content;
+    font-size: 30px;
+}
+#stadisticList{
+    margin: 15px;
+}
+
+/* USER BANNER */
+#bannerSection{
+    margin: 15px;
+    margin-top: 105px;
+    background-image: url(EjemploBanner.png);
+}
+#bannerImage{
+  width: 100%;
+  height: 250px;
+  background-position: center;
+}
+
+/* ADMIN SECTION */
+#adminSection{
+    margin: 30px;
+    margin-top: 105px;
+    
+}
