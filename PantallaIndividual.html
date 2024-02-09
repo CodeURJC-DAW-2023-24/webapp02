@@ -3,12 +3,8 @@
 
     <head>
         <meta charset="utf-8">
-        <meta name="author" content="Aurora">
-        <meta name="description" content="Pag-DAW">
-        <meta name="keywords" content="HTML, CSS, Bootstrap">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
         <!--Título-->
-        <title>BEE Principal</title>
+        <title>Pantalla Individual</title>
         <!--Icono-->
         <link rel="icon" type="image/x-icon" href="imagenes/#">
         <!--Bootstrap-->
@@ -17,10 +13,59 @@
 
         <!--CSS-->
         <link rel="stylesheet" href="./Main-Style.css">
+        <link rel="stylesheet" href="./Code/CSS/NavbarStyle.css">
     </head>
 
     <body>
           
+
+          <!-- NAVBAR -->
+        <nav id="nav" class="navbar navbar-expand-lg navbar-dark fixed-top">
+          <div class="container">
+              <!-- LOGO -->
+            <a class="navbar-brand text-white align-text-center text-uppercase" href="#">
+              <img src="./Code/Images/LogoPredeterminado.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-center rounded-circle">
+              <strong>C&Read</strong></a>
+              <!-- TOGGLE BUTTON-->
+            <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" 
+            aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- SIDEBAR -->
+            <div class="sidebar offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+              <!-- SIDEBAR HEADER-->
+              <div class="offcanvas-header text-white border-bottom">
+                <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Menu</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+              </div>
+              <!-- SIDEBAR BODY-->
+              <div class="offcanvas-body d-flex flex-column flex-lg-row p-2">
+                  <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
+                      <li class="nav-item mx-2">
+                          <a class="nav-link text-uppercase" href="#">Series</a>
+                      </li>
+                      <li class="nav-item mx-2">
+                          <a class="nav-link text-uppercase" href="#">Películas</a>
+                      </li>
+                      <li class="nav-item mx-2">
+                          <a class="nav-link text-uppercase" href="#">Libros</a>
+                      </li>
+                  </ul>
+              
+              <!-- SIDEBAR PROFILE OR LOGIN/SINGOUT-->
+                  <div class="d-flex justify-content-center align-item-center gap-3">
+                      <a class="navbar-brand text-white align-text-center text-uppercase" href="#">
+                          <img src="./Code/Images/ImagenPerfilPredeterminada.png" alt="Logo" width="50" height="50" class="align-text-center rounded-circle">
+                      <strong>Perfil</strong></a>
+                  </div>
+              </div>
+            </div>
+          </div>
+      </nav>
+
+      <div></div>
+
           <div class="" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-xl">
               <div class="modal-content">
