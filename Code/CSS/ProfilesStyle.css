@@ -37,6 +37,11 @@
   background-position: center;
 }
 
+#bannerLogo{
+    display: grid;
+    place-items: center;
+}
+
 /* ADMIN SECTION */
 #adminSection{
     margin: 30px;
