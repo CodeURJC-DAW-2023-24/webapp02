@@ -4,7 +4,7 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
-    background: url('Imagenes/fondosuave.jpg') center center fixed;
+    background: url('ImagenesCSS/fondosuave.jpg') center center fixed;
     background-size: cover;
 }
 
