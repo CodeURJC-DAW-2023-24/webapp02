@@ -17,6 +17,8 @@
     padding-right: 10px;
     padding-bottom: 1px;
     padding-top: 5px;
+    margin-top: 10px;
+    margin-left: 10px;
     border-radius: 5px;
     width: max-content;
     font-size: 30px;
@@ -44,7 +46,34 @@
 
 /* ADMIN SECTION */
 #adminSection{
-    margin: 30px;
+    float: initial;
+    width: fit-content;
+    margin:30px;
     margin-top: 105px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    border:3px;
+    border-color: #D4D8FF;
+    border-style: solid;
     
+}
+
+#adminTitle{
+    background-color: #dd257b;
+    color:white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 1px;
+    padding-top: 1px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    width: max-content;
+    font-size: 30px;
+}
+#adminItem{
+    margin-top: 2px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
