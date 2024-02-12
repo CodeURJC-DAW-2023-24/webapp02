@@ -1,7 +1,13 @@
-
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body{
-    background-color: #EFEFEF;
+    background: linear-gradient(90deg, rgb(182, 186, 255), rgb(180, 180, 180));
+    width: 100%;
+    min-height: 100vh;
     background-blend-mode: multiply;
     background-position: center;
     background-size: cover;
@@ -9,10 +15,12 @@ body{
     overflow-y: auto
 }
 
+main{
+    margin-top: 105px;
+}
 /* CAROUSEL */
 #carouselSection{
     margin:30px;
-    margin-top: 105px;
 }
 
 #carouselTitle{
