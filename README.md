@@ -40,6 +40,7 @@ Link al tablero de trello: https://trello.com/b/3sUtM4Yb
   
 - Pantalla Pantalla Biblioteca:
   Pantalla que mostrara el catalogo de películas, libros o series dependiendo de lo que se desee ver. En este caso, para hacer de ejemplo se ha hecho la pantalla bliblioteca de películas.
+  También servirá para mostrar las listas de los usuarios registrados en el sistema.
   
 - Pantalla Elemento Biblioteca:
   Pantalla que mostrara toda la información de un elemento específico de la biblioteca. En el caso actual se ha puesto una seria como ejemplo.
