@@ -2,11 +2,31 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Spring Boot-DemoApplication<demo>",
+            "name": "Spring Boot-DemoApplication<see_and_read>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "mainClass": "com.example.demo.DemoApplication",
-            "projectName": "demo",
+            "mainClass": "com.example.see_and_read.DemoApplication",
+            "projectName": "see_and_read",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DemoApplication<com.example-demo>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.candread.DemoApplication",
+            "projectName": "com.example-demo",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DemoApplication<candread>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.candread.DemoApplication",
+            "projectName": "candread",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
         }
