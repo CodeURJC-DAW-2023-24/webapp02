@@ -1,0 +1,79 @@
+/* STADISTICS */
+#stadisticSection{
+    margin-top: 30px;
+    margin-right: 20px;
+    float: right;
+    width: fit-content;
+    background-color: white;
+    border-radius: 10px;
+    border:3px;
+    border-color: #b4e2ff;
+    border-style: solid;
+}
+#stadisticTitle{
+    background-color: #257edd;
+    color:white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 1px;
+    padding-top: 5px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    width: max-content;
+    font-size: 30px;
+}
+#stadisticList{
+    margin: 15px;
+}
+
+/* USER BANNER */
+#bannerSection{
+    margin: 15px;
+    margin-top: 105px;
+    background-image: url(EjemploBanner.png);
+}
+#bannerImage{
+  width: 100%;
+  height: 250px;
+  background-position: center;
+}
+
+#bannerLogo{
+    display: grid;
+    place-items: center;
+}
+
+/* ADMIN SECTION */
+#adminSection{
+    float: initial;
+    width: fit-content;
+    margin:30px;
+    margin-top: 105px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    border:3px;
+    border-color: #D4D8FF;
+    border-style: solid;
+    
+}
+
+#adminTitle{
+    background-color: #dd257b;
+    color:white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 1px;
+    padding-top: 1px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    width: max-content;
+    font-size: 30px;
+}
+#adminItem{
+    margin-top: 2px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
