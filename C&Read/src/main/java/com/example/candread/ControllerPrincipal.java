@@ -18,4 +18,22 @@ public class ControllerPrincipal {
     //  model.addAttribute("ses", "sesión");
     return "IniSes";
     }
+
+    @GetMapping("/Main")
+    public String moveToMain(Model model) {
+    //  model.addAttribute("ses", "sesión");
+    return "Main";
+    }
+
+    @GetMapping("/PantallaIndiv")
+    public String moveToSingleScreen(Model model) {
+    //  model.addAttribute("ses", "sesión");
+    return "PantallaIndividual";
+    }
+
+    @GetMapping("/ProfileUser")
+    public String moveToPerfil(Model model) {
+    //  model.addAttribute("ses", "sesión");
+    return "ProfileUser";
+    }
 }
