@@ -1,0 +1,22 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.mt-5 {
+    margin-top: 5rem!important;
+}
+
+body{
+    background: linear-gradient(90deg, rgb(199, 202, 253), rgb(238, 232, 242));
+    width: 100%;
+    min-height: 100vh;
+  
+}
+
+.campo-group {
+    border-bottom: 1px solid #ccc; 
+    padding-bottom: 15px; 
+}
+
