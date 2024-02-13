@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-SeeAndReadApplication<see_and_read>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.seeandread.see_and_read.SeeAndReadApplication",
+            "projectName": "see_and_read",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
