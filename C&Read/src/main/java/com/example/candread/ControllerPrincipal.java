@@ -22,6 +22,7 @@ public class ControllerPrincipal {
     @GetMapping("/Main")
     public String moveToMain(Model model) {
     //  model.addAttribute("ses", "sesión");
+    
     return "Main";
     }
 
