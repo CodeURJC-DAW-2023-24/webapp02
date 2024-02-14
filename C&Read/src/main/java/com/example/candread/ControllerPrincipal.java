@@ -3,6 +3,7 @@ package com.example.candread;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 
 @Controller
@@ -20,9 +21,8 @@ public class ControllerPrincipal {
     }
 
     @GetMapping("/Main")
-    public String moveToMain(Model model) {
-    //  model.addAttribute("ses", "sesión");
-    
+    public String moveToMain(Model model, @RequestParam String usuario) {
+        model.addAttribute("username", usuario);
     return "Main";
     }
 
