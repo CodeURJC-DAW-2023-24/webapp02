@@ -1,4 +1,4 @@
-package com.example.candread;
+package com.example.candread.Controller;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

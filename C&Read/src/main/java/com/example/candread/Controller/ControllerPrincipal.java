@@ -11,7 +11,7 @@ public class ControllerPrincipal {
 
     //Moverse al main, es la pagina principal y la primera que sale al entrar
     @GetMapping("/")
-    public String moveToReg(Model model, @RequestParam String usuario) {
+    public String moveToReg(Model model, @RequestParam(required = false) String usuario) {
         model.addAttribute("username", usuario);
     return "W-Main";
     }
