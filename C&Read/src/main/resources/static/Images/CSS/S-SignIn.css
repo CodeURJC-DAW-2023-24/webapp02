@@ -4,7 +4,7 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
-    background: url('../Images/fondosuave.jpg') center center fixed;
+    background: url('../Images/Wallpaper-LogIn.jpg') center center fixed;
     background-size: cover;
 }
 
@@ -15,7 +15,6 @@ form {
     border-radius: 20px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
     width: 300px;
-    height: 400px;
     max-width: 80%;
 }
 
@@ -33,15 +32,15 @@ form {
 }
 
 .avatar {
-    width: 120px; 
+    width: 120px;
     height: 120px;
     border-radius: 50%;
     overflow: hidden;
 }
 
 input {
-    width: 100%; 
-    padding: 12px; 
+    width: 100%;
+    padding: 12px;
     margin-bottom: 16px;
     box-sizing: border-box;
 }
@@ -50,7 +49,7 @@ input[type="submit"] {
     background-color: #f57926;
     color: #000000;
     font-size: medium;
-    padding: 14px; 
+    padding: 14px;
     border: none;
     border-radius: 6px;
     cursor: pointer;
@@ -60,9 +59,8 @@ input[type="submit"]:hover {
     background-color: #c74c1b;
 }
 
-
 .links {
-    margin-top: 10px; /* Espaciado superior entre los enlaces y los campos de entrada */
+    margin-top: 10px;
 }
 
 .links a {
@@ -74,3 +72,4 @@ input[type="submit"]:hover {
 .links a:hover {
     text-decoration: underline;
 }
+
