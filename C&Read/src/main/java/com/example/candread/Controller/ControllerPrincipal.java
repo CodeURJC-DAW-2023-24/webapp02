@@ -1,4 +1,4 @@
-package com.example.candread;
+package com.example.candread.Controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
