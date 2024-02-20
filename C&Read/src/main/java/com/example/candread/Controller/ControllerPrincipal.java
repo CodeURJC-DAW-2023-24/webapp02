@@ -8,33 +8,53 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class ControllerPrincipal {
+
+    //Moverse al main, es la pagina principal y la primera que sale al entrar
     @GetMapping("/")
-    public String moveToReg(Model model) {
-    //  model.addAttribute("ses", "sesión");
-    return "Reg";
-    }
-
-    @GetMapping("/IniSes")
-    public String moveToIniSes(Model model) {
-    //  model.addAttribute("ses", "sesión");
-    return "IniSes";
-    }
-
-    @GetMapping("/Main")
-    public String moveToMain(Model model, @RequestParam String usuario) {
+    public String moveToReg(Model model, @RequestParam String usuario) {
         model.addAttribute("username", usuario);
-    return "Main";
+    return "W-Main";
     }
 
-    @GetMapping("/PantallaIndiv")
+    //Moverse a las bibliotecas
+    @GetMapping("/Library")
+    public String moveToLibrary(Model model) {
+    //  model.addAttribute("ses", "sesión");
+    return "W-Library";
+    }
+
+    //moverse a un elemento de la biblioteca
+    @GetMapping("/SingleElement")
     public String moveToSingleScreen(Model model) {
     //  model.addAttribute("ses", "sesión");
-    return "PantallaIndividual";
+    return "W-SingleElement";
     }
 
-    @GetMapping("/ProfileUser")
+    //moverse a iniciar sesión
+    @GetMapping("/LogIn")
+    public String moveToIniSes(Model model) {
+    //  model.addAttribute("ses", "sesión");
+    return "W-LogIn";
+    }
+
+    //moverse a registrarse
+    @GetMapping("/SignIn")
+    public String moveToMain(Model model) {
+        //  model.addAttribute("ses", "sesión");
+    return "W-SignIn";
+    }
+
+    //moverse al perfil
+    @GetMapping("/Profile")
     public String moveToPerfil(Model model) {
     //  model.addAttribute("ses", "sesión");
-    return "ProfileUser";
+    return "W-Profile";
+    }
+
+    //moverse a la pantalla de administrador
+    @GetMapping("/Admin")
+    public String moveToAdmin(Model model) {
+    //  model.addAttribute("ses", "sesión");
+    return "W-Admin";
     }
 }

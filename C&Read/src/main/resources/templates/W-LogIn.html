@@ -8,33 +8,23 @@
 </head>
 <body>
 
-<form id="loginForm">
-    <div class="circle-container">
-        <div class="avatar-container">
-            <img src="Images/Logo-URJC.png" alt="Avatar" class="avatar">
+    <form id="loginForm" action="/" method="get">
+        <div class="circle-container">
+            <div class="avatar-container">
+                <img src="Images/Logo-URJC.png" alt="Avatar" class="avatar">
+            </div>
         </div>
-    </div>
-    <br>
-    <input type="text" id="usuario" name="usuario" placeholder="Usuario" required>
-    <br>
-    <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
-    <br>
-    <input type="submit" value="Iniciar Sesión">
-    <div class="links">
-        <a href="W-SignIn.html">Registrarse</a> | 
-        <a href="W-Main.html">Continuar sin iniciar sesión</a>
-    </div>
-</form>
-
-<script>//javascript
-    document.getElementById('loginForm').addEventListener('submit', function(event) {
-        // Evita que el formulario se envíe automaticamente
-        event.preventDefault();
-        
-        // Redirige a Main.html después de hacer clic en "Iniciar Sesión"
-        window.location.href = 'W-Main.html';
-    });
-</script>
+        <br>
+        <input type="text" id="usuario" name="usuario" placeholder="Usuario" required>
+        <br>
+        <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
+        <br>
+        <input type="submit" value="Iniciar Sesión">
+        <div class="links">
+            <a href="/SignIn">Registrarse</a> | 
+            <a href="/">Continuar sin iniciar sesión</a>
+        </div>
+    </form>
 
 </body>
 </html>
