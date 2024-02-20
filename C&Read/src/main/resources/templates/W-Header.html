@@ -16,7 +16,7 @@
     <nav id="nav" class="navbar navbar-expand-lg navbar-dark fixed-top">
         <div class="container">
             <!-- LOGO -->
-          <a class="navbar-brand text-white align-text-center text-uppercase" href="W-Main.html">
+          <a class="navbar-brand text-white align-text-center text-uppercase" href="/">
             <img src="Images/Logo.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-center rounded-circle">
             <strong>C&Read</strong></a>
             <!-- TOGGLE BUTTON-->
@@ -36,28 +36,28 @@
             <div class="offcanvas-body d-flex flex-column flex-lg-row p-2">
                 <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
                     <li class="nav-item mx-2">
-                        <a class="nav-link text-uppercase" href="W-Library.html">Series</a>
+                        <a class="nav-link text-uppercase" href="/Library">Series</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link text-uppercase" href="W-Library.html">Películas</a>
+                        <a class="nav-link text-uppercase" href="/Library">Películas</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link text-uppercase" href="W-Library.html">Libros</a>
+                        <a class="nav-link text-uppercase" href="/Library">Libros</a>
                     </li>
                 </ul>
             
             <!-- SIDEBAR PROFILE OR LOGIN/SINGOUT-->
                 <div class="d-flex justify-content-center align-item-center gap-3">
                     {{#username}}
-                    <a class="navbar-brand text-white align-text-center text-uppercase" href="W-Profile.html">
+                    <a class="navbar-brand text-white align-text-center text-uppercase" href="/Profile">
                         <img src="Images/Img-UserProfile2.png" alt="Logo" width="50" height="50" class="align-text-center rounded-circle">
                     <strong>{{username}}</strong></a>
                     {{/username}}
                     {{^username}}
                     <div class="navbar-brand text-white align-text-center">
-                        <a class="btn btn-transparent" href="W-Profile.html">Iniciar sesión</a>
+                        <a class="btn btn-transparent" href="/LogIn">Iniciar sesión</a>
                         <span class="text-white">/</span>
-                        <a id="botonRegistroNavBar" class="btn" href="W-Profile.html">Registrarse</a>
+                        <a id="botonRegistroNavBar" class="btn" href="/SignIn">Registrarse</a>
                     </div>
                     {{/username}}
                 </div>
