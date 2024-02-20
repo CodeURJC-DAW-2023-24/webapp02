@@ -9,3 +9,24 @@
     }
 
 }
+
+.btn-transparent {
+    background-color: transparent;
+    border: 1px solid white; /* Añade un borde para que sea visible */
+    color: white; /* Color de texto blanco */
+    position: relative;
+}
+
+.btn-transparent:hover {
+    background-color: rgba(255, 255, 255, 0.274); /* Color de fondo con transparencia */
+}
+
+#botonRegistroNavBar{
+    background-color: rgb(142, 123, 194);
+    color: white; /* Color de texto blanco */
+    position: relative;
+}
+
+#botonRegistroNavBar:hover {
+    background-color: rgba(255, 255, 255, 0.274); /* Color de fondo con transparencia */
+}

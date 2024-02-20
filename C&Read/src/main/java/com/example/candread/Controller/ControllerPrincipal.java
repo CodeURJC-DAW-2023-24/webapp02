@@ -11,7 +11,10 @@ public class ControllerPrincipal {
 
     //Moverse al main, es la pagina principal y la primera que sale al entrar
     @GetMapping("/")
-    public String moveToReg(Model model, @RequestParam(required = false) String usuario) {
+    public String moveToMain(Model model, @RequestParam(required = false) String usuario) {
+        if (usuario==null) {
+            usuario = null;
+        }
         model.addAttribute("username", usuario);
     return "W-Main";
     }
@@ -39,7 +42,7 @@ public class ControllerPrincipal {
 
     //moverse a registrarse
     @GetMapping("/SignIn")
-    public String moveToMain(Model model) {
+    public String moveToReg(Model model) {
         //  model.addAttribute("ses", "sesión");
     return "W-SignIn";
     }
