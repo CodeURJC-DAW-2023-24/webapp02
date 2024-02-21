@@ -1,5 +1,7 @@
 # webapp02
 
+# FASE 0:
+
 ## Nombre de la Aplicación
 C&Read
 ## Integrantes
@@ -31,3 +33,39 @@ Link al tablero de trello: https://trello.com/b/3sUtM4Yb
   * Series y peliculas (https://apimovieseries-explication.vercel.app/)
 ### - Algoritmo o consulta avanzada
 * Se implementará un algoritmo en la fase de búsqueda que modifique el contenido mostrado teniendo en cuenta las valoraciones de cada elemento. Además, habrá un algoritmo de recomendaciones personalizadas en base a la similitud de reseñas con otros usuarios (si otro usuario coincide en valoraciones altas con la mitad de nuestro contenido, se considerará que tiene gustos similares).
+
+
+# FASE 1:
+
+## Pantallas
+- Pantalla Principal:
+  Esta sería la pantalla principal de la aplicación que tendría un registro de las películas/series/libros preferidos de la semana. Esta pantalla la pueden ver todos los usuarios.
+  
+- Pantalla Inicio de Sesión:
+  Pantalla donde los usuarios con una cuenta pueden iniciar sesión.
+  
+- Pantalla Registro:
+  Pantalla que permite a un usuario sin cuenta, crearse una cuenta en el sistema y pasar a ser un usuario registrado.
+  
+- Pantalla Pantalla Biblioteca:
+  Pantalla que mostrara el catalogo de películas, libros o series dependiendo de lo que se desee ver. En este caso, para hacer de ejemplo se ha hecho la pantalla bliblioteca de películas.
+  También servirá para mostrar las listas de los usuarios registrados en el sistema.
+  
+- Pantalla Elemento Biblioteca:
+  Pantalla que mostrara toda la información de un elemento específico de la biblioteca. En el caso actual se ha puesto una seria como ejemplo.
+  
+- Pantalla Perfil:
+  Pantalla que le mostrará a un usuario registrado su perfil con sus listas de peliculas/series/libros (o listas personalizadas) y sus estadísticas personales.
+  
+- Pantalla Administrador:
+  Pantalla disponoble solo para los administradores que les permitirá añadir noticias a la plataforma o modificar/añadir algun elemento a la biblioteca.
+  
+- Editar Perfil PopUp:
+  PopUp en la pantalla perfil que le permitirá al usuario editar su información de perfil.
+  
+- Editar Elemento Biblioteca PopUp:
+  PopUp en la pantalla de adminitrador que le permitira a los usuarios administradores modíficar un elemento que ya esté en la biblioteca.
+
+## Diagrama de Navegación
+
+# FASE 2:
