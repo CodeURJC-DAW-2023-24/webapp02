@@ -1,9 +1,10 @@
 package com.example.candread.Controller;
 
-import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.example.candread.Model.User;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -15,9 +16,8 @@ public class ControllerPrincipal {
     @GetMapping("/")
     public String moveToMain(Model model, HttpSession session) {
         String username = null;
-        Object userObject = session.getAttribute("user");
-        if (userObject instanceof User) {
-            User user = (User) userObject;
+        User user = (User) session.getAttribute("user");
+        if (user!=null) {
             username = user.getName();
         }
         model.addAttribute("username", username);

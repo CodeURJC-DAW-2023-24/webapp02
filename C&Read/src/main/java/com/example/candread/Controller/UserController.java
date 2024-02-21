@@ -46,7 +46,7 @@ public class UserController {
 
         if (userOptional.isPresent()) {
             // Usuario y contraseña válidos, redirige a la página principal
-            User user = userOptional.get(); // Obtén el objeto User de Optional<User>
+            User user = (User) userOptional.get(); // Obtén el objeto User de Optional<User>
             session.setAttribute("user", user);
             return "redirect:/";
         } else {
