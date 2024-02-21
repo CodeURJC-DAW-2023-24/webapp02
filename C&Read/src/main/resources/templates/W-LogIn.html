@@ -8,16 +8,16 @@
 </head>
 <body>
 
-    <form id="loginForm" action="/" method="get">
+    <form id="loginForm" action="/users/login" method="post">
         <div class="circle-container">
             <div class="avatar-container">
                 <img src="Images/Logo-URJC.png" alt="Avatar" class="avatar">
             </div>
         </div>
         <br>
-        <input type="text" id="usuario" name="usuario" placeholder="Usuario" required>
+        <input type="text" id="usuario" name="name" placeholder="Usuario" required>
         <br>
-        <input type="password" id="contrasena" name="contrasena" placeholder="Contraseña" required>
+        <input type="password" id="contrasena" name="password1" placeholder="Contraseña" required>
         <br>
         <input type="submit" value="Iniciar Sesión">
         <div class="links">
