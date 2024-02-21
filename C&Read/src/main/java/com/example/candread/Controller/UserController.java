@@ -4,13 +4,14 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
+
 
 import com.example.candread.Model.User;
 import com.example.candread.repositories.UserRepository;
 
-@RestController
+@Controller
 @RequestMapping("/users")
 public class UserController {
 
@@ -26,18 +27,12 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public ModelAndView addUser(@ModelAttribute User user) {
+    public String addUser(@ModelAttribute User user) {
         try {
             userRepository.save(user);
-            ModelAndView modelAndView = new ModelAndView("W-Main");
-            // Puedes agregar objetos al modelo si es necesario
-            modelAndView.addObject("message", "Usuario agregado exitosamente");
-            return modelAndView;
+            return "redirect:/";
         } catch (Exception e) {
-            ModelAndView modelAndView = new ModelAndView("error-page");
-            // Puedes agregar objetos al modelo si es necesario
-            modelAndView.addObject("error", "Error al agregar usuario");
-            return modelAndView;
+            return "redirect:/error";
         }
     }
 }
