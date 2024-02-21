@@ -3,19 +3,18 @@ package com.example.candread.Controller.Controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.example.candread.Controller.Model.User;
 import com.example.candread.Controller.Repositories.UserRepository;
 
-
 @RestController
 @RequestMapping("/users")
 public class UserController {
+
     @Autowired
     private UserRepository userRepository;
 
@@ -25,5 +24,21 @@ public class UserController {
 
         return userOptional.map(user -> ResponseEntity.ok().body(user))
                 .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("/add")
+    public ModelAndView addUser(@ModelAttribute User user) {
+        try {
+            userRepository.save(user);
+            ModelAndView modelAndView = new ModelAndView("W-Main");
+            // Puedes agregar objetos al modelo si es necesario
+            modelAndView.addObject("message", "Usuario agregado exitosamente");
+            return modelAndView;
+        } catch (Exception e) {
+            ModelAndView modelAndView = new ModelAndView("error-page");
+            // Puedes agregar objetos al modelo si es necesario
+            modelAndView.addObject("error", "Error al agregar usuario");
+            return modelAndView;
+        }
     }
 }
