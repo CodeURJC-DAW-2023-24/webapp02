@@ -14,6 +14,7 @@ import com.example.candread.repositories.UserRepository;
 @RestController
 @RequestMapping("/users")
 public class UserController {
+
     @Autowired
     private UserRepository userRepository;
 
