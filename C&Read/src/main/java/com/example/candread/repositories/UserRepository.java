@@ -1,8 +1,8 @@
-package com.example.candread.Controller.Repositories;
+package com.example.candread.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.candread.Controller.Model.User;
+import com.example.candread.model.User;
 
 public interface UserRepository extends JpaRepository<User,Long> {
     

@@ -1,4 +1,4 @@
-package com.example.candread.Controller.Controller;
+package com.example.candread.controller;
 
 import java.util.Optional;
 
@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.candread.Controller.Model.User;
-import com.example.candread.Controller.Repositories.UserRepository;
+import com.example.candread.model.User;
+import com.example.candread.repositories.UserRepository;
 @RestController
 @RequestMapping("/users")
 public class UserController {

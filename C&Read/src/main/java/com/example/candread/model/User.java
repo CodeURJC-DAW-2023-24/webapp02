@@ -1,4 +1,4 @@
-package com.example.candread.Controller.Model;
+package com.example.candread.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
