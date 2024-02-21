@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.example.candread.Controller.Model.User;
 import com.example.candread.Controller.Repositories.UserRepository;
+
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -18,10 +20,10 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("/{id}")
-    public ResponseEntity <User> getUser(@PathVariable Long Id){
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        Optional<User> userOptional = userRepository.findById(id);
 
-        Optional<User> user = userRepository.findById(Id);
-        return ResponseEntity.of(user);
-        
+        return userOptional.map(user -> ResponseEntity.ok().body(user))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 }

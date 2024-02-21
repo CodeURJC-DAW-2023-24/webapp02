@@ -50,6 +50,13 @@
 		</dependency>
 	</dependencies>
 
+	<dependency>
+        <groupId>jakarta.persistence</groupId>
+        <artifactId>jakarta.persistence-api</artifactId>
+        <version>3.0.1</version>
+        <scope>provided</scope>
+    </dependency>
+
 	<build>
 		<plugins>
 			<plugin>
