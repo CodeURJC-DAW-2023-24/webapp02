@@ -1,16 +1,15 @@
-package com.example.candread.controller;
+package com.example.candread.Controller;
 
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
-import com.example.candread.model.User;
+import com.example.candread.Model.User;
 import com.example.candread.repositories.UserRepository;
+
 @RestController
 @RequestMapping("/users")
 public class UserController {
@@ -19,10 +18,26 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("/{id}")
-    public ResponseEntity <User> getUser(@PathVariable Long id){
+    public ResponseEntity<User> getUserById(@PathVariable Long id) {
+        Optional<User> userOptional = userRepository.findById(id);
 
-        Optional<User> user = userRepository.findById(id);
-        return ResponseEntity.of(user);
-        
+        return userOptional.map(user -> ResponseEntity.ok().body(user))
+                .orElseGet(() -> ResponseEntity.notFound().build());
+    }
+
+    @PostMapping("/add")
+    public ModelAndView addUser(@ModelAttribute User user) {
+        try {
+            userRepository.save(user);
+            ModelAndView modelAndView = new ModelAndView("W-Main");
+            // Puedes agregar objetos al modelo si es necesario
+            modelAndView.addObject("message", "Usuario agregado exitosamente");
+            return modelAndView;
+        } catch (Exception e) {
+            ModelAndView modelAndView = new ModelAndView("error-page");
+            // Puedes agregar objetos al modelo si es necesario
+            modelAndView.addObject("error", "Error al agregar usuario");
+            return modelAndView;
+        }
     }
 }
