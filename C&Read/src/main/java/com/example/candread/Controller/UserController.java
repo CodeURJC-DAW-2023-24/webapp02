@@ -18,9 +18,9 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("/{id}")
-    public ResponseEntity <User> getUser(@PathVariable Long Id){
+    public ResponseEntity <User> getUser(@PathVariable Long id){
 
-        Optional<User> user = userRepository.findById(Id);
+        Optional<User> user = userRepository.findById(id);
         return ResponseEntity.of(user);
         
     }
