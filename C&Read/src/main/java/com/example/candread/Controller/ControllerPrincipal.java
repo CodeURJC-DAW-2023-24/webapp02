@@ -16,6 +16,7 @@ public class ControllerPrincipal {
             usuario = null;
         }
         model.addAttribute("username", usuario);
+        
     return "W-Main";
     }
 
