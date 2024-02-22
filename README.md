@@ -82,16 +82,56 @@ Link al tablero de trello: https://trello.com/b/3sUtM4Yb
  - David Ovidio Rubio Caballero:
    - Descripción:
    - 5 Commits:
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5 
    - 5 Ficheros:
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5 
  - Javier Vallejo Fernández:
    - Descripción:
    - 5 Commits:
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5 
    - 5 Ficheros:
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5 
  - Juan Álvarez Loeches:
    - Descripción:
    - 5 Commits:
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5 
    - 5 Ficheros:
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5 
  - Aurora María Fernández Basanta:
    - Descripción:
    - 5 Commits:
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5 
    - 5 Ficheros:
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5 
