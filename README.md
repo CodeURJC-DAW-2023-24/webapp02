@@ -122,7 +122,7 @@ Link al tablero de trello: https://trello.com/b/3sUtM4Yb
      - 4
      - 5 
  - Aurora María Fernández Basanta:
-   - Descripción:
+   - Descripción: Organización de los archivos | Añadido Header y Footer con Mustache | Registro e Inicio de sesion en el Header intercalado con Perfil dependiendo del estado del usuario | Pasarle el usuario iniciado a la sesión.
    - 5 Commits:
      - 1
      - 2
