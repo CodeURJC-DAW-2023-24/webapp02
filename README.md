@@ -67,4 +67,4 @@ Link al tablero de trello: https://trello.com/b/3sUtM4Yb
   PopUp en la pantalla de adminitrador que le permitira a los usuarios administradores modíficar un elemento que ya esté en la biblioteca.
 
 ## Diagrama de Navegación
-
+   ![Todos los usuarios](https://github.com/CodeURJC-DAW-2023-24/webapp02/assets/80918271/4409ee27-fd54-48ca-86d3-f0f02023adec)
