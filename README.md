@@ -69,3 +69,29 @@ Link al tablero de trello: https://trello.com/b/3sUtM4Yb
 ## Diagrama de Navegación
 
 # FASE 2:
+
+## Navegación
+
+## Instrucciones
+
+## Diagramas Entidades
+
+## Diagramas Clases Y Templates
+
+## Participación
+ - David Ovidio Rubio Caballero:
+   - Descripción:
+   - 5 Commits:
+   - 5 Ficheros:
+ - Javier Vallejo Fernández:
+   - Descripción:
+   - 5 Commits:
+   - 5 Ficheros:
+ - Juan Álvarez Loeches:
+   - Descripción:
+   - 5 Commits:
+   - 5 Ficheros:
+ - Aurora María Fernández Basanta:
+   - Descripción:
+   - 5 Commits:
+   - 5 Ficheros:
