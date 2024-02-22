@@ -8,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import com.example.candread.Model.User;
+import com.example.candread.model.User;
 import com.example.candread.repositories.UserRepository;
 
 import jakarta.servlet.http.HttpSession;

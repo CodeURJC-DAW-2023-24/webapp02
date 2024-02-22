@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.example.candread.Model.User;
+import com.example.candread.model.User;
 
 import jakarta.servlet.http.HttpSession;
 
