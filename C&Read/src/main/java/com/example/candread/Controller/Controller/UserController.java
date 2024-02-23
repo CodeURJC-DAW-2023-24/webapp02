@@ -4,14 +4,16 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.example.candread.Controller.Model.User;
 import com.example.candread.Controller.Repositories.UserRepository;
 
-@RestController
+import jakarta.servlet.http.HttpSession;
+
+@Controller
 @RequestMapping("/users")
 public class UserController {
 
@@ -27,35 +29,30 @@ public class UserController {
     }
 
     @PostMapping("/add")
-    public ModelAndView addUser(@ModelAttribute User user) {
+    public String addUser(@ModelAttribute User user) {
         try {
+            //se guarda usuario nuevo en la base de datos
             userRepository.save(user);
-            ModelAndView modelAndView = new ModelAndView("W-Main");
-            // Puedes agregar objetos al modelo si es necesario
-            modelAndView.addObject("message", "Usuario agregado exitosamente");
-            return modelAndView;
+            return "redirect:/LogIn";
         } catch (Exception e) {
-            ModelAndView modelAndView = new ModelAndView("error-page");
-            // Puedes agregar objetos al modelo si es necesario
-            modelAndView.addObject("error", "Error al agregar usuario");
-            return modelAndView;
+            return "redirect:/SignIn";
         }
     }
 
     @PostMapping("/login")
-    public ModelAndView login(@RequestParam String name, @RequestParam String password1, Model model) {
+    public String login(@RequestParam String name, @RequestParam String password1, Model model, HttpSession session) {
         Optional<User> userOptional = userRepository.findByNameAndPassword1(name, password1);
 
         if (userOptional.isPresent()) {
             // Usuario y contraseña válidos, redirige a la página principal
-            ModelAndView modelAndView = new ModelAndView("W-Main");
-            modelAndView.addObject("message", "Inicio de sesión exitoso");
-            return modelAndView;
+            User user = (User) userOptional.get(); // Obtén el objeto User de Optional<User>
+            session.setAttribute("user", user);
+            return "redirect:/" + user.getName() + "/Main";
+
         } else {
             // Usuario o contraseña incorrectos, redirige a la página de inicio de sesión con un mensaje de error
-            ModelAndView modelAndView = new ModelAndView("W-LogIn");
-            modelAndView.addObject("error", "Usuario o contraseña incorrectos");
-            return modelAndView;
+            return "redirect:/LogIn";
         }
     }
+    
 }

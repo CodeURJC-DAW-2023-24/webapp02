@@ -3,7 +3,11 @@ package com.example.candread.Controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.candread.Controller.Model.User;
+
+import jakarta.servlet.http.HttpSession;
+
 
 
 @Controller
@@ -11,12 +15,13 @@ public class ControllerPrincipal {
 
     //Moverse al main, es la pagina principal y la primera que sale al entrar
     @GetMapping("/")
-    public String moveToMain(Model model, @RequestParam(required = false) String usuario) {
-        if (usuario==null) {
-            usuario = null;
+    public String moveToMain(Model model, HttpSession session) {
+        String username = null;
+        User user = (User) session.getAttribute("user");
+        if (user!=null) {
+            username = user.getName();
         }
-        model.addAttribute("username", usuario);
-        
+        model.addAttribute("username", username);
     return "W-Main";
     }
 
