@@ -3,6 +3,8 @@ package com.example.candread.Controller.Controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -11,14 +13,27 @@ import org.springframework.web.bind.annotation.*;
 import com.example.candread.Controller.Model.User;
 import com.example.candread.Controller.Repositories.UserRepository;
 
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import jakarta.servlet.http.HttpSession;
 
+@Configuration
 @Controller
 @RequestMapping("/users")
 public class UserController {
 
+
+    @Bean
+    public BCryptPasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
@@ -32,7 +47,12 @@ public class UserController {
     public String addUser(@ModelAttribute User user) {
         try {
             //se guarda usuario nuevo en la base de datos
+            // User encryptedUser = new User();
+            // encryptedUser.setName("user2");
+            // encryptedUser.setPassword1(passwordEncoder.encode("pass2"));
             userRepository.save(user);
+            // userRepository.save(encryptedUser);
+
             return "redirect:/LogIn";
         } catch (Exception e) {
             return "redirect:/SignIn";

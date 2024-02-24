@@ -13,6 +13,7 @@ public class User {
     private Long id;
 
     private String name;
+    private String rol;
 
     public String getName() {
         return name;
@@ -31,4 +32,17 @@ public class User {
     public void setPassword1(String password1) {
         this.password1 = password1;
     }
+
+    
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRole(String rol) {
+        this.rol = rol;
+    }
+
+    
+    
 }
