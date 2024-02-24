@@ -1,0 +1,106 @@
+/*NAVBAR*/
+#nav{
+    opacity: 0.8;
+}
+/* STADISTICS */
+#stadisticSection{
+    margin-top: 30px;
+    margin-right: 20px;
+    float: right;
+    width: fit-content;
+    background-color: white;
+    border-radius: 10px;
+    border:3px;
+    border-color: #b4d2ff;
+    border-style: solid;
+}
+#stadisticTitle{
+    background-color: #3253ad;
+    color:white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 1px;
+    padding-top: 5px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    width: max-content;
+    font-size: 30px;
+}
+#stadisticList{
+    margin: 15px;
+}
+
+/* USER BANNER */
+#bannerSection{
+    padding-top: 120px;
+    background-image: url("../Images/Wallpaper-Banner.png");
+    display: grid;
+    place-items: center;
+    border: 5px;
+    border-color: #494F87;
+    border-style: solid;
+
+}
+
+#bannerLogo{
+    background-color: white;
+    width: 150px;
+    height: 150px;
+    border: 3px;
+    border-color: #494F87;
+    border-style: solid;
+    border-radius: 50%;
+}
+
+
+
+#bannerUsername{
+    margin: 20px;
+    background-color: #494F87;
+    text-align: center;
+    color: white;
+    width: auto;
+    padding: 10px;
+    border-radius: 10%;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* ADMIN SECTION */
+#adminSection{
+    float: initial;
+    width: fit-content;
+    margin:30px;
+    margin-top: 105px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    border:3px;
+    border-color: #D4D8FF;
+    border-style: solid;
+    
+}
+
+#adminTitle{
+    background-color: #dd257b;
+    color:white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 1px;
+    padding-top: 1px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    width: max-content;
+    font-size: 30px;
+}
+#adminItem{
+    margin-top: 2px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+a {
+    text-decoration: auto !important;
+}

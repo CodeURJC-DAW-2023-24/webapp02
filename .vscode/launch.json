@@ -1,0 +1,28 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "DemoApplication",
+            "request": "launch",
+            "mainClass": "com.example.candread.Controller.DemoApplication",
+            "projectName": "candread"
+        },
+        {
+            "type": "java",
+            "name": "BaseDeDatos",
+            "request": "launch",
+            "mainClass": "com.example.candread.BaseDeDatos",
+            "projectName": "candread"
+        },
+        {
+            "type": "java",
+            "name": "Spring Boot-DemoApplication<candread>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.example.candread.DemoApplication",
+            "projectName": "candread",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}

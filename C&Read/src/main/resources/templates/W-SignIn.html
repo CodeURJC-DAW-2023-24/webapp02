@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+    <link rel="stylesheet" href="CSS/S-SignIn.css">
+
+</head>
+<body>
+
+<form id="registerForm" action="/users/add" method="post">
+    <div class="circle-container">
+        <div class="avatar-container">
+            <img src="Images/Logo-URJC.png" alt="Imagen de Registro" class="avatar">
+        </div>
+    </div>
+    <br>
+    <input type="text" id="nombre" name="name" placeholder="Nombre" required>
+    <br>
+    <input type="password" id="contrasena1" name="password1" placeholder="Contraseña" required>
+    <br>
+    <input type="password" id="contrasena2" name="password2" placeholder="Repetir Contraseña" required>
+    <br>
+    <input type="submit" value="Registrarse">
+    <br>
+    <div class="links">
+        <a href="/LogIn">¿Ya tienes cuenta? Iniciar Sesión</a>
+    </div>
+</form>
+
+</body>
+</html>
