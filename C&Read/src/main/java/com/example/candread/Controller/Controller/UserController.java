@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.example.candread.Controller.Model.User;
 import com.example.candread.Controller.Repositories.UserRepository;
-
+import com.example.candread.Controller.Security.RepositoryUserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -33,12 +33,16 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired
+    public RepositoryUserDetailsService userDetailService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @GetMapping("/{id}")
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         Optional<User> userOptional = userRepository.findById(id);
-
+        
+        
         return userOptional.map(user -> ResponseEntity.ok().body(user))
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }

@@ -5,13 +5,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
-import static org.springframework.security.config.Customizer.withDefaults;
 
 
 
@@ -37,24 +37,31 @@ public class SecurityConfiguration {
 	@Bean
 	public DaoAuthenticationProvider authenticationProvider() {
 		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
-
 		authProvider.setUserDetailsService(userDetailService);
 		authProvider.setPasswordEncoder(passwordEncoder());
 
 		return authProvider;
 	}
 
-	
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+    	auth.userDetailsService(userDetailService).passwordEncoder(passwordEncoder());
+    }
+
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
 		http.authenticationProvider(authenticationProvider());
 
         http.authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/","/LogIn","/SignIn","/users/login","/users/add").permitAll()
-				.requestMatchers("/javi/Main").authenticated()
+                .requestMatchers("/","/LogIn","/SignIn","/users/login","/users/add","/CSS/**","/Images/**","/*/Main" ).permitAll()
+				.requestMatchers("/Library").permitAll()
+				// con esto de momento se  puede entrar en cualquier usaurio 
+				// hay que ver como hacerlo para que distinga roles
 				);
-
+			
+			
+		
         http.csrf(csrf -> csrf.disable());
     
     return http.build();
