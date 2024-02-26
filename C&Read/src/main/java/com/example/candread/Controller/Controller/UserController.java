@@ -54,12 +54,8 @@ public class UserController {
     @PostMapping("/add")
     public String addUser(@ModelAttribute User user) {
         try {
-            //se guarda usuario nuevo en la base de datos
-            List<String> roles = new ArrayList<>();
-            roles.add("USER");
-
-            User userPrueba = new User(user.getName(), user.getPassword1());
-            userPrueba.setRoles(roles);
+            //se crea un usuario y se le asigna uno o varios roles
+            User userPrueba = new User(user.getName(), user.getPassword1(), "USER");
             userRepository.save(userPrueba);
 
             // userRepository.save(encryptedUser);
@@ -76,7 +72,7 @@ public class UserController {
 
         if (userOptional.isPresent()) {
             // Usuario y contraseña válidos, redirige a la página principal
-            User user = (User) userOptional.get(); // Obtén el objeto User de Optional<User>
+            User user = (User) userOptional.get(); // Obtenemos el objeto User de Optional<User>
             session.setAttribute("user", user);
             UserDetails a = userDetailService.loadUserByUsername(name);
             return "redirect:/" + user.getName() + "/Main";

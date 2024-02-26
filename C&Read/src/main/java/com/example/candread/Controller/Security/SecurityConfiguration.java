@@ -49,22 +49,31 @@ public class SecurityConfiguration {
 
 
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-		http.authenticationProvider(authenticationProvider());
+        http.authenticationProvider(authenticationProvider());
 
         http.authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/","/LogIn","/SignIn","/users/login","/users/add","/CSS/**","/Images/**","/*/Main" ).permitAll()
-				.requestMatchers("/Library").hasRole("USER")
-				// con esto de momento se  puede entrar en cualquier usaurio 
-				// hay que ver como hacerlo para que distinga roles
-				);
-			
-			
-		
+                .requestMatchers("/", "/LogIn", "/SignIn", "/users/login", "/users/add", "/CSS/**", "/Images/**", "/*/Main").permitAll()
+                .requestMatchers("/Library").hasRole("USER")
+                .anyRequest().authenticated()
+        );
+
+        http.formLogin((formLogin) -> formLogin
+                .loginPage("/LogIn")
+                .defaultSuccessUrl("/Library", true)
+                .failureUrl("/LogIn?error=true")
+                .permitAll()
+        );
+
+        http.logout((logout) -> logout
+                .logoutSuccessUrl("/LogIn?logout=true")
+                .permitAll()
+        );
+
         http.csrf(csrf -> csrf.disable());
-    
-    return http.build();
-}
+
+        return http.build();
+    }
 
 }
