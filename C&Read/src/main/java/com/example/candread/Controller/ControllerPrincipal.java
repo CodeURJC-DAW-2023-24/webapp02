@@ -27,8 +27,11 @@ public class ControllerPrincipal {
 
     //Moverse a las bibliotecas
     @GetMapping("/Library")
-    public String moveToLibrary(Model model) {
-    //  model.addAttribute("ses", "sesión");
+    public String moveToLibrary(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
     return "W-Library";
     }
 

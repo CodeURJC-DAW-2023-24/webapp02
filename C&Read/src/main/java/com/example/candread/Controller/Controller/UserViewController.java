@@ -7,15 +7,23 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.example.candread.Controller.Model.User;
+
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 @RequestMapping("/{username}")
 public class UserViewController {
     
     @GetMapping("/Main")
-    public String main(@PathVariable String username, Model model) {
+    public String main(@PathVariable String username, Model model, HttpSession session) {
         // Puedes agregar atributos al modelo si es necesario, y también puedes acceder a la variable de ruta {username}
         model.addAttribute("username", username);
-        
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
         return "W-Main";  
     }
+    
 }
