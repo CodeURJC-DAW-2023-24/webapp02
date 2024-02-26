@@ -54,7 +54,7 @@ public class SecurityConfiguration {
         http.authenticationProvider(authenticationProvider());
 
         http.authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/*", "/LogIn", "/SignIn", "/users/login", "/users/add", "/CSS/**", "/Images/**", "/*/Main").permitAll()
+                .requestMatchers("/", "/LogIn", "/SignIn", "/users/login", "/users/add", "/CSS/**", "/Images/**", "/*/Main").permitAll()
                 .requestMatchers("/Library").hasAuthority("USER")
                 .anyRequest().authenticated()
         );
