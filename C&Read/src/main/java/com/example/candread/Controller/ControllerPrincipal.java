@@ -1,10 +1,16 @@
 package com.example.candread.Controller;
 
+import java.util.Collections;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.example.candread.model.News;
 import com.example.candread.model.User;
+import com.example.candread.repositories.NewRepository;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -12,11 +18,20 @@ import jakarta.servlet.http.HttpSession;
 @Controller
 public class ControllerPrincipal {
 
+
+    @Autowired
+    private NewRepository newRepository;
+
     //Moverse al main, es la pagina principal y la primera que sale al entrar
     @GetMapping("/")
     public String moveToMain(Model model, HttpSession session) {
         String username = getUserName(session);
         model.addAttribute("username", username);
+
+        List<News> news = newRepository.findAll();
+        Collections.reverse(news);
+        List<News> newNews = news.subList(0, Math.min(news.size(), 3));
+        model.addAttribute("news", newNews);
     return "W-Main";
     }
 
