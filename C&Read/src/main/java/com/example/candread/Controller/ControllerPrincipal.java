@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.candread.model.News;
 import com.example.candread.model.User;
@@ -24,22 +25,25 @@ public class ControllerPrincipal {
 
     //Moverse al main, es la pagina principal y la primera que sale al entrar
     @GetMapping("/")
-    public String moveToMain(Model model, HttpSession session) {
-        String username = getUserName(session);
-        model.addAttribute("username", username);
-
+    public String moveToMain(Model model, @RequestParam(required = false) String usuario) {
+        if (usuario==null) {
+            usuario = null;
+        }
         List<News> news = newRepository.findAll();
         Collections.reverse(news);
         List<News> newNews = news.subList(0, Math.min(news.size(), 3));
-        model.addAttribute("news", newNews);
+        model.addAttribute("username", usuario);
+        
     return "W-Main";
     }
 
     //Moverse a las bibliotecas
     @GetMapping("/Library")
-    public String moveToLibrary(Model model, HttpSession session) {
-        String username = getUserName(session);
-        model.addAttribute("username", username);
+    public String moveToLibrary(HttpSession session, Model model) {
+        User user = (User) session.getAttribute("user");
+        if (user != null) {
+            model.addAttribute("user", user);
+        }
     return "W-Library";
     }
 
