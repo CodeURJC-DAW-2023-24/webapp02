@@ -1,5 +1,7 @@
 package com.example.candread.Controller.Controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,8 @@ import org.springframework.web.bind.annotation.*;
 import com.example.candread.Controller.Model.User;
 import com.example.candread.Controller.Repositories.UserRepository;
 import com.example.candread.Controller.Security.RepositoryUserDetailsService;
+
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
@@ -51,10 +55,13 @@ public class UserController {
     public String addUser(@ModelAttribute User user) {
         try {
             //se guarda usuario nuevo en la base de datos
-            // User encryptedUser = new User();
-            // encryptedUser.setName("user2");
-            // encryptedUser.setPassword1(passwordEncoder.encode("pass2"));
-            userRepository.save(user);
+            List<String> roles = new ArrayList<>();
+            roles.add("USER");
+
+            User userPrueba = new User(user.getName(), user.getPassword1());
+            userPrueba.setRoles(roles);
+            userRepository.save(userPrueba);
+
             // userRepository.save(encryptedUser);
 
             return "redirect:/LogIn";
@@ -71,6 +78,7 @@ public class UserController {
             // Usuario y contraseña válidos, redirige a la página principal
             User user = (User) userOptional.get(); // Obtén el objeto User de Optional<User>
             session.setAttribute("user", user);
+            UserDetails a = userDetailService.loadUserByUsername(name);
             return "redirect:/" + user.getName() + "/Main";
 
         } else {

@@ -55,7 +55,7 @@ public class SecurityConfiguration {
 
         http.authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers("/","/LogIn","/SignIn","/users/login","/users/add","/CSS/**","/Images/**","/*/Main" ).permitAll()
-				.requestMatchers("/Library").permitAll()
+				.requestMatchers("/Library").hasRole("USER")
 				// con esto de momento se  puede entrar en cualquier usaurio 
 				// hay que ver como hacerlo para que distinga roles
 				);
