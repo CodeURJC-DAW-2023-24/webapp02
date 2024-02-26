@@ -9,5 +9,6 @@ import com.example.candread.model.User;
 public interface UserRepository extends JpaRepository<User,Long> {
 
     Optional<User> findByNameAndPassword(String name, String password);
+    Optional<User> findByName(String name);
     
 }

@@ -24,6 +24,12 @@ public class User {
     public User() {
     }
 
+    public User(String name, String password, String... roles) {
+		this.name = name;
+		this.password = password;
+        this.roles = List.of(roles);
+	}
+
     public String getName() {
         return name;
     }
@@ -51,13 +57,5 @@ public class User {
 	}
 
     
-    public User(String name, String password1, String... roles) {
-		this.name = name;
-		this.password1 = password1;
-        this.roles = List.of(roles);
-	}
 
-    public User() {
-	}
-    
 }

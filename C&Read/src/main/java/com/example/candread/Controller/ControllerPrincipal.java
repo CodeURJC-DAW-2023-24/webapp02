@@ -33,7 +33,7 @@ public class ControllerPrincipal {
         Collections.reverse(news);
         List<News> newNews = news.subList(0, Math.min(news.size(), 3));
         model.addAttribute("username", usuario);
-        
+        model.addAttribute("news", newNews);
     return "W-Main";
     }
 

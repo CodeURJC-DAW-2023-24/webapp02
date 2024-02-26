@@ -1,4 +1,4 @@
-package com.example.candread.Controller.Controller;
+package com.example.candread.Controller;
 //permite al usuario ver su version personalizada de las vistas y cambiar la ruta para poner el nombre del usuario
 
 import org.springframework.stereotype.Controller;
@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.candread.Controller.Model.User;
+import com.example.candread.model.User;
 
 import jakarta.servlet.http.HttpSession;
 
