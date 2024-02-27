@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.example.candread.model.New;
 import com.example.candread.model.User;
 import com.example.candread.repositories.NewRepository;
+import com.example.candread.services.UserService;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -23,10 +24,13 @@ public class ControllerPrincipal {
     @Autowired
     private NewRepository newRepository;
 
+    @Autowired
+    private UserService userService;
+
     //Moverse al main, es la pagina principal y la primera que sale al entrar
     @GetMapping("/")
     public String moveToMain(HttpSession session, Model model) {
-
+        userService.insertUsers();
         UserDetails username = (UserDetails) session.getAttribute("user");
         if (username!=null) {
             model.addAttribute("username", username.getUsername());
