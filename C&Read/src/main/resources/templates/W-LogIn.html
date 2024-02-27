@@ -8,14 +8,14 @@
 </head>
 <body>
 
-    <form id="loginForm" action="/users/login" method="post">
+    <form id="loginForm" method="post">
         <div class="circle-container">
             <div class="avatar-container">
                 <img src="Images/Logo-URJC.png" alt="Avatar" class="avatar">
             </div>
         </div>
         <br>
-        <input type="text" id="usuario" name="name" placeholder="Usuario" required>
+        <input type="text" id="usuario" name="username" placeholder="Usuario" required>
         <br>
         <input type="password" id="contrasena" name="password" placeholder="Contraseña" required>
         <br>
@@ -24,6 +24,7 @@
             <a href="/SignIn">Registrarse</a> | 
             <a href="/">Continuar sin iniciar sesión</a>
         </div>
+        <input type="hidden" name="_csrf" value="{{token}}"/>
     </form>
 
 </body>

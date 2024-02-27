@@ -1,17 +1,11 @@
 {
     "configurations": [
+
         {
             "type": "java",
             "name": "DemoApplication",
             "request": "launch",
             "mainClass": "com.example.candread.DemoApplication",
-            "projectName": "candread"
-        },
-        {
-            "type": "java",
-            "name": "DemoApplication",
-            "request": "launch",
-            "mainClass": "com.example.candread.controller.DemoApplication",
             "projectName": "candread"
         }
     ]
