@@ -4,6 +4,7 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,14 +26,17 @@ public class ControllerPrincipal {
 
     //Moverse al main, es la pagina principal y la primera que sale al entrar
     @GetMapping("/")
-    public String moveToMain(Model model, @RequestParam(required = false) String usuario) {
-        if (usuario==null) {
-            usuario = null;
+    public String moveToMain(HttpSession session, Model model) {
+
+        UserDetails username = (UserDetails) session.getAttribute("user");
+        if (username!=null) {
+            model.addAttribute("username", username.getUsername());
         }
+        model.addAttribute("username", username);
+
         List<News> news = newRepository.findAll();
         Collections.reverse(news);
         List<News> newNews = news.subList(0, Math.min(news.size(), 3));
-        model.addAttribute("username", usuario);
         model.addAttribute("news", newNews);
     return "W-Main";
     }
@@ -40,10 +44,8 @@ public class ControllerPrincipal {
     //Moverse a las bibliotecas
     @GetMapping("/Library")
     public String moveToLibrary(HttpSession session, Model model) {
-        User user = (User) session.getAttribute("user");
-        if (user != null) {
-            model.addAttribute("user", user);
-        }
+        UserDetails username = (UserDetails) session.getAttribute("user");
+        model.addAttribute("username", username.getUsername());
     return "W-Library";
     }
 
@@ -72,16 +74,16 @@ public class ControllerPrincipal {
     //moverse al perfil
     @GetMapping("/Profile")
     public String moveToPerfil(Model model, HttpSession session) {
-        String username = getUserName(session);
-        model.addAttribute("username", username);
+        UserDetails username = (UserDetails) session.getAttribute("user");
+        model.addAttribute("username", username.getUsername());
     return "W-Profile";
     }
 
     //moverse a la pantalla de administrador
     @GetMapping("/Admin")
     public String moveToAdmin(Model model, HttpSession session) {
-        String username = getUserName(session);
-        model.addAttribute("username", username);
+        UserDetails username = (UserDetails) session.getAttribute("user");
+        model.addAttribute("username", username.getUsername());
     return "W-Admin";
     }
 
