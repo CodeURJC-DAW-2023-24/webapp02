@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.candread.Security.RepositoryUserDetailsService;
-import com.example.candread.model.User;
 
 import jakarta.servlet.http.HttpSession;
 
