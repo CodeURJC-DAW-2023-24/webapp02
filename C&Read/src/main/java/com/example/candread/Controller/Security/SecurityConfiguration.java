@@ -54,11 +54,12 @@ public class SecurityConfiguration {
         http.authenticationProvider(authenticationProvider());
 
         http.authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/", "/LogIn", "/SignIn", "/users/login", "/users/add", "/CSS/**", "/Images/**", "/*/Main").permitAll()
-                .requestMatchers("/Library").hasAuthority("USER")
+                .requestMatchers("/", "/LogIn", "/SignIn", "/users/login", "/users/add", "/CSS/**", "/Images/**", "/error").permitAll()
+                .requestMatchers("/Library", "/*/Main").hasRole("USER")
                 .anyRequest().authenticated()
         );
 
+	
 
         http.logout((logout) -> logout
                 .logoutSuccessUrl("/LogIn?logout=true")
