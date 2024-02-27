@@ -1,4 +1,4 @@
-package com.example.candread.Controller.Model;
+package com.example.candread.model;
 
 import java.util.List;
 
@@ -11,7 +11,6 @@ import jakarta.persistence.GenerationType;
 
 @Entity
 public class User {
-   
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -19,6 +18,17 @@ public class User {
     private String name;
     @ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
+
+    private String password;
+
+    public User() {
+    }
+
+    public User(String name, String password, String... roles) {
+		this.name = name;
+		this.password = password;
+        this.roles = List.of(roles);
+	}
 
     public String getName() {
         return name;
@@ -28,14 +38,12 @@ public class User {
         this.name = name;
     }
 
-    private String password1;
-
-    public String getPassword1() {
-        return password1;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassword1(String password1) {
-        this.password1 = password1;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
 
@@ -49,13 +57,5 @@ public class User {
 	}
 
     
-    public User(String name, String password1, String... roles) {
-		this.name = name;
-		this.password1 = password1;
-        this.roles = List.of(roles);
-	}
 
-    public User() {
-	}
-    
 }
