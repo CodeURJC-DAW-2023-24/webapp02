@@ -2,9 +2,7 @@ package com.example.candread.model;
 
 import java.util.List;
 
-import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -36,6 +34,8 @@ public class Element {
     private String name;
     private String description;
     private String author;
+
+    //Imagenes:
     private String image;
 
     //private reseñas
