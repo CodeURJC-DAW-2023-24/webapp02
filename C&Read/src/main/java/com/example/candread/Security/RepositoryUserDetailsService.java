@@ -1,4 +1,4 @@
-package com.example.candread.Controller.Security;
+package com.example.candread.Security;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,8 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.example.candread.Controller.Model.User;
-import com.example.candread.Controller.Repositories.UserRepository;
+import com.example.candread.model.User;
+import com.example.candread.repositories.UserRepository;
 
 @Service
 public class RepositoryUserDetailsService implements UserDetailsService {
@@ -33,7 +33,7 @@ public class RepositoryUserDetailsService implements UserDetailsService {
 		
 
 		return new org.springframework.security.core.userdetails.User(user.getName(), 
-				user.getPassword1(), roles);
+				user.getPassword(), roles);
 	}
 }
 
