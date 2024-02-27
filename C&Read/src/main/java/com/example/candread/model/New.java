@@ -6,18 +6,18 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
 @Entity
-public class News {
+public class New {
 
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String titulo;
+    private String title;
     private String description;
     private String link;
 
-    public News() {
+    public New() {
     }
 
     public Long getId() {
@@ -27,10 +27,10 @@ public class News {
         this.id = id;
     }
     public String getTitulo() {
-        return titulo;
+        return title;
     }
     public void setTitulo(String titulo) {
-        this.titulo = titulo;
+        this.title = titulo;
     }
     public String getDescription() {
         return description;

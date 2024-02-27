@@ -9,7 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.example.candread.model.News;
+import com.example.candread.model.New;
 import com.example.candread.model.User;
 import com.example.candread.repositories.NewRepository;
 
@@ -33,9 +33,9 @@ public class ControllerPrincipal {
         }
         model.addAttribute("username", username);
 
-        List<News> news = newRepository.findAll();
+        List<New> news = newRepository.findAll();
         Collections.reverse(news);
-        List<News> newNews = news.subList(0, Math.min(news.size(), 3));
+        List<New> newNews = news.subList(0, Math.min(news.size(), 3));
         model.addAttribute("news", newNews);
     return "W-Main";
     }
