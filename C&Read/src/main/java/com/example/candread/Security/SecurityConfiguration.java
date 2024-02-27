@@ -50,7 +50,7 @@ public class SecurityConfiguration {
 		http.authenticationProvider(authenticationProvider());
 
 		http.authorizeHttpRequests((authorize) -> authorize
-				.requestMatchers("/", "/CSS/**", "/Images/**").permitAll()
+				.requestMatchers("/*", "/CSS/**", "/Images/**", "/SignIn", "/users/**").permitAll()
 				.requestMatchers("/Library").hasRole("ADMIN")
 				.anyRequest().authenticated()
 
@@ -60,16 +60,7 @@ public class SecurityConfiguration {
 			.defaultSuccessUrl("/")
 			.permitAll()
 		)
-		/*http.formLogin(formLogin -> formLogin
-				.loginPage("/LogIn")
-				.successHandler((request, response, authentication) -> {
-					String username = authentication.getName();
-					String role = authentication.getAuthorities().toString();
-					System.out.println("Usuario autenticado: " + username + ", Rol: " + role);
-					response.sendRedirect("/" + username + "/Main");
-				})
-				.permitAll());*/
-
+		
 		.logout((logout) -> logout
 				.logoutSuccessUrl("/LogIn?logout=true")
 				.permitAll());

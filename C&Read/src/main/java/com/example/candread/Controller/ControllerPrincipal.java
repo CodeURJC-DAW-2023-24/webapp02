@@ -1,7 +1,5 @@
 package com.example.candread.Controller;
 
-import java.util.Collections;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,7 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.example.candread.model.New;
+
 import com.example.candread.model.User;
 import com.example.candread.repositories.NewRepository;
 import com.example.candread.repositories.UserRepository;
@@ -44,18 +42,6 @@ public class ControllerPrincipal {
         }
         model.addAttribute("username", u);
         model.addAttribute("admin", request.isUserInRole("ADMIN"));
-        /* 
-        userService.insertUsers();
-        UserDetails username = (UserDetails) session.getAttribute("user");
-        if (username!=null) {
-            model.addAttribute("username", username.getUsername());
-        }
-        model.addAttribute("username", username);
-
-        List<New> news = newRepository.findAll();
-        Collections.reverse(news);
-        List<New> newNews = news.subList(0, Math.min(news.size(), 3));
-        model.addAttribute("news", newNews);*/
     return "W-Main";
     }
 
@@ -88,8 +74,10 @@ public class ControllerPrincipal {
 
     //moverse a registrarse
     @GetMapping("/SignIn")
-    public String moveToReg(Model model) {
+    public String moveToReg(Model model, HttpServletRequest request) {
         //  model.addAttribute("ses", "sesión");
+        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+        model.addAttribute("token", token.getToken()); 
     return "W-SignIn";
     }
 
