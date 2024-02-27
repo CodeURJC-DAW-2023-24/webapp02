@@ -42,22 +42,32 @@ public class Element {
 
     // Imagenes:
     private String image;
+    private String type;
 
     // private reseñas
-    @OneToMany
+    /*@OneToMany
     private List<Review> reviews;
 
     // private genero - lista
     private List<Genres> genres;
 
-    private Types type;
+    
     private Seasons season;
     private States state;
-    private Countries country;
+    private Countries country; */
 
     // CONSTRUCTOR DEL ELEMENT:
 
-    public Element(String name, String description, String author,
+    public Element(String nombre, String descripcion, String autor, String imagen1, String type1){
+        this.name = nombre;
+        this.description = descripcion;
+        this.author = autor;
+        this.image = imagen1;
+        this.type = type1;
+
+    }
+
+    /*public Element(String name, String description, String author,
             List<Review> reviews, Types type, Seasons season, States state,
             Countries country, List<Genres> genres1) {
         this.name = name;
@@ -81,7 +91,7 @@ public class Element {
         this.season = season;
         this.state = state;
         this.country = country;
-    }
+    }*/
 
     // GETTERS Y SETTERS
 
@@ -116,7 +126,7 @@ public class Element {
     public void setAuthor(String author) {
         this.author = author;
     }
-
+    
     public String getImage() {
         return image;
     }
@@ -125,14 +135,14 @@ public class Element {
         this.image = image;
     }
 
-    public Types getType() {
+    public String getType() {
         return type;
     }
 
     public void setType(Types type) {
-        this.type = type;
+        this.type = type.name();
     }
-
+/* 
     public Seasons getSeason() {
         return season;
     }
@@ -163,6 +173,6 @@ public class Element {
 
     public void setGeneros(List<Genres> generos) {
         this.genres = generos;
-    }
+    } */
 
 }

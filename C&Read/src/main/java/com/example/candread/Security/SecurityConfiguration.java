@@ -54,17 +54,14 @@ public class SecurityConfiguration {
 				.requestMatchers("/Library").hasRole("ADMIN")
 				.anyRequest().authenticated()
 
-<<<<<<< HEAD
-		);
 
-=======
 		).formLogin(formLogin -> formLogin
 			.loginPage("/LogIn")
 			.failureUrl("/loginerror")
 			.defaultSuccessUrl("/")
 			.permitAll()
 		)
->>>>>>> a0f8a5162e6669767bf169ea390aefce72425815
+
 		/*http.formLogin(formLogin -> formLogin
 				.loginPage("/LogIn")
 				.successHandler((request, response, authentication) -> {

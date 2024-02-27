@@ -19,53 +19,54 @@ import com.example.candread.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
-
 @Controller
 public class ControllerPrincipal {
 
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
+    /*@Autowired
     private NewRepository newRepository;
 
     @Autowired
-    private UserService userService;
+    private UserService userService; 
+    
+    @Autowired
+    private ElementService elementService;
+    */
 
-    //Moverse al main, es la pagina principal y la primera que sale al entrar
+    // Moverse al main, es la pagina principal y la primera que sale al entrar
     @GetMapping("/")
     public String moveToMain(Model model, HttpServletRequest request) {
 
-<<<<<<< HEAD
-        //Adición de un objeto element de ejemplo a la base de datos.
-        //elementService.insertElement();
-        
-=======
+        // Adición de un objeto element de ejemplo a la base de datos.
+        // elementService.insertElement();
         String u = null;
         if (request.getUserPrincipal() != null) {
             String name = request.getUserPrincipal().getName();
             User user = userRepository.findByName(name).orElseThrow();
-            u=user.getName();
+            u = user.getName();
         }
         model.addAttribute("username", u);
         model.addAttribute("admin", request.isUserInRole("ADMIN"));
-        /* 
-        userService.insertUsers();
->>>>>>> a0f8a5162e6669767bf169ea390aefce72425815
-        UserDetails username = (UserDetails) session.getAttribute("user");
-        if (username!=null) {
-            model.addAttribute("username", username.getUsername());
-        }
-        model.addAttribute("username", username);
-
-        List<New> news = newRepository.findAll();
-        Collections.reverse(news);
-        List<New> newNews = news.subList(0, Math.min(news.size(), 3));
-        model.addAttribute("news", newNews);*/
-    return "W-Main";
+        /*
+         * userService.insertUsers();
+         * >>>>>>> a0f8a5162e6669767bf169ea390aefce72425815
+         * UserDetails username = (UserDetails) session.getAttribute("user");
+         * if (username!=null) {
+         * model.addAttribute("username", username.getUsername());
+         * }
+         * model.addAttribute("username", username);
+         * 
+         * List<New> news = newRepository.findAll();
+         * Collections.reverse(news);
+         * List<New> newNews = news.subList(0, Math.min(news.size(), 3));
+         * model.addAttribute("news", newNews);
+         */
+        return "W-Main";
     }
 
-    //Moverse a las bibliotecas
+    // Moverse a las bibliotecas
     @GetMapping("/Library")
     public String moveToLibrary(HttpSession session, Model model, HttpServletRequest request) {
 
@@ -73,52 +74,52 @@ public class ControllerPrincipal {
         User user = userRepository.findByName(name).orElseThrow();
         model.addAttribute("username", user.getName());
         model.addAttribute("admin", request.isUserInRole("ADMIN"));
-    return "W-Library";
+        return "W-Library";
     }
 
-    //moverse a un elemento de la biblioteca
+    // moverse a un elemento de la biblioteca
     @GetMapping("/SingleElement")
     public String moveToSingleScreen(Model model, HttpSession session) {
         String username = getUserName(session);
         model.addAttribute("username", username);
-    return "W-SingleElement";
+        return "W-SingleElement";
     }
 
-    //moverse a iniciar sesión
+    // moverse a iniciar sesión
     @GetMapping("/LogIn")
     public String moveToIniSes(Model model, HttpServletRequest request) {
         CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-        model.addAttribute("token", token.getToken()); 
-    return "W-LogIn";
+        model.addAttribute("token", token.getToken());
+        return "W-LogIn";
     }
 
-    //moverse a registrarse
+    // moverse a registrarse
     @GetMapping("/SignIn")
     public String moveToReg(Model model) {
-        //  model.addAttribute("ses", "sesión");
-    return "W-SignIn";
+        // model.addAttribute("ses", "sesión");
+        return "W-SignIn";
     }
 
-    //moverse al perfil
+    // moverse al perfil
     @GetMapping("/Profile")
     public String moveToPerfil(Model model, HttpSession session) {
         UserDetails username = (UserDetails) session.getAttribute("user");
         model.addAttribute("username", username.getUsername());
-    return "W-Profile";
+        return "W-Profile";
     }
 
-    //moverse a la pantalla de administrador
+    // moverse a la pantalla de administrador
     @GetMapping("/Admin")
     public String moveToAdmin(Model model, HttpSession session) {
         UserDetails username = (UserDetails) session.getAttribute("user");
         model.addAttribute("username", username.getUsername());
-    return "W-Admin";
+        return "W-Admin";
     }
 
-    private String getUserName(HttpSession session){
+    private String getUserName(HttpSession session) {
         String username = null;
         User user = (User) session.getAttribute("user");
-        if (user!=null) {
+        if (user != null) {
             username = user.getName();
         }
         return username;

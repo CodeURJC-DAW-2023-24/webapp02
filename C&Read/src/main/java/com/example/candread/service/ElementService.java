@@ -22,12 +22,14 @@ public class ElementService {
 
     @PostConstruct
     public void insertElement(){
-        String name1 = "ele1";
+        String name1 = "elemento1";
         String description1 = "descripcionmuymuylarga";
         String author1 = "Autor1";
+        String imagen1 = "ImagenEjemplo";
 
         Types type1 = Types.LIBRO;
-        Seasons season1 = Seasons.INVIERNO;
+        String tipo = type1.name();
+        /*Seasons season1 = Seasons.INVIERNO;
         States state1 = States.COMPLETO;
         Countries country1 = Countries.ESPAÑA;
 
@@ -38,11 +40,13 @@ public class ElementService {
 
         List<Genres> generos1 = new ArrayList<>();
         generos1.add(Genres.CIENCIAFICCION);
-        generos1.add(Genres.ROMANCE);
+        generos1.add(Genres.ROMANCE); */
 
         //Contructor del elemento de prueba
-        Element elementoTest = new Element(name1, description1, 
-        author1, reviewsPrueba, type1, season1, state1, country1, generos1);
+       // Element elementoTest = new Element(name1, description1, 
+        //author1, reviewsPrueba, type1, season1, state1, country1, generos1);
+
+        Element elementoTest = new Element(name1, description1, author1, imagen1, tipo);
 
         //Guardar el elemento de prueba creado
         elementRepository.save(elementoTest);

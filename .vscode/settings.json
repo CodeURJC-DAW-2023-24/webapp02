@@ -14,6 +14,19 @@
             "name": "DAW",
             "database": "daw",
             "username": "rudy"
+        },
+        {
+            "mysqlOptions": {
+                "authProtocol": "default",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 3306,
+            "driver": "MySQL",
+            "name": "Local instance MySQL80",
+            "database": "usuarioscread",
+            "username": "root"
         }
     ]
 }
