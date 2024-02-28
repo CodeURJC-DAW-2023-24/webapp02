@@ -1,6 +1,5 @@
 package com.example.candread.Controller;
 
-
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,20 +25,11 @@ public class ControllerPrincipal {
 
     @Autowired
     private NewRepository newRepository;
-/* 
-    @Autowired
-    private UserService userService; 
-    
-    @Autowired
-    private ElementService elementService;
-    */
 
     // Moverse al main, es la pagina principal y la primera que sale al entrar
     @GetMapping("/")
     public String moveToMain(Model model, HttpServletRequest request) {
 
-        // Adición de un objeto element de ejemplo a la base de datos.
-        // elementService.insertElement();
         String u = null;
         if (request.getUserPrincipal() != null) {
             String name = request.getUserPrincipal().getName();

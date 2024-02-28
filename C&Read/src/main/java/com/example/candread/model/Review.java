@@ -20,6 +20,13 @@ public class Review {
 
     private int rating;
 
+    @ManyToOne
+     private Element element;
+     
+     /*@ManyToOne
+     * private User user;
+     */
+
 
     public Review(String cuerpo, int puntuacion) {
         this.body = cuerpo;
@@ -50,14 +57,16 @@ public class Review {
         this.rating = rating;
     }
 
+    public Element getElement() {
+        return element;
+    }
+
+    public void setElement(Element element) {
+        this.element = element;
+    }
+
 
     
-    /*
-     * @ManyToOne
-     * private Element element;
-     * 
-     * @ManyToOne
-     * private User user;
-     */
+    
 
 }

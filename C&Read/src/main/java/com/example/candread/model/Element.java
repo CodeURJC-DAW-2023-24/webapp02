@@ -67,18 +67,14 @@ public class Element {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> genres;
 
-    //@OneToMany (mappedBy = "id", cascade = CascadeType.ALL)
+    @OneToMany (mappedBy = "id", cascade = CascadeType.ALL)
     @ElementCollection(fetch = FetchType.EAGER)
     private List<Review> reviews;
-    /*
-     * @OneToMany
-     * private List<Review> reviews;
-     */
 
     // CONSTRUCTOR DEL ELEMENT:
 
     public Element(String nombre, String descripcion, String autor, String imagen1,
-            String type1, String temporada, String estado, String pais, List<String> generosEjemplo, List<Review> reseñas) {
+            String type1, String temporada, String estado, String pais, List<String> generosEjemplo) {
         this.name = nombre;
         this.description = descripcion;
         this.author = autor;
@@ -88,10 +84,12 @@ public class Element {
         this.state = estado;
         this.country = pais;
         this.genres = generosEjemplo;
-        this.reviews = reseñas;
 
     }
 
+    public Element() {
+        // Código del constructor, si es necesario
+    }
     // GETTERS Y SETTERS
 
     public Long getId() {
