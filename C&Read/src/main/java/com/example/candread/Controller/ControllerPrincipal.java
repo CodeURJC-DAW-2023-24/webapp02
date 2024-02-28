@@ -55,16 +55,6 @@ public class ControllerPrincipal {
         return "W-Library";
     }
 
-    // moverse a un elemento de la biblioteca
-    @GetMapping("/SingleElement")
-    public String moveToSingleScreen(Model model, HttpServletRequest request) {
-        String name = request.getUserPrincipal().getName();
-        User user = userRepository.findByName(name).orElseThrow();
-        model.addAttribute("username", user.getName());
-        model.addAttribute("admin", request.isUserInRole("ADMIN"));
-    return "W-SingleElement";
-    }
-
     // moverse a iniciar sesión
     @GetMapping("/LogIn")
     public String moveToIniSes(Model model, HttpServletRequest request) {
