@@ -50,14 +50,26 @@ public class SecurityConfiguration {
 		http.authenticationProvider(authenticationProvider());
 
 		http.authorizeHttpRequests((authorize) -> authorize
+<<<<<<< HEAD
 				.requestMatchers("/", "/CSS/**", "/Images/**").permitAll()
 				.requestMatchers("/Library").hasRole("ADMIN")
 				.anyRequest().authenticated()
+=======
+				.requestMatchers("/", "/CSS/**", "/Images/**", "/SignIn", "/users/**", "/Library", "/SingleElement", "/loginerror", "/error").permitAll()
+				.requestMatchers("/Profile", "/*/Main").hasAnyRole("USER", "ADMIN")
+				.requestMatchers("/Admin", "/news/add").hasRole("ADMIN")
+				
+>>>>>>> 2ec3c3d40eba767f6613fd6a80f6a0d51c557980
 
 		).formLogin(formLogin -> formLogin
 			.loginPage("/LogIn")
 			.failureUrl("/loginerror")
-			.defaultSuccessUrl("/")
+			.successHandler((request, response, authentication) -> {
+				String username = authentication.getName();
+				String redirectUrl = "/" + username + "/Main";
+				request.getSession().setAttribute("redirectUrl", redirectUrl);
+				response.sendRedirect(redirectUrl);
+			})
 			.permitAll()
 		)
 

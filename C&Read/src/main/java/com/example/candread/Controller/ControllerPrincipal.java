@@ -8,6 +8,7 @@ import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.candread.model.New;
 import com.example.candread.model.User;
@@ -111,6 +112,7 @@ public class ControllerPrincipal {
     return "W-Admin";
     }
 
+<<<<<<< HEAD
    /*  private String getUserName(HttpSession session) {
         String username = null;
         User user = (User) session.getAttribute("user");
@@ -119,4 +121,27 @@ public class ControllerPrincipal {
         }
         return username;
     }*/
+=======
+
+    @PostMapping(value = {"/error", "/loginerror"})
+    public String moveToErrorOrLoginError(Model model, HttpServletRequest request) {
+        String name = request.getUserPrincipal().getName();
+        User user = userRepository.findByName(name).orElseThrow();
+        model.addAttribute("username", user.getName());
+        model.addAttribute("admin", request.isUserInRole("ADMIN"));
+    return "W-Error";
+    }
+
+    @GetMapping(value = {"/error", "/loginerror"})
+    public String moveToErrorLoginError(Model model, HttpServletRequest request) {
+        String name = request.getUserPrincipal().getName();
+        User user = userRepository.findByName(name).orElseThrow();
+        model.addAttribute("username", user.getName());
+        model.addAttribute("admin", request.isUserInRole("ADMIN"));
+    return "W-Error";
+    }
+
+
+
+>>>>>>> 2ec3c3d40eba767f6613fd6a80f6a0d51c557980
 }
