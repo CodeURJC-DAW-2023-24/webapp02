@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 import com.example.candread.model.User;
-import com.example.candread.repositories.NewRepository;
 import com.example.candread.repositories.UserRepository;
-import com.example.candread.services.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -23,12 +21,6 @@ public class ControllerPrincipal {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private NewRepository newRepository;
-
-    @Autowired
-    private UserService userService;
 
     //Moverse al main, es la pagina principal y la primera que sale al entrar
     @GetMapping("/")
@@ -58,9 +50,11 @@ public class ControllerPrincipal {
 
     //moverse a un elemento de la biblioteca
     @GetMapping("/SingleElement")
-    public String moveToSingleScreen(Model model, HttpSession session) {
-        String username = getUserName(session);
-        model.addAttribute("username", username);
+    public String moveToSingleScreen(Model model, HttpServletRequest request) {
+        String name = request.getUserPrincipal().getName();
+        User user = userRepository.findByName(name).orElseThrow();
+        model.addAttribute("username", user.getName());
+        model.addAttribute("admin", request.isUserInRole("ADMIN"));
     return "W-SingleElement";
     }
 
@@ -83,17 +77,21 @@ public class ControllerPrincipal {
 
     //moverse al perfil
     @GetMapping("/Profile")
-    public String moveToPerfil(Model model, HttpSession session) {
-        UserDetails username = (UserDetails) session.getAttribute("user");
-        model.addAttribute("username", username.getUsername());
+    public String moveToPerfil(Model model, HttpServletRequest request) {
+        String name = request.getUserPrincipal().getName();
+        User user = userRepository.findByName(name).orElseThrow();
+        model.addAttribute("username", user.getName());
+        model.addAttribute("admin", request.isUserInRole("ADMIN"));
     return "W-Profile";
     }
 
     //moverse a la pantalla de administrador
     @GetMapping("/Admin")
-    public String moveToAdmin(Model model, HttpSession session) {
-        UserDetails username = (UserDetails) session.getAttribute("user");
-        model.addAttribute("username", username.getUsername());
+    public String moveToAdmin(Model model, HttpServletRequest request) {
+        String name = request.getUserPrincipal().getName();
+        User user = userRepository.findByName(name).orElseThrow();
+        model.addAttribute("username", user.getName());
+        model.addAttribute("admin", request.isUserInRole("ADMIN"));
     return "W-Admin";
     }
 

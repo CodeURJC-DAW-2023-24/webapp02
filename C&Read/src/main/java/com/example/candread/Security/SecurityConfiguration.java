@@ -50,8 +50,9 @@ public class SecurityConfiguration {
 		http.authenticationProvider(authenticationProvider());
 
 		http.authorizeHttpRequests((authorize) -> authorize
-				.requestMatchers("/", "/CSS/**", "/Images/**", "/SignIn", "/users/**").permitAll()
-				.requestMatchers("/Library").hasAnyRole("ADMIN")
+				.requestMatchers("/", "/CSS/**", "/Images/**", "/SignIn", "/users/**", "/Library", "/SingleElement").permitAll()
+				.requestMatchers("/Profile").hasAnyRole("USER")
+				.requestMatchers("/Admin", "/news/add").hasAnyRole("ADMIN")
 				
 
 		).formLogin(formLogin -> formLogin

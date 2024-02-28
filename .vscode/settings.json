@@ -13,8 +13,7 @@
             "driver": "MySQL",
             "name": "DAW",
             "database": "daw",
-            "username": "rudy",
-            "askForPassword": true
+            "username": "rudy"
         }
     ]
 }
