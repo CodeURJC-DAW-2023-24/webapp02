@@ -66,6 +66,17 @@ public class SecurityConfiguration {
 			})
 			.permitAll()
 		)
+
+		/*http.formLogin(formLogin -> formLogin
+				.loginPage("/LogIn")
+				.successHandler((request, response, authentication) -> {
+					String username = authentication.getName();
+					String role = authentication.getAuthorities().toString();
+					System.out.println("Usuario autenticado: " + username + ", Rol: " + role);
+					response.sendRedirect("/" + username + "/Main");
+				})
+				.permitAll());*/
+
 		
 		.logout((logout) -> logout
 				.logoutSuccessUrl("/LogIn?logout=true")
