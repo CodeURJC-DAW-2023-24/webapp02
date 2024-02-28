@@ -92,7 +92,6 @@ public class Element {
         this.country = pais;
         this.genres = generosEjemplo;
         //this.reviews = reseñas;
-
     }
 
     // GETTERS Y SETTERS

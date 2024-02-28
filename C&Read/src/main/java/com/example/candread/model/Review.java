@@ -21,8 +21,13 @@ public class Review {
     private int rating;
 
     @ManyToOne 
-    @JoinColumn(name = "element_id")
+    @JoinColumn(name = "element_ID")
     private Element elementLinked;
+
+    //ID para el usuario al que esta vinculada la review
+    @ManyToOne
+    @JoinColumn(name = "user_ID")
+    private User userLinked;
 
     public Review(){
 
@@ -63,6 +68,14 @@ public class Review {
 
     public void setElementLinked(Element elementLinked) {
         this.elementLinked = elementLinked;
+    }
+
+    public User getUserLinked() {
+        return userLinked;
+    }
+
+    public void setUserLinked(User userLinked) {
+        this.userLinked = userLinked;
     }
 
     

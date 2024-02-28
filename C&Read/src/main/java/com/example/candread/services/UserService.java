@@ -19,12 +19,25 @@ public class UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private ElementService elementService;
+
     @PostConstruct
     public void insertUsers() {
         if(!existsByUsernameAndPassword("admin1", "pass")){
             User userPrueba = new User("admin1", passwordEncoder.encode("pass"), "USER", "ADMIN");
             userRepository.save(userPrueba);
         }
+
+        if(!existsByUsernameAndPassword("Antonio27", "pass")){
+            User userPrueba2 = new User("Antonio27", "pass", "USER");
+            userRepository.save(userPrueba2);
+
+        }
+
+        //ElementService created to execute after users creation
+        elementService.insertElement();
+
     }
     
 

@@ -1,12 +1,17 @@
-package com.example.candread.service;
+package com.example.candread.services;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.DependsOn;
+import org.springframework.core.annotation.Order;
 import org.springframework.stereotype.Service;
 import com.example.candread.model.Element;
 import com.example.candread.model.Review;
+import com.example.candread.model.User;
 import com.example.candread.model.Element.Countries;
 import com.example.candread.model.Element.Genres;
 import com.example.candread.model.Element.Seasons;
@@ -14,6 +19,7 @@ import com.example.candread.model.Element.States;
 import com.example.candread.model.Element.Types;
 import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.ReviewRepository;
+import com.example.candread.repositories.UserRepository;
 
 import jakarta.annotation.PostConstruct;
 
@@ -26,7 +32,10 @@ public class ElementService {
     @Autowired
     private ReviewRepository reviewRepository;
 
-    @PostConstruct
+    @Autowired
+    private UserRepository userRepository;
+
+    //@PostConstruct
     public void insertElement(){
 
         //String imagen2 = new String("static/Images/Alas_Sangre.jpg");
@@ -47,6 +56,11 @@ public class ElementService {
 
         Review reviewTest1 = new Review("Viva el romantasy", 5);
         reviewTest1.setElementLinked(elementoTest1);
+
+        Optional<User> userPrueba1 = userRepository.findById((long) 2);
+        User antonio = userPrueba1.orElseThrow();
+        reviewTest1.setUserLinked(antonio);
+
         reviewRepository.save(reviewTest1);
 
         generosEjemplo1.clear();
@@ -79,7 +93,6 @@ public class ElementService {
         "Yoshifumi Tozuka", "UndeadUnluck.jpg", Types.LIBRO.name(), Seasons.PRIMAVERA.name(), 
         States.EN_EMISION.name(), Countries.JAPON.name(), generosEjemplo1);
         elementRepository.save(elementoTest3);
-
         
 
         generosEjemplo1.clear();
