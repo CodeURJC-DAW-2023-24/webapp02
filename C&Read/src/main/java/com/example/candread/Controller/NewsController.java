@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.candread.model.New;
 import com.example.candread.repositories.NewRepository;
+import com.example.candread.services.NewService;
 
 @Configuration
 @Controller
@@ -22,6 +23,9 @@ import com.example.candread.repositories.NewRepository;
 public class NewsController {
 
      @Autowired
+    private NewService newService;
+
+    @Autowired
     private NewRepository newRepository;
 
     @GetMapping("/{id}")
@@ -37,7 +41,7 @@ public class NewsController {
 
         try {
             New newPrueba = new New(newO.getTitle(), newO.getDescription(), newO.getDate(), newO.getLink());
-            newRepository.save(newPrueba);
+            newService.saveNew(newPrueba);
             model.addAttribute("successMessage", "¡Noticia guardada correctamente!");
         } catch (Exception e) {
             model.addAttribute("errorMessage", "Error al guardar la noticia.");

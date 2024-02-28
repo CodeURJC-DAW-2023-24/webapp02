@@ -1,15 +1,17 @@
 package com.example.candread.Controller;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
-
+import com.example.candread.model.New;
 import com.example.candread.model.User;
+import com.example.candread.repositories.NewRepository;
 import com.example.candread.repositories.UserRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,6 +23,9 @@ public class ControllerPrincipal {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private NewRepository newRepository;
 
     //Moverse al main, es la pagina principal y la primera que sale al entrar
     @GetMapping("/")
@@ -34,6 +39,9 @@ public class ControllerPrincipal {
         }
         model.addAttribute("username", u);
         model.addAttribute("admin", request.isUserInRole("ADMIN"));
+
+        List<New> newsList = newRepository.findAll(); // Obtener todas las noticias
+        model.addAttribute("news", newsList);
     return "W-Main";
     }
 
@@ -95,12 +103,4 @@ public class ControllerPrincipal {
     return "W-Admin";
     }
 
-    private String getUserName(HttpSession session){
-        String username = null;
-        User user = (User) session.getAttribute("user");
-        if (user!=null) {
-            username = user.getName();
-        }
-        return username;
-    }
 }
