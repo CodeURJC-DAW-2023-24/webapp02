@@ -8,6 +8,7 @@ import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.candread.model.New;
 import com.example.candread.model.User;
@@ -102,5 +103,26 @@ public class ControllerPrincipal {
         model.addAttribute("admin", request.isUserInRole("ADMIN"));
     return "W-Admin";
     }
+
+
+    @PostMapping(value = {"/error", "/loginerror"})
+    public String moveToErrorOrLoginError(Model model, HttpServletRequest request) {
+        String name = request.getUserPrincipal().getName();
+        User user = userRepository.findByName(name).orElseThrow();
+        model.addAttribute("username", user.getName());
+        model.addAttribute("admin", request.isUserInRole("ADMIN"));
+    return "W-Error";
+    }
+
+    @GetMapping(value = {"/error", "/loginerror"})
+    public String moveToErrorLoginError(Model model, HttpServletRequest request) {
+        String name = request.getUserPrincipal().getName();
+        User user = userRepository.findByName(name).orElseThrow();
+        model.addAttribute("username", user.getName());
+        model.addAttribute("admin", request.isUserInRole("ADMIN"));
+    return "W-Error";
+    }
+
+
 
 }

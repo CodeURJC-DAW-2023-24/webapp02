@@ -25,6 +25,10 @@ public class UserService {
             User userPrueba = new User("admin1", passwordEncoder.encode("pass"), "USER", "ADMIN");
             userRepository.save(userPrueba);
         }
+        if(!existsByUsernameAndPassword("admin3", "123")){
+            User userPrueba = new User("admin3", passwordEncoder.encode("123"),  "ADMIN");
+            userRepository.save(userPrueba);
+        }
     }
     
 
