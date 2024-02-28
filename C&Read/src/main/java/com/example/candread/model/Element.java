@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mysql.cj.jdbc.Blob;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -66,7 +67,9 @@ public class Element {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> genres;
 
-    // private reseñas
+    //@OneToMany (mappedBy = "id", cascade = CascadeType.ALL)
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<Review> reviews;
     /*
      * @OneToMany
      * private List<Review> reviews;
@@ -75,7 +78,7 @@ public class Element {
     // CONSTRUCTOR DEL ELEMENT:
 
     public Element(String nombre, String descripcion, String autor, String imagen1,
-            String type1, String temporada, String estado, String pais, List<String> generosEjemplo) {
+            String type1, String temporada, String estado, String pais, List<String> generosEjemplo, List<Review> reseñas) {
         this.name = nombre;
         this.description = descripcion;
         this.author = autor;
@@ -85,6 +88,7 @@ public class Element {
         this.state = estado;
         this.country = pais;
         this.genres = generosEjemplo;
+        this.reviews = reseñas;
 
     }
 
@@ -169,4 +173,14 @@ public class Element {
     public void setGeneros(List<String> generos) {
         this.genres = generos;
     }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    
 }
