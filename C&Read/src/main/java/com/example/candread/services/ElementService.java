@@ -2,6 +2,7 @@ package com.example.candread.services;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.Blob;
@@ -14,7 +15,8 @@ import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StreamUtils;
 
@@ -53,10 +55,12 @@ public class ElementService {
         generosEjemplo1.add(Genres.ROMANCE.name());
 
         //Getting the info for the imageFile attribute
-        URL urlImg = new URL("https://m.media-amazon.com/images/I/91OI4F8Fa7L._AC_UF894,1000_QL80_.jpg");
-        InputStream inputStream = urlImg.openStream();
+        //URL urlImg = new URL("https://m.media-amazon.com/images/I/91OI4F8Fa7L._AC_UF894,1000_QL80_.jpg");
+        Resource resource = new ClassPathResource("/static/Images/Alas_Sangre.jpg");
+        //InputStream inputStream = urlImg.openStream(resource);
+        InputStream inputStream = resource.getInputStream();
+        
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
         byte[] buffer = new byte[2048];
         int bytesRead;
         while ((bytesRead = inputStream.read(buffer)) != -1){
