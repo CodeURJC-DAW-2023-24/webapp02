@@ -112,17 +112,6 @@ public class ControllerPrincipal {
     return "W-Admin";
     }
 
-<<<<<<< HEAD
-   /*  private String getUserName(HttpSession session) {
-        String username = null;
-        User user = (User) session.getAttribute("user");
-        if (user != null) {
-            username = user.getName();
-        }
-        return username;
-    }*/
-=======
-
     @PostMapping(value = {"/error", "/loginerror"})
     public String moveToErrorOrLoginError(Model model, HttpServletRequest request) {
         String name = request.getUserPrincipal().getName();
@@ -140,8 +129,4 @@ public class ControllerPrincipal {
         model.addAttribute("admin", request.isUserInRole("ADMIN"));
     return "W-Error";
     }
-
-
-
->>>>>>> 2ec3c3d40eba767f6613fd6a80f6a0d51c557980
 }
