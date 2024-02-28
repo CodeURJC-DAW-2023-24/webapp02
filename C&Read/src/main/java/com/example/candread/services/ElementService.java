@@ -1,14 +1,23 @@
 package com.example.candread.services;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
+
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.core.annotation.Order;
+
 import org.springframework.stereotype.Service;
+import org.springframework.util.StreamUtils;
+
 import com.example.candread.model.Element;
 import com.example.candread.model.Review;
 import com.example.candread.model.User;
@@ -21,7 +30,6 @@ import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.ReviewRepository;
 import com.example.candread.repositories.UserRepository;
 
-import jakarta.annotation.PostConstruct;
 
 @Service
 public class ElementService {
@@ -36,7 +44,7 @@ public class ElementService {
     private UserRepository userRepository;
 
     //@PostConstruct
-    public void insertElement(){
+    public void insertElement() throws IOException, SerialException, SQLException{
 
         //String imagen2 = new String("static/Images/Alas_Sangre.jpg");
 
@@ -44,14 +52,31 @@ public class ElementService {
         generosEjemplo1.add(Genres.FANTASIA.name());
         generosEjemplo1.add(Genres.ROMANCE.name());
 
-        /*List<Review> reviewsEjemplo = new ArrayList<>();
-        Review reviewTest1 = new Review("La tripulación es súper animada y la historia parece no acabar nunca, chopper es monisimo uwu", 5);
-        reviewsEjemplo.add(reviewTest1); */
+        //Getting the info for the imageFile attribute
+        URL urlImg = new URL("https://m.media-amazon.com/images/I/91OI4F8Fa7L._AC_UF894,1000_QL80_.jpg");
+        InputStream inputStream = urlImg.openStream();
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        byte[] buffer = new byte[2048];
+        int bytesRead;
+        while ((bytesRead = inputStream.read(buffer)) != -1){
+            outputStream.write(buffer, 0, bytesRead);
+        }
+
+        byte[] imageBytes = outputStream.toByteArray();
+        Blob blobi = new SerialBlob(imageBytes);
+
+        /*ClassPathResource imgFile = new ClassPathResource("static/img/Alas_Sangre.jpg");
+		byte[] photoBytes = StreamUtils.copyToByteArray(imgFile.getInputStream());
+		Blob blobi = new SerialBlob(photoBytes); */
+
         
         //CONSTRUCTURES DE DATOS BASE EN BASE DE DATOS:
         Element elementoTest1 = new Element("Alas de Sangre", "Vuela... o muere. El nuevo fenómeno de fantasía juvenil del que todo el mundo habla.",
         "Rebecca Yarros", "static/Images/Alas_Sangre.jpg", Types.LIBRO.name(), Seasons.OTOÑO.name(), States.COMPLETO.name(), 
         Countries.ESTADOS_UNIDOS.name(), generosEjemplo1);
+
+        elementoTest1.setImageFile(blobi);
         elementRepository.save(elementoTest1);
 
         Review reviewTest1 = new Review("Viva el romantasy", 5);

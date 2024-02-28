@@ -4,7 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.mysql.cj.jdbc.Blob;
+import java.sql.Blob;
+import javax.sql.rowset.serial.SerialBlob;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -54,10 +55,9 @@ public class Element {
 
     // Imagenes:
     private String image;
-
-    /*@Lob
-    @JsonIgnore
-    private Blob imageFile;*/
+//@JsonIgnore
+    @Lob 
+    private Blob imageFile;
 
     private String type;
     private String season;
@@ -182,6 +182,14 @@ public class Element {
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
+    }
+
+    public Blob getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(Blob imageFile) {
+        this.imageFile = imageFile;
     }
 
     
