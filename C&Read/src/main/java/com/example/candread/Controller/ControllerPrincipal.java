@@ -1,8 +1,15 @@
 package com.example.candread.Controller;
 
 
+import java.util.Base64;
 import java.util.List;
+import java.util.Optional;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
 
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
@@ -10,11 +17,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.candread.model.Element;
 import com.example.candread.model.New;
 import com.example.candread.model.User;
+import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.NewRepository;
 import com.example.candread.repositories.UserRepository;
-
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -34,9 +42,13 @@ public class ControllerPrincipal {
     private ElementService elementService;
     */
 
+    @Autowired
+    private ElementRepository elementRepository;
+   
+
     // Moverse al main, es la pagina principal y la primera que sale al entrar
     @GetMapping("/")
-    public String moveToMain(Model model, HttpServletRequest request) {
+    public String moveToMain(Model model, HttpServletRequest request) throws SQLException, IOException {
 
         // Adición de un objeto element de ejemplo a la base de datos.
         // elementService.insertElement();
@@ -46,6 +58,19 @@ public class ControllerPrincipal {
             User user = userRepository.findByName(name).orElseThrow();
             u = user.getName();
         }
+
+        Optional<Element> elementOptional = elementRepository.findById((long) 1);
+        Element element = elementOptional.orElseThrow();
+        Blob blob = element.getImageFile();
+        InputStream inputStream = blob.getBinaryStream();
+        byte[] imageBytes = inputStream.readAllBytes();
+        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+        // System.out.println(base64Image);
+
+
+        inputStream.close();
+
+        model.addAttribute("blobi", base64Image);
         model.addAttribute("username", u);
         model.addAttribute("admin", request.isUserInRole("ADMIN"));
 
