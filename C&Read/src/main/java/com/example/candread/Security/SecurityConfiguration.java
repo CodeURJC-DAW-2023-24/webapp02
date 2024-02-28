@@ -54,7 +54,6 @@ public class SecurityConfiguration {
 				.requestMatchers("/Library").hasRole("ADMIN")
 				.anyRequest().authenticated()
 
-
 		).formLogin(formLogin -> formLogin
 			.loginPage("/LogIn")
 			.failureUrl("/loginerror")
@@ -72,6 +71,7 @@ public class SecurityConfiguration {
 				})
 				.permitAll());*/
 
+		
 		.logout((logout) -> logout
 				.logoutSuccessUrl("/LogIn?logout=true")
 				.permitAll());
