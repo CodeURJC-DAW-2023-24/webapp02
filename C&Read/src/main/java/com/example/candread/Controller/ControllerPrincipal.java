@@ -1,20 +1,19 @@
 package com.example.candread.Controller;
 
-import java.util.Collections;
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.candread.model.New;
 import com.example.candread.model.User;
 import com.example.candread.repositories.NewRepository;
 import com.example.candread.repositories.UserRepository;
-import com.example.candread.services.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -29,9 +28,6 @@ public class ControllerPrincipal {
     @Autowired
     private NewRepository newRepository;
 
-    @Autowired
-    private UserService userService;
-
     //Moverse al main, es la pagina principal y la primera que sale al entrar
     @GetMapping("/")
     public String moveToMain(Model model, HttpServletRequest request) {
@@ -44,18 +40,9 @@ public class ControllerPrincipal {
         }
         model.addAttribute("username", u);
         model.addAttribute("admin", request.isUserInRole("ADMIN"));
-        /* 
-        userService.insertUsers();
-        UserDetails username = (UserDetails) session.getAttribute("user");
-        if (username!=null) {
-            model.addAttribute("username", username.getUsername());
-        }
-        model.addAttribute("username", username);
 
-        List<New> news = newRepository.findAll();
-        Collections.reverse(news);
-        List<New> newNews = news.subList(0, Math.min(news.size(), 3));
-        model.addAttribute("news", newNews);*/
+        List<New> newsList = newRepository.findAll(); // Obtener todas las noticias
+        model.addAttribute("news", newsList);
     return "W-Main";
     }
 
@@ -72,9 +59,11 @@ public class ControllerPrincipal {
 
     //moverse a un elemento de la biblioteca
     @GetMapping("/SingleElement")
-    public String moveToSingleScreen(Model model, HttpSession session) {
-        String username = getUserName(session);
-        model.addAttribute("username", username);
+    public String moveToSingleScreen(Model model, HttpServletRequest request) {
+        String name = request.getUserPrincipal().getName();
+        User user = userRepository.findByName(name).orElseThrow();
+        model.addAttribute("username", user.getName());
+        model.addAttribute("admin", request.isUserInRole("ADMIN"));
     return "W-SingleElement";
     }
 
@@ -88,33 +77,52 @@ public class ControllerPrincipal {
 
     //moverse a registrarse
     @GetMapping("/SignIn")
-    public String moveToReg(Model model) {
+    public String moveToReg(Model model, HttpServletRequest request) {
         //  model.addAttribute("ses", "sesión");
+        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+        model.addAttribute("token", token.getToken()); 
     return "W-SignIn";
     }
 
     //moverse al perfil
     @GetMapping("/Profile")
-    public String moveToPerfil(Model model, HttpSession session) {
-        UserDetails username = (UserDetails) session.getAttribute("user");
-        model.addAttribute("username", username.getUsername());
+    public String moveToPerfil(Model model, HttpServletRequest request) {
+        String name = request.getUserPrincipal().getName();
+        User user = userRepository.findByName(name).orElseThrow();
+        model.addAttribute("username", user.getName());
+        model.addAttribute("admin", request.isUserInRole("ADMIN"));
     return "W-Profile";
     }
 
     //moverse a la pantalla de administrador
     @GetMapping("/Admin")
-    public String moveToAdmin(Model model, HttpSession session) {
-        UserDetails username = (UserDetails) session.getAttribute("user");
-        model.addAttribute("username", username.getUsername());
+    public String moveToAdmin(Model model, HttpServletRequest request) {
+        String name = request.getUserPrincipal().getName();
+        User user = userRepository.findByName(name).orElseThrow();
+        model.addAttribute("username", user.getName());
+        model.addAttribute("admin", request.isUserInRole("ADMIN"));
     return "W-Admin";
     }
 
-    private String getUserName(HttpSession session){
-        String username = null;
-        User user = (User) session.getAttribute("user");
-        if (user!=null) {
-            username = user.getName();
-        }
-        return username;
+
+    @PostMapping(value = {"/error", "/loginerror"})
+    public String moveToErrorOrLoginError(Model model, HttpServletRequest request) {
+        String name = request.getUserPrincipal().getName();
+        User user = userRepository.findByName(name).orElseThrow();
+        model.addAttribute("username", user.getName());
+        model.addAttribute("admin", request.isUserInRole("ADMIN"));
+    return "W-Error";
     }
+
+    @GetMapping(value = {"/error", "/loginerror"})
+    public String moveToErrorLoginError(Model model, HttpServletRequest request) {
+        String name = request.getUserPrincipal().getName();
+        User user = userRepository.findByName(name).orElseThrow();
+        model.addAttribute("username", user.getName());
+        model.addAttribute("admin", request.isUserInRole("ADMIN"));
+    return "W-Error";
+    }
+
+
+
 }

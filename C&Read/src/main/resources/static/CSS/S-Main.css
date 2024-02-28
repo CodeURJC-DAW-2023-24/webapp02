@@ -54,7 +54,7 @@ main{
 #tops
 {
     float: left;
-    width: fit-content;
+    width: 60%;
 }
 
 #topSection{
@@ -99,7 +99,7 @@ main{
 /* NEWS */
 #news
 {
-    width : max-content;
+    width : 30%;
     float: left;
     margin:30px;
     padding: 10px;
@@ -121,15 +121,18 @@ main{
     width: max-content;
 }
 
+#newsContainer {
+    display: flex;
+    flex-direction: column;
+}
+
 #new{
     background-color:#EFEFEF;
     margin: 20px;
-    width:40rem;
     padding: 10px;
     border-color: #D4D8FF;
     border-style: solid;
     border-radius: 10px;
-    
 }
 
 #newTitle{

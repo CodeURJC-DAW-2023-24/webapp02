@@ -50,26 +50,23 @@ public class SecurityConfiguration {
 		http.authenticationProvider(authenticationProvider());
 
 		http.authorizeHttpRequests((authorize) -> authorize
-				.requestMatchers("/", "/CSS/**", "/Images/**").permitAll()
-				.requestMatchers("/Library").hasRole("ADMIN")
-				.anyRequest().authenticated()
+				.requestMatchers("/", "/CSS/**", "/Images/**", "/SignIn", "/users/**", "/Library", "/SingleElement", "/loginerror", "/error").permitAll()
+				.requestMatchers("/Profile", "/*/Main").hasAnyRole("USER", "ADMIN")
+				.requestMatchers("/Admin", "/news/add").hasRole("ADMIN")
+				
 
 		).formLogin(formLogin -> formLogin
 			.loginPage("/LogIn")
 			.failureUrl("/loginerror")
-			.defaultSuccessUrl("/")
+			.successHandler((request, response, authentication) -> {
+				String username = authentication.getName();
+				String redirectUrl = "/" + username + "/Main";
+				request.getSession().setAttribute("redirectUrl", redirectUrl);
+				response.sendRedirect(redirectUrl);
+			})
 			.permitAll()
 		)
-		/*http.formLogin(formLogin -> formLogin
-				.loginPage("/LogIn")
-				.successHandler((request, response, authentication) -> {
-					String username = authentication.getName();
-					String role = authentication.getAuthorities().toString();
-					System.out.println("Usuario autenticado: " + username + ", Rol: " + role);
-					response.sendRedirect("/" + username + "/Main");
-				})
-				.permitAll());*/
-
+		
 		.logout((logout) -> logout
 				.logoutSuccessUrl("/LogIn?logout=true")
 				.permitAll());

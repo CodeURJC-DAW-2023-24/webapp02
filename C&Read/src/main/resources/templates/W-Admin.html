@@ -28,98 +28,101 @@
     <div class="container mt-5">
         <div class="row">
             <!-- Caja 1 con margen-top y margen-bottom -->
-            <div class="col-md-12 mt-5 mb-5">
-                <h4>Añadir noticias</h4>
-                <div class="card rounded">
-                    <div class="card-body">
-                        <div class="row">
-                            <!-- Columna para los campos de entrada -->
-                            <div class="col-md-6 mb-3">
-                                <label for="campo1" class="form-label">Título:</label>
-                                <input type="text" class="form-control" id="campo1">
+            <form id="addNewsForm" action="/news/add" method="post">
+                <div class="col-md-12 mt-5 mb-5">
+                    <h4>Añadir noticias</h4>
+                    <div class="card rounded">
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- Columna para los campos de entrada -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="campo1" class="form-label">Título:</label>
+                                    <input type="text" name="title" class="form-control" id="campo1">
+                                </div>
+                                <div class="col-md-6 mb-3">
+                                    <label for="campo2" class="form-label">Fecha:</label>
+                                    <input type="text" name="date" class="form-control datepicker" id="campo2">
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="campo3" class="form-label">Descripción:</label>
+                                    <input type="text" name="description" class="form-control" id="campo3">
+                                </div>
+                                <div class="col-md-12 mb-3">
+                                    <label for="campo4" class="form-label">Enlace:</label>
+                                    <input type="text" name="link" class="form-control" id="campo4">
+                                </div>
                             </div>
-                            <div class="col-md-6 mb-3">
-                                <label for="campo2" class="form-label">Fecha:</label>
-                                <input type="text" class="form-control" id="campo2">
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label for="campo3" class="form-label">Descripción:</label>
-                                <input type="text" class="form-control" id="campo3">
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label for="campo4" class="form-label">Enlace:</label>
-                                <input type="text" class="form-control" id="campo4">
-                            </div>
-                        </div>
 
-                        <div class="row">
-                            <!-- Columna para el botón "Agregar" -->
-                            <div class="col-md-12">
-                                <button class="btn btn-primary">Agregar</button>
+                            <div class="row">
+                                <!-- Columna para el botón "Agregar" -->
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary">Agregar</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
+                    <input type="hidden" name="_csrf" value="{{token}}"/>
+            </form>
+        </div>
 
 
-            <!-- Caja 2 con margen-bottom -->
-            <div class="col-md-12 mb-5">
-                <h4>BBDD</h4>
-                <div class="card rounded">
-                    <div class="card-body">
-                        <div class="row">
-                            <!-- Columna para los campos de entrada -->
-                            <div class="col-md-6 mb-3">
-                                <label for="campo1" class="form-label">Modificar:</label>
-                                <input type="text" class="form-control" id="campo1">
-                            </div>
-                            <!-- Columna para los botones -->
-                            <div class="col-md-6 mb-3 d-flex align-items-end justify-content-start">
-                                <button class="btn btn-primary me-4">Agregar</button>
-                                <!-- Button trigger modal -->
-                                <button type="button" class="btn btn-primary" data-bs-toggle="modal"
-                                    data-bs-target="#exampleModal">
-                                    Modificar
-                                </button>
+        <!-- Caja 2 con margen-bottom -->
+        <div class="col-md-12 mb-5">
+            <h4>BBDD</h4>
+            <div class="card rounded">
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Columna para los campos de entrada -->
+                        <div class="col-md-6 mb-3">
+                            <label for="campo1" class="form-label">Modificar:</label>
+                            <input type="text" class="form-control" id="campo1">
+                        </div>
+                        <!-- Columna para los botones -->
+                        <div class="col-md-6 mb-3 d-flex align-items-end justify-content-start">
+                            <button class="btn btn-primary me-4">Agregar</button>
+                            <!-- Button trigger modal -->
+                            <button type="button" class="btn btn-primary" data-bs-toggle="modal"
+                                data-bs-target="#exampleModal">
+                                Modificar
+                            </button>
 
-                                <!-- Modal -->
-                                <div class="modal fade" id="exampleModal" tabindex="-1"
-                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
-                                                <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                    aria-label="Close"></button>
-                                            </div>
-                                            <div class="modal-body">
-                                                ...
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-secondary"
-                                                    data-bs-dismiss="modal">Close</button>
-                                                <button type="button" class="btn btn-primary">Save changes</button>
-                                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                                aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            ...
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-bs-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary">Save changes</button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="col-md-12 mb-3">
-                                <label for="campo3" class="form-label">Título:</label>
-                                <input type="text" class="form-control" id="campo3">
-                            </div>
-                            <div class="col-md-12 mb-3">
-                                <label for="campo4" class="form-label">Descripción:</label>
-                                <input type="text" class="form-control" id="campo4">
-                            </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="campo3" class="form-label">Título:</label>
+                            <input type="text" class="form-control" id="campo3">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label for="campo4" class="form-label">Descripción:</label>
+                            <input type="text" class="form-control" id="campo4">
                         </div>
                     </div>
                 </div>
             </div>
-
         </div>
+
+    </div>
     </div>
 
     <!-- Bootstrap JS y otros scripts -->
@@ -129,6 +132,11 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/java-8-date-time-js@0.6.0/build/java-8-date-time.min.js"></script>
+
+    <script>
+        $("#campo2").attr("pattern", "\\d{4}-[01]\\d-[0-3]\\d");
+    </script>
 </body>
 
 </html>
