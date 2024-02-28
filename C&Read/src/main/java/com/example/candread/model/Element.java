@@ -6,6 +6,7 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.mysql.cj.jdbc.Blob;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -31,11 +32,11 @@ public class Element {
     }
 
     public enum Countries {
-        ESPAÑA, ESTADOSUNIDOS, JAPON, CHINA, REINOUNIDO
+        ESPAÑA, ESTADOS_UNIDOS, JAPON, CHINA, REINO_UNIDO, COREA
     }
 
     public enum Genres {
-        ACCION, TERROR, AVENTURA, MISTERIO, ROMANCE, CIENCIAFICCION, DRAMA, INFANTIL, COMEDIA, FANTASIA
+        ACCION, TERROR, AVENTURA, MISTERIO, ROMANCE, CIENCIAFICCION, DRAMA, INFANTIL, COMEDIA, FANTASIA, SOBRENATURAL, NOVELA, JUVENIL
     }
 
     @Id
@@ -43,15 +44,19 @@ public class Element {
     private Long id;
 
     private String name;
+
+    @Column (length = 5000) //Más espacio para las descripciones
     private String description;
+
     private String author;
+    
 
     // Imagenes:
     private String image;
 
-    @Lob
+    /*@Lob
     @JsonIgnore
-    private Blob imageFile;
+    private Blob imageFile;*/
 
     private String type;
     private String season;

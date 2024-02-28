@@ -23,9 +23,9 @@ public class ControllerPrincipal {
     @Autowired
     private UserRepository userRepository;
 
-    /*@Autowired
+    @Autowired
     private NewRepository newRepository;
-
+/* 
     @Autowired
     private UserService userService; 
     
@@ -111,12 +111,12 @@ public class ControllerPrincipal {
     return "W-Admin";
     }
 
-    private String getUserName(HttpSession session) {
+   /*  private String getUserName(HttpSession session) {
         String username = null;
         User user = (User) session.getAttribute("user");
         if (user != null) {
             username = user.getName();
         }
         return username;
-    }
+    }*/
 }
