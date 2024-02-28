@@ -20,6 +20,13 @@ public class Review {
 
     private int rating;
 
+    @ManyToOne 
+    @JoinColumn(name = "element_id")
+    private Element elementLinked;
+
+    public Review(){
+
+    }
 
     public Review(String cuerpo, int puntuacion) {
         this.body = cuerpo;
@@ -49,6 +56,16 @@ public class Review {
     public void setRating(int rating) {
         this.rating = rating;
     }
+
+    public Element getElementLinked() {
+        return elementLinked;
+    }
+
+    public void setElementLinked(Element elementLinked) {
+        this.elementLinked = elementLinked;
+    }
+
+    
 
 
     

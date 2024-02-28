@@ -67,18 +67,21 @@ public class Element {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> genres;
 
+    
+    //
     //@OneToMany (mappedBy = "id", cascade = CascadeType.ALL)
-    @ElementCollection(fetch = FetchType.EAGER)
-    private List<Review> reviews;
-    /*
-     * @OneToMany
-     * private List<Review> reviews;
-     */
+    //@ElementCollection(fetch = FetchType.EAGER)
+    @OneToMany (mappedBy = "elementLinked", cascade = CascadeType.ALL)
+    private List<Review> reviews = new ArrayList<>();
 
     // CONSTRUCTOR DEL ELEMENT:
 
+    public Element(){
+
+    }
+
     public Element(String nombre, String descripcion, String autor, String imagen1,
-            String type1, String temporada, String estado, String pais, List<String> generosEjemplo, List<Review> reseñas) {
+            String type1, String temporada, String estado, String pais, List<String> generosEjemplo){ //List<Review> reseñas) {
         this.name = nombre;
         this.description = descripcion;
         this.author = autor;
@@ -88,7 +91,7 @@ public class Element {
         this.state = estado;
         this.country = pais;
         this.genres = generosEjemplo;
-        this.reviews = reseñas;
+        //this.reviews = reseñas;
 
     }
 
