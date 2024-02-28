@@ -1,4 +1,6 @@
 package com.example.candread.service;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,35 +24,29 @@ public class ElementService {
 
     @PostConstruct
     public void insertElement(){
-        String name1 = "elemento1";
-        String description1 = "descripcionmuymuylarga";
-        String author1 = "Autor1";
-        String imagen1 = "ImagenEjemplo";
 
-        Types type1 = Types.LIBRO;
-        String tipo = type1.name();
-        /*Seasons season1 = Seasons.INVIERNO;
-        States state1 = States.COMPLETO;
-        Countries country1 = Countries.ESPAÑA;
+        List<String> generosEjemplo1 = new ArrayList<>();
+        generosEjemplo1.add(Genres.FANTASIA.name());
+        generosEjemplo1.add(Genres.ROMANCE.name());
 
+        String imagen2 = new String("static/Images/Alas_Sangre.jpg");
+        
+        
+        
+        //CONSTRUCTURES DE DATOS BASE EN BASE DE DATOS:
+        Element elementoTest1 = new Element("Alas de Sangre", "Vuela... o muere. El nuevo fenómeno de fantasía juvenil del que todo el mundo habla.",
+        "Rebecca Yarros", "https://m.media-amazon.com/images/I/91OI4F8Fa7L._AC_UF894,1000_QL80_.jpg", Types.LIBRO.name(), Seasons.OTOÑO.name(), States.COMPLETO.name(), 
+        Countries.ESTADOSUNIDOS.name(), generosEjemplo1);
+
+        //Guardar el elemento de prueba creado
+        elementRepository.save(elementoTest1);
+
+        /* 
         //Crear ReviewPrevio
         Review review1 = new Review("review1", "descriptionreview1", 4);
         List<Review> reviewsPrueba = new ArrayList<>();
         reviewsPrueba.add(review1);
-
-        List<Genres> generos1 = new ArrayList<>();
-        generos1.add(Genres.CIENCIAFICCION);
-        generos1.add(Genres.ROMANCE); */
-
-        //Contructor del elemento de prueba
-       // Element elementoTest = new Element(name1, description1, 
-        //author1, reviewsPrueba, type1, season1, state1, country1, generos1);
-
-        Element elementoTest = new Element(name1, description1, author1, imagen1, tipo);
-
-        //Guardar el elemento de prueba creado
-        elementRepository.save(elementoTest);
-
+ */
     }
 
 }
