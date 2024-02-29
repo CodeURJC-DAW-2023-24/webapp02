@@ -11,7 +11,7 @@
             "server": "localhost",
             "port": 3306,
             "driver": "MySQL",
-            "name": "DAW",
+            "name": "conexionRudy",
             "database": "bdd_candread",
             "username": "rudy"
         }
