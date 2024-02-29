@@ -15,6 +15,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -60,26 +61,7 @@ public class ControllerPrincipal {
         return "W-Main";
     }
 
-    // Move to Library
-    @GetMapping("/Library")
-    public String moveToLibrary(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
-
-        int pageNumber = page.orElse(0);
-        int pageSize = 6;
-        pageable = PageRequest.of(pageNumber, pageSize);
-
-        elementService.fullSet64Image();
-
-
-        Page<Element> books= pagingRepository.findByType("LIBRO", pageable);
-        model.addAttribute("books", books);
-        model.addAttribute("hasPrev", books.hasPrevious());
-		model.addAttribute("hasNext", books.hasNext());
-		model.addAttribute("nextPage", books.getNumber()+1);
-		model.addAttribute("prevPage", books.getNumber()-1);
-        
-    return "W-Library"; 
-    }
+    
 
     // move to LogIn
     @GetMapping("/LogIn")
