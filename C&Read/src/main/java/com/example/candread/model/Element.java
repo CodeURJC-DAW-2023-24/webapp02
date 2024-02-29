@@ -3,9 +3,7 @@ package com.example.candread.model;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.sql.Blob;
-import javax.sql.rowset.serial.SerialBlob;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -52,10 +50,8 @@ public class Element {
 
     private String author;
     
-
     // Imagenes:
     private String image;
-//@JsonIgnore
     @Lob 
     private Blob imageFile;
 
@@ -67,10 +63,6 @@ public class Element {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> genres;
 
-    
-    //
-    //@OneToMany (mappedBy = "id", cascade = CascadeType.ALL)
-    //@ElementCollection(fetch = FetchType.EAGER)
     @OneToMany (mappedBy = "elementLinked", cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
 

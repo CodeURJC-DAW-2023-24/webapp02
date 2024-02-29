@@ -8,134 +8,138 @@
   <!--Icono-->
   <link rel="icon" type="image/x-icon" href="imagenes/#">
   <!--Bootstrap-->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet" />
 
   <!--CSS-->
-  <link rel="stylesheet" href="CSS/S-Main.css">
-  <link rel="stylesheet" href="CSS/S-SingleElement.css">
-  <link rel="stylesheet" href="CSS/S-NavBar.css">
+  <link rel="stylesheet" href="../CSS/S-Main.css">
+  <link rel="stylesheet" href="../CSS/S-SingleElement.css">
 </head>
 
 <body>
   <!-- NAVBAR -->
   {{> W-Header}}
 
-  <div></div>
-
-  <div class="" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-xl">
-      <div class="modal-content">
-        <div class="modal-header">
+  <!--MAIN-->
+  <main>
+    <!--MAIN INFO-->
+    <div id="elementContent" class="container">
+      <div id="mainContent" class="row">
+        <div id="mainImg" class="col-md-2">
+          <img src="../Images/CardCover-OnePiece.jpg" class="img-fluid" alt="...">
         </div>
-        <div class="modal-body">
-          <div class="row border border-lightrounded m-2" id="modal-row">
-            <img src="Images/CardCover-OnePiece.jpg" class="modal-img p-0" alt="...">
-            <div class="col-6">
-              <div class="d-flex flex-row">
-                <h1 class="" id="exampleModalLabel">One Piece</h1>
-                <div class="col-md-4 m-2"></div>
-                <div class="col-md-7 m-2 list-group-item dropdown">
-                  <div class="d-flex align-items-center">
-                    <input type="checkbox" id="favorite-checkbox" class="favorite-checkbox">
-                    <label for="favorite-checkbox" class="favorite-container">
-                      <div class="favourite">
-                        <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" role="img"
-                          xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"
-                          class="svg-inline--fa fa-heart fa-w-1">
-                          <path fill="currentColor"
-                            d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z">
-                          </path>
-                        </svg>
-                      </div>
-                    </label>
-                    <select class="form-select" aria-label="Añadir a lista:"> <!-- Lista desplegable -->
-                      <option selected>Añadir a lista:</option>
-                      <option value="1">Lista 1</option>
-                      <option value="2">Lista 2</option>
-                      <option value="3">Lista 3</option>
-                    </select>
-                  </div>
-                </div>
-              </div>
-              <p>One Piece es un cómic y anime japonés de Eiichiro Oda. One Piece narra la historia de un joven llamado
-                Monkey D. Luffy, que inspirado por su amigo pirata Shanks, comienza un viaje para alcanzar su sueño, ser
-                el Rey de los piratas, para lo cual deberá encontrar el tesoro One Piece dejado por el anterior rey de
-                los piratas Gol D. Roger.</p>
-              <!-- Mensaje en recuadro -->
-
-            </div>
-            <div class="col-md-3 m-2" role="alert">
-              Valoración media: 10
-            </div>
-          </div>
+        <div id="mainInfo" class="col-md-8 col-sm-12">
+          <h2 id="mainTitle">{{serie.name}}</h2>
+          <p id="mainDescription">{{serie.description}}</p>
         </div>
-
-
-
-
-        <div class="row m-2" id="modal-row-sinopsis">
-          <div class="col-md-5">
-            <div class="col-md-4">
-              <!-- Contenido de la información -->
-              <h5 class="campo">Información:</h5>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <!-- Contenido del comentario -->
-            <div class="col-md-4">
-              <h5 class="campo">Reseñas:</h5>
-            </div>
-
-            <!-- Reseña predefinida -->
-            <div class="reseña">
-              <div class="perfil align-self-start">
-                <!-- Usa align-self-start para alinear la imagen en la parte superior -->
-                <img src="Images/Img-UserProfile2.png" alt="Imagen de perfil">
-              </div>
-              <div class="información">
-                <h6 class="mb-0">Usuario</h6> <!-- Agrega la clase mb-0 para eliminar el margen inferior del título -->
-                <div class="puntuación">
-                  <!-- Estrellas -->
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star checked"></span>
-                  <span class="fa fa-star"></span>
-                  <span class="fa fa-star"></span>
-                </div>
-                <p class="mt-0">10/10</p> <!-- Agrega la clase mt-0 para eliminar el margen superior del párrafo -->
-              </div>
-            </div>
-
-          </div>
+        <div class="col-md-2">
+          <p id="mainRating">Valoración media: 10</p>
         </div>
-
       </div>
-      <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                <button type="button" class="btn btn-primary">Guardar cambios</button> -->
+      <div id="listGroup" class="row">
+        <div class="d-flex align-items-center">
+          <input type="checkbox" id="favorite-checkbox" class="favorite-checkbox">
+          <label for="favorite-checkbox" class="favorite-container">
+            <div class="favourite">
+              <svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="heart" role="img"
+                xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" class="svg-inline--fa fa-heart fa-w-1">
+                <path fill="currentColor"
+                  d="M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z">
+                </path>
+              </svg>
+            </div>
+          </label>
+          <select class="form-select" aria-label="Añadir a lista:">
+            <option selected>Añadir a lista:</option>
+            <option value="1">Lista 1</option>
+            <option value="2">Lista 2</option>
+            <option value="3">Lista 3</option>
+          </select>
+        </div>
+      </div>
     </div>
-    <div class="modal-footer">
 
+    <!--REVIEW AND INFO-->
+    <div id="infoReviewContent" class="container">
+      <div id="secondContent" class="row">
+        <div id="secondInfo" class="col-md-5">
+          <h5 class="campo">Información:</h5>
+        </div>
+
+        <div id="mainReviews" class="col-md-6">
+          <h5 class="campo">Reseñas:</h5>
+          <div id="review">
+            <div class="perfil align-self-start">
+              <img src="../Images/Img-UserProfile2.png" alt="Imagen de perfil">
+            </div>
+            <div class="información">
+              <h6 class="mb-0">Usuario</h6>
+              <div class="puntuación">
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star checked"></span>
+                <span class="fa fa-star"></span>
+                <span class="fa fa-star"></span>
+              </div>
+              <p class="mt-0">10/10</p>
+            </div>
+          </div>
+          <div id="addReview">
+            {{#username}}
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalAddReview">Añadir
+              Reseña</button>
+            {{/username}}
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  </div>
-  </div>
-  </div>
-  <!-- </div> -->
+
+    <!-- Modal para añadir una reseña -->
+    <div class="modal fade" id="modalAddReview" tabindex="-1" aria-labelledby="modalAddReviewLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalAddReviewLabel">Añadir Reseña</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <!-- Contenido del formulario para añadir la reseña -->
+            <form id="addReviewForm" action="/review/add?elementId={{serie.id}}" method="post">
+              <div class="mb-3">
+                <label for="userRating" class="form-label">Puntuación</label>
+                <select class="form-select" id="userRating" name="userRating">
+                  <option selected>Seleccionar puntuación</option>
+                  <option value="1">1 estrella</option>
+                  <option value="2">2 estrellas</option>
+                  <option value="3">3 estrellas</option>
+                  <option value="4">4 estrellas</option>
+                  <option value="5">5 estrellas</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label for="userReview" class="form-label">Reseña</label>
+                <textarea class="form-control" id="userReview" name="userReview" rows="3"></textarea>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="btnSave" type="submit" class="btn">Guardar</button>
+              </div>
+              <input type="hidden" name="_csrf" value="{{token}}" />
+            </form>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+  </main>
+
   <!--Bootstrap-->
-  <!--Bootstrap-->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
     crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.min.js"
-    integrity="sha384-mQ93GR66B00ZXjt0YO5KlohRA5SY2XofN4zfuZxLkoj1gXtW8ANNCe9d5Y3eG5eD"
-    crossorigin="anonymous"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
-    integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
     crossorigin="anonymous"></script>
 </body>
 
