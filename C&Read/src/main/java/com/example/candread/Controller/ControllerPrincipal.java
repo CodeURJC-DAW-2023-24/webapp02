@@ -1,15 +1,13 @@
 package com.example.candread.Controller;
 
-
-import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.Base64;
+import java.util.List;
+import java.util.Optional;
 
-import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,9 +25,28 @@ public class ControllerPrincipal {
     @Autowired
     private NewRepository newRepository;
 
+    @Autowired
+    private ElementRepository elementRepository;
+
     // Moverse al main, es la pagina principal y la primera que sale al entrar
-    @GetMapping("/")
-    public String moveToMain(Model model) {
+     @GetMapping("/")
+    public String moveToMain(Model model, HttpServletRequest request) throws SQLException, IOException {
+
+        // Adición de un objeto element de ejemplo a la base de datos.
+        // elementService.insertElement();
+
+        Optional<Element> elementOptional = elementRepository.findById((long) 1);
+        Element element = elementOptional.orElseThrow();
+        Blob blob = element.getImageFile();
+        InputStream inputStream = blob.getBinaryStream();
+        byte[] imageBytes = inputStream.readAllBytes();
+        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+        // System.out.println(base64Image);
+
+        inputStream.close();
+
+        model.addAttribute("blobi", base64Image);;
+
         List<New> newsList = newRepository.findAll(); // Obtener todas las noticias
         model.addAttribute("news", newsList);
     return "W-Main";

@@ -37,7 +37,7 @@ public class ReviewController {
 
             Optional<Element> optionalElement = elementRepository.findById(elementId);
             Element element = (Element) optionalElement.get();
-            newReview.setElement(element);
+            newReview.setElementLinked(element);
 
             reviewRepository.save(newReview);
 

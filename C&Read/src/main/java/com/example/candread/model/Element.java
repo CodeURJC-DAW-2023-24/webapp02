@@ -1,10 +1,9 @@
 package com.example.candread.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.sql.Blob;
-import javax.sql.rowset.serial.SerialBlob;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -14,6 +13,7 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
 
 @Entity
@@ -50,10 +50,8 @@ public class Element {
 
     private String author;
     
-
     // Imagenes:
     private String image;
-//@JsonIgnore
     @Lob 
     private Blob imageFile;
 
@@ -65,10 +63,6 @@ public class Element {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> genres;
 
-    
-    //
-    //@OneToMany (mappedBy = "id", cascade = CascadeType.ALL)
-    //@ElementCollection(fetch = FetchType.EAGER)
     @OneToMany (mappedBy = "elementLinked", cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
 
@@ -92,9 +86,6 @@ public class Element {
         //this.reviews = reseñas;
     }
 
-    public Element() {
-        // Código del constructor, si es necesario
-    }
     // GETTERS Y SETTERS
 
     public Long getId() {
