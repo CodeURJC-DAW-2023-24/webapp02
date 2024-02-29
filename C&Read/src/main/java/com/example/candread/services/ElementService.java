@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -204,22 +205,22 @@ public class ElementService {
         States.COMPLETO.name(), Countries.ESPAÑA.name(), generosEjemplo1);
         elementoTest11.setImageFile(blobi);
         elementRepository.save(elementoTest11);
+
+        
     }
 
-    // public void insertSeries() throws IOException, SerialException, SQLException{
+     public void setElementsImage64(long id) throws SQLException, IOException {
+         Optional<Element> elementOptional = elementRepository.findById(id);
+        Element element = elementOptional.orElseThrow();
+        Blob blob = element.getImageFile();
+        InputStream inputStream = blob.getBinaryStream();
+        byte[] imageBytes = inputStream.readAllBytes();
+        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+        element.setBase64Image(base64Image);
 
-
-
-
-    // }
-
-    // public void insertSerie ()  throws IOException, SerialException, SQLException{
-
-
-
-
-
-    // }
+       
+        inputStream.close();
+    }
 
     public Blob getBlob (String path) throws IOException, SerialException, SQLException {
         Resource resource = new ClassPathResource(path);
@@ -236,6 +237,12 @@ public class ElementService {
         byte[] imageBytes = outputStream.toByteArray();
         Blob blobi = new SerialBlob(imageBytes);
         return blobi;
+    }
+
+    public void fullSet64Image() throws SQLException, IOException {
+        for (long i = 1; i <= 11; i++) {
+            setElementsImage64(i);
+        }
     }
     
 
