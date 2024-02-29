@@ -1,11 +1,28 @@
 package com.example.candread.services;
-
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
+import javax.sql.rowset.serial.SerialBlob;
+import javax.sql.rowset.serial.SerialException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StreamUtils;
+
 import com.example.candread.model.Element;
 import com.example.candread.model.Review;
+import com.example.candread.model.User;
 import com.example.candread.model.Element.Countries;
 import com.example.candread.model.Element.Genres;
 import com.example.candread.model.Element.Seasons;
@@ -13,8 +30,8 @@ import com.example.candread.model.Element.States;
 import com.example.candread.model.Element.Types;
 import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.ReviewRepository;
+import com.example.candread.repositories.UserRepository;
 
-import jakarta.annotation.PostConstruct;
 
 @Service
 public class ElementService {
@@ -25,26 +42,58 @@ public class ElementService {
     @Autowired
     private ReviewRepository reviewRepository;
 
-    @PostConstruct
-    public void insertElement(){
+    @Autowired
+    private UserRepository userRepository;
+
+    //@PostConstruct
+    public void insertElement() throws IOException, SerialException, SQLException{
 
         //String imagen2 = new String("static/Images/Alas_Sangre.jpg");
 
         List<String> generosEjemplo1 = new ArrayList<>();
         generosEjemplo1.add(Genres.FANTASIA.name());
         generosEjemplo1.add(Genres.ROMANCE.name());
+
+        //Getting the info for the imageFile attribute
+        //URL urlImg = new URL("https://m.media-amazon.com/images/I/91OI4F8Fa7L._AC_UF894,1000_QL80_.jpg");
+        Resource resource = new ClassPathResource("static/Images/Alas_Sangre.jpg");
+        //InputStream inputStream = urlImg.openStream(resource);
+        InputStream inputStream = resource.getInputStream();
+        
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+        byte[] buffer = new byte[2048];
+        int bytesRead;
+        while ((bytesRead = inputStream.read(buffer)) != -1){
+            outputStream.write(buffer, 0, bytesRead);
+        }
+
+        byte[] imageBytes = outputStream.toByteArray();
+        Blob blobi = new SerialBlob(imageBytes);
+
+        // ClassPathResource imgFile = new ClassPathResource("static/img/Alas_Sangre.jpg");
+		// byte[] photoBytes = StreamUtils.copyToByteArray(imgFile.getInputStream());
+		// Blob blobi = new SerialBlob(photoBytes); 
+
         
         //CONSTRUCTURES DE DATOS BASE EN BASE DE DATOS:
         Element elementoTest1 = new Element("Alas de Sangre", "Vuela... o muere. El nuevo fenómeno de fantasía juvenil del que todo el mundo habla.",
         "Rebecca Yarros", "static/Images/Alas_Sangre.jpg", Types.LIBRO.name(), Seasons.OTOÑO.name(), States.COMPLETO.name(), 
         Countries.ESTADOS_UNIDOS.name(), generosEjemplo1);
+
+        elementoTest1.setImageFile(blobi);
         elementRepository.save(elementoTest1);
 
-        Review reviewTest1 = new Review("La tripulación es súper animada y la historia parece no acabar nunca, chopper es monisimo uwu", 5);
-        reviewTest1.setElement(elementoTest1);
+        Review reviewTest1 = new Review("Viva el romantasy", 5);
+        reviewTest1.setElementLinked(elementoTest1);
+
+        Optional<User> userPrueba1 = userRepository.findById((long) 2);
+        User antonio = userPrueba1.orElseThrow();
+        reviewTest1.setUserLinked(antonio);
+
         reviewRepository.save(reviewTest1);
 
         generosEjemplo1.clear();
+        //reviewsEjemplo.clear();
         generosEjemplo1.add(Genres.AVENTURA.name());
         generosEjemplo1.add(Genres.FANTASIA.name());
         generosEjemplo1.add(Genres.JUVENIL.name());
@@ -53,8 +102,15 @@ public class ElementService {
         "La historia de un chaval buscando ser el rey de los piratas", 
         "Eiichiro Oda", "static/Images/CardCover-OnePiece.jpg", Types.LIBRO.name(), Seasons.VERANO.name(), 
         States.EN_EMISION.name(), Countries.JAPON.name(), generosEjemplo1);
-        
         elementRepository.save(elementoTest2);
+
+        Review reviewTest3 = new Review("La tripulación es súper animada y la historia parece no acabar nunca, chopper es monisimo uwu", 4);
+        reviewTest3.setElementLinked(elementoTest2);
+        reviewRepository.save(reviewTest3);
+        Review reviewTest2 = new Review("BUENARDO EL MANGA PAPU", 5);
+        reviewTest2.setElementLinked(elementoTest2);
+        reviewRepository.save(reviewTest2);
+        
 
         generosEjemplo1.clear();
         generosEjemplo1.add(Genres.COMEDIA.name());
@@ -66,6 +122,7 @@ public class ElementService {
         "Yoshifumi Tozuka", "UndeadUnluck.jpg", Types.LIBRO.name(), Seasons.PRIMAVERA.name(), 
         States.EN_EMISION.name(), Countries.JAPON.name(), generosEjemplo1);
         elementRepository.save(elementoTest3);
+        
 
         generosEjemplo1.clear();
         generosEjemplo1.add(Genres.NOVELA.name());

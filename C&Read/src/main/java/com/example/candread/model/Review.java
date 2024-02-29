@@ -19,13 +19,18 @@ public class Review {
 
     private int rating;
 
-    @ManyToOne
-     private Element element;
-     
-     /*@ManyToOne
-     * private User user;
-     */
+    @ManyToOne 
+    @JoinColumn(name = "element_ID")
+    private Element elementLinked;
 
+    //ID para el usuario al que esta vinculada la review
+    @ManyToOne
+    @JoinColumn(name = "user_ID")
+    private User userLinked;
+
+    public Review(){
+
+    }
 
     public Review(String cuerpo, int puntuacion) {
         this.body = cuerpo;
@@ -56,16 +61,32 @@ public class Review {
         this.rating = rating;
     }
 
-    public Element getElement() {
-        return element;
+    public Element getElementLinked() {
+        return elementLinked;
     }
 
-    public void setElement(Element element) {
-        this.element = element;
+    public void setElementLinked(Element elementLinked) {
+        this.elementLinked = elementLinked;
     }
+
+    public User getUserLinked() {
+        return userLinked;
+    }
+
+    public void setUserLinked(User userLinked) {
+        this.userLinked = userLinked;
+    }
+
+    
 
 
     
-    
+    /*
+     * @ManyToOne
+     * private Element element;
+     * 
+     * @ManyToOne
+     * private User user;
+     */
 
 }

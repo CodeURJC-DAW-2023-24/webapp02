@@ -2,6 +2,10 @@ package com.example.candread.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.sql.Blob;
+import javax.sql.rowset.serial.SerialBlob;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
@@ -49,10 +53,9 @@ public class Element {
 
     // Imagenes:
     private String image;
-
-    /*@Lob
-    @JsonIgnore
-    private Blob imageFile;*/
+//@JsonIgnore
+    @Lob 
+    private Blob imageFile;
 
     private String type;
     private String season;
@@ -62,14 +65,21 @@ public class Element {
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> genres;
 
-    @OneToMany (mappedBy = "id", cascade = CascadeType.ALL)
-    @ElementCollection(fetch = FetchType.EAGER)
-    private List<Review> reviews;
+    
+    //
+    //@OneToMany (mappedBy = "id", cascade = CascadeType.ALL)
+    //@ElementCollection(fetch = FetchType.EAGER)
+    @OneToMany (mappedBy = "elementLinked", cascade = CascadeType.ALL)
+    private List<Review> reviews = new ArrayList<>();
 
     // CONSTRUCTOR DEL ELEMENT:
 
+    public Element(){
+
+    }
+
     public Element(String nombre, String descripcion, String autor, String imagen1,
-            String type1, String temporada, String estado, String pais, List<String> generosEjemplo) {
+            String type1, String temporada, String estado, String pais, List<String> generosEjemplo){ //List<Review> reseñas) {
         this.name = nombre;
         this.description = descripcion;
         this.author = autor;
@@ -79,7 +89,7 @@ public class Element {
         this.state = estado;
         this.country = pais;
         this.genres = generosEjemplo;
-
+        //this.reviews = reseñas;
     }
 
     public Element() {
@@ -173,6 +183,14 @@ public class Element {
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
+    }
+
+    public Blob getImageFile() {
+        return imageFile;
+    }
+
+    public void setImageFile(Blob imageFile) {
+        this.imageFile = imageFile;
     }
 
     

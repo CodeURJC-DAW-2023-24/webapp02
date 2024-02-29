@@ -1,12 +1,15 @@
 package com.example.candread.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.GenerationType;
 
 @Entity
@@ -20,6 +23,10 @@ public class User {
 	private List<String> roles;
 
     private String password;
+
+    //Apartado para asociar el usuario a las reviews que tiene.
+    @OneToMany (mappedBy = "userLinked", cascade = CascadeType.ALL)
+    private List<Review> reviews = new ArrayList<>();
 
     public User() {
     }
@@ -55,6 +62,22 @@ public class User {
 	public void setRoles(List<String> roles) {
 		this.roles = roles;
 	}
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
 
     
 

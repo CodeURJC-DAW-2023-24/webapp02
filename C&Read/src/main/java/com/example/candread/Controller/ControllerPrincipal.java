@@ -1,16 +1,25 @@
 package com.example.candread.Controller;
 
-import java.util.List;
 
+import java.util.Base64;
+import java.util.List;
+import java.util.Optional;
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.Blob;
+import java.sql.SQLException;
+
+import org.apache.tomcat.util.http.fileupload.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.candread.model.Element;
 import com.example.candread.model.New;
+import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.NewRepository;
-
 import jakarta.servlet.http.HttpServletRequest;
 @Controller
 public class ControllerPrincipal {
