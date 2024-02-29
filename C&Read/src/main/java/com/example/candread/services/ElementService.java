@@ -56,7 +56,7 @@ public class ElementService {
 
         //Getting the info for the imageFile attribute
         //URL urlImg = new URL("https://m.media-amazon.com/images/I/91OI4F8Fa7L._AC_UF894,1000_QL80_.jpg");
-        Resource resource = new ClassPathResource("/static/Images/Alas_Sangre.jpg");
+        Resource resource = new ClassPathResource("static/Images/Alas_Sangre.jpg");
         //InputStream inputStream = urlImg.openStream(resource);
         InputStream inputStream = resource.getInputStream();
         
