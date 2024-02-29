@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.sql.Blob;
+import javax.sql.rowset.serial.SerialBlob;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -51,8 +52,10 @@ public class Element {
 
     private String author;
     
+
     // Imagenes:
     private String image;
+//@JsonIgnore
     @Lob 
     private Blob imageFile;
 
@@ -75,12 +78,11 @@ public class Element {
 
     }
 
-    public Element(String nombre, String descripcion, String autor, String imagen1,
+    public Element(String nombre, String descripcion, String autor,
             String type1, String temporada, String estado, String pais, List<String> generosEjemplo){ //List<Review> reseñas) {
         this.name = nombre;
         this.description = descripcion;
         this.author = autor;
-        this.image = imagen1;
         this.type = type1;
         this.season = temporada;
         this.state = estado;
@@ -123,13 +125,6 @@ public class Element {
         this.author = author;
     }
 
-    public String getImage() {
-        return image;
-    }
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 
     public String getType() {
         return type;
