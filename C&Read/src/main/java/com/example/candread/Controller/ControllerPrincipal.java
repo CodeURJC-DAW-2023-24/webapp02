@@ -4,21 +4,32 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.candread.model.Element;
 import com.example.candread.model.New;
 import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.NewRepository;
+import com.example.candread.repositories.PagingRepository;
+import com.example.candread.services.ElementService;
+
 import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+
 @Controller
 public class ControllerPrincipal {
 
@@ -28,33 +39,28 @@ public class ControllerPrincipal {
     @Autowired
     private ElementRepository elementRepository;
 
+    @Autowired
+    private PagingRepository pagingRepository;
+
+    @Autowired
+    private ElementService elementService;
+
     // Moverse al main, es la pagina principal y la primera que sale al entrar
      @GetMapping("/")
     public String moveToMain(Model model, HttpServletRequest request) throws SQLException, IOException {
 
-        Optional<Element> elementOptional = elementRepository.findById((long) 1);
-        Element element = elementOptional.orElseThrow();
-        Blob blob = element.getImageFile();
-        InputStream inputStream = blob.getBinaryStream();
-        byte[] imageBytes = inputStream.readAllBytes();
-        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-        inputStream.close();
-        model.addAttribute("blobi", base64Image);;
+        elementService.fullSet64Image();
 
-        List<Element> carousel = elementRepository.findTop5ByOrderByIdDesc();
+        
 
         List<New> newsList = newRepository.findAll(); // Obtener todas las noticias
         model.addAttribute("news", newsList);
-    return "W-Main";
+        return "W-Main";
     }
 
-    // Moverse a las bibliotecas
-    @GetMapping("/Library")
-    public String moveToLibrary(Model model) {
-        return "W-Library";
-    }
+    
 
-    // moverse a iniciar sesión
+    // move to LogIn
     @GetMapping("/LogIn")
     public String moveToIniSes(Model model, HttpServletRequest request) {
         return "W-LogIn";
@@ -87,4 +93,5 @@ public class ControllerPrincipal {
     public String moveToErrorLoginError(Model model) {
     return "W-Error";
     }
+
 }
