@@ -218,73 +218,18 @@
             </div>
             <div id="topList" class="container">
                 <div class="row">
-                    <div class="col-sm-4">
-                        <a href="#" class="card-link">
-                            <div class="card text-bg-dark">
-                                <img src="Images/CardCover-Book.jpg" class="card-img-top" alt="...">
-                                <div class="card-img-overlay">
-                                    <div id="cardContent"
-                                        class="mt-auto position-absolute bottom-0 start-0 end-0 bg-black opacity-75 p-2">
-                                        <h4 class="card-title ">Card title</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-sm-4">
-                        <a href="#" class="card-link">
-                            <div class="card text-bg-dark">
-                                <img src="Images/CardCover-Book.jpg" class="card-img-top" alt="...">
-                                <div class="card-img-overlay">
-                                    <div id="cardContent"
-                                        class="mt-auto position-absolute bottom-0 start-0 end-0 bg-black opacity-75 p-2">
-                                        <h4 class="card-title ">Card title</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-sm-4">
-                        <a href="#" class="card-link">
-                            <div class="card text-bg-dark">
-                                <img src="Images/CardCover-Book.jpg" class="card-img-top" alt="...">
-                                <div class="card-img-overlay">
-                                    <div id="cardContent"
-                                        class="mt-auto position-absolute bottom-0 start-0 end-0 bg-black opacity-75 p-2">
-                                        <h4 class="card-title ">Card title</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-sm-4">
-                        <a href="#" class="card-link">
-                            <div class="card text-bg-dark">
-                                <img src="Images/CardCover-Book.jpg" class="card-img-top" alt="...">
-                                <div class="card-img-overlay">
-                                    <div id="cardContent"
-                                        class="mt-auto position-absolute bottom-0 start-0 end-0 bg-black opacity-75 p-2">
-                                        <h4 class="card-title ">Card title</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-sm-4">
-                        <a href="#" class="card-link">
-                            <div class="card text-bg-dark">
-                                <img src="Images/CardCover-Book.jpg" class="card-img-top" alt="...">
-                                <div class="card-img-overlay">
-                                    <div id="cardContent"
-                                        class="mt-auto position-absolute bottom-0 start-0 end-0 bg-black opacity-75 p-2">
-                                        <h4 class="card-title ">Card title</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                </div>
+                    {{#PersonalBooks}}
+                        {{> W-Card}}
+                    {{/PersonalBooks}}
+                    <br>
+                    {{#PersonalBookshasPrev}}
+                        <a href="/Profile?page={{PersonalBooksprevPage}}">Prev Books</a>
+                    {{/PersonalBookshasPrev}}
+                    <br>
+                    {{#PersonalBookshasNext}}
+                        <a href="/Profile?page={{PersonalBooksnextPage}}">Next Books</a>
+                    {{/PersonalBookshasNext}}
+                </div> 
 
             </div>
         </article>

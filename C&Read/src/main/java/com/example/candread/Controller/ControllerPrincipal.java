@@ -22,9 +22,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.candread.model.Element;
 import com.example.candread.model.New;
+import com.example.candread.model.Review;
+import com.example.candread.model.User;
 import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.NewRepository;
+import com.example.candread.repositories.PagingProfileRepository;
 import com.example.candread.repositories.PagingRepository;
+import com.example.candread.repositories.ReviewRepository;
 import com.example.candread.services.ElementService;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,6 +45,12 @@ public class ControllerPrincipal {
 
     @Autowired
     private PagingRepository pagingRepository;
+
+    @Autowired
+    private PagingProfileRepository pagingProfileRepository;
+
+    @Autowired
+    private ReviewRepository reviewRepository;
 
     @Autowired
     private ElementService elementService;
@@ -74,7 +84,24 @@ public class ControllerPrincipal {
 
     // moverse al perfil
     @GetMapping("/Profile")
-    public String moveToPerfil(Model model) {
+    public String moveToPerfil(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+        int pageNumber = page.orElse(0);
+        int pageSize = 10;
+        pageable = PageRequest.of(pageNumber, pageSize);
+
+        elementService.fullSet64Image();
+
+        //I extract the actual User from the model to use his Id
+        User user = (User) model.getAttribute("user");
+        Long userid =user.getId();
+
+        Page<Review> books= reviewRepository.findByUserLinked(userid, pageable);
+        model.addAttribute("PersonalBooks", books);
+        model.addAttribute("PersonalBookshasPrev", books.hasPrevious());
+		model.addAttribute("PersonalBookshasNext", books.hasNext());
+		model.addAttribute("PersonalBooksnextPage", books.getNumber()+1);
+		model.addAttribute("PersonalBooksprevPage", books.getNumber()-1);
+        
     return "W-Profile";
     }
 
