@@ -15,6 +15,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Lob;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 
 @Entity
 public class Element {
@@ -59,6 +60,8 @@ public class Element {
     private String season;
     private String state;
     private String country;
+    @Transient
+    private String base64Image;
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> genres;
@@ -184,5 +187,15 @@ public class Element {
         this.imageFile = imageFile;
     }
 
+    public String getBase64Image() {
+        return base64Image;
+    }
+
+    public void setBase64Image(String base64Image) {
+        this.base64Image = base64Image;
+    }
+
+
+    
     
 }

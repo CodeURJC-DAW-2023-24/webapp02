@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -34,18 +35,15 @@ public class ControllerPrincipal {
 
         // Adición de un objeto element de ejemplo a la base de datos.
         // elementService.insertElement();
+        for (long i = 1; i <= 11; i++) {
+            setElementsImage64(i);
+        }
+        // setElementsImage64(0);
 
-        Optional<Element> elementOptional = elementRepository.findById((long) 1);
-        Element element = elementOptional.orElseThrow();
-        Blob blob = element.getImageFile();
-        InputStream inputStream = blob.getBinaryStream();
-        byte[] imageBytes = inputStream.readAllBytes();
-        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-        // System.out.println(base64Image);
+        List<String> imagesList = new ArrayList<>();       
 
-        inputStream.close();
-
-        model.addAttribute("blobi", base64Image);;
+        model.addAttribute("blobi", imagesList);
+        
 
         List<New> newsList = newRepository.findAll(); // Obtener todas las noticias
         model.addAttribute("news", newsList);
@@ -90,5 +88,18 @@ public class ControllerPrincipal {
     @GetMapping(value = {"/error", "/loginerror"})
     public String moveToErrorLoginError(Model model) {
     return "W-Error";
+    }
+
+    public void setElementsImage64(long id) throws SQLException, IOException {
+         Optional<Element> elementOptional = elementRepository.findById(id);
+        Element element = elementOptional.orElseThrow();
+        Blob blob = element.getImageFile();
+        InputStream inputStream = blob.getBinaryStream();
+        byte[] imageBytes = inputStream.readAllBytes();
+        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+        element.setBase64Image(base64Image);
+
+       
+        inputStream.close();
     }
 }
