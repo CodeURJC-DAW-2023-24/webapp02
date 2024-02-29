@@ -1,16 +1,14 @@
 package com.example.candread.Controller;
 
-
-import java.util.Base64;
-import java.util.List;
-import java.util.Optional;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.Base64;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.web.csrf.CsrfToken;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,45 +16,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.example.candread.model.Element;
 import com.example.candread.model.New;
-import com.example.candread.model.User;
 import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.NewRepository;
-import com.example.candread.repositories.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
-
 @Controller
 public class ControllerPrincipal {
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private NewRepository newRepository;
-/* 
-    @Autowired
-    private UserService userService; 
-    
-    @Autowired
-    private ElementService elementService;
-    */
 
     @Autowired
     private ElementRepository elementRepository;
-   
 
     // Moverse al main, es la pagina principal y la primera que sale al entrar
-    @GetMapping("/")
+     @GetMapping("/")
     public String moveToMain(Model model, HttpServletRequest request) throws SQLException, IOException {
 
         // Adición de un objeto element de ejemplo a la base de datos.
         // elementService.insertElement();
-        String u = null;
-        if (request.getUserPrincipal() != null) {
-            String name = request.getUserPrincipal().getName();
-            User user = userRepository.findByName(name).orElseThrow();
-            u = user.getName();
-        }
 
         Optional<Element> elementOptional = elementRepository.findById((long) 1);
         Element element = elementOptional.orElseThrow();
@@ -66,12 +43,9 @@ public class ControllerPrincipal {
         String base64Image = Base64.getEncoder().encodeToString(imageBytes);
         // System.out.println(base64Image);
 
-
         inputStream.close();
 
-        model.addAttribute("blobi", base64Image);
-        model.addAttribute("username", u);
-        model.addAttribute("admin", request.isUserInRole("ADMIN"));
+        model.addAttribute("blobi", base64Image);;
 
         List<New> newsList = newRepository.findAll(); // Obtener todas las noticias
         model.addAttribute("news", newsList);
@@ -80,81 +54,41 @@ public class ControllerPrincipal {
 
     // Moverse a las bibliotecas
     @GetMapping("/Library")
-    public String moveToLibrary(HttpSession session, Model model, HttpServletRequest request) {
-
-        String name = request.getUserPrincipal().getName();
-        User user = userRepository.findByName(name).orElseThrow();
-        model.addAttribute("username", user.getName());
-        model.addAttribute("admin", request.isUserInRole("ADMIN"));
+    public String moveToLibrary(Model model) {
         return "W-Library";
-    }
-
-    // moverse a un elemento de la biblioteca
-    @GetMapping("/SingleElement")
-    public String moveToSingleScreen(Model model, HttpServletRequest request) {
-        String name = request.getUserPrincipal().getName();
-        User user = userRepository.findByName(name).orElseThrow();
-        model.addAttribute("username", user.getName());
-        model.addAttribute("admin", request.isUserInRole("ADMIN"));
-    return "W-SingleElement";
     }
 
     // moverse a iniciar sesión
     @GetMapping("/LogIn")
     public String moveToIniSes(Model model, HttpServletRequest request) {
-        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-        model.addAttribute("token", token.getToken());
         return "W-LogIn";
     }
 
     // moverse a registrarse
     @GetMapping("/SignIn")
     public String moveToReg(Model model, HttpServletRequest request) {
-        //  model.addAttribute("ses", "sesión");
-        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
-        model.addAttribute("token", token.getToken()); 
     return "W-SignIn";
     }
 
     // moverse al perfil
     @GetMapping("/Profile")
-    public String moveToPerfil(Model model, HttpServletRequest request) {
-        String name = request.getUserPrincipal().getName();
-        User user = userRepository.findByName(name).orElseThrow();
-        model.addAttribute("username", user.getName());
-        model.addAttribute("admin", request.isUserInRole("ADMIN"));
+    public String moveToPerfil(Model model) {
     return "W-Profile";
     }
 
     // moverse a la pantalla de administrador
     @GetMapping("/Admin")
-    public String moveToAdmin(Model model, HttpServletRequest request) {
-        String name = request.getUserPrincipal().getName();
-        User user = userRepository.findByName(name).orElseThrow();
-        model.addAttribute("username", user.getName());
-        model.addAttribute("admin", request.isUserInRole("ADMIN"));
+    public String moveToAdmin(Model model) {
     return "W-Admin";
     }
 
-
     @PostMapping(value = {"/error", "/loginerror"})
-    public String moveToErrorOrLoginError(Model model, HttpServletRequest request) {
-        String name = request.getUserPrincipal().getName();
-        User user = userRepository.findByName(name).orElseThrow();
-        model.addAttribute("username", user.getName());
-        model.addAttribute("admin", request.isUserInRole("ADMIN"));
+    public String moveToErrorOrLoginError(Model model) {
     return "W-Error";
     }
 
     @GetMapping(value = {"/error", "/loginerror"})
-    public String moveToErrorLoginError(Model model, HttpServletRequest request) {
-        String name = request.getUserPrincipal().getName();
-        User user = userRepository.findByName(name).orElseThrow();
-        model.addAttribute("username", user.getName());
-        model.addAttribute("admin", request.isUserInRole("ADMIN"));
+    public String moveToErrorLoginError(Model model) {
     return "W-Error";
     }
-
-
-
 }

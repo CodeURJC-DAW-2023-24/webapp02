@@ -78,16 +78,4 @@ public class Review {
         this.userLinked = userLinked;
     }
 
-    
-
-
-    
-    /*
-     * @ManyToOne
-     * private Element element;
-     * 
-     * @ManyToOne
-     * private User user;
-     */
-
 }

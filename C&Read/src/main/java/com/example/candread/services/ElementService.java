@@ -51,8 +51,9 @@ public class ElementService {
         generosEjemplo1.add(Genres.ROMANCE.name());
 
         //Getting the info for the imageFile attribute
-        Resource resource = new ClassPathResource("/static/Images/CardCover-MoviePoster.jpg");
-        
+        //URL urlImg = new URL("https://m.media-amazon.com/images/I/91OI4F8Fa7L._AC_UF894,1000_QL80_.jpg");
+        Resource resource = new ClassPathResource("static/Images/Alas_Sangre.jpg");
+        //InputStream inputStream = urlImg.openStream(resource);
         InputStream inputStream = resource.getInputStream();
         
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -204,13 +205,6 @@ public class ElementService {
         "Maria Menendez Ponte", Types.LIBRO.name(), Seasons.OTOÑO.name(), 
         States.COMPLETO.name(), Countries.ESPAÑA.name(), generosEjemplo1);
         elementRepository.save(elementoTest11);
-
-        /* 
-        //Crear ReviewPrevio
-        Review review1 = new Review("review1", "descriptionreview1", 4);
-        List<Review> reviewsPrueba = new ArrayList<>();
-        reviewsPrueba.add(review1);
- */
     }
 
 }
