@@ -69,3 +69,69 @@ Link al tablero de trello: https://trello.com/b/3sUtM4Yb
 ## Diagrama de Navegación
 
 # FASE 2:
+
+## Navegación
+
+## Instrucciones
+
+## Diagramas Entidades
+
+## Diagramas Clases Y Templates
+
+## Participación
+ - David Ovidio Rubio Caballero:
+   - Descripción:
+   - 5 Commits:
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5 
+   - 5 Ficheros:
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5 
+ - Javier Vallejo Fernández:
+   - Descripción:
+   - 5 Commits:
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5 
+   - 5 Ficheros:
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5 
+ - Juan Álvarez Loeches:
+   - Descripción:
+   - 5 Commits:
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5 
+   - 5 Ficheros:
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5 
+ - Aurora María Fernández Basanta:
+   - Descripción: Organización de los archivos | Añadido Header y Footer con Mustache | Registro e Inicio de sesion en el Header intercalado con Perfil dependiendo del estado del usuario | Pasarle el usuario iniciado a la sesión.
+   - 5 Commits:
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5 
+   - 5 Ficheros:
+     - 1
+     - 2
+     - 3
+     - 4
+     - 5 
