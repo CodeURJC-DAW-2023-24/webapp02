@@ -94,18 +94,26 @@ public class ControllerPrincipal {
 
     @PostMapping(value = {"/error", "/loginerror"})
     public String moveToErrorOrLoginError(Model model, HttpServletRequest request) {
-        String name = request.getUserPrincipal().getName();
-        User user = userRepository.findByName(name).orElseThrow();
-        model.addAttribute("username", user.getName());
+        String u = null;
+        if (request.getUserPrincipal() != null) {
+            String name = request.getUserPrincipal().getName();
+            User user = userRepository.findByName(name).orElseThrow();
+            u = user.getName();
+        }
+        model.addAttribute("username", u);
         model.addAttribute("admin", request.isUserInRole("ADMIN"));
     return "W-Error";
     }
 
     @GetMapping(value = {"/error", "/loginerror"})
     public String moveToErrorLoginError(Model model, HttpServletRequest request) {
-        String name = request.getUserPrincipal().getName();
-        User user = userRepository.findByName(name).orElseThrow();
-        model.addAttribute("username", user.getName());
+        String u = null;
+        if (request.getUserPrincipal() != null) {
+            String name = request.getUserPrincipal().getName();
+            User user = userRepository.findByName(name).orElseThrow();
+            u = user.getName();
+        }
+        model.addAttribute("username", u);
         model.addAttribute("admin", request.isUserInRole("ADMIN"));
     return "W-Error";
     }
