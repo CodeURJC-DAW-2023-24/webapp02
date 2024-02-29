@@ -86,7 +86,10 @@
             </div>
           </div>
           <div id="addReview">
-            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalAddReview">Añadir Reseña</button>
+            {{#username}}
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalAddReview">Añadir
+              Reseña</button>
+            {{/username}}
           </div>
         </div>
       </div>
@@ -102,10 +105,10 @@
           </div>
           <div class="modal-body">
             <!-- Contenido del formulario para añadir la reseña -->
-            <form>
+            <form id="addReviewForm" action="/review/add?elementId={{serie.id}}" method="post">
               <div class="mb-3">
                 <label for="userRating" class="form-label">Puntuación</label>
-                <select class="form-select" id="userRating">
+                <select class="form-select" id="userRating" name="userRating">
                   <option selected>Seleccionar puntuación</option>
                   <option value="1">1 estrella</option>
                   <option value="2">2 estrellas</option>
@@ -116,14 +119,16 @@
               </div>
               <div class="mb-3">
                 <label for="userReview" class="form-label">Reseña</label>
-                <textarea class="form-control" id="userReview" rows="3"></textarea>
+                <textarea class="form-control" id="userReview" name="userReview" rows="3"></textarea>
               </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                <button id="btnSave" type="submit" class="btn">Guardar</button>
+              </div>
+              <input type="hidden" name="_csrf" value="{{token}}" />
             </form>
           </div>
-          <div  class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-            <button id="btnSave" type="button" class="btn">Guardar</button>
-          </div>
+          
         </div>
       </div>
     </div>

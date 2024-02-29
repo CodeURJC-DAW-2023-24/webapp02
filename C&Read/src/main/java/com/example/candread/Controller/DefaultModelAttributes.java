@@ -8,13 +8,48 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.example.candread.model.Element;
+import com.example.candread.model.User;
 import com.example.candread.repositories.ElementRepository;
+import com.example.candread.repositories.UserRepository;
+
+import jakarta.servlet.http.HttpServletRequest;
+
+import org.springframework.ui.Model;
+import org.springframework.security.web.csrf.CsrfToken;
 
 @ControllerAdvice
 public class DefaultModelAttributes {
 
     @Autowired
     private ElementRepository elementRepository;
+
+    @Autowired
+    private UserRepository userRepository;
+
+    @ModelAttribute(name = "username")
+    public String getUserString(HttpServletRequest request) {
+
+        String u = null;
+        if (request.getUserPrincipal() != null) {
+            String name = request.getUserPrincipal().getName();
+            User user = userRepository.findByName(name).orElseThrow();
+            u = user.getName();
+        }
+        return u;
+    }
+
+    @ModelAttribute(name = "admin")
+    public Boolean isAdmin(HttpServletRequest request) {
+        return request.isUserInRole("ADMIN");
+    }
+
+    @ModelAttribute
+    public void addCsrfToken(Model model, HttpServletRequest request) {
+        CsrfToken token = (CsrfToken) request.getAttribute("_csrf");
+        if (token != null) {
+            model.addAttribute("token", token.getToken());
+        }
+    }
 
     @ModelAttribute(name = "libros")
     public List<Element> listaLibros() {
