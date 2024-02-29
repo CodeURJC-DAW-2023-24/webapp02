@@ -49,9 +49,6 @@ public class ControllerPrincipal {
      @GetMapping("/")
     public String moveToMain(Model model, HttpServletRequest request) throws SQLException, IOException {
 
-        // Adición de un objeto element de ejemplo a la base de datos.
-        // elementService.insertElement();
-
         elementService.fullSet64Image();
 
         
