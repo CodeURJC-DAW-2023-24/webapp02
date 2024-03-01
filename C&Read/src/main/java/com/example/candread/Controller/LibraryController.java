@@ -126,7 +126,7 @@ public class LibraryController {
     return "W-Library"; 
     }
 
-    @GetMapping("/Year")
+    /*@GetMapping("/Year")
     public String yearFilter(Model model, HttpSession session, @RequestParam("year") String year, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
@@ -142,6 +142,6 @@ public class LibraryController {
 		model.addAttribute("prevPage", books.getNumber()-1);
         
     return "W-Library"; 
-    }
+    }*/
 
 }
