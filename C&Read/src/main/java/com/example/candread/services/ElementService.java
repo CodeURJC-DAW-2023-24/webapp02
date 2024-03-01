@@ -72,7 +72,6 @@ public class ElementService {
         // ClassPathResource imgFile = new ClassPathResource("static/img/Alas_Sangre.jpg");
 		// byte[] photoBytes = StreamUtils.copyToByteArray(imgFile.getInputStream());
 		// Blob blobi = new SerialBlob(photoBytes); 
-
         
         //DDBB CONSTRUCTORS FOR ELEMENTS
         Element elementoTest1 = new Element("Alas de Sangre", "Vuela... o muere. El nuevo fenómeno de fantasía juvenil del que todo el mundo habla.",
@@ -95,6 +94,8 @@ public class ElementService {
         reviewRepository.save(reviewTest1);
 
         generosEjemplo1.clear();
+        userList.clear();
+        userList.add(admin1);
         //reviewsEjemplo.clear();
         generosEjemplo1.add(Genres.AVENTURA.name());
         generosEjemplo1.add(Genres.FANTASIA.name());
@@ -105,6 +106,7 @@ public class ElementService {
         "Eiichiro Oda", Types.LIBRO.name(), Seasons.VERANO.name(), 
         States.EN_EMISION.name(), Countries.JAPON.name(), generosEjemplo1);
         elementoTest2.setImageFile(blobi);
+        elementoTest2.setUsers(userList);
         elementRepository.save(elementoTest2);
 
         Review reviewTest3 = new Review("La tripulación es súper animada y la historia parece no acabar nunca, chopper es monisimo uwu", 4);

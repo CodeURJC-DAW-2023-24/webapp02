@@ -30,7 +30,7 @@ public class User {
     private List<Review> reviews = new ArrayList<>();
 
     //Apartado para asociar el usuario a las reviews que tiene.
-    @ManyToMany (mappedBy = "userid", cascade = CascadeType.ALL)
+    @ManyToMany (mappedBy = "users", cascade = CascadeType.ALL)
     private List<Element> elements = new ArrayList<>();
 
     public User() {
