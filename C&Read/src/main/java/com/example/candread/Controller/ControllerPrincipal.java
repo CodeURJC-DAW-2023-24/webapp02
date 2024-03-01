@@ -29,7 +29,9 @@ import com.example.candread.repositories.NewRepository;
 import com.example.candread.repositories.PagingRepository;
 import com.example.candread.repositories.ReviewRepository;
 import com.example.candread.services.ElementService;
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
+import jakarta.persistence.criteria.CriteriaBuilder.Case;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -45,6 +47,8 @@ public class ControllerPrincipal {
     @Autowired
     private PagingRepository pagingRepository;
 
+    @Autowired
+    private PagingRepository pagingProfileRepository;
 
     @Autowired
     private ReviewRepository reviewRepository;
@@ -83,19 +87,60 @@ public class ControllerPrincipal {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
+        int numberBooks = 0;
+        int numberFilms = 0;
+        int numberSeries = 0;
+        String typeNow;
+        int limit = 0;
 
         elementService.fullSet64Image();
 
         //I extract the actual User from the model to use his Id
         User user = (User) model.getAttribute("user");
-        Long userid =user.getId();
 
-        Page<Review> books= reviewRepository.findByUserLinked(userid, pageable);
-        model.addAttribute("PersonalBooks", books);
-        model.addAttribute("PersonalBookshasPrev", books.hasPrevious());
-		model.addAttribute("PersonalBookshasNext", books.hasNext());
-		model.addAttribute("PersonalBooksnextPage", books.getNumber()+1);
-		model.addAttribute("PersonalBooksprevPage", books.getNumber()-1);
+        //FOR AND SWITCH CASE TO GET ALL NUMBER OF MEDIA REGISTERED IN THE USER
+        limit = user.getElements().size();
+        for(int i = 0; i<limit; i = i+1){
+            typeNow = user.getElements().get(i).getType();
+            switch (typeNow) {
+                case "LIBRO":
+                    numberBooks = numberBooks +1;
+                    break;
+                case "SERIE":
+                    numberSeries = numberSeries +1;
+                    break;
+                case "PELICULA":
+                    numberFilms = numberFilms + 1;
+                default:
+                    break;
+            }
+        }
+        Long userid =user.getId();
+        //Page<Review> books= reviewRepository.findByUserLinked(userid, pageable);
+        Page<Element> userBooks = pagingRepository.findByUsersIdAndType(userid, "LIBRO", pageable);
+        model.addAttribute("PersonalBooks", userBooks);
+        model.addAttribute("PersonalBookshasPrev", userBooks.hasPrevious());
+		model.addAttribute("PersonalBookshasNext", userBooks.hasNext());
+		model.addAttribute("PersonalBooksnextPage", userBooks.getNumber()+1);
+		model.addAttribute("PersonalBooksprevPage", userBooks.getNumber()-1);
+
+        Page<Element> userSeries = pagingRepository.findByUsersIdAndType(userid, "SERIE", pageable);
+        model.addAttribute("PersonalSeries", userSeries);
+        model.addAttribute("PersonalSerieshasPrev", userSeries.hasPrevious());
+		model.addAttribute("PersonalSerieshasNext", userSeries.hasNext());
+		model.addAttribute("PersonalSeriesnextPage", userSeries.getNumber()+1);
+		model.addAttribute("PersonalSeriesprevPage", userSeries.getNumber()-1);
+
+        Page<Element> userFilms = pagingRepository.findByUsersIdAndType(userid, "PELICULA", pageable);
+        model.addAttribute("PersonalFilms", userFilms);
+        model.addAttribute("PersonalFilmshasPrev", userFilms.hasPrevious());
+		model.addAttribute("PersonalFilmshasNext", userFilms.hasNext());
+		model.addAttribute("PersonalFilmsnextPage", userFilms.getNumber()+1);
+		model.addAttribute("PersonalFilmsprevPage", userFilms.getNumber()-1);
+
+        model.addAttribute("numBooks", numberBooks);
+        model.addAttribute("numSeries", numberSeries);
+        model.addAttribute("numFilms", numberFilms);
         
     return "W-Profile";
     }
