@@ -56,6 +56,8 @@ public class UserService {
 
         //ElementService created to execute after users creation
         elementService.insertElement();
+        elementService.insertSeries();
+        elementService.inserFilms();
 
 
     }
