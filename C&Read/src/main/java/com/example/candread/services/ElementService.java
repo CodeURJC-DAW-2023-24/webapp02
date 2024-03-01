@@ -66,7 +66,7 @@ public class ElementService {
         //Getting the info for the imageFile attribute
         //URL urlImg = new URL("https://m.media-amazon.com/images/I/91OI4F8Fa7L._AC_UF894,1000_QL80_.jpg");
         Blob blobi = getBlob("static/Images/Alas_Sangre.jpg");
-        Blob blobOnepiece = getBlob("static/Images/CardCover-OnePiece.jpg");
+        Blob blobOnepiece = getBlob("static/Images/One_Piece_Libro.jpg");
         Blob blobMarina = getBlob("static/Images/Marina.jpg");
         Blob blobImperioFinal = getBlob("static/Images/El_Imperio_Final.jpg");
         Blob blobSoloLeveling = getBlob("static/Images/Solo_Leveling.jpeg");
@@ -129,6 +129,8 @@ public class ElementService {
         
 
         generosEjemplo1.clear();
+        userList.clear();
+        userList.add(antonio);
         generosEjemplo1.add(Genres.COMEDIA.name());
         generosEjemplo1.add(Genres.SOBRENATURAL.name());
         generosEjemplo1.add(Genres.AVENTURA.name());
@@ -138,10 +140,12 @@ public class ElementService {
         "Yoshifumi Tozuka", Types.LIBRO.name(), Seasons.PRIMAVERA.name(), 
         States.EN_EMISION.name(), Countries.JAPON.name(), generosEjemplo1);
         elementoTest3.setImageFile(undeadBlob);
+        elementoTest3.setUsers(userList);
         elementRepository.save(elementoTest3);
        
 
         generosEjemplo1.clear();
+        userList.clear();
         generosEjemplo1.add(Genres.NOVELA.name());
         generosEjemplo1.add(Genres.MISTERIO.name());
         generosEjemplo1.add(Genres.JUVENIL.name());
@@ -196,9 +200,13 @@ public class ElementService {
         "Cixin Liu", Types.LIBRO.name(), Seasons.INVIERNO.name(), 
         States.COMPLETO.name(), Countries.CHINA.name(), generosEjemplo1);
         elementoTest8.setImageFile(blobTresCuerpos);
+
+        userList.add(antonio);
+        elementoTest8.setUsers(userList);
         elementRepository.save(elementoTest8);
 
         generosEjemplo1.clear();
+        userList.clear();
         generosEjemplo1.add(Genres.NOVELA.name());
         generosEjemplo1.add(Genres.FANTASIA.name());
         generosEjemplo1.add(Genres.AVENTURA.name());
@@ -255,9 +263,9 @@ public class ElementService {
 
        
         Blob blobOnepiece = getBlob("static/Images/CardCover-OnePiece.jpg");
-        Blob blobSoloLeveling = getBlob("static/Images/Solo_Leveling.jpeg");
+        Blob blobSoloLeveling = getBlob("static/Images/Solo_Leveling_Serie.jpg");
         Blob blobJujutsu = getBlob("static/Images/Jujutsu_Kaisen.jpg");
-        Blob undeadBlob = getBlob("static/Images/UndeadUnluck.jpg");
+        Blob undeadBlob = getBlob("static/Images/UndeadUnluck_Serie.jpg");
         Blob blobFrieren = getBlob("static/Images/Frieren.jpg");
         Blob blobFull = getBlob("static/Images/Full_Metal_Alchemist.jpg");
         Blob blobMagi = getBlob("static/Images/Magi_Simbad.jpg");
@@ -292,6 +300,7 @@ public class ElementService {
         elementRepository.save(elementoTest1);
 
         generosEjemplo1.clear();
+        userList.clear();
         generosEjemplo1.add(Genres.COMEDIA.name());
         generosEjemplo1.add(Genres.SOBRENATURAL.name());
         generosEjemplo1.add(Genres.AVENTURA.name());
@@ -315,10 +324,15 @@ public class ElementService {
         "Yoshifumi Tozuka", Types.SERIE.name(), Seasons.PRIMAVERA.name(), 
         States.EN_EMISION.name(), Countries.JAPON.name(), generosEjemplo1);
         elementoTest3.setImageFile(undeadBlob);
+
+        userList.add(antonio);
+        userList.add(admin2);
+        elementoTest3.setUsers(userList);
         elementRepository.save(elementoTest3);
        
 
         generosEjemplo1.clear();
+        userList.clear();
         generosEjemplo1.add(Genres.ACCION.name());
         generosEjemplo1.add(Genres.MISTERIO.name());
         generosEjemplo1.add(Genres.JUVENIL.name());
@@ -422,6 +436,17 @@ public class ElementService {
         Blob blobMermaid = getBlob("static/Images/Sirenita.jpg");
         Blob blobUp = getBlob("static/Images/Up.jpg");
 
+        //BASE USERS ON THE SYSTEM
+        Optional<User> userPrueba3 = userRepository.findById((long) 1);
+        User admin1 = userPrueba3.orElseThrow();
+        Optional<User> userPrueba2 = userRepository.findById((long) 2);
+        User admin2 = userPrueba2.orElseThrow();
+        Optional<User> userPrueba1 = userRepository.findById((long) 3);
+        User antonio = userPrueba1.orElseThrow();
+        List<User> userList = new ArrayList<>();
+
+        
+
 
         List<String> generosEjemplo1 = new ArrayList<>();
 
@@ -462,10 +487,15 @@ public class ElementService {
         "Walt Disney Pictures", Types.PELICULA.name(), Seasons.PRIMAVERA.name(), 
         States.COMPLETO.name(), Countries.ESTADOS_UNIDOS.name(), generosEjemplo1);
         elementoTest3.setImageFile(blobElemental);
+
+        userList.add(antonio);
+        userList.add(admin1);
+        elementoTest3.setUsers(userList);
         elementRepository.save(elementoTest3);
        
 
         generosEjemplo1.clear();
+        userList.clear();
         generosEjemplo1.add(Genres.MISTERIO.name());
         generosEjemplo1.add(Genres.DRAMA.name());
         generosEjemplo1.add(Genres.JUVENIL.name());
