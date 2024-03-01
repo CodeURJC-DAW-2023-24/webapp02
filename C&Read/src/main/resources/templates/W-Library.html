@@ -42,16 +42,16 @@
 
             <div id="libraryList" class="container">
                 <div class="row">
-                    {{#books}}
+                    {{#elements}}
                         {{> W-Card}}
-                    {{/books}}
+                    {{/elements}}
                     <br>
                     {{#hasPrev}}
-                        <a href="/Library/?page={{prevPage}}">Prev Books</a>
+                        <a href="/Library/{{controllerRoute}}?page={{prevPage}}">Prev Books</a>
                     {{/hasPrev}}
                     <br>
                     {{#hasNext}}
-                        <a href="/Library/?page={{nextPage}}">Next Books</a>
+                        <a href="/Library/{{controllerRoute}}?page={{nextPage}}">Next Books</a>
                     {{/hasNext}}
                 </div>    
             </div>

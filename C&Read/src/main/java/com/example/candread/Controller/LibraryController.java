@@ -34,8 +34,8 @@ public class LibraryController {
     private ElementService elementService;
 
 
-    @GetMapping("/")
-    public String moveToLibrary(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    @GetMapping("/Books")
+    public String moveToBookLibrary(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
 
         int pageNumber = page.orElse(0);
         int pageSize = 10;
@@ -45,7 +45,8 @@ public class LibraryController {
 
 
         Page<Element> books= pagingRepository.findByType("LIBRO", pageable);
-        model.addAttribute("books", books);
+        model.addAttribute("elements", books);
+        model.addAttribute("controllerRoute", "Books");
         model.addAttribute("hasPrev", books.hasPrevious());
         model.addAttribute("hasNext", books.hasNext());
         model.addAttribute("nextPage", books.getNumber()+1);
@@ -53,6 +54,50 @@ public class LibraryController {
 
     return "W-Library"; 
     }
+
+    @GetMapping("/Films")
+    public String moveToFilmLibrary(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+
+        int pageNumber = page.orElse(0);
+        int pageSize = 10;
+        pageable = PageRequest.of(pageNumber, pageSize);
+
+        elementService.fullSet64Image();
+
+
+        Page<Element> films= pagingRepository.findByType("PELICULA", pageable);
+        model.addAttribute("elements", films);
+        model.addAttribute("controllerRoute", "Films");
+        model.addAttribute("hasPrev", films.hasPrevious());
+        model.addAttribute("hasNext", films.hasNext());
+        model.addAttribute("nextPage", films.getNumber()+1);
+        model.addAttribute("prevPage", films.getNumber()-1);
+
+    return "W-Library"; 
+    }
+
+    @GetMapping("/Series")
+    public String moveToSeriesLibrary(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+
+        int pageNumber = page.orElse(0);
+        int pageSize = 10;
+        pageable = PageRequest.of(pageNumber, pageSize);
+
+        elementService.fullSet64Image();
+
+
+        Page<Element> series= pagingRepository.findByType("SERIE", pageable);
+        model.addAttribute("elements", series);
+        model.addAttribute("controllerRoute", "Series");
+        model.addAttribute("hasPrev", series.hasPrevious());
+        model.addAttribute("hasNext", series.hasNext());
+        model.addAttribute("nextPage", series.getNumber()+1);
+        model.addAttribute("prevPage", series.getNumber()-1);
+
+    return "W-Library"; 
+    }
+
+    
 
     @GetMapping("/Genre")
     public String genreFilter(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
@@ -63,7 +108,7 @@ public class LibraryController {
         elementService.fullSet64Image();
 
         Page<Element> books= pagingRepository.findByGenres(genre, pageable);
-        model.addAttribute("books", books);
+        model.addAttribute("elements", books);
         model.addAttribute("hasPrev", books.hasPrevious());
 		model.addAttribute("hasNext", books.hasNext());
 		model.addAttribute("nextPage", books.getNumber()+1);
@@ -81,7 +126,7 @@ public class LibraryController {
         elementService.fullSet64Image();
         
         Page<Element> books= pagingRepository.findBySeason(season, pageable);
-        model.addAttribute("books", books);
+        model.addAttribute("elements", books);
         model.addAttribute("hasPrev", books.hasPrevious());
 		model.addAttribute("hasNext", books.hasNext());
 		model.addAttribute("nextPage", books.getNumber()+1);
@@ -99,7 +144,7 @@ public class LibraryController {
         elementService.fullSet64Image();
         
         Page<Element> books= pagingRepository.findByCountry(country, pageable);
-        model.addAttribute("books", books);
+        model.addAttribute("elements", books);
         model.addAttribute("hasPrev", books.hasPrevious());
 		model.addAttribute("hasNext", books.hasNext());
 		model.addAttribute("nextPage", books.getNumber()+1);
@@ -117,7 +162,7 @@ public class LibraryController {
         elementService.fullSet64Image();
         
         Page<Element> books= pagingRepository.findByState(state, pageable);
-        model.addAttribute("books", books);
+        model.addAttribute("elements", books);
         model.addAttribute("hasPrev", books.hasPrevious());
 		model.addAttribute("hasNext", books.hasNext());
 		model.addAttribute("nextPage", books.getNumber()+1);
