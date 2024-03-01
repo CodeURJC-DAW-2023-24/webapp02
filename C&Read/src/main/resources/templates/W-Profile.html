@@ -26,7 +26,7 @@
     <section id="bannerSection">
         <img src="Images/Img-UserProfile.png" alt="Logo" width="50" height="50" id="bannerLogo">
         <div id="prueba">
-            <p id="bannerUsername">CANDELA <a href="#exampleModal">
+            <p id="bannerUsername">{{user.name}}<a href="#exampleModal">
                     <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
                             src="Images/Icon-Edit.png" alt="HTML tutorial" style="width:30px;height:30px;"></button>
                 </a></p>
@@ -59,7 +59,7 @@
         <!-- Peliculas-->
         <article id="topSection">
             <div id="topTitleUser">
-                <h4> >Mis Películas Favoritas< </h4>
+                <h4> Mis Películas Favoritas </h4>
             </div>
             <div id="topList" class="container">
                 <div class="row">
@@ -137,7 +137,7 @@
 
         <article id="topSection">
             <div id="topTitleUser">
-                <h4> >Mis series favoritas< </h4>
+                <h4> Mis series favoritas </h4>
             </div>
             <div id="topList" class="container">
                 <div class="row">
@@ -214,77 +214,22 @@
         <!-- Libros -->
         <article id="topSection">
             <div id="topTitleUser">
-                <h4> >Mis libros favoritos< </h4>
+                <h4> Mis libros favoritos </h4>
             </div>
             <div id="topList" class="container">
                 <div class="row">
-                    <div class="col-sm-4">
-                        <a href="#" class="card-link">
-                            <div class="card text-bg-dark">
-                                <img src="Images/CardCover-Book.jpg" class="card-img-top" alt="...">
-                                <div class="card-img-overlay">
-                                    <div id="cardContent"
-                                        class="mt-auto position-absolute bottom-0 start-0 end-0 bg-black opacity-75 p-2">
-                                        <h4 class="card-title ">Card title</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-sm-4">
-                        <a href="#" class="card-link">
-                            <div class="card text-bg-dark">
-                                <img src="Images/CardCover-Book.jpg" class="card-img-top" alt="...">
-                                <div class="card-img-overlay">
-                                    <div id="cardContent"
-                                        class="mt-auto position-absolute bottom-0 start-0 end-0 bg-black opacity-75 p-2">
-                                        <h4 class="card-title ">Card title</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-sm-4">
-                        <a href="#" class="card-link">
-                            <div class="card text-bg-dark">
-                                <img src="Images/CardCover-Book.jpg" class="card-img-top" alt="...">
-                                <div class="card-img-overlay">
-                                    <div id="cardContent"
-                                        class="mt-auto position-absolute bottom-0 start-0 end-0 bg-black opacity-75 p-2">
-                                        <h4 class="card-title ">Card title</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-sm-4">
-                        <a href="#" class="card-link">
-                            <div class="card text-bg-dark">
-                                <img src="Images/CardCover-Book.jpg" class="card-img-top" alt="...">
-                                <div class="card-img-overlay">
-                                    <div id="cardContent"
-                                        class="mt-auto position-absolute bottom-0 start-0 end-0 bg-black opacity-75 p-2">
-                                        <h4 class="card-title ">Card title</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                    <div class="col-sm-4">
-                        <a href="#" class="card-link">
-                            <div class="card text-bg-dark">
-                                <img src="Images/CardCover-Book.jpg" class="card-img-top" alt="...">
-                                <div class="card-img-overlay">
-                                    <div id="cardContent"
-                                        class="mt-auto position-absolute bottom-0 start-0 end-0 bg-black opacity-75 p-2">
-                                        <h4 class="card-title ">Card title</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-
-                </div>
+                    {{#PersonalBooks}}
+                        {{> W-Card}}
+                    {{/PersonalBooks}}
+                    <br>
+                    {{#PersonalBookshasPrev}}
+                        <a href="/Profile?page={{PersonalBooksprevPage}}">Prev Books</a>
+                    {{/PersonalBookshasPrev}}
+                    <br>
+                    {{#PersonalBookshasNext}}
+                        <a href="/Profile?page={{PersonalBooksnextPage}}">Next Books</a>
+                    {{/PersonalBookshasNext}}
+                </div> 
 
             </div>
         </article>
@@ -296,7 +241,7 @@
     <!--SECCION ESTADISTICAS-->
     <section id="stadisticSection">
         <div id="stadisticTitle">
-            <h4> >Mis Estadísticas< </h4>
+            <h4> Mis Estadísticas </h4>
         </div>
         <div id="stadisticList" class="container">
             <div class="row">

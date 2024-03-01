@@ -26,16 +26,15 @@ public class DefaultModelAttributes {
     @Autowired
     private UserRepository userRepository;
 
-    @ModelAttribute(name = "username")
-    public String getUserString(HttpServletRequest request) {
+    @ModelAttribute(name = "user")
+    public User getUser(HttpServletRequest request) {
 
-        String u = null;
         if (request.getUserPrincipal() != null) {
             String name = request.getUserPrincipal().getName();
             User user = userRepository.findByName(name).orElseThrow();
-            u = user.getName();
+            return user;
         }
-        return u;
+        return null;
     }
 
     @ModelAttribute(name = "admin")

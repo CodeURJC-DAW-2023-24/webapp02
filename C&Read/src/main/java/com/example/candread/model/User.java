@@ -28,6 +28,10 @@ public class User {
     @OneToMany (mappedBy = "userLinked", cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
 
+    //Apartado para asociar el usuario a las reviews que tiene.
+    @OneToMany (mappedBy = "userid", cascade = CascadeType.ALL)
+    private List<Element> elements = new ArrayList<>();
+
     public User() {
     }
 
