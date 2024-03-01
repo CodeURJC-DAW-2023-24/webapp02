@@ -1,9 +1,7 @@
 package com.example.candread.Controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.IOException;
+import java.sql.SQLException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +11,7 @@ import org.springframework.ui.Model;
 import com.example.candread.model.Element;
 import com.example.candread.model.Review;
 import com.example.candread.repositories.ElementRepository;
+import com.example.candread.services.ElementService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,8 +24,11 @@ public class ElementController {
     @Autowired
     private ElementRepository elementRepository;
 
+    @Autowired
+    private ElementService elementService;
+
     @GetMapping("/{id}")
-    public String getSingleElement(@PathVariable("id") Long id, Model model) {
+    public String getSingleElement(@PathVariable("id") Long id, Model model) throws SQLException, IOException {
 
         Optional<Element> optionalElement = elementRepository.findById(id);
 
@@ -40,8 +42,8 @@ public class ElementController {
                 reviewsConUsuarios.put(r, userName);
             }
             model.addAttribute("serie", serie);
-            model.addAttribute("reviewsConUsuarios", reviewsConUsuarios);
-            return "W-SingleElement";
+            elementService.fullSet64Image();
+            return "W-SingleElement"; 
         } else {
             return "redirect:/error";
         }

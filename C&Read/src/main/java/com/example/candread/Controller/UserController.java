@@ -22,10 +22,10 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequestMapping("/users")
 public class UserController {
 
-    @Bean
+   /*@Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
-    }
+    } */
 
     @Autowired
     private UserRepository userRepository;

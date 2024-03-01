@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
         
-        <link rel="stylesheet" href="../CSS/S-Main.css">
-        <link rel="stylesheet" href="../CSS/S-NavBar.css">
-        <link rel="stylesheet" href="../CSS/S-Card.css">
+        <link rel="stylesheet" href="/CSS/S-Main.css">
+        <link rel="stylesheet" href="/CSS/S-NavBar.css">
+        <link rel="stylesheet" href="/CSS/S-Card.css">
 
         <title>Pagina Principal C&Read</title>
 </head>
@@ -36,13 +36,13 @@
             <div class="offcanvas-body d-flex flex-column flex-lg-row p-2">
                 <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
                     <li class="nav-item mx-2">
-                        <a class="nav-link text-uppercase" href="/Library/">Series</a>
+                        <a class="nav-link text-uppercase" href="/Library/Series">Series</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link text-uppercase" href="/Library/">Películas</a>
+                        <a class="nav-link text-uppercase" href="/Library/Films">Películas</a>
                     </li>
                     <li class="nav-item mx-2">
-                        <a class="nav-link text-uppercase" href="/Library/">Libros</a>
+                        <a class="nav-link text-uppercase" href="/Library/Books">Libros</a>
                     </li>
                 </ul>
             
@@ -52,6 +52,10 @@
                     <a class="navbar-brand text-white align-text-center text-uppercase" href="/Profile">
                         <img src="/Images/Img-UserProfile2.png" alt="Logo" width="50" height="50" class="align-text-center rounded-circle">
                     <strong>{{user.name}}</strong></a>
+                    <form id = "logoutbutton" class = "btn" action="/logout" method="post">
+                        <input id = "logoutbuttonText" type="submit" value="Sign Out" />
+                        <input type="hidden" name="_csrf" value="{{token}}"/>
+                    </form>
                     {{/user}}
                     {{^user}}
                     <div class="navbar-brand text-white align-text-center">
