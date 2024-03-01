@@ -154,15 +154,16 @@ public class LibraryController {
     return "W-Library"; 
     }
 
-    @GetMapping("/Season")
-    public String seasonFilter(Model model, HttpSession session, @RequestParam("season") String season, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    @GetMapping("/Books/Season")
+    public String BookSeasonFilter(Model model, HttpSession session, @RequestParam("season") String season, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
 
         elementService.fullSet64Image();
         
-        Page<Element> books= pagingRepository.findBySeason(season, pageable);
+        Page<Element> books= pagingRepository.findByTypeAndSeason("LIBRO",season, pageable);
+        model.addAttribute("controllerRoute", "Books");
         model.addAttribute("elements", books);
         model.addAttribute("hasPrev", books.hasPrevious());
 		model.addAttribute("hasNext", books.hasNext());
@@ -172,7 +173,83 @@ public class LibraryController {
     return "W-Library"; 
     }
 
-    @GetMapping("/Country")
+    @GetMapping("/Films/Season")
+    public String FilmSeasonFilter(Model model, HttpSession session, @RequestParam("season") String season, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+        int pageNumber = page.orElse(0);
+        int pageSize = 10;
+        pageable = PageRequest.of(pageNumber, pageSize);
+
+        elementService.fullSet64Image();
+        
+        Page<Element> series= pagingRepository.findByTypeAndSeason("PELICULA", season, pageable);
+        model.addAttribute("controllerRoute", "Films");
+        model.addAttribute("elements", series);
+        model.addAttribute("hasPrev", series.hasPrevious());
+		model.addAttribute("hasNext", series.hasNext());
+		model.addAttribute("nextPage", series.getNumber()+1);
+		model.addAttribute("prevPage", series.getNumber()-1);
+        
+    return "W-Library"; 
+    }
+
+    @GetMapping("/Series/Season")
+    public String SerieseasonFilter(Model model, HttpSession session, @RequestParam("season") String season, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+        int pageNumber = page.orElse(0);
+        int pageSize = 10;
+        pageable = PageRequest.of(pageNumber, pageSize);
+
+        elementService.fullSet64Image();
+        
+        Page<Element> films= pagingRepository.findByTypeAndSeason("SERIE", season, pageable);
+        model.addAttribute("controllerRoute", "Series");
+        model.addAttribute("elements", films);
+        model.addAttribute("hasPrev", films.hasPrevious());
+		model.addAttribute("hasNext", films.hasNext());
+		model.addAttribute("nextPage", films.getNumber()+1);
+		model.addAttribute("prevPage", films.getNumber()-1);
+        
+    return "W-Library"; 
+    }
+
+    @GetMapping("/Books/Country")
+    public String BooksCountryFilter(Model model, HttpSession session, @RequestParam("country") String country, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+        int pageNumber = page.orElse(0);
+        int pageSize = 10;
+        pageable = PageRequest.of(pageNumber, pageSize);
+
+        elementService.fullSet64Image();
+        
+        Page<Element> books= pagingRepository.findByTypeAndCountry("LIBRO", country, pageable);
+        model.addAttribute("controllerRoute", "Books");
+        model.addAttribute("elements", books);
+        model.addAttribute("hasPrev", books.hasPrevious());
+		model.addAttribute("hasNext", books.hasNext());
+		model.addAttribute("nextPage", books.getNumber()+1);
+		model.addAttribute("prevPage", books.getNumber()-1);
+        
+    return "W-Library"; 
+    }
+
+    @GetMapping("/Films/Country")
+    public String FilmsCountryFilter(Model model, HttpSession session, @RequestParam("country") String country, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+        int pageNumber = page.orElse(0);
+        int pageSize = 10;
+        pageable = PageRequest.of(pageNumber, pageSize);
+
+        elementService.fullSet64Image();
+        
+        Page<Element> books= pagingRepository.findByTypeAndCountry("PELICULA", country, pageable);
+        model.addAttribute("controllerRoute", "Films");
+        model.addAttribute("elements", books);
+        model.addAttribute("hasPrev", books.hasPrevious());
+		model.addAttribute("hasNext", books.hasNext());
+		model.addAttribute("nextPage", books.getNumber()+1);
+		model.addAttribute("prevPage", books.getNumber()-1);
+        
+    return "W-Library"; 
+    }
+
+    @GetMapping("/Series/Country")
     public String countryFilter(Model model, HttpSession session, @RequestParam("country") String country, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
@@ -180,7 +257,8 @@ public class LibraryController {
 
         elementService.fullSet64Image();
         
-        Page<Element> books= pagingRepository.findByCountry(country, pageable);
+        Page<Element> books= pagingRepository.findByTypeAndCountry("SERIE", country, pageable);
+        model.addAttribute("controllerRoute", "Series");
         model.addAttribute("elements", books);
         model.addAttribute("hasPrev", books.hasPrevious());
 		model.addAttribute("hasNext", books.hasNext());
@@ -190,15 +268,54 @@ public class LibraryController {
     return "W-Library"; 
     }
 
-    @GetMapping("/State")
-    public String stateFilter(Model model, HttpSession session, @RequestParam("state") String state, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    @GetMapping("/Books/State")
+    public String BookStateFilter(Model model, HttpSession session, @RequestParam("state") String state, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
 
         elementService.fullSet64Image();
         
-        Page<Element> books= pagingRepository.findByState(state, pageable);
+        Page<Element> books= pagingRepository.findByTypeAndState("LIBRO", state, pageable);
+        model.addAttribute("controllerRoute", "Books");
+        model.addAttribute("elements", books);
+        model.addAttribute("hasPrev", books.hasPrevious());
+		model.addAttribute("hasNext", books.hasNext());
+		model.addAttribute("nextPage", books.getNumber()+1);
+		model.addAttribute("prevPage", books.getNumber()-1);
+        
+    return "W-Library"; 
+    }
+
+    @GetMapping("/Films/State")
+    public String FilmStateFilter(Model model, HttpSession session, @RequestParam("state") String state, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+        int pageNumber = page.orElse(0);
+        int pageSize = 10;
+        pageable = PageRequest.of(pageNumber, pageSize);
+
+        elementService.fullSet64Image();
+        
+        Page<Element> books= pagingRepository.findByTypeAndState("PELICULA", state, pageable);
+        model.addAttribute("controllerRoute", "Films");
+        model.addAttribute("elements", books);
+        model.addAttribute("hasPrev", books.hasPrevious());
+		model.addAttribute("hasNext", books.hasNext());
+		model.addAttribute("nextPage", books.getNumber()+1);
+		model.addAttribute("prevPage", books.getNumber()-1);
+        
+    return "W-Library"; 
+    }
+
+    @GetMapping("/Series/State")
+    public String SerieStateFilter(Model model, HttpSession session, @RequestParam("state") String state, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+        int pageNumber = page.orElse(0);
+        int pageSize = 10;
+        pageable = PageRequest.of(pageNumber, pageSize);
+
+        elementService.fullSet64Image();
+        
+        Page<Element> books= pagingRepository.findByTypeAndState("SERIE", state, pageable);
+        model.addAttribute("controllerRoute", "Series");
         model.addAttribute("elements", books);
         model.addAttribute("hasPrev", books.hasPrevious());
 		model.addAttribute("hasNext", books.hasNext());
