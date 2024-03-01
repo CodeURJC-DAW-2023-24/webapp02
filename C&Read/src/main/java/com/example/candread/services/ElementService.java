@@ -93,8 +93,7 @@ public class ElementService {
         Review reviewTest1 = new Review("Viva el romantasy", 5);
         reviewTest1.setElementLinked(elementoTest1);
         reviewTest1.setUserLinked(antonio);
-        userList.add(antonio);
-        userList.add(admin2);
+        
         elementoTest1.setUsers(userList); 
 
         elementRepository.save(elementoTest1);
@@ -109,6 +108,9 @@ public class ElementService {
         generosEjemplo1.add(Genres.AVENTURA.name());
         generosEjemplo1.add(Genres.FANTASIA.name());
         generosEjemplo1.add(Genres.JUVENIL.name());
+
+        userList.add(antonio);
+        userList.add(admin2);
 
         Element elementoTest2 = new Element("One Piece", 
         "La historia de un chaval buscando ser el rey de los piratas", 
@@ -261,7 +263,7 @@ public class ElementService {
         Blob blobMagi = getBlob("static/Images/Magi_Simbad.jpg");
         Blob blobSimpson = getBlob("static/Images/Simpson.jpg");
         Blob blobi = getBlob("static/Images/AquiNoHayQuienViva.jpg");
-        Blob blobArcane = getBlob("static/Images/Simpson.jpg");
+        Blob blobArcane = getBlob("static/Images/Arcane.jpg");
         Blob blobi2 = getBlob("static/Images/LaQueSeAvecina.jpg");
 
         List<String> generosEjemplo1 = new ArrayList<>();
@@ -270,11 +272,24 @@ public class ElementService {
         generosEjemplo1.add(Genres.CIENCIAFICCION.name());
         generosEjemplo1.add(Genres.ACCION.name());
 
+        //BASE USERS ON THE SYSTEM
+        Optional<User> userPrueba3 = userRepository.findById((long) 1);
+        User admin1 = userPrueba3.orElseThrow();
+        Optional<User> userPrueba2 = userRepository.findById((long) 2);
+        User admin2 = userPrueba2.orElseThrow();
+        Optional<User> userPrueba1 = userRepository.findById((long) 3);
+        User antonio = userPrueba1.orElseThrow();
+        List<User> userList = new ArrayList<>();
+
+        userList.add(antonio);
+
         Element elementoTest1 = new Element("Solo Leveling", 
         "En un mundo en el que ciertos humanos llamados «cazadores» poseen habilidades mágicas, estos deben luchar contra monstruos para proteger a la raza humana de una aniquilación segura. Un cazador muy débil llamado Sung Jinwoo se encuentra en una lucha en la que solo puede tratar de sobrevivir. Un día, después de sobrevivir por poco a una mazmorra doble abrumadoramente poderosa que casi acaba con todo su grupo, un programa misterioso llamado Sistema lo elige como su único jugador y, a su vez, le da la sorprendente habilidad de subir de nivel sin límites. Durante su viaje, Jinwoo luchará contra todo tipo de enemigos, tanto humanos como monstruos, y descubrirá los secretos que entrañan las mazmorras y la verdadera fuente de sus poderes.", 
         "Chugong", Types.SERIE.name(), Seasons.PRIMAVERA.name(), 
         States.COMPLETO.name(), Countries.COREA.name(), generosEjemplo1);
         elementoTest1.setImageFile(blobSoloLeveling);
+        elementoTest1.setUsers(userList); 
+        elementRepository.save(elementoTest1);
 
         generosEjemplo1.clear();
         generosEjemplo1.add(Genres.COMEDIA.name());
