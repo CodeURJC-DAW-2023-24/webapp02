@@ -47,9 +47,21 @@ public class ElementService {
 
         //String imagen2 = new String("static/Images/Alas_Sangre.jpg");
 
+        //LISTS NEEDED FOR THE CONSTRUCTORS
         List<String> generosEjemplo1 = new ArrayList<>();
         generosEjemplo1.add(Genres.FANTASIA.name());
         generosEjemplo1.add(Genres.ROMANCE.name());
+        List<User> userList = new ArrayList<>();
+        List<Element> elementList = new ArrayList<>();
+
+        //BASE USERS ON THE SYSTEM
+        Optional<User> userPrueba3 = userRepository.findById((long) 1);
+        User admin1 = userPrueba3.orElseThrow();
+        Optional<User> userPrueba2 = userRepository.findById((long) 2);
+        User admin2 = userPrueba2.orElseThrow();
+        Optional<User> userPrueba1 = userRepository.findById((long) 3);
+        User antonio = userPrueba1.orElseThrow();
+
 
         //Getting the info for the imageFile attribute
         //URL urlImg = new URL("https://m.media-amazon.com/images/I/91OI4F8Fa7L._AC_UF894,1000_QL80_.jpg");
@@ -62,20 +74,23 @@ public class ElementService {
 		// Blob blobi = new SerialBlob(photoBytes); 
 
         
-        //CONSTRUCTURES DE DATOS BASE EN BASE DE DATOS:
+        //DDBB CONSTRUCTORS FOR ELEMENTS
         Element elementoTest1 = new Element("Alas de Sangre", "Vuela... o muere. El nuevo fenómeno de fantasía juvenil del que todo el mundo habla.",
         "Rebecca Yarros", Types.LIBRO.name(), Seasons.OTOÑO.name(), States.COMPLETO.name(), 
         Countries.ESTADOS_UNIDOS.name(), generosEjemplo1);
 
         elementoTest1.setImageFile(blobi);
-        elementRepository.save(elementoTest1);
 
+        
         Review reviewTest1 = new Review("Viva el romantasy", 5);
         reviewTest1.setElementLinked(elementoTest1);
-
-        Optional<User> userPrueba1 = userRepository.findById((long) 2);
-        User antonio = userPrueba1.orElseThrow();
         reviewTest1.setUserLinked(antonio);
+        userList.add(antonio);
+        userList.add(admin2);
+        elementoTest1.setUsers(userList); 
+
+        elementRepository.save(elementoTest1);
+        
 
         reviewRepository.save(reviewTest1);
 

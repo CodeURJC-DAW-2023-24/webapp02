@@ -16,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Transient;
@@ -54,12 +55,12 @@ public class Element {
 
     private String author;
 
-    @ManyToOne 
-    @JoinColumn(name = "user_ID")
-    private User userid;
+    //@JoinColumn(name = "user_ID")
+    @ManyToMany 
+    private List<User> users;
 
     // Imagenes:
-    private String image;
+    //private String image;
 //@JsonIgnore
     @Lob 
     private Blob imageFile;
@@ -194,6 +195,16 @@ public class Element {
     public void setBase64Image(String base64Image) {
         this.base64Image = base64Image;
     }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> userid) {
+        this.users = userid;
+    }
+
+    
 
 
     
