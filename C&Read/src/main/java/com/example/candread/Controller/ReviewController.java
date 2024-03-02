@@ -34,14 +34,15 @@ public class ReviewController {
 
         try {
             Review newReview = new Review(userReview, userRating);
-
-            Optional<Element> optionalElement = elementRepository.findById(elementId);
-            Element element = (Element) optionalElement.get();
-            newReview.setElementLinked(element);
-
-            reviewRepository.save(newReview);
-
-            model.addAttribute("successMessage", "¡Review guardado correctamente!");
+            if(elementId!=null){
+                Optional<Element> optionalElement = elementRepository.findById(elementId);
+                Element element = (Element) optionalElement.get();
+                newReview.setElementLinked(element);
+    
+                reviewRepository.save(newReview);
+    
+                model.addAttribute("successMessage", "¡Review guardado correctamente!");
+            }
         } catch (Exception e) {
             model.addAttribute("errorMessage", "Error al guardar la review.");
         }

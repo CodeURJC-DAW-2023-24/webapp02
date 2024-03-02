@@ -52,7 +52,6 @@ public class ElementService {
         generosEjemplo1.add(Genres.FANTASIA.name());
         generosEjemplo1.add(Genres.ROMANCE.name());
         List<User> userList = new ArrayList<>();
-        List<Element> elementList = new ArrayList<>();
 
         //BASE USERS ON THE SYSTEM
         Optional<User> userPrueba3 = userRepository.findById((long) 1);
@@ -273,10 +272,6 @@ public class ElementService {
         generosEjemplo1.add(Genres.ACCION.name());
 
         //BASE USERS ON THE SYSTEM
-        Optional<User> userPrueba3 = userRepository.findById((long) 1);
-        User admin1 = userPrueba3.orElseThrow();
-        Optional<User> userPrueba2 = userRepository.findById((long) 2);
-        User admin2 = userPrueba2.orElseThrow();
         Optional<User> userPrueba1 = userRepository.findById((long) 3);
         User antonio = userPrueba1.orElseThrow();
         List<User> userList = new ArrayList<>();
@@ -561,9 +556,12 @@ public class ElementService {
 
 
 
-    public Blob getBlob (String path) throws IOException, SerialException, SQLException {
+    public Blob getBlob(String path) throws IOException, SerialException, SQLException {
+        if (path == null) {
+            throw new IllegalArgumentException("Path cannot be null");
+        }
+    
         Resource resource = new ClassPathResource(path);
-        //InputStream inputStream = urlImg.openStream(resource);
         InputStream inputStream = resource.getInputStream();
         
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
@@ -572,7 +570,7 @@ public class ElementService {
         while ((bytesRead = inputStream.read(buffer)) != -1){
             outputStream.write(buffer, 0, bytesRead);
         }
-
+    
         byte[] imageBytes = outputStream.toByteArray();
         Blob blobi = new SerialBlob(imageBytes);
         return blobi;

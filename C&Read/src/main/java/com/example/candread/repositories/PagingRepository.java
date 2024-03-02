@@ -2,12 +2,9 @@ package com.example.candread.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import java.util.List;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import com.example.candread.model.Element;
-import com.example.candread.model.User;
 
 
 

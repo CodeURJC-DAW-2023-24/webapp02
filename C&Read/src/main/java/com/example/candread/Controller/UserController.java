@@ -1,10 +1,7 @@
 package com.example.candread.Controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,11 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @RequestMapping("/users")
 public class UserController {
 
-   /*@Bean
-    public BCryptPasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    } */
-
     @Autowired
     private UserRepository userRepository;
 
@@ -34,14 +26,6 @@ public class UserController {
 
     @Autowired
     private PasswordEncoder passwordEncoder;
-
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Long id) {
-        Optional<User> userOptional = userRepository.findById(id);
-
-        return userOptional.map(user -> ResponseEntity.ok().body(user))
-                .orElseGet(() -> ResponseEntity.notFound().build());
-    }
 
     @PostMapping("/add")
     public String addUser(@ModelAttribute User user) {

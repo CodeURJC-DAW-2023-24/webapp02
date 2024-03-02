@@ -16,8 +16,9 @@ public class NewService {
 
     public void saveNew(New newO) {
         // Guardar la nueva noticia
-        newRepository.save(newO);
-
+        if(newO!=null){
+            newRepository.save(newO);
+        }
         // Obtener todas las noticias
         List<New> allNews = newRepository.findAll();
 
@@ -26,7 +27,9 @@ public class NewService {
             int numberOfNewsToDelete = allNews.size() - 3;
             for (int i = 0; i < numberOfNewsToDelete; i++) {
                 New oldestNew = allNews.get(i);
-                newRepository.delete(oldestNew);
+                if(oldestNew!=null){
+                    newRepository.delete(oldestNew);
+                }
             }
         }
     }

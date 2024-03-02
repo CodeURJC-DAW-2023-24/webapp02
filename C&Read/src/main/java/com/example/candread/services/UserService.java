@@ -3,10 +3,6 @@ package com.example.candread.services;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Optional;
-import com.example.candread.model.Element;
 
 import javax.sql.rowset.serial.SerialException;
 
@@ -15,7 +11,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.candread.model.User;
-import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.UserRepository;
 
 import jakarta.annotation.PostConstruct;
@@ -25,9 +20,6 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
-
-    @Autowired
-    private ElementRepository elementRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

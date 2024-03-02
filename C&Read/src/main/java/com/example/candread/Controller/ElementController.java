@@ -33,30 +33,33 @@ public class ElementController {
     @GetMapping("/{id}")
     public String getSingleElement(@PathVariable("id") Long id, Model model) throws SQLException, IOException {
 
-        Optional<Element> optionalElement = elementRepository.findById(id);
-
-        if (optionalElement.isPresent()) {
-            Element serie = optionalElement.get();
-            List<Review> reviews = serie.getReviews();
-            Map<Review, String> reviewsConUsuarios = new HashMap<>();
-            int totalRating=0;
-            for (Review r : reviews) {
-                String userName = (r.getUserLinked() != null) ? r.getUserLinked().getName() : "ANONYMOUS";
-                reviewsConUsuarios.put(r, userName);
-                totalRating+=r.getRating();
+        if(id!=null){
+            Optional<Element> optionalElement = elementRepository.findById(id);
+            if (optionalElement.isPresent()) {
+                Element serie = optionalElement.get();
+                List<Review> reviews = serie.getReviews();
+                Map<Review, String> reviewsConUsuarios = new HashMap<>();
+                int totalRating=0;
+                for (Review r : reviews) {
+                    String userName = (r.getUserLinked() != null) ? r.getUserLinked().getName() : "ANONYMOUS";
+                    reviewsConUsuarios.put(r, userName);
+                    totalRating+=r.getRating();
+                }
+                double averageRating = 0;
+                if(totalRating!=0){
+                    averageRating = (double) totalRating / reviews.size();
+                }
+                model.addAttribute("averageRating", averageRating);
+                model.addAttribute("serie", serie);
+                model.addAttribute("reviewsConUsuarios", reviewsConUsuarios);
+    
+                
+                elementService.fullSet64Image();
+                return "W-SingleElement"; 
+            } else {
+                return "redirect:/error";
             }
-            double averageRating = 0;
-            if(totalRating!=0){
-                averageRating = (double) totalRating / reviews.size();
-            }
-            model.addAttribute("averageRating", averageRating);
-            model.addAttribute("serie", serie);
-            model.addAttribute("reviewsConUsuarios", reviewsConUsuarios);
-
-            
-            elementService.fullSet64Image();
-            return "W-SingleElement"; 
-        } else {
+        }else{
             return "redirect:/error";
         }
     }
