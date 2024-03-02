@@ -4,12 +4,12 @@
 }
 /* STADISTICS */
 #stadisticSection{
-    margin-top: 30px;
-    margin-right: 20px;
-    float: right;
-    width: fit-content;
+    width : 30%;
+    float: left;
+    margin:30px;
+    padding: 10px;
     background-color: white;
-    border-radius: 10px;
+    border-radius: 5px;
     border:3px;
     border-color: #b4d2ff;
     border-style: solid;
@@ -30,7 +30,11 @@
 #stadisticList{
     margin: 15px;
 }
-
+#tops
+{
+    float: left;
+    width: 60%;
+}
 /* USER BANNER */
 #bannerSection{
     padding-top: 120px;
