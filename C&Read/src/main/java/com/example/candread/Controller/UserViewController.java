@@ -44,15 +44,13 @@ public class UserViewController {
         elementService.fullSet64Image();
         
         //CAROUSEL IMG
-        List<Element> elementosEstreno = elementRepository.findTop5ByOrderByIdDesc();
-        List<String> listCarouselImg = new ArrayList<>();
-        for(Element e: elementosEstreno){
+        List<Element> elementosEstreno = elementRepository.findTop4ByOrderByIdDesc();
+        for (int i = 0; i < elementosEstreno.size(); i++) {
+            Element e = elementosEstreno.get(i);
             String img = e.getBase64Image();
-            String imgSrc = "data:image/jpg;base64," + img;
-            listCarouselImg.add(imgSrc);
-            
+            String finalimg = "data:image/jpg;base64,"+ img;
+            model.addAttribute("firstSlide"+i, finalimg);
         }
-        model.addAttribute("ListaCarusel", listCarouselImg);
 
         List<New> newsList = newRepository.findAll(); // Obtener todas las noticias
         model.addAttribute("news", newsList);

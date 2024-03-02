@@ -34,9 +34,10 @@
           <p id="mainDescription">{{serie.description}}</p>
         </div>
         <div class="col-md-2">
-          <p id="mainRating">Valoración media: 10</p>
+          <p id="mainRating">Valoración media: {{averageRating}}</p>
         </div>
       </div>
+      {{#user}}
       <div id="listGroup" class="row">
         <div class="d-flex align-items-center">
           <input type="checkbox" id="favorite-checkbox" class="favorite-checkbox">
@@ -50,14 +51,17 @@
               </svg>
             </div>
           </label>
+          
           <select class="form-select" aria-label="Añadir a lista:">
             <option selected>Añadir a lista:</option>
             <option value="1">Lista 1</option>
             <option value="2">Lista 2</option>
             <option value="3">Lista 3</option>
           </select>
+          
         </div>
       </div>
+      {{/user}}
     </div>
 
     <!--REVIEW AND INFO-->
