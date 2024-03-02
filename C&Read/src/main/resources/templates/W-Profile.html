@@ -152,6 +152,29 @@
                         });
                     </script>
 
+                    <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
+                    <script>
+                        const zValues = ["ACCION", "TERROR", "AVENTURA", "MISTERIO", "ROMANCE", "CIENCIAFICCION", "DRAMA", "INFANTIL", "COMEDIA", "FANTASIA", "SOBRENATURAL","NOVELA","JUVENIL"];
+                        const wValues = ["{{numAccion}}","{{numTerror}}", "{{numAventura}}", "{{numMisterio}}", "{{numRomance}}",
+                    "{{numCiencia}}", "{{numDrama}}", "{{numInfantil}}","{{numComedia}}",
+                    "{{numFantasia}}", "{{numSobrenatural}}", "{{numNovela}}", "{{numJuvenil}}"];
+                        const barColors2 = ["red","blue","green", "orange", "yellow", "brown", "purple", "black",""];
+                        new Chart("myChart2", {
+                        type: "pie",
+                        data: {
+                            labels: zValues,
+                            datasets: [{
+                            backgroundColor: barColors2,
+                            data: wValues
+                            }]},
+                        options: {
+                            title: {
+                            display: false,
+                            text: "Generos Guardados"
+                            }}
+                        });
+                    </script>
+
                     
                     <!--<img src="Images/Img-Stadistics.png" class="img"> -->
                     

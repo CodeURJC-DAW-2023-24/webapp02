@@ -108,10 +108,28 @@ public class ControllerPrincipal {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
+        //int nB, nF, nS = 0 NO LOS PONE TODOS A 0, PREGUNTAR POR QUÉ
         int numberBooks = 0;
         int numberFilms = 0;
         int numberSeries = 0;
+
+        //NUMBER OF GENRES
+        int numberAction = 0;
+        int numberTerror = 0;
+        int numberAventura = 0;
+        int numberMisterio = 0;
+        int numberRomance = 0;
+        int numberCiencia = 0;
+        int numberDrama = 0;
+        int numberInfantil = 0;
+        int numberComedia = 0;
+        int numberFantasia = 0;
+        int numberSobrenatural = 0;
+        int numberNovela = 0;
+        int numberJuvenil = 0;
+
         String typeNow;
+        List<String> genresNow = new ArrayList<>();
         int limit = 0;
 
         elementService.fullSet64Image();
@@ -123,7 +141,7 @@ public class ControllerPrincipal {
         limit = user.getElements().size();
         for(int i = 0; i<limit; i = i+1){
             typeNow = user.getElements().get(i).getType();
-            switch (typeNow) {
+            switch (typeNow){
                 case "LIBRO":
                     numberBooks = numberBooks +1;
                     break;
@@ -132,9 +150,65 @@ public class ControllerPrincipal {
                     break;
                 case "PELICULA":
                     numberFilms = numberFilms + 1;
+                    break;
+
                 default:
                     break;
             }
+            
+        }
+        String genreNow;
+        for(int i = 0; i<limit; i = i+1){
+            genresNow = user.getElements().get(i).getGeneros();
+            int limitNow = genresNow.size();
+            for(int j = 0; j<limitNow; j = j+1){
+                genreNow = genresNow.get(j);
+                switch (genreNow) {
+                    case "ACCION":
+                        numberAction = numberAction +1;
+                        break;
+                    case "TERROR":
+                        numberTerror = numberTerror +1;
+                        break;
+                    case "AVENTURA":
+                        numberAventura = numberAventura + 1;
+                        break;
+                    case "MISTERIO":
+                        numberMisterio = numberMisterio +1;
+                        break;
+                    case "ROMANCE":
+                        numberRomance = numberRomance +1;
+                        break;
+                    case "CIENCIAFICCION":
+                        numberCiencia = numberCiencia + 1;
+                        break; 
+                    case "DRAMA":
+                        numberDrama = numberDrama +1;
+                        break;
+                    case "INFANTIL":
+                        numberInfantil = numberInfantil +1;
+                        break;
+                    case "COMEDIA":
+                        numberComedia = numberComedia + 1;
+                        break; 
+                    case "FANTASIA":
+                        numberFantasia = numberFantasia +1;
+                        break;
+                    case "SOBRENATURAL":
+                        numberSobrenatural = numberSobrenatural +1;
+                        break;
+                    case "NOVELA":
+                        numberNovela = numberNovela + 1;
+                        break; 
+                    case "JUVENIL":
+                        numberJuvenil = numberJuvenil + 1;
+                        break; 
+                    default:
+                        break;
+                }
+                
+            }
+            
         }
         Long userid =user.getId();
         //Page<Review> books= reviewRepository.findByUserLinked(userid, pageable);
@@ -162,6 +236,20 @@ public class ControllerPrincipal {
         model.addAttribute("numBooks", numberBooks);
         model.addAttribute("numSeries", numberSeries);
         model.addAttribute("numFilms", numberFilms);
+
+        model.addAttribute("numAccion", numberAction );
+        model.addAttribute("numTerror", numberTerror);
+        model.addAttribute("numAventura", numberAventura);
+        model.addAttribute("numMisterio", numberMisterio);
+        model.addAttribute("numRomance", numberRomance);
+        model.addAttribute("numCiencia", numberCiencia);
+        model.addAttribute("numDrama", numberDrama);
+        model.addAttribute("numInfantil",numberInfantil );
+        model.addAttribute("numComedia", numberComedia);
+        model.addAttribute("numFantasia", numberFantasia);
+        model.addAttribute("numSobrenatural", numberSobrenatural);
+        model.addAttribute("numNovela", numberNovela);
+        model.addAttribute("numJuvenil", numberJuvenil);
         
     return "W-Profile";
     }
