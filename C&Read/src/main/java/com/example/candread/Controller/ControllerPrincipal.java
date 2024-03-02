@@ -1,12 +1,11 @@
 package com.example.candread.Controller;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +14,18 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.candread.model.Element;
 import com.example.candread.model.New;
-import com.example.candread.model.Review;
 import com.example.candread.model.User;
 import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.NewRepository;
 import com.example.candread.repositories.PagingRepository;
-import com.example.candread.repositories.ReviewRepository;
 import com.example.candread.services.ElementService;
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
-import jakarta.persistence.criteria.CriteriaBuilder.Case;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -48,12 +42,6 @@ public class ControllerPrincipal {
     private PagingRepository pagingRepository;
 
     @Autowired
-    private PagingRepository pagingProfileRepository;
-
-    @Autowired
-    private ReviewRepository reviewRepository;
-
-    @Autowired
     private ElementService elementService;
 
     // Moverse al main, es la pagina principal y la primera que sale al entrar
@@ -62,8 +50,16 @@ public class ControllerPrincipal {
 
         elementService.fullSet64Image();
 
+        //CAROUSEL IMG
+        List<Element> elementosEstreno = elementRepository.findTop4ByOrderByIdDesc();
+        for (int i = 0; i < elementosEstreno.size(); i++) {
+            Element e = elementosEstreno.get(i);
+            String img = e.getBase64Image();
+            String finalimg = "data:image/jpg;base64,"+ img;
+            model.addAttribute("firstSlide"+i, finalimg);
+        }
         
-
+        // Pasamos los datos a la vista
         List<New> newsList = newRepository.findAll(); // Obtener todas las noticias
         model.addAttribute("news", newsList);
         return "W-Main";

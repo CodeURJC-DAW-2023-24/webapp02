@@ -1,12 +1,9 @@
 package com.example.candread.Controller;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.sql.Blob;
 import java.sql.SQLException;
-import java.util.Base64;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +21,6 @@ import com.example.candread.services.ElementService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
-import com.example.candread.Controller.ControllerPrincipal;
 
 @Controller
 @RequestMapping("/{username}")
@@ -46,6 +42,17 @@ public class UserViewController {
             throws SQLException, IOException {
 
         elementService.fullSet64Image();
+        
+        //CAROUSEL IMG
+        List<Element> elementosEstreno = elementRepository.findTop5ByOrderByIdDesc();
+        List<String> listCarouselImg = new ArrayList<>();
+        for(Element e: elementosEstreno){
+            String img = e.getBase64Image();
+            String imgSrc = "data:image/jpg;base64," + img;
+            listCarouselImg.add(imgSrc);
+            
+        }
+        model.addAttribute("ListaCarusel", listCarouselImg);
 
         List<New> newsList = newRepository.findAll(); // Obtener todas las noticias
         model.addAttribute("news", newsList);

@@ -9,4 +9,6 @@ import com.example.candread.model.Element;
 public interface ElementRepository extends JpaRepository<Element,Long>{
     
     List<Element> findTop5ByOrderByIdDesc();
+
+    List<Element> findTop4ByOrderByIdDesc();
 }

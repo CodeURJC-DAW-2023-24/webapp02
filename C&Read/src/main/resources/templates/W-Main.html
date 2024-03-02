@@ -31,13 +31,28 @@
                         aria-current="true" aria-label="Slide 1"></button>
                     <button type="button" data-bs-target="#carouselMain" data-bs-slide-to="1"
                         aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselMain" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselMain" data-bs-slide-to="3"
+                        aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#carouselMain" data-bs-slide-to="4"
+                        aria-label="Slide 6"></button>
+
                 </div>
                 <div class="carousel-inner ">
+
                     <div class="carousel-item active">
-                        <img src="/Images/Wallpaper-Anime.jpg" class="d-block w-100" alt="...">
+                        <img src="{{firstSlide0}}" class="d-block w-100" alt="...">
+                    </div>
+
+                    <div class="carousel-item">
+                        <img src="{{firstSlide1}}" class="d-block w-100" alt="...">
                     </div>
                     <div class="carousel-item">
-                        <img src="/Images/Logo.png" class="d-block w-100" alt="...">
+                        <img src="{{firstSlide2}}" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{{firstSlide3}}" class="d-block w-100" alt="...">
                     </div>
                 </div>
                 <button class="carousel-control-prev" type="button" data-bs-target="#carouselMain" data-bs-slide="prev">
@@ -60,7 +75,7 @@
                 <div id="topList" class="container">
                     <div class="row">
                         {{#TopPeliculas}}
-                            {{> W-Card}}
+                        {{> W-Card}}
                         {{/TopPeliculas}}
                     </div>
                 </div>
@@ -73,7 +88,7 @@
                 <div id="topList" class="container">
                     <div class="row">
                         {{#TopSeries}}
-                            {{> W-Card}}
+                        {{> W-Card}}
                         {{/TopSeries}}
                     </div>
                 </div>
@@ -86,7 +101,7 @@
                 <div id="topList" class="container">
                     <div class="row">
                         {{#TopLibros}}
-                            {{> W-Card}}
+                        {{> W-Card}}
                         {{/TopLibros}}
                     </div>
                 </div>

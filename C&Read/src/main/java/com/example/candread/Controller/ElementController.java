@@ -2,6 +2,9 @@ package com.example.candread.Controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +45,7 @@ public class ElementController {
                 reviewsConUsuarios.put(r, userName);
             }
             model.addAttribute("serie", serie);
+            model.addAttribute("reviewsConUsuarios", reviewsConUsuarios);
             elementService.fullSet64Image();
             return "W-SingleElement"; 
         } else {

@@ -3,7 +3,6 @@ package com.example.candread.Controller;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,7 @@ import com.example.candread.model.User;
 import com.example.candread.repositories.UserRepository;
 import com.example.candread.Security.RepositoryUserDetailsService;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 
