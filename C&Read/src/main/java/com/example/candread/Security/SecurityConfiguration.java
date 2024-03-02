@@ -32,42 +32,34 @@ public class SecurityConfiguration {
 	}
 
 	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    http.authenticationProvider(authenticationProvider());
 
-		http.authenticationProvider(authenticationProvider());
+    http.authorizeHttpRequests((authorize) -> authorize
+            .requestMatchers("/", "/CSS/**", "/Images/**", "/SignIn", "/users/**", "/Library/**", "/SingleElement/**", "/loginerror", "/error").permitAll()
+            .requestMatchers("/Profile/**", "/*/Main", "/review/**").hasAnyRole("USER", "ADMIN")
+            .requestMatchers("/Admin", "/news/add").hasRole("ADMIN")
+    )
+    .formLogin(formLogin -> formLogin
+        .loginPage("/LogIn")
+        .failureUrl("/loginerror")
+        .successHandler((request, response, authentication) -> {
+            String username = authentication.getName();
+            String redirectUrl = "/" + username + "/Main";
+            request.getSession().setAttribute("redirectUrl", redirectUrl);
+            response.sendRedirect(redirectUrl);
+        })
+        .permitAll()
+    )
 
-		http.authorizeHttpRequests((authorize) -> authorize
-				.requestMatchers("/", "/CSS/**", "/Images/**", "/SignIn", "/users/**", "/Library/**", "/SingleElement/**", "/loginerror", "/error").permitAll()
-				.requestMatchers("/Profile/**", "/*/Main", "/review/**").hasAnyRole("USER", "ADMIN")
-				.requestMatchers("/Admin", "/news/add").hasRole("ADMIN")
-		).formLogin(formLogin -> formLogin
-			.loginPage("/LogIn")
-			.failureUrl("/loginerror")
-			.successHandler((request, response, authentication) -> {
-				String username = authentication.getName();
-				String redirectUrl = "/" + username + "/Main";
-				request.getSession().setAttribute("redirectUrl", redirectUrl);
-				response.sendRedirect(redirectUrl);
-			})
-			.permitAll()
-		)
+    .logout(logout -> logout
+					.logoutUrl("/logout")
+					.logoutSuccessUrl("/")
+					.permitAll()
+			);
 
-		/*http.formLogin(formLogin -> formLogin
-				.loginPage("/LogIn")
-				.successHandler((request, response, authentication) -> {
-					String username = authentication.getName();
-					String role = authentication.getAuthorities().toString();
-					System.out.println("Usuario autenticado: " + username + ", Rol: " + role);
-					response.sendRedirect("/" + username + "/Main");
-				})
-				.permitAll());*/
+    return http.build();
+}
 
-		
-		.logout((logout) -> logout
-				.logoutSuccessUrl("/LogIn?logout=true")
-				.permitAll());
-
-		return http.build();
-	}
 
 }

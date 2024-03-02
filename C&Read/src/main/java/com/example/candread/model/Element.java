@@ -55,13 +55,10 @@ public class Element {
 
     private String author;
 
-    //@JoinColumn(name = "user_ID")
     @ManyToMany 
     private List<User> users;
 
-    // Imagenes:
-    //private String image;
-//@JsonIgnore
+
     @Lob 
     private Blob imageFile;
 
@@ -203,9 +200,6 @@ public class Element {
     public void setUsers(List<User> userid) {
         this.users = userid;
     }
-
-    
-
 
     
     

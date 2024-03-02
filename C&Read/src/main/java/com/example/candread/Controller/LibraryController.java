@@ -96,23 +96,60 @@ public class LibraryController {
 
     return "W-Library"; 
     }
-
     
-
-    @GetMapping("/Genre")
-    public String genreFilter(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    @GetMapping("/Books/Genre")
+    public String BookGenreFilter(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
 
         elementService.fullSet64Image();
 
-        Page<Element> books= pagingRepository.findByGenres(genre, pageable);
+        Page<Element> books= pagingRepository.findByTypeAndGenres("LIBRO", genre, pageable);
+        model.addAttribute("controllerRoute", "Books");
         model.addAttribute("elements", books);
         model.addAttribute("hasPrev", books.hasPrevious());
 		model.addAttribute("hasNext", books.hasNext());
 		model.addAttribute("nextPage", books.getNumber()+1);
 		model.addAttribute("prevPage", books.getNumber()-1);
+        
+    return "W-Library"; 
+    }
+
+    @GetMapping("/Films/Genre")
+    public String FilmGenreFilter(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+        int pageNumber = page.orElse(0);
+        int pageSize = 10;
+        pageable = PageRequest.of(pageNumber, pageSize);
+
+        elementService.fullSet64Image();
+
+        Page<Element> films= pagingRepository.findByTypeAndGenres("PELICULA", genre, pageable);
+        model.addAttribute("controllerRoute", "Films");
+        model.addAttribute("elements", films);
+        model.addAttribute("hasPrev", films.hasPrevious());
+		model.addAttribute("hasNext", films.hasNext());
+		model.addAttribute("nextPage", films.getNumber()+1);
+		model.addAttribute("prevPage", films.getNumber()-1);
+        
+    return "W-Library"; 
+    }
+
+    @GetMapping("/Series/Genre")
+    public String SeriesGenreFilter(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+        int pageNumber = page.orElse(0);
+        int pageSize = 10;
+        pageable = PageRequest.of(pageNumber, pageSize);
+
+        elementService.fullSet64Image();
+
+        Page<Element> series= pagingRepository.findByTypeAndGenres("SERIE", genre, pageable);
+        model.addAttribute("controllerRoute", "Series");
+        model.addAttribute("elements", series);
+        model.addAttribute("hasPrev", series.hasPrevious());
+		model.addAttribute("hasNext", series.hasNext());
+		model.addAttribute("nextPage", series.getNumber()+1);
+		model.addAttribute("prevPage", series.getNumber()-1);
         
     return "W-Library"; 
     }
