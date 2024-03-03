@@ -63,6 +63,12 @@ public class Element {
     @ManyToMany 
     private List<User> users;
 
+    //variable for favourites
+    
+    //@JoinColumn(name = "userFav_ID")
+    //@ManyToOne
+    //private User userFavourited;
+
     @Lob 
     private Blob imageFile;
 
@@ -211,6 +217,14 @@ public class Element {
     public void setYear(int year) {
         this.year = year;
     }
+
+    /*public User getUserFavourited() {
+        return userFavourited;
+    }
+
+    public void setUserFavourited(User userFavourited) {
+        this.userFavourited = userFavourited;
+    }*/
 
     
     

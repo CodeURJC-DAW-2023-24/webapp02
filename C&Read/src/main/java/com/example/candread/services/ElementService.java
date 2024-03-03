@@ -96,7 +96,17 @@ public class ElementService {
         userList.add(antonio);
         elementoTest1.setUsers(userList); 
 
+        elementList.add(elementoTest1);
+        //antonio.getFavourites().addAll(elementList);
+        antonio.setFavourites(elementList);
+        //userRepository.save(antonio);
+
         elementRepository.save(elementoTest1);
+        
+        elementList.clear();
+        //elementList.add(elementoTest1);
+        //elementoTest1.setUserFavourited(antonio);
+        //antonio.setFavourites(elementList);
         
 
         reviewRepository.save(reviewTest1);
@@ -157,6 +167,10 @@ public class ElementService {
         elementoTest4.setImageFile(blobMarina);
         elementRepository.save(elementoTest4);
 
+        //elementList.add(elementoTest4);
+        //antonio.setFavourites(elementList);
+
+        //elementList.clear();
         generosEjemplo1.clear();
         generosEjemplo1.add(Genres.FANTASIA.name());
         generosEjemplo1.add(Genres.ACCION.name());

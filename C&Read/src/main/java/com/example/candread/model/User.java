@@ -33,7 +33,9 @@ public class User {
     @ManyToMany (mappedBy = "users", cascade = CascadeType.ALL)
     private List<Element> elements = new ArrayList<>();
 
-    //private List<Element> favourites = new ArrayList<>();
+    //@ManyToMany (mappedBy = "userFavourited", cascade = CascadeType.ALL)
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<Element> favourites = new ArrayList<>();
 
     public User() {
     }
@@ -92,6 +94,14 @@ public class User {
 
     public void setElements(List<Element> elements) {
         this.elements = elements;
+    }
+
+    public List<Element> getFavourites() {
+        return favourites;
+    }
+
+    public void setFavourites(List<Element> favourites) {
+        this.favourites = favourites;
     }
 
     
