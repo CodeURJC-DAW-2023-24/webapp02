@@ -92,9 +92,22 @@
                     <a href="/Profile?page={{PersonalBooksnextPage}}">Next Books</a>
                     {{/PersonalBookshasNext}}
                 </div>
+<<<<<<< HEAD
             </div>
         </article>
         {{/PersonalBooks}}
+=======
+                <br> 
+                <button id="downloadNamesBtn">Descargar Todos</button>
+            </div>
+        </article>
+            
+        <script>
+            var listOfBooks = "{{PersonalBooks}}";
+        </script>
+
+        <script src="/Scripts/download.js" defer></script>
+>>>>>>> 2600f9335f44cbc1de4704756873c68f8652fa8a
         <!-- Series -->
         {{#PersonalSeries}}
         <article id="topSection">
