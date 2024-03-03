@@ -15,6 +15,7 @@ import com.example.candread.model.Element;
 import com.example.candread.model.Review;
 import com.example.candread.repositories.ElementRepository;
 import com.example.candread.services.ElementService;
+import com.example.candread.services.UserService;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,9 +31,12 @@ public class ElementController {
     @Autowired
     private ElementService elementService;
 
+    @Autowired
+    private UserService userService;
+
     @GetMapping("/{id}")
     public String getSingleElement(@PathVariable("id") Long id, Model model) throws SQLException, IOException {
-
+        userService.fullSet64Image();
         if(id!=null){
             Optional<Element> optionalElement = elementRepository.findById(id);
             if (optionalElement.isPresent()) {

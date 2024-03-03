@@ -19,12 +19,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.candread.model.Element;
 import com.example.candread.repositories.PagingRepository;
 import com.example.candread.services.ElementService;
+import com.example.candread.services.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 
 
@@ -38,10 +38,13 @@ public class LibraryController {
     @Autowired
     private ElementService elementService;
 
+    @Autowired
+    private UserService userService;
+
 
     @GetMapping("/Books")
     public String moveToBookLibrary(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
-
+        userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -63,7 +66,7 @@ public class LibraryController {
 
     @GetMapping("/Books/js")
     public String moveToBookLibraryjs(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
-
+        userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -90,7 +93,7 @@ public class LibraryController {
 
     @GetMapping("/Films")
     public String moveToFilmLibrary(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
-
+        userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -111,7 +114,7 @@ public class LibraryController {
 
     @GetMapping("/Films/js")
     public String moveToFilmLibraryjs(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
-
+        userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -136,7 +139,7 @@ public class LibraryController {
 
     @GetMapping("/Series")
     public String moveToSeriesLibrary(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
-
+        userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -158,7 +161,7 @@ public class LibraryController {
 
     @GetMapping("/Series/js")
     public String moveToSeriesLibraryjs(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
-
+        userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -184,6 +187,7 @@ public class LibraryController {
     
     @GetMapping("/Books/Genre/js")
     public String BookGenreFilterjs(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
+        userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -207,6 +211,7 @@ public class LibraryController {
 
     @GetMapping("/Films/Genre/js")
     public String FilmGenreFilterjs(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
+        userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -230,6 +235,7 @@ public class LibraryController {
 
     @GetMapping("/Series/Genre/js")
     public String SeriesGenreFilterjs(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
+        userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -253,6 +259,7 @@ public class LibraryController {
 
     @GetMapping("/Books/Season/js")
     public String BookSeasonFilterjs(Model model, HttpSession session, @RequestParam("season") String season, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
+        userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -276,6 +283,7 @@ public class LibraryController {
 
     @GetMapping("/Films/Season/js")
     public String FilmSeasonFilterjs(Model model, HttpSession session, @RequestParam("season") String season, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
+        userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -300,6 +308,7 @@ public class LibraryController {
 
     @GetMapping("/Series/Season/js")
     public String SerieseasonFilterjs(Model model, HttpSession session, @RequestParam("season") String season, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
+        userService.fullSet64Image(); 
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -323,6 +332,7 @@ public class LibraryController {
 
     @GetMapping("/Books/Country/js")
     public String BooksCountryFilterjs(Model model, HttpSession session, @RequestParam("country") String country, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
+        userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -346,6 +356,7 @@ public class LibraryController {
 
     @GetMapping("/Films/Country/js")
     public String FilmsCountryFilterjs(Model model, HttpSession session, @RequestParam("country") String country, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
+        userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -370,6 +381,7 @@ public class LibraryController {
 
     @GetMapping("/Series/Country/js")
     public String countryFilterjs(Model model, HttpSession session, @RequestParam("country") String country, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
+        userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -394,6 +406,7 @@ public class LibraryController {
 
     @GetMapping("/Books/State/js")
     public String BookStateFilterjs(Model model, HttpSession session, @RequestParam("state") String state, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
+        userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -418,6 +431,7 @@ public class LibraryController {
 
     @GetMapping("/Films/State/js")
     public String FilmStateFilterjs(Model model, HttpSession session, @RequestParam("state") String state, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
+        userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -441,6 +455,7 @@ public class LibraryController {
 
     @GetMapping("/Series/State/js")
     public String SerieStateFilterjs(Model model, HttpSession session, @RequestParam("state") String state, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
+        userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);

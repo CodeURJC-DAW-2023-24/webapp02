@@ -3,28 +3,21 @@ package com.example.candread.Controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.candread.model.Element;
 import com.example.candread.model.New;
-import com.example.candread.model.User;
 import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.NewRepository;
-import com.example.candread.repositories.PagingRepository;
 import com.example.candread.services.ElementService;
+import com.example.candread.services.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpSession;
 
 @Controller
 public class ControllerPrincipal {
@@ -36,7 +29,7 @@ public class ControllerPrincipal {
     private ElementRepository elementRepository;
 
     @Autowired
-    private PagingRepository pagingRepository;
+    private UserService userService;
 
     @Autowired
     private ElementService elementService;
@@ -76,7 +69,8 @@ public class ControllerPrincipal {
 
     // moverse a la pantalla de administrador
     @GetMapping("/Admin")
-    public String moveToAdmin(Model model) {
+    public String moveToAdmin(Model model) throws SQLException, IOException {
+        userService.fullSet64Image();;
         return "W-Admin";
     }
 
