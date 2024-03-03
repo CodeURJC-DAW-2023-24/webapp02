@@ -28,8 +28,8 @@ public class NewsController {
     public String addNew(@RequestParam("title") String title, @RequestParam("date") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate date, @RequestParam("description") String description, @RequestParam("link") String link, Model model, HttpServletRequest request) {
         
         try {
-            New newPrueba = new New(title, description, date, link);
-            newService.saveNew(newPrueba);
+            New newNew = new New(title, description, date, link);
+            newService.saveNew(newNew);
             model.addAttribute("successMessage", "¡Noticia guardada correctamente!");
         } catch (Exception e) {
             model.addAttribute("errorMessage", "Error al guardar la noticia.");

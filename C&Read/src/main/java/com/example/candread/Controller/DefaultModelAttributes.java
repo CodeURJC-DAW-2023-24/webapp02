@@ -50,63 +50,63 @@ public class DefaultModelAttributes {
         }
     }
 
-    @ModelAttribute(name = "libros")
-    public List<Element> listaLibros() {
+    @ModelAttribute(name = "books")
+    public List<Element> booksList() {
 
-        List<Element> listaLibros = devolverListadeTipo("LIBRO");
-        return listaLibros;
+        List<Element> bookList = getTypeList("LIBRO");
+        return bookList;
     }
 
-    @ModelAttribute(name = "peliculas")
-    public List<Element> listaPeliculas() {
-        List<Element> listaPeliculas = devolverListadeTipo("PELICULA");
-        return listaPeliculas;
+    @ModelAttribute(name = "films")
+    public List<Element> filmsList() {
+        List<Element> filmList = getTypeList("PELICULA");
+        return filmList;
     }
 
     @ModelAttribute(name = "series")
-    public List<Element> listaSeries() {
-        List<Element> listaSeries = devolverListadeTipo("SERIE");
-        return listaSeries;
+    public List<Element> SeriesList() {
+        List<Element> seriesList = getTypeList("SERIE");
+        return seriesList;
     }
 
-    @ModelAttribute(name = "TopLibros")
-    public List<Element> topLibros() {
+    @ModelAttribute(name = "TopBooks")
+    public List<Element> topBooks() {
 
-        List<Element> listaLibros = devolverListadeTipo("LIBRO");
-        List<Element> listaTopLibros = new ArrayList<>();
-        if (listaLibros.size() >= 5) {
+        List<Element> booksList = getTypeList("LIBRO");
+        List<Element> listTopBooks = new ArrayList<>();
+        if (booksList.size() >= 5) {
             for (int i = 0; i < 5; i++) {
-                listaTopLibros.add(listaLibros.get(i));
+                listTopBooks.add(booksList.get(i));
             }
         }
-        return listaTopLibros;
+        return listTopBooks;
     }
 
-    @ModelAttribute(name = "TopPeliculas")
-    public List<Element> topPeliculas() {
-        List<Element> listaPeliculas = devolverListadeTipo("PELICULA");
-        List<Element> listaTopPeliculas = new ArrayList<>();
-        if (listaPeliculas.size() >= 5) {
+    @ModelAttribute(name = "TopFilms")
+    public List<Element> topFilms() {
+        List<Element> filmsList = getTypeList("PELICULA");
+        List<Element> topFilmsList = new ArrayList<>();
+        if (filmsList.size() >= 5) {
             for (int i = 0; i < 5; i++) {
-                listaTopPeliculas.add(listaPeliculas.get(i));
+                topFilmsList.add(filmsList.get(i));
             }
         }
-        return listaTopPeliculas;
+        return topFilmsList;
     }
 
     @ModelAttribute(name = "TopSeries")
     public List<Element> topSeries() {
-        List<Element> listaSeries = devolverListadeTipo("SERIE");
-        List<Element> listaTopSeries = new ArrayList<>();
-        if (listaSeries.size() >= 5) {
+        List<Element> seriesList = getTypeList("SERIE");
+        List<Element> topSeriesList = new ArrayList<>();
+        if (seriesList.size() >= 5) {
             for (int i = 0; i < 5; i++) {
-                listaTopSeries.add(listaSeries.get(i));
+                topSeriesList.add(seriesList.get(i));
             }
         }
-        return listaTopSeries;
+        return topSeriesList;
     }
 
-    public List<Element> devolverListadeTipo(String tipo) {
+    public List<Element> getTypeList(String tipo) {
 
         List<Element> listaElementos = elementRepository.findAll();
         List<Element> lista = new ArrayList<>();

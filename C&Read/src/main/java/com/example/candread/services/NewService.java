@@ -15,14 +15,11 @@ public class NewService {
     private NewRepository newRepository;
 
     public void saveNew(New newO) {
-        // Guardar la nueva noticia
         if(newO!=null){
             newRepository.save(newO);
         }
-        // Obtener todas las noticias
         List<New> allNews = newRepository.findAll();
 
-        // Si hay más de tres noticias, eliminar las más antiguas
         if (allNews.size() > 3) {
             int numberOfNewsToDelete = allNews.size() - 3;
             for (int i = 0; i < numberOfNewsToDelete; i++) {

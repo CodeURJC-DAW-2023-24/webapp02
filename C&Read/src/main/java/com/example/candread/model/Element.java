@@ -58,16 +58,12 @@ public class Element {
     @ManyToMany 
     private List<User> users;
 
-    //variable for favourites
-    
-    //@JoinColumn(name = "userFav_ID")
     @ManyToMany
     private List<User> usersFavourited;
 
     @Lob 
     private Blob imageFile;
 
-    
     @Transient
     private String base64Image;
 
@@ -85,7 +81,7 @@ public class Element {
 
     public Element(String nombre, String descripcion, String autor,
             String type1, String temporada, String estado, String pais, List<String> generosEjemplo,
-            int year){ //List<Review> reseñas) {
+            int year){ 
         this.name = nombre;
         this.description = descripcion;
         this.author = autor;
@@ -95,11 +91,8 @@ public class Element {
         this.country = pais;
         this.genres = generosEjemplo;
         this.year = year;
-        //this.reviews = reseñas;
     }
-
     // GETTERS Y SETTERS
-
     public Long getId() {
         return id;
     }
@@ -220,14 +213,6 @@ public class Element {
     public void setUsersFavourited(List<User> usersFavourited) {
         this.usersFavourited = usersFavourited;
     }
-
-    /*public User getUserFavourited() {
-        return userFavourited;
-    }
-
-    public void setUserFavourited(User userFavourited) {
-        this.userFavourited = userFavourited;
-    }*/
 
     
     

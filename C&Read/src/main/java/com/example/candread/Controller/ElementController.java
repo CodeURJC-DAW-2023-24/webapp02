@@ -124,10 +124,7 @@ public class ElementController {
                 //
                 return "redirect:/SingleElement/" + elementId;
             } else {
-                // newElement.getUsers().add(user);
                 newElement.getUsersFavourited().add(user);
-                // user.getElements().clear();
-                // user.setElements(newList);
                 elementRepository.save(newElement);
                 return "redirect:/SingleElement/" + elementId;
             }

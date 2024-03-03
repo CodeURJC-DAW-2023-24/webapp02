@@ -17,7 +17,6 @@ public interface PagingRepository extends JpaRepository<Element, Long>{
     Page<Element> findByCountry(String country, Pageable pageable);
     Page<Element> findByState(String state, Pageable pageable);
     Page<Element> findByUsersIdAndType(Long id, String type, Pageable pageable);
-    //Page<Element> findByYear(String year, Pageable pageable);
     Page<Element> findByTypeAndGenres(String string, String genre, Pageable pageable);
     Page<Element> findByUsersFavouritedIdAndType(Long id, String type, Pageable pageable);
     Page<Element> findByTypeAndSeason(String string, String season, Pageable pageable);

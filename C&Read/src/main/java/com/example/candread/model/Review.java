@@ -24,7 +24,6 @@ public class Review {
     @JoinColumn(name = "element_ID")
     private Element elementLinked;
 
-    //ID para el usuario al que esta vinculada la review
     @ManyToOne
     @JoinColumn(name = "user_ID")
     private User userLinked;

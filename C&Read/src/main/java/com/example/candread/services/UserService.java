@@ -69,20 +69,9 @@ public class UserService {
         elementService.insertElement();
         elementService.insertSeries();
         elementService.inserFilms();
-        /* 
-        List<Element> elementList = new ArrayList<>();
-        Optional<Element> element1 = elementRepository.findById((long) 1);
-        Element fav1 = element1.orElseThrow();
-        elementList.add(fav1);
-        Optional<User> user1 = userRepository.findById((long) 3);
-        User antonio = user1.orElseThrow();
-        antonio.setFavourites(elementList);
-        userRepository.save(antonio);*/
-
 
     }
     
-
     public boolean existsByUsernameAndPassword(String username, String password) {
         return userRepository.findByName(username)
         .map(user -> passwordEncoder.matches(password, user.getPassword()))
@@ -119,20 +108,20 @@ public class UserService {
     }
 
     public void setUsersImage64(long id) throws SQLException, IOException {
-    Optional<User> userOptional = userRepository.findById(id);
-       User user = userOptional.orElseThrow();
-       Blob blob = user.getProfileImage();
-       InputStream inputStream = blob.getBinaryStream();
-       byte[] imageBytes = inputStream.readAllBytes();
-       String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-       user.setBase64ProfileImage(base64Image);
+        Optional<User> userOptional = userRepository.findById(id);
+        User user = userOptional.orElseThrow();
+        Blob blob = user.getProfileImage();
+        InputStream inputStream = blob.getBinaryStream();
+        byte[] imageBytes = inputStream.readAllBytes();
+        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+        user.setBase64ProfileImage(base64Image);
 
-       blob = user.getBannerImage();
-       inputStream = blob.getBinaryStream();
-       imageBytes = inputStream.readAllBytes();
-       base64Image = Base64.getEncoder().encodeToString(imageBytes);
-       user.setBase64BannerImage(base64Image);
-      
-       inputStream.close();
+        blob = user.getBannerImage();
+        inputStream = blob.getBinaryStream();
+        imageBytes = inputStream.readAllBytes();
+        base64Image = Base64.getEncoder().encodeToString(imageBytes);
+        user.setBase64BannerImage(base64Image);
+        
+        inputStream.close();
    }
 }

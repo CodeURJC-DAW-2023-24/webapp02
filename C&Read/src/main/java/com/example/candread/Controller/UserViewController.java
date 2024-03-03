@@ -57,6 +57,7 @@ public class UserViewController {
 
         elementService.fullSet64Image();
         userService.fullSet64Image();
+
         // CAROUSEL IMG
         List<Element> elementosEstreno = elementRepository.findTop4ByOrderByIdDesc();
         for (int i = 0; i < elementosEstreno.size(); i++) {
@@ -105,7 +106,6 @@ public class UserViewController {
 
         elementService.fullSet64Image();
 
-        // I extract the actual User from the model to use his Id
         User user = (User) model.getAttribute("user");
 
         // FOR AND SWITCH CASE TO GET ALL NUMBER OF MEDIA REGISTERED IN THE USER
@@ -181,7 +181,6 @@ public class UserViewController {
                 }
             }
             Long userid = user.getId();
-            // Page<Review> books= reviewRepository.findByUserLinked(userid, pageable);
             Page<Element> userBooks = pagingRepository.findByUsersIdAndType(userid, "LIBRO", pageable);
             model.addAttribute("PersonalBooks", userBooks);
             model.addAttribute("PersonalBookshasPrev", userBooks.hasPrevious());

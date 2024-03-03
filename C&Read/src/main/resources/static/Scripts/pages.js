@@ -6,7 +6,6 @@ document.addEventListener('DOMContentLoaded', function () {
     var page = 0;
     var filterpage = 0;
 
-    // Hacer algo con los datos del modelo
     console.log(contRoute);
 
     function loadResults(url) {
@@ -19,7 +18,6 @@ document.addEventListener('DOMContentLoaded', function () {
         .then(data => {
             spinner.style.display = 'none';
             resultsContainer.innerHTML = data;
-            // Add the listeners after updating the content
             addEventListeners(); 
         })
         .catch(error => {
@@ -47,8 +45,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (genreFilterForm) {
             genreFilterForm.addEventListener('submit', function (event) {
-                event.preventDefault(); // Evitar que el formulario se envíe normalmente
-                page = 0; // Reiniciar la página al cambiar el filtro
+                event.preventDefault(); 
+                page = 0; 
                 var selectedGenre = genreFilterForm.querySelector('select[name="genre"]').value;
                 var genreUrl = '/Library/' + contRoute + '/Genre/js?page=0&genre=' + selectedGenre;
                 console.log(genreUrl);
@@ -58,8 +56,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (seasonFilterForm) {
             seasonFilterForm.addEventListener('submit', function (event) {
-                event.preventDefault(); // Evitar que el formulario se envíe normalmente
-                page = 0; // Reiniciar la página al cambiar el filtro
+                event.preventDefault(); 
+                page = 0; 
                 var selectedSeason = seasonFilterForm.querySelector('select[name="season"]').value;
                 var seasonUrl = '/Library/' + contRoute + '/Season/js?page=0&season=' + selectedSeason;
                 console.log(seasonUrl);
@@ -69,8 +67,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (countryFilterForm) {
             countryFilterForm.addEventListener('submit', function (event) {
-                event.preventDefault(); // Evitar que el formulario se envíe normalmente
-                page = 0; // Reiniciar la página al cambiar el filtro
+                event.preventDefault(); 
+                page = 0; 
                 var selectedCountry = countryFilterForm.querySelector('select[name="country"]').value;
                 var countryUrl = '/Library/' + contRoute + '/Country/js?page=0&country=' + selectedCountry;
                 console.log(countryUrl);
@@ -80,8 +78,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (stateFilterForm) {
             stateFilterForm.addEventListener('submit', function (event) {
-                event.preventDefault(); // Evitar que el formulario se envíe normalmente
-                page = 0; // Reiniciar la página al cambiar el filtro
+                event.preventDefault(); 
+                page = 0; 
                 var selectedState = stateFilterForm.querySelector('select[name="state"]').value;
                 var stateUrl = '/Library/' + contRoute + '/State/js?page=0&state=' + selectedState;
                 console.log(stateUrl);
@@ -89,7 +87,5 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
     }
-
-    // Initially it adds the Listeners
     addEventListeners();
 });

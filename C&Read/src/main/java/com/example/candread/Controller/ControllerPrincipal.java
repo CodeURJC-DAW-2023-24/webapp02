@@ -92,7 +92,7 @@ public class ControllerPrincipal {
     public ResponseEntity<byte[]> downloadNames(Model model, HttpSession session, Pageable pageable)
             throws IOException {
         List<String> names = obtenerNombresDeLibros(model, pageable);
-        // Convert the list of names to a string separated by line breaks
+
         byte[] pdfBytes = generatePdf(names);
 
         HttpHeaders headers = new HttpHeaders();
@@ -110,10 +110,10 @@ public class ControllerPrincipal {
         if (user != null) {
             Long userid = user.getId();
             Page<Element> userBooks = pagingRepository.findByUsersIdAndType(userid, "LIBRO", pageable);
+
             for (Element book : userBooks.getContent()) {
                 names.add(book.getName());
             }
-            
         }
         return names;
     }
