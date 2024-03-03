@@ -2,19 +2,13 @@ package com.example.candread.Controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
-<<<<<<< HEAD
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-=======
 import java.util.ArrayList;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
->>>>>>> e99b72ad25030b02fe588d85d2e992e5c77934c2
 import java.util.Optional;
-import java.util.List;
-
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,20 +18,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
 import com.example.candread.model.Element;
-<<<<<<< HEAD
+
 import com.example.candread.model.Review;
-=======
-import com.example.candread.model.New;
-import com.example.candread.model.Element.Genres;
+
 import com.example.candread.model.User;
->>>>>>> e99b72ad25030b02fe588d85d2e992e5c77934c2
+
 import com.example.candread.repositories.ElementRepository;
-import com.example.candread.repositories.UserRepository;
 import com.example.candread.services.ElementService;
 import com.example.candread.services.UserService;
-
-import jakarta.servlet.http.HttpServletRequest;
-import com.mysql.cj.jdbc.Blob;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -47,7 +35,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.http.MediaType;
 
 @Controller
 @RequestMapping("/SingleElement")
@@ -55,9 +42,6 @@ public class ElementController {
 
     @Autowired
     private ElementRepository elementRepository;
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private ElementService elementService;
@@ -68,41 +52,39 @@ public class ElementController {
     @GetMapping("/{id}")
     public String getSingleElement(@PathVariable("id") Long id, Model model) throws SQLException, IOException {
         userService.fullSet64Image();
-        if(id!=null){
+        if (id != null) {
             Optional<Element> optionalElement = elementRepository.findById(id);
             if (optionalElement.isPresent()) {
                 Element serie = optionalElement.get();
                 List<Review> reviews = serie.getReviews();
                 Map<Review, String> reviewsConUsuarios = new HashMap<>();
-                int totalRating=0;
+                int totalRating = 0;
                 for (Review r : reviews) {
                     String userName = (r.getUserLinked() != null) ? r.getUserLinked().getName() : "ANONYMOUS";
                     reviewsConUsuarios.put(r, userName);
-                    totalRating+=r.getRating();
+                    totalRating += r.getRating();
                 }
                 double averageRating = 0;
-                if(totalRating!=0){
+                if (totalRating != 0) {
                     averageRating = (double) totalRating / reviews.size();
                 }
                 model.addAttribute("averageRating", averageRating);
                 model.addAttribute("serie", serie);
                 model.addAttribute("reviewsConUsuarios", reviewsConUsuarios);
-    
-                
+
                 elementService.fullSet64Image();
-                return "W-SingleElement"; 
+                return "W-SingleElement";
             } else {
                 return "redirect:/error";
             }
-        }else{
+        } else {
             return "redirect:/error";
         }
     }
-<<<<<<< HEAD
-=======
 
     @PostMapping("/{id}/addelement")
-    public String addElement(@PathVariable("id") Long id, Model model, HttpServletRequest request)throws SQLException, IOException{
+    public String addElement(@PathVariable("id") Long id, Model model, HttpServletRequest request)
+            throws SQLException, IOException {
 
         Optional<Element> optionalElement = elementRepository.findById(id);
         Element newElement = optionalElement.orElseThrow();
@@ -112,19 +94,21 @@ public class ElementController {
 
         List<User> userList = new ArrayList<>();
         userList = newElement.getUsers();
-        if(userList.contains(user)){
+        if (userList.contains(user)) {
             //
-            return "redirect:/SingleElement/"+elementId;
+            return "redirect:/SingleElement/" + elementId;
         } else {
             newElement.getUsers().add(user);
-            //user.getElements().clear();
-            //user.setElements(newList);
+            // user.getElements().clear();
+            // user.setElements(newList);
             elementRepository.save(newElement);
-            return "redirect:/SingleElement/"+elementId;
+            return "redirect:/SingleElement/" + elementId;
         }
     }
+
     @PostMapping("/{id}/favourite")
-    public String addFavourite(@PathVariable("id") Long id, Model model, HttpServletRequest request)throws SQLException, IOException{
+    public String addFavourite(@PathVariable("id") Long id, Model model, HttpServletRequest request)
+            throws SQLException, IOException {
 
         Optional<Element> optionalElement = elementRepository.findById(id);
         Element newElement = optionalElement.orElseThrow();
@@ -134,34 +118,36 @@ public class ElementController {
 
         List<User> userList = new ArrayList<>();
         userList = newElement.getUsersFavourited();
-        if(userList.contains(user)){
+        if (userList.contains(user)) {
             //
-            return "redirect:/SingleElement/"+elementId;
+            return "redirect:/SingleElement/" + elementId;
         } else {
-            //newElement.getUsers().add(user);
+            // newElement.getUsers().add(user);
             newElement.getUsersFavourited().add(user);
-            //user.getElements().clear();
-            //user.setElements(newList);
+            // user.getElements().clear();
+            // user.setElements(newList);
             elementRepository.save(newElement);
-            return "redirect:/SingleElement/"+elementId;
+            return "redirect:/SingleElement/" + elementId;
         }
     }
+
     @PostMapping("/add")
-    public String addElement(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("author") String author, 
-    @RequestParam("type") String type, @RequestParam("season") String season, @RequestParam("state") String state, 
-    @RequestParam("country") String country, @RequestParam("genres") List<String> genres,  @RequestParam("image") MultipartFile image, @RequestParam("years") int years,
-    Model model, HttpServletRequest request) {
-    
->>>>>>> e99b72ad25030b02fe588d85d2e992e5c77934c2
+    public String addElement(@RequestParam("name") String name, @RequestParam("description") String description,
+            @RequestParam("author") String author,
+            @RequestParam("type") String type, @RequestParam("season") String season,
+            @RequestParam("state") String state,
+            @RequestParam("country") String country, @RequestParam("genres") List<String> genres,
+            @RequestParam("image") MultipartFile image, @RequestParam("years") int years,
+            Model model, HttpServletRequest request) {
 
         try {
- 
-            Element newElement = new Element(name,description,author,type,season,state,country,genres,years);
+
+            Element newElement = new Element(name, description, author, type, season, state, country, genres, years);
             byte[] imageData = image.getBytes();
             SerialBlob blob = new SerialBlob(imageData);
             newElement.setImageFile(blob);
             elementRepository.save(newElement);
-            
+
         } catch (Exception e) {
             model.addAttribute("errorMessage", "Error al guardar la noticia.");
         }

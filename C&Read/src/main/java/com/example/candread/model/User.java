@@ -41,11 +41,6 @@ public class User {
     @ManyToMany (mappedBy = "usersFavourited", cascade = CascadeType.ALL)
     private List<Element> favourites = new ArrayList<>();
 
-    //@ManyToMany (mappedBy = "userFavourited", cascade = CascadeType.ALL)
-    //@ElementCollection(fetch = FetchType.EAGER)  <-FUNCIONA
-    @ManyToMany (mappedBy = "usersFavourited", cascade = CascadeType.ALL)
-    private List<Element> favourites = new ArrayList<>();
-
     @Lob 
     private Blob profileImage;
 

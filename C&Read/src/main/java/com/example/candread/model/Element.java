@@ -4,12 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.sql.Blob;
-<<<<<<< HEAD
-=======
-import java.time.Year;
-
-import javax.sql.rowset.serial.SerialBlob;
->>>>>>> e99b72ad25030b02fe588d85d2e992e5c77934c2
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
