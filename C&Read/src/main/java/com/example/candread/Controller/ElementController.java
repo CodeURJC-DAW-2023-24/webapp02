@@ -55,6 +55,28 @@ public class ElementController {
         }
     }
 
+    @PostMapping("/{id}/addelement")
+    public String addElement(@PathVariable("id") Long id, Model model, HttpServletRequest request)throws SQLException, IOException{
+
+        Optional<Element> optionalElement = elementRepository.findById(id);
+        Element newElement = optionalElement.orElseThrow();
+
+        User user = (User) model.getAttribute("user");
+        long elementId = newElement.getId();
+
+        List<User> userList = new ArrayList<>();
+        userList = newElement.getUsers();
+        if(userList.contains(user)){
+            //
+            return "redirect:/SingleElement/"+elementId;
+        } else {
+            newElement.getUsers().add(user);
+            //user.getElements().clear();
+            //user.setElements(newList);
+            elementRepository.save(newElement);
+            return "redirect:/SingleElement/"+elementId;
+        }
+    }
     @PostMapping("/{id}/favourite")
     public String addFavourite(@PathVariable("id") Long id, Model model, HttpServletRequest request)throws SQLException, IOException{
 
@@ -64,31 +86,18 @@ public class ElementController {
         User user = (User) model.getAttribute("user");
         long elementId = newElement.getId();
 
-        /*List<Element> newList = new ArrayList<>();
-        newList = user.getElements();
-        newList.add( newElement); */
-
         List<User> userList = new ArrayList<>();
-        userList = newElement.getUsers();
+        userList = newElement.getUsersFavourited();
         if(userList.contains(user)){
-            //Metodo para notificar que ya existe
+            //
             return "redirect:/SingleElement/"+elementId;
         } else {
-            newElement.getUsers().add(user);
+            //newElement.getUsers().add(user);
+            newElement.getUsersFavourited().add(user);
             //user.getElements().clear();
             //user.setElements(newList);
             elementRepository.save(newElement);
             return "redirect:/SingleElement/"+elementId;
         }
-        /* 
-        //Element serie = optionalElement.get();
-        model.addAttribute("serie", newElement);
-
-        if (request.getAttribute("_csrf") != null) {
-            model.addAttribute("token", request.getAttribute("_csrf").toString());
-        }*/
-        
     }
-    
-
 }

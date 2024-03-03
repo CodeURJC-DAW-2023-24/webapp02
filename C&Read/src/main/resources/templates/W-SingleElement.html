@@ -39,6 +39,15 @@
       </div>
       <div id="listGroup" class="row">
         <div class="d-flex align-items-center">
+          <form id="addElement" action="/SingleElement/{{serie.id}}/addelement" method="post">
+            <div id="addElementDiv">
+              {{#user}}
+              <button type="submit" class="btn">Añadir
+                a mi biblioteca</button>
+              {{/user}}
+            </div>
+            <input type="hidden" name="_csrf" value="{{token}}" />
+          </form>
           <form id="addFavourite" action="/SingleElement/{{serie.id}}/favourite" method="post">
             <div id="addFavouriteDiv">
               {{#user}}
