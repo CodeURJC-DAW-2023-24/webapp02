@@ -97,6 +97,8 @@ public class ControllerPrincipal {
     return new ResponseEntity<>(content, headers, HttpStatus.OK);
     }
 
+    
+
     private List<String> obtenerNombresDeLibros(Model model, Pageable pageable) {
         // Lógica para obtener los nombres de los libros
         
