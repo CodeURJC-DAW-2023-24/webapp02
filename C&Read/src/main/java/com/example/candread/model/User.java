@@ -33,6 +33,8 @@ public class User {
     @ManyToMany (mappedBy = "users", cascade = CascadeType.ALL)
     private List<Element> elements = new ArrayList<>();
 
+    //private List<Element> favourites = new ArrayList<>();
+
     public User() {
     }
 
