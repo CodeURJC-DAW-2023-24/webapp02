@@ -7,13 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
-import java.time.LocalDate;
 import java.util.Optional;
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
@@ -86,23 +83,27 @@ public class ElementController {
     public String addElement(@PathVariable("id") Long id, Model model, HttpServletRequest request)
             throws SQLException, IOException {
 
-        Optional<Element> optionalElement = elementRepository.findById(id);
-        Element newElement = optionalElement.orElseThrow();
+        if (id != null) {
+            Optional<Element> optionalElement = elementRepository.findById(id);
+            Element newElement = optionalElement.orElseThrow();
 
-        User user = (User) model.getAttribute("user");
-        long elementId = newElement.getId();
+            User user = (User) model.getAttribute("user");
+            long elementId = newElement.getId();
 
-        List<User> userList = new ArrayList<>();
-        userList = newElement.getUsers();
-        if (userList.contains(user)) {
-            //
-            return "redirect:/SingleElement/" + elementId;
+            List<User> userList = new ArrayList<>();
+            userList = newElement.getUsers();
+            if (userList.contains(user)) {
+                //
+                return "redirect:/SingleElement/" + elementId;
+            } else {
+                newElement.getUsers().add(user);
+                // user.getElements().clear();
+                // user.setElements(newList);
+                elementRepository.save(newElement);
+                return "redirect:/SingleElement/" + elementId;
+            }
         } else {
-            newElement.getUsers().add(user);
-            // user.getElements().clear();
-            // user.setElements(newList);
-            elementRepository.save(newElement);
-            return "redirect:/SingleElement/" + elementId;
+            return "redirect:/error";
         }
     }
 
@@ -110,25 +111,30 @@ public class ElementController {
     public String addFavourite(@PathVariable("id") Long id, Model model, HttpServletRequest request)
             throws SQLException, IOException {
 
-        Optional<Element> optionalElement = elementRepository.findById(id);
-        Element newElement = optionalElement.orElseThrow();
+        if (id != null) {
+            Optional<Element> optionalElement = elementRepository.findById(id);
+            Element newElement = optionalElement.orElseThrow();
 
-        User user = (User) model.getAttribute("user");
-        long elementId = newElement.getId();
+            User user = (User) model.getAttribute("user");
+            long elementId = newElement.getId();
 
-        List<User> userList = new ArrayList<>();
-        userList = newElement.getUsersFavourited();
-        if (userList.contains(user)) {
-            //
-            return "redirect:/SingleElement/" + elementId;
+            List<User> userList = new ArrayList<>();
+            userList = newElement.getUsersFavourited();
+            if (userList.contains(user)) {
+                //
+                return "redirect:/SingleElement/" + elementId;
+            } else {
+                // newElement.getUsers().add(user);
+                newElement.getUsersFavourited().add(user);
+                // user.getElements().clear();
+                // user.setElements(newList);
+                elementRepository.save(newElement);
+                return "redirect:/SingleElement/" + elementId;
+            }
         } else {
-            // newElement.getUsers().add(user);
-            newElement.getUsersFavourited().add(user);
-            // user.getElements().clear();
-            // user.setElements(newList);
-            elementRepository.save(newElement);
-            return "redirect:/SingleElement/" + elementId;
+            return "redirect:/error";
         }
+
     }
 
     @PostMapping("/add")

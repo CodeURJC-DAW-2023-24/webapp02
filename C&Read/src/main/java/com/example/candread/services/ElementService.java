@@ -287,8 +287,6 @@ public class ElementService {
         generosEjemplo1.add(Genres.ACCION.name());
 
         //BASE USERS ON THE SYSTEM
-        Optional<User> userPrueba3 = userRepository.findById((long) 1);
-        User admin1 = userPrueba3.orElseThrow();
         Optional<User> userPrueba2 = userRepository.findById((long) 2);
         User admin2 = userPrueba2.orElseThrow();
         Optional<User> userPrueba1 = userRepository.findById((long) 3);
@@ -451,14 +449,9 @@ public class ElementService {
         //BASE USERS ON THE SYSTEM
         Optional<User> userPrueba3 = userRepository.findById((long) 1);
         User admin1 = userPrueba3.orElseThrow();
-        Optional<User> userPrueba2 = userRepository.findById((long) 2);
-        User admin2 = userPrueba2.orElseThrow();
         Optional<User> userPrueba1 = userRepository.findById((long) 3);
         User antonio = userPrueba1.orElseThrow();
         List<User> userList = new ArrayList<>();
-
-        
-
 
         List<String> generosEjemplo1 = new ArrayList<>();
 

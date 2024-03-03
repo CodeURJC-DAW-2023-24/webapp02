@@ -18,7 +18,6 @@ import com.example.candread.Security.SecurityConfiguration;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 
-
 @Configuration
 @Controller
 @RequestMapping("/users")
@@ -63,24 +62,24 @@ public class UserController {
 
         try {
             User user = (User) model.getAttribute("user");
-            String n = name;
-            if (!base64BannerImage.getOriginalFilename().equals("")
-                    && !base64ProfileImage.getOriginalFilename().equals("")) {
+            if (user != null) {
+                if (!base64BannerImage.getOriginalFilename().equals("")
+                        && !base64ProfileImage.getOriginalFilename().equals("")) {
 
-                byte[] imageProfileBytes = base64ProfileImage.getBytes();
-                byte[] imageBannerBytes = base64BannerImage.getBytes();
+                    byte[] imageProfileBytes = base64ProfileImage.getBytes();
+                    byte[] imageBannerBytes = base64BannerImage.getBytes();
 
-                Blob profileImageBlob = new SerialBlob(imageProfileBytes);
-                Blob profileBannerBlob = new SerialBlob(imageBannerBytes);
+                    Blob profileImageBlob = new SerialBlob(imageProfileBytes);
+                    Blob profileBannerBlob = new SerialBlob(imageBannerBytes);
 
-                user.setBannerImage(profileBannerBlob);
-                user.setProfileImage(profileImageBlob);
+                    user.setBannerImage(profileBannerBlob);
+                    user.setProfileImage(profileImageBlob);
+                }
+                user.setName(name);
+                userRepository.save(user); // URL base
+
+                userDetailsService.updateSecurityContext(userRepository, name);
             }
-            user.setName(name);
-            userRepository.save(user); // URL base
-
-            userDetailsService.updateSecurityContext(userRepository, name);
-
 
             return "redirect:/" + name + "/Profile"; // Redirigir sin el token
         } catch (Exception e) {
