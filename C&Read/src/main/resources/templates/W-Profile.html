@@ -92,22 +92,16 @@
                     <a href="/Profile?page={{PersonalBooksnextPage}}">Next Books</a>
                     {{/PersonalBookshasNext}}
                 </div>
-<<<<<<< HEAD
+            </div>
+            <br>
+            <button id="downloadNamesBtn">Descargar Todos</button>
             </div>
         </article>
         {{/PersonalBooks}}
-=======
-                <br> 
-                <button id="downloadNamesBtn">Descargar Todos</button>
-            </div>
-        </article>
-            
-        <script>
-            var listOfBooks = "{{PersonalBooks}}";
-        </script>
+
 
         <script src="/Scripts/download.js" defer></script>
->>>>>>> 2600f9335f44cbc1de4704756873c68f8652fa8a
+
         <!-- Series -->
         {{#PersonalSeries}}
         <article id="topSection">
@@ -158,17 +152,17 @@
             <div id="topList" class="container">
                 <div class="row">
                     {{#PersonalBFavs}}
-                        {{> W-Card}}
+                    {{> W-Card}}
                     {{/PersonalBFavs}}
                     <br>
                     {{#PersonalBFavshasPrev}}
-                        <a href="/Profile?page={{PersonalBFavsprevPage}}">Prev Books</a>
+                    <a href="/Profile?page={{PersonalBFavsprevPage}}">Prev Books</a>
                     {{/PersonalBFavshasPrev}}
                     <br>
                     {{#PersonalBFavshasNext}}
-                        <a href="/Profile?page={{PersonalBFavsnextPage}}">Next Books</a>
+                    <a href="/Profile?page={{PersonalBFavsnextPage}}">Next Books</a>
                     {{/PersonalBFavshasNext}}
-                </div> 
+                </div>
             </div>
         </article>
         <!-- FAVOURITE SERIES -->
@@ -179,17 +173,17 @@
             <div id="topList" class="container">
                 <div class="row">
                     {{#PersonalSFavs}}
-                        {{> W-Card}}
+                    {{> W-Card}}
                     {{/PersonalSFavs}}
                     <br>
                     {{#PersonalSFavshasPrev}}
-                        <a href="/Profile?page={{PersonalSFavsprevPage}}">Prev Series</a>
+                    <a href="/Profile?page={{PersonalSFavsprevPage}}">Prev Series</a>
                     {{/PersonalSFavshasPrev}}
                     <br>
                     {{#PersonalSFavshasNext}}
-                        <a href="/Profile?page={{PersonalSFavsnextPage}}">Next Series</a>
+                    <a href="/Profile?page={{PersonalSFavsnextPage}}">Next Series</a>
                     {{/PersonalSFavshasNext}}
-                </div> 
+                </div>
             </div>
         </article>
         <!-- FAVOURITE FILMS -->
@@ -200,17 +194,17 @@
             <div id="topList" class="container">
                 <div class="row">
                     {{#PersonalFFavs}}
-                        {{> W-Card}}
+                    {{> W-Card}}
                     {{/PersonalFFavs}}
                     <br>
                     {{#PersonalFFavshasPrev}}
-                        <a href="/Profile?page={{PersonalFFavsprevPage}}">Prev Films</a>
+                    <a href="/Profile?page={{PersonalFFavsprevPage}}">Prev Films</a>
                     {{/PersonalFFavshasPrev}}
                     <br>
                     {{#PersonalFFavshasNext}}
-                        <a href="/Profile?page={{PersonalFFavsnextPage}}">Next Films</a>
+                    <a href="/Profile?page={{PersonalFFavsnextPage}}">Next Films</a>
                     {{/PersonalFFavshasNext}}
-                </div> 
+                </div>
             </div>
         </article>
     </section>
@@ -222,14 +216,14 @@
         <div id="stadisticList" class="container">
             <div class="row">
                 <!--div class="col-sm-2"-->
-                    <canvas id="myChart" style="width:100%;max-width:400px"></canvas>
-                    <script>
-                        const xValues = ["LIBROS", "PELICULAS", "SERIES"];
-                        const yValues = ["{{numBooks}}", "{{numFilms}}", "{{numSeries}}"];
-                        const barColors = ["red","blue","#5cd65c"];
-                        new Chart("myChart", {
-                          type: "pie",
-                          data: {
+                <canvas id="myChart" style="width:100%;max-width:400px"></canvas>
+                <script>
+                    const xValues = ["LIBROS", "PELICULAS", "SERIES"];
+                    const yValues = ["{{numBooks}}", "{{numFilms}}", "{{numSeries}}"];
+                    const barColors = ["red", "blue", "#5cd65c"];
+                    new Chart("myChart", {
+                        type: "pie",
+                        data: {
                             labels: xValues,
                             datasets: [{
                                 backgroundColor: barColors,
@@ -238,44 +232,42 @@
                         },
                         options: {
                             title: {
-                              display: false,
-                              text: "Medios Guardados"
-                            }}
-                        });
-                    </script>
+                                display: false,
+                                text: "Medios Guardados"
+                            }
+                        }
+                    });
+                </script>
 
-                    <canvas id="myChart2" style="width:100%;max-width:500px"></canvas>
-                    <script>
-                        const zValues = ["ACCION", "TERROR", "AVENTURA", "MISTERIO", "ROMANCE", "CIENCIAFICCION", "DRAMA", "INFANTIL", "COMEDIA", "FANTASIA", "SOBRENATURAL","NOVELA","JUVENIL"];
-                        const wValues = ["{{numAccion}}","{{numTerror}}", "{{numAventura}}", "{{numMisterio}}", "{{numRomance}}",
-                    "{{numCiencia}}", "{{numDrama}}", "{{numInfantil}}","{{numComedia}}",
-                    "{{numFantasia}}", "{{numSobrenatural}}", "{{numNovela}}", "{{numJuvenil}}"];
-                        const barColors2 = ["red","black","#5cd65c", "orange", "yellow", "#00ffcc", "purple", "#99ccff","#0000b3", "#ffb3cc", "#ffbf80", "#cc0066", "brown"];
-                        new Chart("myChart2", {
+                <canvas id="myChart2" style="width:100%;max-width:500px"></canvas>
+                <script>
+                    const zValues = ["ACCION", "TERROR", "AVENTURA", "MISTERIO", "ROMANCE", "CIENCIAFICCION", "DRAMA", "INFANTIL", "COMEDIA", "FANTASIA", "SOBRENATURAL", "NOVELA", "JUVENIL"];
+                    const wValues = ["{{numAccion}}", "{{numTerror}}", "{{numAventura}}", "{{numMisterio}}", "{{numRomance}}",
+                        "{{numCiencia}}", "{{numDrama}}", "{{numInfantil}}", "{{numComedia}}",
+                        "{{numFantasia}}", "{{numSobrenatural}}", "{{numNovela}}", "{{numJuvenil}}"];
+                    const barColors2 = ["red", "black", "#5cd65c", "orange", "yellow", "#00ffcc", "purple", "#99ccff", "#0000b3", "#ffb3cc", "#ffbf80", "#cc0066", "brown"];
+                    new Chart("myChart2", {
                         type: "pie",
                         data: {
                             labels: zValues,
                             datasets: [{
-                            backgroundColor: barColors2,
-                            data: wValues
-                            }]},
+                                backgroundColor: barColors2,
+                                data: wValues
+                            }]
+                        },
                         options: {
                             title: {
-                            display: false,
-                            text: "Generos Guardados"
-                            }}
-                        });
-                    </script>
-
-
-                <!--<img src="Images/Img-Stadistics.png" class="img"> -->
-
-                <!--/div-->
+                                display: false,
+                                text: "Generos Guardados"
+                            }
+                        }
+                    });
+                </script>
             </div>
         </div>
     </aside>
 
-    
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
