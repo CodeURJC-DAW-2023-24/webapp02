@@ -94,19 +94,19 @@ Link al tablero de trello: https://trello.com/b/3sUtM4Yb
      - 4: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/DavidFase2/C%26Read/src/main/java/com/example/candread/Controller/UserViewController.java
      - 5: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/DavidFase2/C%26Read/src/main/resources/static/Scripts/pages.js
  - Javier Vallejo Fernández:
-   - Descripción:
+   - Descripción: Configuración de la seguridad junto a David|funcionalidad de insercion de un elemento en la base de datos|insercion de datos de ejemplo junto con Juan|modificacion de element para que pueda tener la cadena codificada en base 64 pero no se vea reflejado en las bases de datos|configuracion correcta en el properties para la conexion de batos de datos|mustache empleado en single element para que single element muestre la imagen del elemento
    - 5 Commits:
-     - 1
-     - 2
-     - 3
-     - 4
-     - 5 
+     - 1 https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/2161ca54869c1cbdc34c2fedbd4f58f9361417fb
+     - 2 https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/9c9e521a046389af6ae908b8d13288b687073688
+     - 3 https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/ac2173e4168c8d378b4491ebaf4bc64fd58b228d
+     - 4 https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/c27738f986a7a78eae0807883f734b697f7952b7
+     - 5 https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/60f46ab25f2a666e7dc74aa6f9b82dd2e1e5c4d2
    - 5 Ficheros:
-     - 1
-     - 2
-     - 3
-     - 4
-     - 5 
+     - 1 [Security Configuration](https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JaviFase2/C%26Read/src/main/java/com/example/candread/Security/SecurityConfiguration.java)
+     - 2 [https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JaviFase2/C%26Read/src/main/java/com/example/candread/Security/RepositoryUserDetailsService.java]
+     - 3 https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JaviFase2/C%26Read/src/main/java/com/example/candread/Controller/ElementController.java
+     - 4 https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JaviFase2/C%26Read/src/main/java/com/example/candread/services/ElementService.java
+     - 5 https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JaviFase2/C%26Read/src/main/resources/templates/W-Admin.html
  - Juan Álvarez Loeches:
    - Descripción:
    - 5 Commits:
