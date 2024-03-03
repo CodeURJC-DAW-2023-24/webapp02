@@ -1,5 +1,6 @@
 package com.example.candread.Controller;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -29,6 +30,12 @@ import com.example.candread.repositories.NewRepository;
 import com.example.candread.repositories.PagingRepository;
 import com.example.candread.repositories.ReviewRepository;
 import com.example.candread.services.ElementService;
+import com.itextpdf.kernel.pdf.PdfDocument;
+import com.itextpdf.kernel.pdf.PdfWriter;
+import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Text;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
@@ -79,17 +86,19 @@ public class ControllerPrincipal {
 
     @GetMapping("/downloadNames")
     @ResponseBody
-    public ResponseEntity<String> downloadNames(Model model, HttpSession session, Pageable pageable) {
+    public ResponseEntity<byte[]> downloadNames(Model model, HttpSession session, Pageable pageable) throws IOException {
         List<String> names = obtenerNombresDeLibros(model, pageable); 
 
+        byte[] pdfBytes = generatePdf(names);
+
         // Convierte la lista de nombres a una cadena separada por saltos de línea
-         String content = String.join("\n", names);
+        String content = String.join("\n", names);
 
         HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.TEXT_PLAIN);
-        headers.setContentDispositionFormData("attachment", "nombres_de_libros.txt");
+        headers.setContentType(MediaType.APPLICATION_PDF);
+        headers.setContentDispositionFormData("attachment", "nombres_de_libros.pdf");
 
-    return new ResponseEntity<>(content, headers, HttpStatus.OK);
+    return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
     }
 
     private List<String> obtenerNombresDeLibros(Model model, Pageable pageable) {
@@ -108,6 +117,22 @@ public class ControllerPrincipal {
         
         // Añade más nombres según tu lógica
         return names;
+    }
+
+    public static byte[] generatePdf(List<String> content) throws IOException {
+        ByteArrayOutputStream pdfOutputStream = new ByteArrayOutputStream();
+
+        PdfDocument pdfDoc = new PdfDocument(new PdfWriter(pdfOutputStream));
+        Document doc = new Document(pdfDoc);
+
+        for (String name : content) {
+            doc.add(new Paragraph(new Text(name)));
+        }
+
+        doc.close();
+        pdfOutputStream.close();
+
+        return pdfOutputStream.toByteArray();
     }
 
     // moverse al perfil
