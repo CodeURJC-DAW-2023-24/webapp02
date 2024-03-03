@@ -20,6 +20,7 @@ import com.example.candread.model.Element;
 import com.example.candread.repositories.PagingRepository;
 import com.example.candread.services.ElementService;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -61,7 +62,7 @@ public class LibraryController {
     }
 
     @GetMapping("/Books/js")
-    public String moveToBookLibraryjs(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    public String moveToBookLibraryjs(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
 
         int pageNumber = page.orElse(0);
         int pageSize = 10;
@@ -78,6 +79,10 @@ public class LibraryController {
         model.addAttribute("hasNext", books.hasNext());
         model.addAttribute("nextPage", books.getNumber()+1);
         model.addAttribute("prevPage", books.getNumber()-1);
+
+        if (request.getAttribute("_csrf") != null) {
+            model.addAttribute("token", request.getAttribute("_csrf").toString());
+        }
 
 
     return "W-LibraryFragment"; 
@@ -105,7 +110,7 @@ public class LibraryController {
     }
 
     @GetMapping("/Films/js")
-    public String moveToFilmLibraryjs(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    public String moveToFilmLibraryjs(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
 
         int pageNumber = page.orElse(0);
         int pageSize = 10;
@@ -121,6 +126,10 @@ public class LibraryController {
         model.addAttribute("hasNext", films.hasNext());
         model.addAttribute("nextPage", films.getNumber()+1);
         model.addAttribute("prevPage", films.getNumber()-1);
+
+        if (request.getAttribute("_csrf") != null) {
+            model.addAttribute("token", request.getAttribute("_csrf").toString());
+        }
 
     return "W-LibraryFragment"; 
     }
@@ -142,12 +151,13 @@ public class LibraryController {
         model.addAttribute("hasNext", series.hasNext());
         model.addAttribute("nextPage", series.getNumber()+1);
         model.addAttribute("prevPage", series.getNumber()-1);
+        
 
     return "W-Library"; 
     }
 
     @GetMapping("/Series/js")
-    public String moveToSeriesLibraryjs(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    public String moveToSeriesLibraryjs(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
 
         int pageNumber = page.orElse(0);
         int pageSize = 10;
@@ -164,12 +174,16 @@ public class LibraryController {
         model.addAttribute("nextPage", series.getNumber()+1);
         model.addAttribute("prevPage", series.getNumber()-1);
 
+        if (request.getAttribute("_csrf") != null) {
+            model.addAttribute("token", request.getAttribute("_csrf").toString());
+        }
+
     return "W-LibraryFragment"; 
     }
     
     
     @GetMapping("/Books/Genre/js")
-    public String BookGenreFilterjs(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    public String BookGenreFilterjs(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -183,12 +197,16 @@ public class LibraryController {
 		model.addAttribute("hasNext", books.hasNext());
 		model.addAttribute("nextPage", books.getNumber()+1);
 		model.addAttribute("prevPage", books.getNumber()-1);
+
+        if (request.getAttribute("_csrf") != null) {
+            model.addAttribute("token", request.getAttribute("_csrf").toString());
+        }
         
     return "W-LibraryFragment"; 
     }
 
     @GetMapping("/Films/Genre/js")
-    public String FilmGenreFilterjs(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    public String FilmGenreFilterjs(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -202,12 +220,16 @@ public class LibraryController {
 		model.addAttribute("hasNext", films.hasNext());
 		model.addAttribute("nextPage", films.getNumber()+1);
 		model.addAttribute("prevPage", films.getNumber()-1);
+
+        if (request.getAttribute("_csrf") != null) {
+            model.addAttribute("token", request.getAttribute("_csrf").toString());
+        }
         
     return "W-LibraryFragment"; 
     }
 
     @GetMapping("/Series/Genre/js")
-    public String SeriesGenreFilterjs(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    public String SeriesGenreFilterjs(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -221,12 +243,16 @@ public class LibraryController {
 		model.addAttribute("hasNext", series.hasNext());
 		model.addAttribute("nextPage", series.getNumber()+1);
 		model.addAttribute("prevPage", series.getNumber()-1);
+
+        if (request.getAttribute("_csrf") != null) {
+            model.addAttribute("token", request.getAttribute("_csrf").toString());
+        }
         
     return "W-LibraryFragment"; 
     }
 
     @GetMapping("/Books/Season/js")
-    public String BookSeasonFilterjs(Model model, HttpSession session, @RequestParam("season") String season, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    public String BookSeasonFilterjs(Model model, HttpSession session, @RequestParam("season") String season, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -240,12 +266,16 @@ public class LibraryController {
 		model.addAttribute("hasNext", books.hasNext());
 		model.addAttribute("nextPage", books.getNumber()+1);
 		model.addAttribute("prevPage", books.getNumber()-1);
+
+        if (request.getAttribute("_csrf") != null) {
+            model.addAttribute("token", request.getAttribute("_csrf").toString());
+        }
         
     return "W-LibraryFragment"; 
     }
 
     @GetMapping("/Films/Season/js")
-    public String FilmSeasonFilterjs(Model model, HttpSession session, @RequestParam("season") String season, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    public String FilmSeasonFilterjs(Model model, HttpSession session, @RequestParam("season") String season, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -259,13 +289,17 @@ public class LibraryController {
 		model.addAttribute("hasNext", series.hasNext());
 		model.addAttribute("nextPage", series.getNumber()+1);
 		model.addAttribute("prevPage", series.getNumber()-1);
+
+        if (request.getAttribute("_csrf") != null) {
+            model.addAttribute("token", request.getAttribute("_csrf").toString());
+        }
         
     return "W-LibraryFragment"; 
     }
 
 
     @GetMapping("/Series/Season/js")
-    public String SerieseasonFilterjs(Model model, HttpSession session, @RequestParam("season") String season, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    public String SerieseasonFilterjs(Model model, HttpSession session, @RequestParam("season") String season, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -279,12 +313,16 @@ public class LibraryController {
 		model.addAttribute("hasNext", films.hasNext());
 		model.addAttribute("nextPage", films.getNumber()+1);
 		model.addAttribute("prevPage", films.getNumber()-1);
+
+        if (request.getAttribute("_csrf") != null) {
+            model.addAttribute("token", request.getAttribute("_csrf").toString());
+        }
         
     return "W-LibraryFragment"; 
     }
 
     @GetMapping("/Books/Country/js")
-    public String BooksCountryFilterjs(Model model, HttpSession session, @RequestParam("country") String country, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    public String BooksCountryFilterjs(Model model, HttpSession session, @RequestParam("country") String country, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -298,12 +336,16 @@ public class LibraryController {
 		model.addAttribute("hasNext", books.hasNext());
 		model.addAttribute("nextPage", books.getNumber()+1);
 		model.addAttribute("prevPage", books.getNumber()-1);
+
+        if (request.getAttribute("_csrf") != null) {
+            model.addAttribute("token", request.getAttribute("_csrf").toString());
+        }
         
     return "W-LibraryFragment"; 
     }
 
     @GetMapping("/Films/Country/js")
-    public String FilmsCountryFilterjs(Model model, HttpSession session, @RequestParam("country") String country, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    public String FilmsCountryFilterjs(Model model, HttpSession session, @RequestParam("country") String country, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -317,13 +359,17 @@ public class LibraryController {
 		model.addAttribute("hasNext", books.hasNext());
 		model.addAttribute("nextPage", books.getNumber()+1);
 		model.addAttribute("prevPage", books.getNumber()-1);
+
+        if (request.getAttribute("_csrf") != null) {
+            model.addAttribute("token", request.getAttribute("_csrf").toString());
+        }
         
     return "W-LibraryFragment"; 
     }
 
 
     @GetMapping("/Series/Country/js")
-    public String countryFilterjs(Model model, HttpSession session, @RequestParam("country") String country, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    public String countryFilterjs(Model model, HttpSession session, @RequestParam("country") String country, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -337,13 +383,17 @@ public class LibraryController {
 		model.addAttribute("hasNext", books.hasNext());
 		model.addAttribute("nextPage", books.getNumber()+1);
 		model.addAttribute("prevPage", books.getNumber()-1);
+
+        if (request.getAttribute("_csrf") != null) {
+            model.addAttribute("token", request.getAttribute("_csrf").toString());
+        }
         
     return "W-LibraryFragment"; 
     }
 
 
     @GetMapping("/Books/State/js")
-    public String BookStateFilterjs(Model model, HttpSession session, @RequestParam("state") String state, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    public String BookStateFilterjs(Model model, HttpSession session, @RequestParam("state") String state, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -357,13 +407,17 @@ public class LibraryController {
 		model.addAttribute("hasNext", books.hasNext());
 		model.addAttribute("nextPage", books.getNumber()+1);
 		model.addAttribute("prevPage", books.getNumber()-1);
+
+        if (request.getAttribute("_csrf") != null) {
+            model.addAttribute("token", request.getAttribute("_csrf").toString());
+        }
         
     return "W-LibraryFragment"; 
     }
 
 
     @GetMapping("/Films/State/js")
-    public String FilmStateFilterjs(Model model, HttpSession session, @RequestParam("state") String state, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    public String FilmStateFilterjs(Model model, HttpSession session, @RequestParam("state") String state, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -377,12 +431,16 @@ public class LibraryController {
 		model.addAttribute("hasNext", books.hasNext());
 		model.addAttribute("nextPage", books.getNumber()+1);
 		model.addAttribute("prevPage", books.getNumber()-1);
+
+        if (request.getAttribute("_csrf") != null) {
+            model.addAttribute("token", request.getAttribute("_csrf").toString());
+        }
         
     return "W-LibraryFragment"; 
     }
 
     @GetMapping("/Series/State/js")
-    public String SerieStateFilterjs(Model model, HttpSession session, @RequestParam("state") String state, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    public String SerieStateFilterjs(Model model, HttpSession session, @RequestParam("state") String state, @RequestParam("page") Optional<Integer> page, Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -396,6 +454,10 @@ public class LibraryController {
 		model.addAttribute("hasNext", books.hasNext());
 		model.addAttribute("nextPage", books.getNumber()+1);
 		model.addAttribute("prevPage", books.getNumber()-1);
+
+        if (request.getAttribute("_csrf") != null) {
+            model.addAttribute("token", request.getAttribute("_csrf").toString());
+        }
         
     return "W-LibraryFragment"; 
     }

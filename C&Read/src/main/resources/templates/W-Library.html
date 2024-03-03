@@ -111,6 +111,7 @@
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary" id="genreFilterBtn">Filtrar</button>
+                <input type="hidden" name="_csrf" value="{{token}}"/>
             </form>
 
             <script>
@@ -150,6 +151,7 @@
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary" id="seasonFilterBtn">Filtrar</button>
+                <input type="hidden" name="_csrf" value="{{token}}"/>
             </form>
 
             <form id="countryFilterForm">
@@ -167,6 +169,7 @@
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary" id="countryFilterBtn">Filtrar</button>
+                <input type="hidden" name="_csrf" value="{{token}}"/>
             </form>
 
             <form id="stateFilterForm">
@@ -182,6 +185,7 @@
                     </select>
                 </div>
                 <button type="submit" class="btn btn-primary" id="stateFilterBtn">Filtrar</button>
+                <input type="hidden" name="_csrf" value="{{token}}"/>
             </form>
 
         </aside>
