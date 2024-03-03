@@ -87,7 +87,7 @@ public class ControllerPrincipal {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
-        //int nB, nF, nS = 0 NO LOS PONE TODOS A 0, PREGUNTAR POR QUÉ
+        //int nB, nF, nS = 0; NO LOS PONE TODOS A 0, PREGUNTAR POR QUÉ
         int numberBooks = 0;
         int numberFilms = 0;
         int numberSeries = 0;
