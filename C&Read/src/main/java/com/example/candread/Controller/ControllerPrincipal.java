@@ -56,12 +56,12 @@ public class ControllerPrincipal {
         elementService.fullSet64Image();
 
         // CAROUSEL IMG
-        List<Element> elementosEstreno = elementRepository.findTop4ByOrderByIdDesc();
-        for (int i = 0; i < elementosEstreno.size(); i++) {
-            Element e = elementosEstreno.get(i);
+        List<Element> elementsRelease = elementRepository.findTop4ByOrderByIdDesc();
+        for (int i = 0; i < elementsRelease.size(); i++) {
+            Element e = elementsRelease.get(i);
             String img = e.getBase64Image();
-            String finalimg = "data:image/jpg;base64," + img;
-            model.addAttribute("firstSlide" + i, finalimg);
+            String finalImg = "data:image/jpg;base64," + img;
+            model.addAttribute("firstSlide" + i, finalImg);
         }
 
         // Pasamos los datos a la vista
@@ -87,7 +87,7 @@ public class ControllerPrincipal {
     public ResponseEntity<String> downloadNames(Model model, HttpSession session, Pageable pageable) {
         List<String> names = obtenerNombresDeLibros(model, pageable); 
 
-        // Convierte la lista de nombres a una cadena separada por saltos de línea
+        // Convert the list of names to a string separated by line breaks
          String content = String.join("\n", names);
 
         HttpHeaders headers = new HttpHeaders();
@@ -98,30 +98,24 @@ public class ControllerPrincipal {
     }
 
     private List<String> obtenerNombresDeLibros(Model model, Pageable pageable) {
-        // Lógica para obtener los nombres de los libros
+        // Logic to get the names of the books
         
         User user = (User) model.getAttribute("user");
         if (user!=null){
             Long userid =user.getId();
-            //Page<Review> books= reviewRepository.findByUserLinked(userid, pageable);
             Page<Element> userBooks = pagingRepository.findByUsersIdAndType(userid, "LIBRO", pageable);
     
             List<String> names = new ArrayList<>();
     
             for (Element book : userBooks.getContent()) {
-                names.add(book.getName()); // Reemplaza "getNombre()" con el método real para obtener el nombre del libro
             }
-            
-            // Añade más nombres según tu lógica
             return names;
         }else{
             return null;
         }
         
     }
-
-
-    // moverse a la pantalla de administrador
+    
     @GetMapping("/Admin")
     public String moveToAdmin(Model model) throws SQLException, IOException {
         userService.fullSet64Image();;
