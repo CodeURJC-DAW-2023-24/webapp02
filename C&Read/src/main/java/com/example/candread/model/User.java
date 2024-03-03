@@ -34,7 +34,8 @@ public class User {
     private List<Element> elements = new ArrayList<>();
 
     //@ManyToMany (mappedBy = "userFavourited", cascade = CascadeType.ALL)
-    @ElementCollection(fetch = FetchType.EAGER)
+    //@ElementCollection(fetch = FetchType.EAGER)  <-FUNCIONA
+    @ManyToMany (mappedBy = "usersFavourited", cascade = CascadeType.ALL)
     private List<Element> favourites = new ArrayList<>();
 
     public User() {

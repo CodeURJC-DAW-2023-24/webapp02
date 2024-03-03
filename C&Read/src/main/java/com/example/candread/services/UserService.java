@@ -58,6 +58,15 @@ public class UserService {
         elementService.insertElement();
         elementService.insertSeries();
         elementService.inserFilms();
+        /* 
+        List<Element> elementList = new ArrayList<>();
+        Optional<Element> element1 = elementRepository.findById((long) 1);
+        Element fav1 = element1.orElseThrow();
+        elementList.add(fav1);
+        Optional<User> user1 = userRepository.findById((long) 3);
+        User antonio = user1.orElseThrow();
+        antonio.setFavourites(elementList);
+        userRepository.save(antonio);*/
 
 
     }

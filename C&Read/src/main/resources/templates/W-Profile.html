@@ -122,6 +122,69 @@
                 </div> 
             </div>
         </article>
+        <!-- FAVOURITE BOOKS -->
+        <article id="topSection">
+            <div id="topTitleUser">
+                <h4> Mis libros favoritos:</h4>
+            </div>
+            <div id="topList" class="container">
+                <div class="row">
+                    {{#PersonalBFavs}}
+                        {{> W-Card}}
+                    {{/PersonalBFavs}}
+                    <br>
+                    {{#PersonalBFavshasPrev}}
+                        <a href="/Profile?page={{PersonalBFavsprevPage}}">Prev Books</a>
+                    {{/PersonalBFavshasPrev}}
+                    <br>
+                    {{#PersonalBFavshasNext}}
+                        <a href="/Profile?page={{PersonalBFavsnextPage}}">Next Books</a>
+                    {{/PersonalBFavshasNext}}
+                </div> 
+            </div>
+        </article>
+        <!-- FAVOURITE SERIES -->
+        <article id="topSection">
+            <div id="topTitleUser">
+                <h4> Mis series favoritos:</h4>
+            </div>
+            <div id="topList" class="container">
+                <div class="row">
+                    {{#PersonalSFavs}}
+                        {{> W-Card}}
+                    {{/PersonalSFavs}}
+                    <br>
+                    {{#PersonalSFavshasPrev}}
+                        <a href="/Profile?page={{PersonalSFavsprevPage}}">Prev Series</a>
+                    {{/PersonalSFavshasPrev}}
+                    <br>
+                    {{#PersonalSFavshasNext}}
+                        <a href="/Profile?page={{PersonalSFavsnextPage}}">Next Series</a>
+                    {{/PersonalSFavshasNext}}
+                </div> 
+            </div>
+        </article>
+        <!-- FAVOURITE FILMS -->
+        <article id="topSection">
+            <div id="topTitleUser">
+                <h4> Mis peliculas favoritos:</h4>
+            </div>
+            <div id="topList" class="container">
+                <div class="row">
+                    {{#PersonalFFavs}}
+                        {{> W-Card}}
+                    {{/PersonalFFavs}}
+                    <br>
+                    {{#PersonalFFavshasPrev}}
+                        <a href="/Profile?page={{PersonalFFavsprevPage}}">Prev Films</a>
+                    {{/PersonalFFavshasPrev}}
+                    <br>
+                    {{#PersonalFFavshasNext}}
+                        <a href="/Profile?page={{PersonalFFavsnextPage}}">Next Films</a>
+                    {{/PersonalFFavshasNext}}
+                </div> 
+            </div>
+        </article>
 
     <!--SECCION ESTADISTICAS-->
     <section id="stadisticSection">
@@ -129,9 +192,9 @@
             <h4> Mis Estadísticas </h4>
         </div>
         <div id="stadisticList" class="container">
-            <!--div class="row"-->
+            <div class="row">
                 <!--div class="col-sm-2"-->
-                    <canvas id="myChart" style="width:100%;max-width:500px"></canvas>
+                    <canvas id="myChart" style="width:100%;max-width:400px"></canvas>
                     <script>
                         const xValues = ["LIBROS", "PELICULAS", "SERIES"];
                         const yValues = ["{{numBooks}}", "{{numFilms}}", "{{numSeries}}"];
@@ -152,7 +215,7 @@
                         });
                     </script>
 
-                    <canvas id="myChart2" style="width:100%;max-width:600px"></canvas>
+                    <canvas id="myChart2" style="width:100%;max-width:500px"></canvas>
                     <script>
                         const zValues = ["ACCION", "TERROR", "AVENTURA", "MISTERIO", "ROMANCE", "CIENCIAFICCION", "DRAMA", "INFANTIL", "COMEDIA", "FANTASIA", "SOBRENATURAL","NOVELA","JUVENIL"];
                         const wValues = ["{{numAccion}}","{{numTerror}}", "{{numAventura}}", "{{numMisterio}}", "{{numRomance}}",
@@ -179,8 +242,8 @@
                     <!--<img src="Images/Img-Stadistics.png" class="img"> -->
                     
                 <!--/div-->
-            <!--/div-->
-        </!--div>
+            </div>
+        </div>
     </section>
 
 

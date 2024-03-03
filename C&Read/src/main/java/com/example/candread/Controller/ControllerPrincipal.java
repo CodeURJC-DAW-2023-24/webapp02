@@ -87,7 +87,6 @@ public class ControllerPrincipal {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
-        //int nB, nF, nS = 0; NO LOS PONE TODOS A 0, PREGUNTAR POR QUÉ
         int numberBooks = 0;
         int numberFilms = 0;
         int numberSeries = 0;
@@ -133,8 +132,7 @@ public class ControllerPrincipal {
 
                 default:
                     break;
-            }
-            
+            } 
         }
         String genreNow;
         for(int i = 0; i<limit; i = i+1){
@@ -185,9 +183,7 @@ public class ControllerPrincipal {
                     default:
                         break;
                 }
-                
             }
-            
         }
         Long userid =user.getId();
         //Page<Review> books= reviewRepository.findByUserLinked(userid, pageable);
@@ -212,10 +208,34 @@ public class ControllerPrincipal {
 		model.addAttribute("PersonalFilmsnextPage", userFilms.getNumber()+1);
 		model.addAttribute("PersonalFilmsprevPage", userFilms.getNumber()-1);
 
+        //ATTRIBUTES FOR FAVOURITES
+        Page<Element> userBFavourites = pagingRepository.findByUsersFavouritedIdAndType(userid, "LIBRO", pageable);
+        model.addAttribute("PersonalBFavs", userBFavourites);
+        model.addAttribute("PersonalBFavshasPrev", userBFavourites.hasPrevious());
+		model.addAttribute("PersonalBFavshasNext", userBFavourites.hasNext());
+		model.addAttribute("PersonalBFavsnextPage", userBFavourites.getNumber()+1);
+		model.addAttribute("PersonalBFavsprevPage", userBFavourites.getNumber()-1);
+
+        Page<Element> userSFavourites = pagingRepository.findByUsersFavouritedIdAndType(userid, "SERIE", pageable);
+        model.addAttribute("PersonalSFavs", userSFavourites);
+        model.addAttribute("PersonalSFavshasPrev", userSFavourites.hasPrevious());
+		model.addAttribute("PersonalSFavshasNext", userSFavourites.hasNext());
+		model.addAttribute("PersonalSFavsnextPage", userSFavourites.getNumber()+1);
+		model.addAttribute("PersonalSFavsprevPage", userSFavourites.getNumber()-1);
+
+        Page<Element> userFFavourites = pagingRepository.findByUsersFavouritedIdAndType(userid, "PELICULA", pageable);
+        model.addAttribute("PersonalFFavs", userFFavourites);
+        model.addAttribute("PersonalFFavshasPrev", userFFavourites.hasPrevious());
+		model.addAttribute("PersonalFFavshasNext", userFFavourites.hasNext());
+		model.addAttribute("PersonalFFavsnextPage", userFFavourites.getNumber()+1);
+		model.addAttribute("PersonalFFavsprevPage", userFFavourites.getNumber()-1);
+
+        //ATTRIBUTES FOR CHART 1 - TYPE OF ELEMENT
         model.addAttribute("numBooks", numberBooks);
         model.addAttribute("numSeries", numberSeries);
         model.addAttribute("numFilms", numberFilms);
 
+        //ATTRIBUTES FOR CHART 2 - GENRE OF ELEMENT
         model.addAttribute("numAccion", numberAction );
         model.addAttribute("numTerror", numberTerror);
         model.addAttribute("numAventura", numberAventura);

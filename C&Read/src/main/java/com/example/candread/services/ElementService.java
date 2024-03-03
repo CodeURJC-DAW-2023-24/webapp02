@@ -96,9 +96,11 @@ public class ElementService {
         userList.add(antonio);
         elementoTest1.setUsers(userList); 
 
-        elementList.add(elementoTest1);
+        elementoTest1.setUsersFavourited(userList);
+
+        //elementList.add(elementoTest1);
         //antonio.getFavourites().addAll(elementList);
-        antonio.setFavourites(elementList);
+        //antonio.setFavourites(elementList);
         //userRepository.save(antonio);
 
         elementRepository.save(elementoTest1);
@@ -167,8 +169,12 @@ public class ElementService {
         elementoTest4.setImageFile(blobMarina);
         elementRepository.save(elementoTest4);
 
-        //elementList.add(elementoTest4);
-        //antonio.setFavourites(elementList);
+        //MAKING A BOOK A FAVOURITE FOR ANTONIO
+        //elementList.add(elementoTest1);
+        elementList.add(elementoTest4);
+        antonio.setFavourites(elementList);
+        userRepository.save(antonio);
+        //antonio.getFavourites().add(elementoTest4);
 
         //elementList.clear();
         generosEjemplo1.clear();
@@ -379,7 +385,13 @@ public class ElementService {
         "Keiichirou Saitou", Types.SERIE.name(), Seasons.PRIMAVERA.name(), 
         States.COMPLETO.name(), Countries.COREA.name(), generosEjemplo1, 2023);
         elementoTest6.setImageFile(blobFrieren);
+
+        userList.clear();
+        userList.add(antonio);
+        elementoTest6.setUsersFavourited(userList);
+
         elementRepository.save(elementoTest6);
+        userList.clear();
 
         generosEjemplo1.clear();
         generosEjemplo1.add(Genres.AVENTURA.name());
@@ -545,7 +557,12 @@ public class ElementService {
         "Walt Disney Pictures", Types.PELICULA.name(), Seasons.PRIMAVERA.name(), 
         States.COMPLETO.name(), Countries.ESTADOS_UNIDOS.name(), generosEjemplo1, 2016);
         elementoTest6.setImageFile(blobMoana);
+
+        userList.clear();
+        userList.add(antonio);
+        elementoTest6.setUsersFavourited(userList);
         elementRepository.save(elementoTest6);
+        userList.clear();
 
         generosEjemplo1.clear();
         generosEjemplo1.add(Genres.AVENTURA.name());
