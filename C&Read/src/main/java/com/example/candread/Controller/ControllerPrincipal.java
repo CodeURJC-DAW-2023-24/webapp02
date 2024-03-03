@@ -101,18 +101,23 @@ public class ControllerPrincipal {
         // Lógica para obtener los nombres de los libros
         
         User user = (User) model.getAttribute("user");
-        Long userid =user.getId();
-        //Page<Review> books= reviewRepository.findByUserLinked(userid, pageable);
-        Page<Element> userBooks = pagingRepository.findByUsersIdAndType(userid, "LIBRO", pageable);
-
-        List<String> names = new ArrayList<>();
-
-        for (Element book : userBooks.getContent()) {
-            names.add(book.getName()); // Reemplaza "getNombre()" con el método real para obtener el nombre del libro
+        if (user!=null){
+            Long userid =user.getId();
+            //Page<Review> books= reviewRepository.findByUserLinked(userid, pageable);
+            Page<Element> userBooks = pagingRepository.findByUsersIdAndType(userid, "LIBRO", pageable);
+    
+            List<String> names = new ArrayList<>();
+    
+            for (Element book : userBooks.getContent()) {
+                names.add(book.getName()); // Reemplaza "getNombre()" con el método real para obtener el nombre del libro
+            }
+            
+            // Añade más nombres según tu lógica
+            return names;
+        }else{
+            return null;
         }
         
-        // Añade más nombres según tu lógica
-        return names;
     }
 
 
