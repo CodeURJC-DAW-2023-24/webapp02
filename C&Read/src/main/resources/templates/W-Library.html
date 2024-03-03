@@ -26,7 +26,7 @@
         <section id="library">
             <div class="row" id="libraryHead">
                 <div class="col-md-6" id="libraryTitle">
-                    <h4>Biblioteca de Películas</h4>
+                    <h4>Biblioteca de {{controllerRoute}}</h4>
                 </div>
                 <div class="dropdown col-md-6">
                     <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -47,14 +47,26 @@
                     {{/elements}}
                     <br>
                     {{#hasPrev}}
-                        <a href="/Library/{{controllerRoute}}?page={{prevPage}}">Prev Books</a>
+                    <button id="load-prev-btn">Resultados anteriores</button>
                     {{/hasPrev}}
                     <br>
                     {{#hasNext}}
-                        <a href="/Library/{{controllerRoute}}?page={{nextPage}}">Next Books</a>
+                        <button id="load-more-btn">Mas resultados</button>
                     {{/hasNext}}
                 </div>    
             </div>
+            
+            <div id="spinner" style="display: none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+            <script>
+                var contRoute = "{{controllerRoute}}";
+            </script>
+
+            
 
         </section>
 
@@ -76,7 +88,7 @@
                 </div>
             </div>
 
-            <form action="/Library/{{controllerRoute}}/Genre" method="get">
+            <form id="genreFilterForm">
                 <div id="filterElement">
                     <div id="elementTitle">
                         <h4>Género:</h4>
@@ -98,8 +110,16 @@
                         <option value="JUVENIL">JUVENIL</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Filtrar</button>
+                <button type="submit" class="btn btn-primary" id="genreFilterBtn">Filtrar</button>
+                <input type="hidden" name="_csrf" value="{{token}}"/>
             </form>
+
+            <script>
+                var filter = "";
+            </script>
+
+            <script src="/Scripts/pages.js" defer></script>
+            
 
             <form action="/Library/Year" method="get">
                 <div id="filterElement">
@@ -117,7 +137,7 @@
                 <button type="submit" class="btn btn-primary">Filtrar</button>
             </form>
 
-            <form action="/Library/{{controllerRoute}}/Season" method="get">
+            <form id="seasonFilterForm">
                 <div id="filterElement">
                     <div id="elementTitle">
                         <h4>Temporada:</h4>
@@ -130,10 +150,11 @@
                         <option value="INVIERNO">Invierno</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Filtrar</button>
+                <button type="submit" class="btn btn-primary" id="seasonFilterBtn">Filtrar</button>
+                <input type="hidden" name="_csrf" value="{{token}}"/>
             </form>
 
-            <form action="/Library/{{controllerRoute}}/Country" method="get">
+            <form id="countryFilterForm">
                 <div id="filterElement">
                     <div id="elementTitle">
                         <h4>País:</h4>
@@ -147,10 +168,11 @@
                         <option value="CHINA">China</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Filtrar</button>
+                <button type="submit" class="btn btn-primary" id="countryFilterBtn">Filtrar</button>
+                <input type="hidden" name="_csrf" value="{{token}}"/>
             </form>
 
-            <form action="/Library/{{controllerRoute}}/State" method="get">
+            <form id="stateFilterForm">
                 <div id="filterElement">
                     <div id="elementTitle">
                         <h4>Estado:</h4>
@@ -162,8 +184,10 @@
                         <option value="POR_ESTRENARSE">Por estrenarse</option>
                     </select>
                 </div>
-                <button type="submit" class="btn btn-primary">Filtrar</button>
+                <button type="submit" class="btn btn-primary" id="stateFilterBtn">Filtrar</button>
+                <input type="hidden" name="_csrf" value="{{token}}"/>
             </form>
+
         </aside>
     </main>
 
