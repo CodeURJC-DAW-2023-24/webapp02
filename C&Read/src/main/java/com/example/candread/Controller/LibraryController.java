@@ -2,10 +2,13 @@ package com.example.candread.Controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -20,6 +23,7 @@ import com.example.candread.services.ElementService;
 import jakarta.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 
 
 
@@ -52,7 +56,44 @@ public class LibraryController {
         model.addAttribute("nextPage", books.getNumber()+1);
         model.addAttribute("prevPage", books.getNumber()-1);
 
+
     return "W-Library"; 
+    }
+
+    @GetMapping("/Books/js")
+    public String moveToBookLibraryjs(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+
+        int pageNumber = page.orElse(0);
+        int pageSize = 10;
+        pageable = PageRequest.of(pageNumber, pageSize);
+
+        elementService.fullSet64Image();
+
+
+        Page<Element> books= pagingRepository.findByType("LIBRO", pageable);
+        Page<Element> Prevbooks = (Page<Element>) model.getAttribute("elements");
+
+        List<Element> content1 = books.getContent();
+        List<Element> content2 = new ArrayList<>();
+        if(Prevbooks != null){
+            content2 = Prevbooks.getContent();
+        }
+        
+
+        List<Element> combinedList = new ArrayList<>(content1);
+        combinedList.addAll(content2);
+
+        Page<Element> combinedPage = new PageImpl<>(combinedList, pageable, combinedList.size());
+        
+        model.addAttribute("elements", combinedPage);
+        model.addAttribute("controllerRoute", "Books");
+        model.addAttribute("hasPrev", books.hasPrevious());
+        model.addAttribute("hasNext", books.hasNext());
+        model.addAttribute("nextPage", books.getNumber()+1);
+        model.addAttribute("prevPage", books.getNumber()-1);
+
+
+    return "W-LibraryFragment"; 
     }
 
     @GetMapping("/Films")

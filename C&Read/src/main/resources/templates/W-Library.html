@@ -46,15 +46,23 @@
                         {{> W-Card}}
                     {{/elements}}
                     <br>
-                    {{#hasPrev}}
-                        <a href="/Library/{{controllerRoute}}?page={{prevPage}}">Prev Books</a>
-                    {{/hasPrev}}
+                    
+                    <button id="load-prev-btn">Resultados anteriores</button>
+                    
                     <br>
                     {{#hasNext}}
-                        <a href="/Library/{{controllerRoute}}?page={{nextPage}}">Next Books</a>
+                        <button id="load-more-btn">Mas resultados</button>
                     {{/hasNext}}
                 </div>    
             </div>
+            
+            <div id="spinner" style="display: none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+            <script src="/Scripts/pages.js"></script>
 
         </section>
 
