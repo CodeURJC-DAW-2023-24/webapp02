@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 import com.example.candread.model.Element;
 import com.example.candread.model.New;
@@ -32,8 +34,10 @@ import com.example.candread.services.ElementService;
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 
 import jakarta.persistence.criteria.CriteriaBuilder.Case;
+import jakarta.servlet.Filter;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 public class ControllerPrincipal {
@@ -160,5 +164,7 @@ public class ControllerPrincipal {
     public String moveToErrorLoginError(Model model) {
     return "W-Error";
     }
+
+    
 
 }
