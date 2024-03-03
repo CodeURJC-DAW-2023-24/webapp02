@@ -36,7 +36,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
     http.authenticationProvider(authenticationProvider());
 
     http.authorizeHttpRequests((authorize) -> authorize
-            .requestMatchers("/", "/CSS/**", "/Images/**", "/Scripts/**", "/SignIn", "/users/**", "/Library/**", "/SingleElement/**", "/loginerror", "/error").permitAll()
+            .requestMatchers("/", "/CSS/**", "/Images/**", "/Scripts/**","/downloadNames/**", "/SignIn", "/users/**", "/Library/**", "/SingleElement/**", "/loginerror", "/error").permitAll()
             .requestMatchers("/Profile/**", "/*/Main", "/review/**").hasAnyRole("USER", "ADMIN")
             .requestMatchers("/Admin", "/news/add").hasRole("ADMIN")
     )
