@@ -26,7 +26,7 @@ public class NewsController {
 
     @PostMapping("/add")
     public String addNew(@RequestParam("title") String title, @RequestParam("date") @DateTimeFormat(pattern = "dd/MM/yyyy") LocalDate date, @RequestParam("description") String description, @RequestParam("link") String link, Model model, HttpServletRequest request) {
-
+        
         try {
             New newPrueba = new New(title, description, date, link);
             newService.saveNew(newPrueba);

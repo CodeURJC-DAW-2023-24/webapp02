@@ -82,7 +82,7 @@ public class ElementController {
     @PostMapping("/{id}/addelement")
     public String addElement(@PathVariable("id") Long id, Model model, HttpServletRequest request)
             throws SQLException, IOException {
-
+        userService.fullSet64Image();
         if (id != null) {
             Optional<Element> optionalElement = elementRepository.findById(id);
             Element newElement = optionalElement.orElseThrow();
@@ -110,7 +110,7 @@ public class ElementController {
     @PostMapping("/{id}/favourite")
     public String addFavourite(@PathVariable("id") Long id, Model model, HttpServletRequest request)
             throws SQLException, IOException {
-
+        userService.fullSet64Image();
         if (id != null) {
             Optional<Element> optionalElement = elementRepository.findById(id);
             Element newElement = optionalElement.orElseThrow();

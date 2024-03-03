@@ -28,7 +28,7 @@ public class DefaultModelAttributes {
 
     @ModelAttribute(name = "user")
     public User getUser(HttpServletRequest request) {
-
+        
         if (request.getUserPrincipal() != null) {
             String name = request.getUserPrincipal().getName();
             User user = userRepository.findByName(name).orElseThrow();

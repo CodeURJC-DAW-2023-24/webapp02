@@ -40,7 +40,7 @@ public class ControllerPrincipal {
     // Moverse al main, es la pagina principal y la primera que sale al entrar
     @GetMapping("/")
     public String moveToMain(Model model, HttpServletRequest request) throws SQLException, IOException {
-
+        userService.fullSet64Image();
         elementService.fullSet64Image();
 
         // CAROUSEL IMG
