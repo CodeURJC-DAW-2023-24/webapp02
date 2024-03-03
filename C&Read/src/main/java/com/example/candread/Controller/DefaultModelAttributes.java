@@ -50,24 +50,6 @@ public class DefaultModelAttributes {
         }
     }
 
-    @ModelAttribute(name = "books")
-    public List<Element> booksList() {
-
-        List<Element> bookList = getTypeList("LIBRO");
-        return bookList;
-    }
-
-    @ModelAttribute(name = "films")
-    public List<Element> filmsList() {
-        List<Element> filmList = getTypeList("PELICULA");
-        return filmList;
-    }
-
-    @ModelAttribute(name = "series")
-    public List<Element> SeriesList() {
-        List<Element> seriesList = getTypeList("SERIE");
-        return seriesList;
-    }
 
     @ModelAttribute(name = "TopBooks")
     public List<Element> topBooks() {
