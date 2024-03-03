@@ -71,21 +71,8 @@ public class LibraryController {
 
 
         Page<Element> books= pagingRepository.findByType("LIBRO", pageable);
-        Page<Element> Prevbooks = (Page<Element>) model.getAttribute("elements");
-
-        List<Element> content1 = books.getContent();
-        List<Element> content2 = new ArrayList<>();
-        if(Prevbooks != null){
-            content2 = Prevbooks.getContent();
-        }
         
-
-        List<Element> combinedList = new ArrayList<>(content1);
-        combinedList.addAll(content2);
-
-        Page<Element> combinedPage = new PageImpl<>(combinedList, pageable, combinedList.size());
-        
-        model.addAttribute("elements", combinedPage);
+        model.addAttribute("elements", books);
         model.addAttribute("controllerRoute", "Books");
         model.addAttribute("hasPrev", books.hasPrevious());
         model.addAttribute("hasNext", books.hasNext());
@@ -117,6 +104,27 @@ public class LibraryController {
     return "W-Library"; 
     }
 
+    @GetMapping("/Films/js")
+    public String moveToFilmLibraryjs(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+
+        int pageNumber = page.orElse(0);
+        int pageSize = 10;
+        pageable = PageRequest.of(pageNumber, pageSize);
+
+        elementService.fullSet64Image();
+
+
+        Page<Element> films= pagingRepository.findByType("PELICULA", pageable);
+        model.addAttribute("elements", films);
+        model.addAttribute("controllerRoute", "Films");
+        model.addAttribute("hasPrev", films.hasPrevious());
+        model.addAttribute("hasNext", films.hasNext());
+        model.addAttribute("nextPage", films.getNumber()+1);
+        model.addAttribute("prevPage", films.getNumber()-1);
+
+    return "W-LibraryFragment"; 
+    }
+
     @GetMapping("/Series")
     public String moveToSeriesLibrary(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
 
@@ -137,9 +145,31 @@ public class LibraryController {
 
     return "W-Library"; 
     }
+
+    @GetMapping("/Series/js")
+    public String moveToSeriesLibraryjs(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+
+        int pageNumber = page.orElse(0);
+        int pageSize = 10;
+        pageable = PageRequest.of(pageNumber, pageSize);
+
+        elementService.fullSet64Image();
+
+
+        Page<Element> series= pagingRepository.findByType("SERIE", pageable);
+        model.addAttribute("elements", series);
+        model.addAttribute("controllerRoute", "Series");
+        model.addAttribute("hasPrev", series.hasPrevious());
+        model.addAttribute("hasNext", series.hasNext());
+        model.addAttribute("nextPage", series.getNumber()+1);
+        model.addAttribute("prevPage", series.getNumber()-1);
+
+    return "W-LibraryFragment"; 
+    }
     
-    @GetMapping("/Books/Genre")
-    public String BookGenreFilter(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    
+    @GetMapping("/Books/Genre/js")
+    public String BookGenreFilterjs(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -154,11 +184,11 @@ public class LibraryController {
 		model.addAttribute("nextPage", books.getNumber()+1);
 		model.addAttribute("prevPage", books.getNumber()-1);
         
-    return "W-Library"; 
+    return "W-LibraryFragment"; 
     }
 
-    @GetMapping("/Films/Genre")
-    public String FilmGenreFilter(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    @GetMapping("/Films/Genre/js")
+    public String FilmGenreFilterjs(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -173,11 +203,11 @@ public class LibraryController {
 		model.addAttribute("nextPage", films.getNumber()+1);
 		model.addAttribute("prevPage", films.getNumber()-1);
         
-    return "W-Library"; 
+    return "W-LibraryFragment"; 
     }
 
-    @GetMapping("/Series/Genre")
-    public String SeriesGenreFilter(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    @GetMapping("/Series/Genre/js")
+    public String SeriesGenreFilterjs(Model model, HttpSession session, @RequestParam("genre") String genre, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -192,11 +222,11 @@ public class LibraryController {
 		model.addAttribute("nextPage", series.getNumber()+1);
 		model.addAttribute("prevPage", series.getNumber()-1);
         
-    return "W-Library"; 
+    return "W-LibraryFragment"; 
     }
 
-    @GetMapping("/Books/Season")
-    public String BookSeasonFilter(Model model, HttpSession session, @RequestParam("season") String season, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    @GetMapping("/Books/Season/js")
+    public String BookSeasonFilterjs(Model model, HttpSession session, @RequestParam("season") String season, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -211,11 +241,11 @@ public class LibraryController {
 		model.addAttribute("nextPage", books.getNumber()+1);
 		model.addAttribute("prevPage", books.getNumber()-1);
         
-    return "W-Library"; 
+    return "W-LibraryFragment"; 
     }
 
-    @GetMapping("/Films/Season")
-    public String FilmSeasonFilter(Model model, HttpSession session, @RequestParam("season") String season, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    @GetMapping("/Films/Season/js")
+    public String FilmSeasonFilterjs(Model model, HttpSession session, @RequestParam("season") String season, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -230,11 +260,12 @@ public class LibraryController {
 		model.addAttribute("nextPage", series.getNumber()+1);
 		model.addAttribute("prevPage", series.getNumber()-1);
         
-    return "W-Library"; 
+    return "W-LibraryFragment"; 
     }
 
-    @GetMapping("/Series/Season")
-    public String SerieseasonFilter(Model model, HttpSession session, @RequestParam("season") String season, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+
+    @GetMapping("/Series/Season/js")
+    public String SerieseasonFilterjs(Model model, HttpSession session, @RequestParam("season") String season, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -249,11 +280,11 @@ public class LibraryController {
 		model.addAttribute("nextPage", films.getNumber()+1);
 		model.addAttribute("prevPage", films.getNumber()-1);
         
-    return "W-Library"; 
+    return "W-LibraryFragment"; 
     }
 
-    @GetMapping("/Books/Country")
-    public String BooksCountryFilter(Model model, HttpSession session, @RequestParam("country") String country, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    @GetMapping("/Books/Country/js")
+    public String BooksCountryFilterjs(Model model, HttpSession session, @RequestParam("country") String country, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -268,11 +299,11 @@ public class LibraryController {
 		model.addAttribute("nextPage", books.getNumber()+1);
 		model.addAttribute("prevPage", books.getNumber()-1);
         
-    return "W-Library"; 
+    return "W-LibraryFragment"; 
     }
 
-    @GetMapping("/Films/Country")
-    public String FilmsCountryFilter(Model model, HttpSession session, @RequestParam("country") String country, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    @GetMapping("/Films/Country/js")
+    public String FilmsCountryFilterjs(Model model, HttpSession session, @RequestParam("country") String country, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -287,11 +318,12 @@ public class LibraryController {
 		model.addAttribute("nextPage", books.getNumber()+1);
 		model.addAttribute("prevPage", books.getNumber()-1);
         
-    return "W-Library"; 
+    return "W-LibraryFragment"; 
     }
 
-    @GetMapping("/Series/Country")
-    public String countryFilter(Model model, HttpSession session, @RequestParam("country") String country, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+
+    @GetMapping("/Series/Country/js")
+    public String countryFilterjs(Model model, HttpSession session, @RequestParam("country") String country, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -306,11 +338,12 @@ public class LibraryController {
 		model.addAttribute("nextPage", books.getNumber()+1);
 		model.addAttribute("prevPage", books.getNumber()-1);
         
-    return "W-Library"; 
+    return "W-LibraryFragment"; 
     }
 
-    @GetMapping("/Books/State")
-    public String BookStateFilter(Model model, HttpSession session, @RequestParam("state") String state, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+
+    @GetMapping("/Books/State/js")
+    public String BookStateFilterjs(Model model, HttpSession session, @RequestParam("state") String state, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -325,11 +358,12 @@ public class LibraryController {
 		model.addAttribute("nextPage", books.getNumber()+1);
 		model.addAttribute("prevPage", books.getNumber()-1);
         
-    return "W-Library"; 
+    return "W-LibraryFragment"; 
     }
 
-    @GetMapping("/Films/State")
-    public String FilmStateFilter(Model model, HttpSession session, @RequestParam("state") String state, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+
+    @GetMapping("/Films/State/js")
+    public String FilmStateFilterjs(Model model, HttpSession session, @RequestParam("state") String state, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -344,11 +378,11 @@ public class LibraryController {
 		model.addAttribute("nextPage", books.getNumber()+1);
 		model.addAttribute("prevPage", books.getNumber()-1);
         
-    return "W-Library"; 
+    return "W-LibraryFragment"; 
     }
 
-    @GetMapping("/Series/State")
-    public String SerieStateFilter(Model model, HttpSession session, @RequestParam("state") String state, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
+    @GetMapping("/Series/State/js")
+    public String SerieStateFilterjs(Model model, HttpSession session, @RequestParam("state") String state, @RequestParam("page") Optional<Integer> page, Pageable pageable) throws SQLException, IOException {
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
@@ -363,7 +397,7 @@ public class LibraryController {
 		model.addAttribute("nextPage", books.getNumber()+1);
 		model.addAttribute("prevPage", books.getNumber()-1);
         
-    return "W-Library"; 
+    return "W-LibraryFragment"; 
     }
 
     // @GetMapping("/Year")
