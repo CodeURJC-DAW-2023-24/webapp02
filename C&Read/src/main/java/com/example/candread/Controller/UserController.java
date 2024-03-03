@@ -1,4 +1,4 @@
-package com.example.candread.Controller;
+package com.example.candread.controller;
 
 import java.sql.Blob;
 
@@ -13,8 +13,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.candread.model.User;
 import com.example.candread.repositories.UserRepository;
+import com.example.candread.security.SecurityConfiguration;
 import com.example.candread.services.UserService;
-import com.example.candread.Security.SecurityConfiguration;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
 

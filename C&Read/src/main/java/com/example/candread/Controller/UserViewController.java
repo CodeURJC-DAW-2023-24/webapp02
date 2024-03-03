@@ -1,4 +1,4 @@
-package com.example.candread.Controller;
+package com.example.candread.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -17,13 +17,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.example.candread.Security.RepositoryUserDetailsService;
 import com.example.candread.model.Element;
 import com.example.candread.model.New;
 import com.example.candread.model.User;
 import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.NewRepository;
 import com.example.candread.repositories.PagingRepository;
+import com.example.candread.security.RepositoryUserDetailsService;
 import com.example.candread.services.ElementService;
 import com.example.candread.services.UserService;
 

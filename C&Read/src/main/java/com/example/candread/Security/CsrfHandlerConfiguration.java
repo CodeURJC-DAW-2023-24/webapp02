@@ -1,4 +1,4 @@
-package com.example.candread.Security;
+package com.example.candread.security;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.lang.NonNull;
