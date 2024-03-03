@@ -90,6 +90,17 @@ main{
     font-size: 30px;
 }
 
+#topTitleUser2{
+    background-color: #e2b632;
+    color:white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 1px;
+    border-radius: 5px;
+    width: max-content;
+    font-size: 30px;
+}
+
 #topList{
     margin: 15px;
 }

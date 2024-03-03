@@ -2,10 +2,12 @@ package com.example.candread.Controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.List;
 
 import javax.sql.rowset.serial.SerialBlob;
 
@@ -18,8 +20,12 @@ import org.springframework.ui.Model;
 import com.example.candread.model.Element;
 import com.example.candread.model.New;
 import com.example.candread.model.Element.Genres;
+import com.example.candread.model.User;
 import com.example.candread.repositories.ElementRepository;
+import com.example.candread.repositories.UserRepository;
 import com.example.candread.services.ElementService;
+
+import jakarta.servlet.http.HttpServletRequest;
 import com.mysql.cj.jdbc.Blob;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -41,6 +47,9 @@ public class ElementController {
     private ElementRepository elementRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private ElementService elementService;
 
     @GetMapping("/{id}")
@@ -60,8 +69,52 @@ public class ElementController {
             return "redirect:/error"; 
         }
     }
-    
 
+    @PostMapping("/{id}/addelement")
+    public String addElement(@PathVariable("id") Long id, Model model, HttpServletRequest request)throws SQLException, IOException{
+
+        Optional<Element> optionalElement = elementRepository.findById(id);
+        Element newElement = optionalElement.orElseThrow();
+
+        User user = (User) model.getAttribute("user");
+        long elementId = newElement.getId();
+
+        List<User> userList = new ArrayList<>();
+        userList = newElement.getUsers();
+        if(userList.contains(user)){
+            //
+            return "redirect:/SingleElement/"+elementId;
+        } else {
+            newElement.getUsers().add(user);
+            //user.getElements().clear();
+            //user.setElements(newList);
+            elementRepository.save(newElement);
+            return "redirect:/SingleElement/"+elementId;
+        }
+    }
+    @PostMapping("/{id}/favourite")
+    public String addFavourite(@PathVariable("id") Long id, Model model, HttpServletRequest request)throws SQLException, IOException{
+
+        Optional<Element> optionalElement = elementRepository.findById(id);
+        Element newElement = optionalElement.orElseThrow();
+
+        User user = (User) model.getAttribute("user");
+        long elementId = newElement.getId();
+
+        List<User> userList = new ArrayList<>();
+        userList = newElement.getUsersFavourited();
+        if(userList.contains(user)){
+            //
+            return "redirect:/SingleElement/"+elementId;
+        } else {
+            //newElement.getUsers().add(user);
+            newElement.getUsersFavourited().add(user);
+            //user.getElements().clear();
+            //user.setElements(newList);
+            elementRepository.save(newElement);
+            return "redirect:/SingleElement/"+elementId;
+        }
+    }
     @PostMapping("/add")
     public String addElement(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("author") String author, 
     @RequestParam("type") String type, @RequestParam("season") String season, @RequestParam("state") String state, 
