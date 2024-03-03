@@ -118,13 +118,13 @@ public class ElementController {
     @PostMapping("/add")
     public String addElement(@RequestParam("name") String name, @RequestParam("description") String description, @RequestParam("author") String author, 
     @RequestParam("type") String type, @RequestParam("season") String season, @RequestParam("state") String state, 
-    @RequestParam("country") String country, @RequestParam("genres") List<String> genres,  @RequestParam("image") MultipartFile image,
+    @RequestParam("country") String country, @RequestParam("genres") List<String> genres,  @RequestParam("image") MultipartFile image, @RequestParam("years") int years,
     Model model, HttpServletRequest request) {
     
 
         try {
  
-            Element newElement = new Element(name,description,author,type,season,state,country,genres);
+            Element newElement = new Element(name,description,author,type,season,state,country,genres,years);
             byte[] imageData = image.getBytes();
             SerialBlob blob = new SerialBlob(imageData);
             newElement.setImageFile(blob);
