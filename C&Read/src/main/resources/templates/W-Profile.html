@@ -78,7 +78,7 @@
         {{#PersonalBooks}}
         <article id="topSection">
             <div id="topTitleUser">
-                <h4> Mis libros favoritos </h4>
+                <h4> Mis libros: </h4>
             </div>
             <div id="topList" class="container">
                 <div class="row">
@@ -99,7 +99,7 @@
         {{#PersonalSeries}}
         <article id="topSection">
             <div id="topTitleUser">
-                <h4> Mis series favoritas </h4>
+                <h4> Mis series: </h4>
             </div>
             <div id="topList" class="container">
                 <div class="row">
@@ -120,7 +120,7 @@
         {{#PersonalFilms}}
         <article id="topSection">
             <div id="topTitleUser">
-                <h4> Mis peliculas favoritas </h4>
+                <h4> Mis peliculas:</h4>
             </div>
             <div id="topList" class="container">
                 <div class="row">
@@ -136,8 +136,70 @@
                 </div>
             </div>
         </article>
-        {{/PersonalFilms}}
-    </section>
+        <!-- FAVOURITE BOOKS -->
+        <article id="topSection">
+            <div id="topTitleUser2">
+                <h4> Mis libros favoritos:</h4>
+            </div>
+            <div id="topList" class="container">
+                <div class="row">
+                    {{#PersonalBFavs}}
+                        {{> W-Card}}
+                    {{/PersonalBFavs}}
+                    <br>
+                    {{#PersonalBFavshasPrev}}
+                        <a href="/Profile?page={{PersonalBFavsprevPage}}">Prev Books</a>
+                    {{/PersonalBFavshasPrev}}
+                    <br>
+                    {{#PersonalBFavshasNext}}
+                        <a href="/Profile?page={{PersonalBFavsnextPage}}">Next Books</a>
+                    {{/PersonalBFavshasNext}}
+                </div> 
+            </div>
+        </article>
+        <!-- FAVOURITE SERIES -->
+        <article id="topSection">
+            <div id="topTitleUser2">
+                <h4> Mis series favoritos:</h4>
+            </div>
+            <div id="topList" class="container">
+                <div class="row">
+                    {{#PersonalSFavs}}
+                        {{> W-Card}}
+                    {{/PersonalSFavs}}
+                    <br>
+                    {{#PersonalSFavshasPrev}}
+                        <a href="/Profile?page={{PersonalSFavsprevPage}}">Prev Series</a>
+                    {{/PersonalSFavshasPrev}}
+                    <br>
+                    {{#PersonalSFavshasNext}}
+                        <a href="/Profile?page={{PersonalSFavsnextPage}}">Next Series</a>
+                    {{/PersonalSFavshasNext}}
+                </div> 
+            </div>
+        </article>
+        <!-- FAVOURITE FILMS -->
+        <article id="topSection">
+            <div id="topTitleUser2">
+                <h4> Mis peliculas favoritos:</h4>
+            </div>
+            <div id="topList" class="container">
+                <div class="row">
+                    {{#PersonalFFavs}}
+                        {{> W-Card}}
+                    {{/PersonalFFavs}}
+                    <br>
+                    {{#PersonalFFavshasPrev}}
+                        <a href="/Profile?page={{PersonalFFavsprevPage}}">Prev Films</a>
+                    {{/PersonalFFavshasPrev}}
+                    <br>
+                    {{#PersonalFFavshasNext}}
+                        <a href="/Profile?page={{PersonalFFavsnextPage}}">Next Films</a>
+                    {{/PersonalFFavshasNext}}
+                </div> 
+            </div>
+        </article>
+
     <!--SECCION ESTADISTICAS-->
     <aside id="stadisticSection">
         <div id="stadisticTitle">
@@ -146,14 +208,14 @@
         <div id="stadisticList" class="container">
             <div class="row">
                 <!--div class="col-sm-2"-->
-                <canvas id="myChart" style="width:100%;max-width:500px"></canvas>
-                <script>
-                    const xValues = ["LIBROS", "PELICULAS", "SERIES"];
-                    const yValues = ["{{numBooks}}", "{{numFilms}}", "{{numSeries}}"];
-                    const barColors = ["red", "blue", "green"];
-                    new Chart("myChart", {
-                        type: "pie",
-                        data: {
+                    <canvas id="myChart" style="width:100%;max-width:400px"></canvas>
+                    <script>
+                        const xValues = ["LIBROS", "PELICULAS", "SERIES"];
+                        const yValues = ["{{numBooks}}", "{{numFilms}}", "{{numSeries}}"];
+                        const barColors = ["red","blue","#5cd65c"];
+                        new Chart("myChart", {
+                          type: "pie",
+                          data: {
                             labels: xValues,
                             datasets: [{
                                 backgroundColor: barColors,
@@ -162,12 +224,34 @@
                         },
                         options: {
                             title: {
-                                display: false,
-                                text: "Medios Guardados"
-                            }
-                        }
-                    });
-                </script>
+                              display: false,
+                              text: "Medios Guardados"
+                            }}
+                        });
+                    </script>
+
+                    <canvas id="myChart2" style="width:100%;max-width:500px"></canvas>
+                    <script>
+                        const zValues = ["ACCION", "TERROR", "AVENTURA", "MISTERIO", "ROMANCE", "CIENCIAFICCION", "DRAMA", "INFANTIL", "COMEDIA", "FANTASIA", "SOBRENATURAL","NOVELA","JUVENIL"];
+                        const wValues = ["{{numAccion}}","{{numTerror}}", "{{numAventura}}", "{{numMisterio}}", "{{numRomance}}",
+                    "{{numCiencia}}", "{{numDrama}}", "{{numInfantil}}","{{numComedia}}",
+                    "{{numFantasia}}", "{{numSobrenatural}}", "{{numNovela}}", "{{numJuvenil}}"];
+                        const barColors2 = ["red","black","#5cd65c", "orange", "yellow", "#00ffcc", "purple", "#99ccff","#0000b3", "#ffb3cc", "#ffbf80", "#cc0066", "brown"];
+                        new Chart("myChart2", {
+                        type: "pie",
+                        data: {
+                            labels: zValues,
+                            datasets: [{
+                            backgroundColor: barColors2,
+                            data: wValues
+                            }]},
+                        options: {
+                            title: {
+                            display: false,
+                            text: "Generos Guardados"
+                            }}
+                        });
+                    </script>
 
 
                 <!--<img src="Images/Img-Stadistics.png" class="img"> -->

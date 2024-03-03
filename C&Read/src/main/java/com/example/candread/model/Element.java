@@ -4,6 +4,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import java.sql.Blob;
+<<<<<<< HEAD
+=======
+import java.time.Year;
+
+import javax.sql.rowset.serial.SerialBlob;
+>>>>>>> e99b72ad25030b02fe588d85d2e992e5c77934c2
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -46,23 +52,28 @@ public class Element {
     private Long id;
 
     private String name;
-
-    @Column (length = 5000) //Más espacio para las descripciones
+    @Column (length = 5000) //More space for large descriptions
     private String description;
-
     private String author;
-
-    @ManyToMany 
-    private List<User> users;
-
-
-    @Lob 
-    private Blob imageFile;
-
+    private int year;
     private String type;
     private String season;
     private String state;
     private String country;
+
+    @ManyToMany 
+    private List<User> users;
+
+    //variable for favourites
+    
+    //@JoinColumn(name = "userFav_ID")
+    @ManyToMany
+    private List<User> usersFavourited;
+
+    @Lob 
+    private Blob imageFile;
+
+    
     @Transient
     private String base64Image;
 
@@ -79,7 +90,8 @@ public class Element {
     }
 
     public Element(String nombre, String descripcion, String autor,
-            String type1, String temporada, String estado, String pais, List<String> generosEjemplo){ //List<Review> reseñas) {
+            String type1, String temporada, String estado, String pais, List<String> generosEjemplo,
+            int year){ //List<Review> reseñas) {
         this.name = nombre;
         this.description = descripcion;
         this.author = autor;
@@ -88,6 +100,7 @@ public class Element {
         this.state = estado;
         this.country = pais;
         this.genres = generosEjemplo;
+        this.year = year;
         //this.reviews = reseñas;
     }
 
@@ -197,6 +210,30 @@ public class Element {
     public void setUsers(List<User> userid) {
         this.users = userid;
     }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
+    }
+
+    public List<User> getUsersFavourited() {
+        return usersFavourited;
+    }
+
+    public void setUsersFavourited(List<User> usersFavourited) {
+        this.usersFavourited = usersFavourited;
+    }
+
+    /*public User getUserFavourited() {
+        return userFavourited;
+    }
+
+    public void setUserFavourited(User userFavourited) {
+        this.userFavourited = userFavourited;
+    }*/
 
     
     
