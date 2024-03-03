@@ -236,20 +236,6 @@ public class ElementService {
         
     }
 
-     public void setElementsImage64(long id) throws SQLException, IOException {
-         Optional<Element> elementOptional = elementRepository.findById(id);
-        Element element = elementOptional.orElseThrow();
-        Blob blob = element.getImageFile();
-        InputStream inputStream = blob.getBinaryStream();
-        byte[] imageBytes = inputStream.readAllBytes();
-        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-        element.setBase64Image(base64Image);
-
-       
-        inputStream.close();
-    }
-
-
     public void insertSeries () throws SerialException, IOException, SQLException {
 
        
@@ -584,6 +570,19 @@ public class ElementService {
             setElementsImage64(i);
         }
     }
+
+    public void setElementsImage64(long id) throws SQLException, IOException {
+        Optional<Element> elementOptional = elementRepository.findById(id);
+       Element element = elementOptional.orElseThrow();
+       Blob blob = element.getImageFile();
+       InputStream inputStream = blob.getBinaryStream();
+       byte[] imageBytes = inputStream.readAllBytes();
+       String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+       element.setBase64Image(base64Image);
+
+      
+       inputStream.close();
+   }
     
 
 }

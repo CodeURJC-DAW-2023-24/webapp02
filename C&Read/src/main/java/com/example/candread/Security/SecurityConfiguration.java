@@ -37,7 +37,7 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
     http.authorizeHttpRequests((authorize) -> authorize
             .requestMatchers("/", "/CSS/**", "/Images/**", "/SignIn", "/users/**", "/Library/**", "/SingleElement/**", "/loginerror", "/error").permitAll()
-            .requestMatchers("/Profile/**", "/*/Main", "/review/**").hasAnyRole("USER", "ADMIN")
+            .requestMatchers("/*/Profile/**", "/*/Main", "/review/**").hasAnyRole("USER", "ADMIN")
             .requestMatchers("/Admin", "/news/add").hasRole("ADMIN")
     )
     .formLogin(formLogin -> formLogin

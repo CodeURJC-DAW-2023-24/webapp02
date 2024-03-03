@@ -1,5 +1,6 @@
 package com.example.candread.model;
 
+import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -9,12 +10,16 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.Transient;
 import jakarta.persistence.GenerationType;
 
 @Entity
 public class User {
+
+    //ATTRIBUTES
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,14 +30,26 @@ public class User {
 
     private String password;
 
-    //Apartado para asociar el usuario a las reviews que tiene.
     @OneToMany (mappedBy = "userLinked", cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
 
-    //Apartado para asociar el usuario a las reviews que tiene.
     @ManyToMany (mappedBy = "users", cascade = CascadeType.ALL)
     private List<Element> elements = new ArrayList<>();
 
+    @Lob 
+    private Blob profileImage;
+
+    @Lob
+    private Blob bannerImage;
+
+    @Transient
+    private String base64ProfileImage;
+
+    @Transient
+    private String base64BannerImage;
+
+
+    //CONTROLLERS
     public User() {
     }
 
@@ -42,6 +59,7 @@ public class User {
         this.roles = List.of(roles);
 	}
 
+    //GETTERS&SETTERS
     public String getName() {
         return name;
     }
@@ -90,6 +108,38 @@ public class User {
 
     public void setElements(List<Element> elements) {
         this.elements = elements;
+    }
+
+    public Blob getProfileImage() {
+        return profileImage;
+    }
+
+    public void setProfileImage(Blob profileImage) {
+        this.profileImage = profileImage;
+    }
+
+    public Blob getBannerImage() {
+        return bannerImage;
+    }
+
+    public void setBannerImage(Blob bannerImage) {
+        this.bannerImage = bannerImage;
+    }
+
+    public String getBase64ProfileImage() {
+        return base64ProfileImage;
+    }
+
+    public void setBase64ProfileImage(String base64ProfileImage) {
+        this.base64ProfileImage = base64ProfileImage;
+    }
+
+    public String getBase64BannerImage() {
+        return base64BannerImage;
+    }
+
+    public void setBase64BannerImage(String base64BannerImage) {
+        this.base64BannerImage = base64BannerImage;
     }
 
     
