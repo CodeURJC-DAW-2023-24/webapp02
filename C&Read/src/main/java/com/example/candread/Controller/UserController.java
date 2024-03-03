@@ -1,7 +1,6 @@
 package com.example.candread.Controller;
 
 import java.sql.Blob;
-import java.util.Base64;
 
 import javax.sql.rowset.serial.SerialBlob;
 
@@ -15,10 +14,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.candread.model.User;
 import com.example.candread.repositories.UserRepository;
 import com.example.candread.services.UserService;
-
-import com.example.candread.Security.RepositoryUserDetailsService;
+import com.example.candread.Security.SecurityConfiguration;
 
 import org.springframework.security.crypto.password.PasswordEncoder;
+
 
 @Configuration
 @Controller
@@ -29,13 +28,13 @@ public class UserController {
     private UserRepository userRepository;
 
     @Autowired
-    public RepositoryUserDetailsService userDetailService;
-
-    @Autowired
     private UserService userService;
 
     @Autowired
     private PasswordEncoder passwordEncoder;
+
+    @Autowired
+    private SecurityConfiguration userDetailsService;
 
     @PostMapping("/add")
     public String addUser(@ModelAttribute User user) {
@@ -60,25 +59,30 @@ public class UserController {
     @PostMapping("/update")
     public String updateUser(Model model, @RequestParam("name") String name,
             @RequestParam(value = "base64ProfileImage", required = false) MultipartFile base64ProfileImage,
-            @RequestParam(value = "base64ProfileImage", required = false) MultipartFile base64BannerImage) {
+            @RequestParam(value = "base64BannerImage", required = false) MultipartFile base64BannerImage) {
 
         try {
             User user = (User) model.getAttribute("user");
             String n = name;
-            if (base64BannerImage != null && base64ProfileImage != null) {
+            if (!base64BannerImage.getOriginalFilename().equals("")
+                    && !base64ProfileImage.getOriginalFilename().equals("")) {
 
                 byte[] imageProfileBytes = base64ProfileImage.getBytes();
-                byte[] imageBannerBytes = base64ProfileImage.getBytes();
+                byte[] imageBannerBytes = base64BannerImage.getBytes();
 
                 Blob profileImageBlob = new SerialBlob(imageProfileBytes);
                 Blob profileBannerBlob = new SerialBlob(imageBannerBytes);
 
                 user.setBannerImage(profileBannerBlob);
                 user.setProfileImage(profileImageBlob);
-                user.setName(name);
-                userRepository.save(user);
             }
-            return "redirect:/" + name + "/Profile";
+            user.setName(name);
+            userRepository.save(user); // URL base
+
+            userDetailsService.updateSecurityContext(userRepository, name);
+
+
+            return "redirect:/" + name + "/Profile"; // Redirigir sin el token
         } catch (Exception e) {
             return "redirect:/" + name + "/Profile";
         }

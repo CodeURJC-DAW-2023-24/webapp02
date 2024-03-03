@@ -56,7 +56,7 @@ public class UserViewController {
             throws SQLException, IOException {
 
         elementService.fullSet64Image();
-        
+        userService.fullSet64Image();
         //CAROUSEL IMG
         List<Element> elementosEstreno = elementRepository.findTop4ByOrderByIdDesc();
         for (int i = 0; i < elementosEstreno.size(); i++) {
@@ -140,8 +140,6 @@ public class UserViewController {
 
         //LOAD PROFILE ELEMENTS
         userService.fullSet64Image();
-        
-
         return "W-Profile";
     }
 

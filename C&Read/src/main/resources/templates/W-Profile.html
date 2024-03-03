@@ -25,7 +25,8 @@
     <!-- PROFILE PAGE -->
 
     <!-- BANNER USER -->
-    <section id="bannerSection">
+    <section id="bannerSection" class="bannerSection">
+        <img src="data:image/jpg;base64, {{user.base64BannerImage}}" alt="Imagen 1" class="ib">
         <img src="data:image/jpg;base64, {{user.base64ProfileImage}}" alt="Logo" width="50" height="50" id="bannerLogo">
         <div id="prueba">
             <p id="bannerUsername">{{user.name}}<a href="#exampleModal">
@@ -40,7 +41,8 @@
                         <form action="/users/update" method="post" enctype="multipart/form-data">
                             <div class="modal-header">
                                 <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile</h1>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
                                 <div class="form-group">
@@ -60,17 +62,17 @@
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                                 <button type="submit" class="btn btn-primary">Save changes</button>
                             </div>
-                            <input type="hidden" name="_csrf" value="{{token}}"/>
+                            <input type="hidden" name="_csrf" value="{{token}}" />
                         </form>
                     </div>
                 </div>
             </div>
-            
+
         </div>
     </section>
 
     <!-- FAVORITOS USUARIO -->
-    
+
     <section id="tops">
         <!-- Libros -->
         {{#PersonalBooks}}
@@ -80,16 +82,16 @@
             </div>
             <div id="topList" class="container">
                 <div class="row">
-                        {{> W-Card}}
+                    {{> W-Card}}
                     <br>
                     {{#PersonalBookshasPrev}}
-                        <a href="/Profile?page={{PersonalBooksprevPage}}">Prev Books</a>
+                    <a href="/Profile?page={{PersonalBooksprevPage}}">Prev Books</a>
                     {{/PersonalBookshasPrev}}
                     <br>
                     {{#PersonalBookshasNext}}
-                        <a href="/Profile?page={{PersonalBooksnextPage}}">Next Books</a>
+                    <a href="/Profile?page={{PersonalBooksnextPage}}">Next Books</a>
                     {{/PersonalBookshasNext}}
-                </div> 
+                </div>
             </div>
         </article>
         {{/PersonalBooks}}
@@ -101,16 +103,16 @@
             </div>
             <div id="topList" class="container">
                 <div class="row">
-                        {{> W-Card}}
+                    {{> W-Card}}
                     <br>
                     {{#PersonalSerieshasPrev}}
-                        <a href="/Profile?page={{PersonalSeriesprevPage}}">Prev Series</a>
+                    <a href="/Profile?page={{PersonalSeriesprevPage}}">Prev Series</a>
                     {{/PersonalSerieshasPrev}}
                     <br>
                     {{#PersonalSerieshasNext}}
-                        <a href="/Profile?page={{PersonalSeriesnextPage}}">Next Series</a>
+                    <a href="/Profile?page={{PersonalSeriesnextPage}}">Next Series</a>
                     {{/PersonalSerieshasNext}}
-                </div> 
+                </div>
             </div>
         </article>
         {{/PersonalSeries}}
@@ -122,16 +124,16 @@
             </div>
             <div id="topList" class="container">
                 <div class="row">
-                        {{> W-Card}}
+                    {{> W-Card}}
                     <br>
                     {{#PersonalFilmshasPrev}}
-                        <a href="/Profile?page={{PersonalFilmsprevPage}}">Prev Films</a>
+                    <a href="/Profile?page={{PersonalFilmsprevPage}}">Prev Films</a>
                     {{/PersonalFilmshasPrev}}
                     <br>
                     {{#PersonalFilmshasNext}}
-                        <a href="/Profile?page={{PersonalFilmsnextPage}}">Next Films</a>
+                    <a href="/Profile?page={{PersonalFilmsnextPage}}">Next Films</a>
                     {{/PersonalFilmshasNext}}
-                </div> 
+                </div>
             </div>
         </article>
         {{/PersonalFilms}}
@@ -144,36 +146,38 @@
         <div id="stadisticList" class="container">
             <div class="row">
                 <!--div class="col-sm-2"-->
-                    <canvas id="myChart" style="width:100%;max-width:500px"></canvas>
-                    <script>
-                        const xValues = ["LIBROS", "PELICULAS", "SERIES"];
-                        const yValues = ["{{numBooks}}", "{{numFilms}}", "{{numSeries}}"];
-                        const barColors = ["red","blue","green"];
-                        new Chart("myChart", {
-                          type: "pie",
-                          data: {
+                <canvas id="myChart" style="width:100%;max-width:500px"></canvas>
+                <script>
+                    const xValues = ["LIBROS", "PELICULAS", "SERIES"];
+                    const yValues = ["{{numBooks}}", "{{numFilms}}", "{{numSeries}}"];
+                    const barColors = ["red", "blue", "green"];
+                    new Chart("myChart", {
+                        type: "pie",
+                        data: {
                             labels: xValues,
                             datasets: [{
-                              backgroundColor: barColors,
-                              data: yValues
-                            }]},
-                          options: {
+                                backgroundColor: barColors,
+                                data: yValues
+                            }]
+                        },
+                        options: {
                             title: {
-                              display: false,
-                              text: "Medios Guardados"
-                            }}
-                        });
-                    </script>
+                                display: false,
+                                text: "Medios Guardados"
+                            }
+                        }
+                    });
+                </script>
 
-                    
-                    <!--<img src="Images/Img-Stadistics.png" class="img"> -->
-                    
+
+                <!--<img src="Images/Img-Stadistics.png" class="img"> -->
+
                 <!--/div-->
             </div>
         </div>
     </aside>
 
-
+    
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>

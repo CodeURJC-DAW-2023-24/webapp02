@@ -122,7 +122,7 @@ public class UserService {
        inputStream = blob.getBinaryStream();
        imageBytes = inputStream.readAllBytes();
        base64Image = Base64.getEncoder().encodeToString(imageBytes);
-       user.setBase64ProfileImage(base64Image);
+       user.setBase64BannerImage(base64Image);
       
        inputStream.close();
    }
