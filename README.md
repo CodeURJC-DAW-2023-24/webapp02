@@ -128,18 +128,18 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
      - 5: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/DavidFase2/C%26Read/src/main/resources/static/Scripts/pages.js
  - Javier Vallejo Fernández:
   - Descripción: Configuración de la seguridad junto a David|funcionalidad de insercion de un elemento en la base de datos|insercion de datos de ejemplo junto con Juan|modificacion de element para que pueda tener la cadena codificada en base 64 pero no se vea reflejado en las bases de datos|configuracion correcta en el properties para la conexion de batos de datos|mustache empleado en single element para que single element muestre la imagen del elemento
-  - 5 Commits:
-   - 1 https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/2161ca54869c1cbdc34c2fedbd4f58f9361417fb
-   - 2 https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/9c9e521a046389af6ae908b8d13288b687073688
-   - 3 https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/ac2173e4168c8d378b4491ebaf4bc64fd58b228d
-   - 4 https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/c27738f986a7a78eae0807883f734b697f7952b7
-   - 5 https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/60f46ab25f2a666e7dc74aa6f9b82dd2e1e5c4d2
-  - 5 Ficheros:
-   - 1 Security Configuration
-   - 2 [https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JaviFase2/C%26Read/src/main/java/com/example/candread/Security/RepositoryUserDetailsService.java]
-   - 3 https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JaviFase2/C%26Read/src/main/java/com/example/candread/Controller/ElementController.java
-   - 4 https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JaviFase2/C%26Read/src/main/java/com/example/candread/services/ElementService.java
-   - 5 https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JaviFase2/C%26Read/src/main/resources/templates/W-Admin.html
+   - 5 Commits:
+    - 1 https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/2161ca54869c1cbdc34c2fedbd4f58f9361417fb
+    - 2 https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/9c9e521a046389af6ae908b8d13288b687073688
+    - 3 https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/ac2173e4168c8d378b4491ebaf4bc64fd58b228d
+    - 4 https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/c27738f986a7a78eae0807883f734b697f7952b7
+    - 5 https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/60f46ab25f2a666e7dc74aa6f9b82dd2e1e5c4d2
+   - 5 Ficheros:
+    - 1 Security Configuration
+    - 2 [https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JaviFase2/C%26Read/src/main/java/com/example/candread/Security/RepositoryUserDetailsService.java]
+    - 3 https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JaviFase2/C%26Read/src/main/java/com/example/candread/Controller/ElementController.java
+    - 4 https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JaviFase2/C%26Read/src/main/java/com/example/candread/services/ElementService.java
+    - 5 https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JaviFase2/C%26Read/src/main/resources/templates/W-Admin.html
 - Juan Álvarez Loeches:
    - Descripción: Definición del Elemento, que recoge todos los tipos de media recogidos en la aplicación | Guardar y trabajar con datos de ejemplo en la base de datos | Adaptar el formato de las imágenes a uno que acepte la BBDD | Gráficos de las estadísticas del usuario en relación a sus elementos guardados y favoritos | Definir las relaciones entre los Elementos y Usuarios, los guardados y los favoritos, y con las reviews | Mostrar en el perfil de usuario sus elementos guardados y sus favoritos por separado | Funciones para permitir al usuario guardar o agregar a favoritos un elemento, evitando que agregue uno que ya posee | 
    - 5 Commits:
@@ -154,7 +154,7 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
      - 3: ElementController.java: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/Juan_Fase2/C%26Read/src/main/java/com/example/candread/Controller/ElementController.java
      - 4: UserViewController.java: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/Juan_Fase2/C%26Read/src/main/java/com/example/candread/Controller/UserViewController.java  (La función moveToPerfil se encontraba anteriormente en el ControllerPrincipal.java pero fue trasladada, así que se sustituye por la clase a la que fue trasladada.)
      - 5: LibraryController.java: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/Juan_Fase2/C%26Read/src/main/java/com/example/candread/Controller/LibraryController.java
-Aurora María Fernández Basanta:
+ - Aurora María Fernández Basanta:
     - Descripción: Organización de los archivos | Añadido Header y Footer con Mustache | Registro e Inicio de sesion en el Header intercalado con Perfil dependiendo del estado del usuario | Pasarle el usuario iniciado al model de serie | Permitirle al usuario    editar su nombre, su imagen de perfil y su imagen de banner | Añadir la página al https y configurar correctamente la seguridad despues de su creación por parted de David y Javier | Añadir el CSRF a los formularios | Permitir añadir noticias y mostrar las 3 más recientes | Crear base de datos de review | Permitir ver las review de cada elemento a todo tipo de usuarios | Permitirle añadir reseña a los usuarios registrados y los admins y seguidamente ver su reseña | Añadir informacion sobre cada elemento a la vista SingleElement | Implementación del carusel con los ultimos elementos añadidos al sistema | Refactorizar el codigo para dejarlo limpio
    - 5 Commits:
      - 1: Fixed Segurity: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/a0f8a5162e6669767bf169ea390aefce72425815 
