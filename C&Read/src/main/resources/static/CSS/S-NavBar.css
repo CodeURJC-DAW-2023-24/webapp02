@@ -1,0 +1,46 @@
+#nav{
+    background-color: #3A345D;
+}
+
+@media (max-width: 991px){
+    .sidebar{
+        background-color: #3A345D;
+        backdrop-filter: blur(50px);
+    }
+
+}
+
+.btn-transparent {
+    background-color: transparent;
+    border: 1px solid white; /* Añade un borde para que sea visible */
+    color: white; /* Color de texto blanco */
+    position: relative;
+}
+
+.btn-transparent:hover {
+    background-color: rgba(255, 255, 255, 0.274); /* Color de fondo con transparencia */
+}
+
+#botonRegistroNavBar{
+    background-color: rgb(142, 123, 194);
+    color: white; /* Color de texto blanco */
+    position: relative;
+}
+
+#botonRegistroNavBar:hover {
+    background-color: rgba(255, 255, 255, 0.274); /* Color de fondo con transparencia */
+}
+
+#logoutbutton {
+    background-color: rgb(142, 123, 194);
+    position: relative;
+    margin-right: 10px;
+}
+
+#logoutbuttonText{
+    background-color: transparent;
+    color: white; /* Color de texto blanco */
+    align-items: center;
+    border: 0px;
+
+}

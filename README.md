@@ -80,19 +80,19 @@ Link al tablero de trello: https://trello.com/b/3sUtM4Yb
 
 ## Participación
  - David Ovidio Rubio Caballero:
-   - Descripción:
-   - 5 Commits:
-     - 1
-     - 2
-     - 3
-     - 4
-     - 5 
+   - Descripción:Funcionalidades de cada tipo de usuario y roles|Paginación de la biblioteca de Elements usando Mustache|Filtros en las biblioteca|Configuración de la seguridad junto a Javier| Agregar CSRF a los formularios| Gestión de registro e inicio de sesión de usuarios| Descarga de los titulos de los libros que tiene el usuario en propiedad, tecnologia extra|Nueva paginación para utilizar AJAX y hacer que la Library no se recargue por completo cada vez que aplico un filtro o busco más elementos|Página de error
+   - 5 Commits: 
+     - 1: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/2a59d1cc48dbaf77aa475d17b78970ff7d3d229c
+     - 2: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/ef746f56f42583e9c4c78e1299bbd3e21409871d
+     - 3: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/2ec3c3d40eba767f6613fd6a80f6a0d51c557980
+     - 4: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/e15bc0f9941c4d5d6954567b8145b7efe1ce6289
+     - 5: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/bcb3b763c2c3d5930c4e25bd5d5e863781a5b897
    - 5 Ficheros:
-     - 1
-     - 2
-     - 3
-     - 4
-     - 5 
+     - 1: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/DavidFase2/C%26Read/src/main/java/com/example/candread/Security/SecurityConfiguration.java
+     - 2: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/DavidFase2/C%26Read/src/main/java/com/example/candread/repositories/PagingRepository.java
+     - 3: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/DavidFase2/C%26Read/src/main/java/com/example/candread/Controller/LibraryController.java
+     - 4: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/DavidFase2/C%26Read/src/main/java/com/example/candread/Controller/UserViewController.java
+     - 5: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/DavidFase2/C%26Read/src/main/resources/static/Scripts/pages.js
  - Javier Vallejo Fernández:
    - Descripción:
    - 5 Commits:
@@ -121,17 +121,16 @@ Link al tablero de trello: https://trello.com/b/3sUtM4Yb
      - 3
      - 4
      - 5 
- - Aurora María Fernández Basanta:
-   - Descripción: Organización de los archivos | Añadido Header y Footer con Mustache | Registro e Inicio de sesion en el Header intercalado con Perfil dependiendo del estado del usuario | Pasarle el usuario iniciado a la sesión.
+    - Descripción: Organización de los archivos | Añadido Header y Footer con Mustache | Registro e Inicio de sesion en el Header intercalado con Perfil dependiendo del estado del usuario | Pasarle el usuario iniciado al model de serie | Permitirle al usuario    editar su nombre, su imagen de perfil y su imagen de banner | Añadir la página al https y configurar correctamente la seguridad despues de su creación por parted de David y Javier | Añadir el CSRF a los formularios | Permitir añadir noticias y mostrar las 3 más recientes | Crear base de datos de review | Permitir ver las review de cada elemento a todo tipo de usuarios | Permitirle añadir reseña a los usuarios registrados y los admins y seguidamente ver su reseña | Añadir informacion sobre cada elemento a la vista SingleElement | Implementación del carusel con los ultimos elementos añadidos al sistema | Refactorizar el codigo para dejarlo limpio
    - 5 Commits:
-     - 1
-     - 2
-     - 3
-     - 4
-     - 5 
+     - 1: Fixed Segurity: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/a0f8a5162e6669767bf169ea390aefce72425815 
+     - 2: News add to Database: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/19d4ea78ec6a8db5ae2d5b183b24a1405219d028 
+     - 3: Reviews Configuration Completed: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/f0d1865cfe22bd52bb846496186cd80337fd6de2 
+     - 4: Carousel Configuration: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/8135f6a785f6169b2430557d8b0b03d17fd2cecb 
+     - 5: User Profile Edit: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/55cf6238f3397bf24123d712ba7b59a197df4e25 
    - 5 Ficheros:
-     - 1
-     - 2
-     - 3
-     - 4
-     - 5 
+     - 1: SecurityConfiguration: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase2/C%26Read/src/main/java/com/example/candread/Security/SecurityConfiguration.java
+     - 2: ReviewController: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase2/C%26Read/src/main/java/com/example/candread/Controller/ReviewController.java
+     - 3: DefaultModelAttribute: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase2/C%26Read/src/main/java/com/example/candread/Controller/DefaultModelAttributes.java
+     - 4: Review: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase2/C%26Read/src/main/java/com/example/candread/model/Review.java
+     - 5: UserController: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase2/C%26Read/src/main/java/com/example/candread/Controller/UserController.java

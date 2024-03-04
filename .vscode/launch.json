@@ -1,0 +1,12 @@
+{
+    "configurations": [
+
+        {
+            "type": "java",
+            "name": "DemoApplication",
+            "request": "launch",
+            "mainClass": "com.example.candread.DemoApplication",
+            "projectName": "candread"
+        }
+    ]
+}
