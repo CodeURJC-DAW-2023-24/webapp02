@@ -71,12 +71,45 @@ Link al tablero de trello: https://trello.com/b/3sUtM4Yb
 # FASE 2:
 
 ## Navegación
+![image](https://github.com/CodeURJC-DAW-2023-24/webapp02/assets/80918271/6f12781e-c0da-4e07-a44b-5d898f9d8f8f)
 
 ## Instrucciones
+Componentes Necesarios:
+ - Para la Base de Datos:
+   - Descargar MySQL Installer Community: https://dev.mysql.com/downloads/file/?id=526408
+   - Versión de MySQL: 8.0.36  
+ - Versión de java: Preferiblemente la versiñon de jdk más actualizada.
+ - Versión de SpringBoot: 3.2.2 <br> 
+
+Pasos a seguir para su correcta ejecución:
+ - Clonar el repositorio de GitHub:
+   Para ello hay dos metodos:
+    - Utiliza el comando git clone seguido de la URL del repositorio de GitHub que deseas clonar. Puedes obtener la URL en la página principal del repositorio en GitHub. Por ejemplo:
+      - git clone https://github.com/usuario/nombre-repositorio.git (Asegúrate de reemplazar "https://github.com/usuario/nombre-repositorio.git" con la URL real del repositorio que deseas clonar)
+      - Abre el proyecto en Visual Studio Code: Una vez que el repositorio se ha clonado, puedes abrir el proyecto en Visual Studio Code utilizando el comando: code nombre-repositorio.
+    - Otro metodo si se utiliza Visual Studio Code sería:
+      - Asegurarse de tener la extendión de github correspondiente que sería: x
+      - Ir a Source Controll clickeando en el siguiente icono: o con el atajo de teclado: Cntrl + Shift + G.
+      - Una vez dentro, puklsar en Clone Repository:
+      - En la pestaña emergente insertar la url del repositorio y darle a enter:
+      - Elegir en que carpeta se querra guardar el projecto clonado y una vez guardado, simplemente aceptar el abrirlo.
+      - Listo, ya estará el projecto disponible en su entorno de desarrollom, podemos pasar al siguiente paso.
+ - Abrir el WorkBench:
+   - Darle a Añadir una nueva conexión y aladirla en el puerto 3306 con Hostname localhost
+   - Crear una base de datos llamada bdd_candread
+   - Crear otro usuario de la base de datos con estos datos:
+     - Username=rudy
+     - Password=Rudy2442.
+
+Siguiendo estos pasos ya puede empezar a usar la aplicación, simplemente vaya al siguiente icono: y pulse el boton de ejecutar:
+Para ver la aplicación en el navegador introduzca la siguiente ruta: https://localhost:8443 y acepte los riesgos de la conexión.
+   
 
 ## Diagramas Entidades
+![image](https://github.com/CodeURJC-DAW-2023-24/webapp02/assets/80918271/808a9b05-a7d7-4c9f-a374-0c2832f2e62a)
 
 ## Diagramas Clases Y Templates
+![image](https://github.com/CodeURJC-DAW-2023-24/webapp02/assets/80918271/f8bd9a04-b503-4f2a-b663-7b110b3a5131)
 
 ## Participación
  - David Ovidio Rubio Caballero:
