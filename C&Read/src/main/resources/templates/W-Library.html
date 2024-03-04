@@ -28,16 +28,6 @@
                 <div class="col-md-6" id="libraryTitle">
                     <h4>Biblioteca de {{controllerRoute}}</h4>
                 </div>
-                <div class="dropdown col-md-6">
-                    <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Ordenar Por:
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Popularidad</a></li>
-                        <li><a class="dropdown-item" href="#">Recientes</a></li>
-                        <li><a class="dropdown-item" href="#">Más Antiguos</a></li>
-                    </ul>
-                </div>
             </div>
 
             <div id="libraryList" class="container">
@@ -76,18 +66,6 @@
                 <h3>Filtros</h3>
             </div>
 
-            <div id="filterElement">
-                <div id="elementTitle">
-                    <h4>Buscar:</h4>
-                </div>
-                <div id="Element">
-                    <form class="d-flex" role="search" id="search">
-                        <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
-                        <button class="btn btn-outline-success" type="submit">Buscar</button>
-                    </form>
-                </div>
-            </div>
-
             <form id="genreFilterForm">
                 <div id="filterElement">
                     <div id="elementTitle">
@@ -119,23 +97,6 @@
             </script>
 
             <script src="/Scripts/pages.js" defer></script>
-            
-
-            <form action="/Library/Year" method="get">
-                <div id="filterElement">
-                    <div id="elementTitle">
-                        <h4>Año:</h4>
-                    </div>
-                    <select class="form-select" aria-label="Añadir a lista:" name="year">
-                        <option selected>Año:</option>
-                        <option value="2020">2020</option>
-                        <option value="2021">2021</option>
-                        <option value="2022">2022</option>
-                        <option value="2023">2023</option>
-                    </select>
-                </div>
-                <button type="submit" class="btn btn-primary">Filtrar</button>
-            </form>
 
             <form id="seasonFilterForm">
                 <div id="filterElement">
