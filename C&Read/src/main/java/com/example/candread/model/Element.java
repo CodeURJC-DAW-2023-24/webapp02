@@ -84,7 +84,8 @@ public class Element {
     }
 
     public Element(String nombre, String descripcion, String autor,
-            String type1, String temporada, String estado, String pais, List<String> generosEjemplo,
+            String type1, String temporada, String estado, 
+            String pais, List<String> generosEjemplo,
             int year){ //List<Review> reseñas) {
         this.name = nombre;
         this.description = descripcion;
