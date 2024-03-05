@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.candread.model.Element;
 import com.example.candread.model.Review;
+import com.example.candread.model.User;
 import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.ReviewRepository;
 
@@ -38,6 +39,8 @@ public class ReviewController {
                 Optional<Element> optionalElement = elementRepository.findById(elementId);
                 Element element = (Element) optionalElement.get();
                 newReview.setElementLinked(element);
+                //User user = (User) model.getAttribute("user");
+                //newReview.setUserLinked(user);
     
                 reviewRepository.save(newReview);
     

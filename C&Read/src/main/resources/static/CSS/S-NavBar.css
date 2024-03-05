@@ -10,7 +10,7 @@
 
 }
 
-.btn-transparent {
+#buttonLogIn {
     background-color: transparent;
     border: 1px solid white; /* Añade un borde para que sea visible */
     color: white; /* Color de texto blanco */
