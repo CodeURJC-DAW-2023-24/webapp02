@@ -1,4 +1,4 @@
-package com.example.candread.Controller;
+package com.example.candread.controller;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;

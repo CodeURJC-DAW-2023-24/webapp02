@@ -1,4 +1,4 @@
-package com.example.candread.Controller;
+package com.example.candread.controller;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.example.candread.Security.RepositoryUserDetailsService;
+import com.example.candread.controller.ControllerPrincipal;
 import com.example.candread.model.Element;
 import com.example.candread.model.New;
 import com.example.candread.repositories.ElementRepository;
@@ -23,8 +24,6 @@ import com.example.candread.repositories.NewRepository;
 import com.example.candread.services.ElementService;
 
 import jakarta.servlet.http.HttpServletRequest;
-
-import com.example.candread.Controller.ControllerPrincipal;
 
 @Controller
 @RequestMapping("/{username}")

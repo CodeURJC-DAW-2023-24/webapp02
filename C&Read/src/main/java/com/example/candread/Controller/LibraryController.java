@@ -1,4 +1,4 @@
-package com.example.candread.Controller;
+package com.example.candread.controller;
 
 import java.io.IOException;
 import java.sql.SQLException;
