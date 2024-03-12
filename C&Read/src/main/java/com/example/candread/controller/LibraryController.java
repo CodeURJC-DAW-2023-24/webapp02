@@ -66,7 +66,9 @@ public class LibraryController {
         userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
-        pageable = PageRequest.of(pageNumber, pageSize);
+
+        pageSize = (pageNumber+1) * pageSize;
+        pageable = PageRequest.of(0, pageSize);
 
         elementService.fullSet64Image();
 
@@ -75,7 +77,7 @@ public class LibraryController {
         
         model.addAttribute("elements", books);
         model.addAttribute("controllerRoute", "Books");
-        model.addAttribute("hasPrev", books.hasPrevious());
+        model.addAttribute("hasPrev", pageSize>10);
         model.addAttribute("hasNext", books.hasNext());
         model.addAttribute("nextPage", books.getNumber()+1);
         model.addAttribute("prevPage", books.getNumber()-1);
@@ -114,7 +116,9 @@ public class LibraryController {
         userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
-        pageable = PageRequest.of(pageNumber, pageSize);
+
+        pageSize = (pageNumber+1) * pageSize;
+        pageable = PageRequest.of(0, pageSize);
 
         elementService.fullSet64Image();
 
@@ -122,7 +126,7 @@ public class LibraryController {
         Page<Element> films= pagingRepository.findByType("PELICULA", pageable);
         model.addAttribute("elements", films);
         model.addAttribute("controllerRoute", "Films");
-        model.addAttribute("hasPrev", films.hasPrevious());
+        model.addAttribute("hasPrev", pageSize>10);
         model.addAttribute("hasNext", films.hasNext());
         model.addAttribute("nextPage", films.getNumber()+1);
         model.addAttribute("prevPage", films.getNumber()-1);
@@ -161,7 +165,9 @@ public class LibraryController {
         userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;
-        pageable = PageRequest.of(pageNumber, pageSize);
+
+        pageSize = (pageNumber+1) * pageSize;
+        pageable = PageRequest.of(0, pageSize);
 
         elementService.fullSet64Image();
 
@@ -169,7 +175,7 @@ public class LibraryController {
         Page<Element> series= pagingRepository.findByType("SERIE", pageable);
         model.addAttribute("elements", series);
         model.addAttribute("controllerRoute", "Series");
-        model.addAttribute("hasPrev", series.hasPrevious());
+        model.addAttribute("hasPrev", pageSize>10);
         model.addAttribute("hasNext", series.hasNext());
         model.addAttribute("nextPage", series.getNumber()+1);
         model.addAttribute("prevPage", series.getNumber()-1);
