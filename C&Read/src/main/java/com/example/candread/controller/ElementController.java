@@ -135,13 +135,17 @@ public class ElementController {
     }
 
     @PostMapping("/add")
-    public String addElement(@RequestParam("name") String name, @RequestParam("description") String description,
-            @RequestParam("author") String author,
-            @RequestParam("type") String type, @RequestParam("season") String season,
-            @RequestParam("state") String state,
-            @RequestParam("country") String country, @RequestParam("genres") List<String> genres,
-            @RequestParam("image") MultipartFile image, @RequestParam("years") int years,
-            Model model, HttpServletRequest request) {
+    public String addElement(@RequestParam(value = "name", required = false) String name,
+    @RequestParam(value = "description", required = false) String description,
+    @RequestParam(value = "author", required = false) String author,
+    @RequestParam(value = "type", required = false) String type,
+    @RequestParam(value = "season", required = false) String season,
+    @RequestParam(value = "state", required = false) String state,
+    @RequestParam(value = "country", required = false) String country,
+    @RequestParam(value = "genres", required = false) List<String> genres,
+    @RequestParam(value = "image", required = false) MultipartFile image,
+    @RequestParam(value = "years", required = false) Integer years,
+    Model model, HttpServletRequest request) {
 
         try {
 
