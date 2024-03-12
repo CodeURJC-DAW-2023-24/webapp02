@@ -77,7 +77,6 @@ public class UserViewController {
     @GetMapping("/Profile")
     public String moveToPerfil(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page,
             Pageable pageable) throws SQLException, IOException {
-
         // LOAD ELEMENTS LISTS
         int pageNumber = page.orElse(0);
         int pageSize = 10;

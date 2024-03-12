@@ -75,41 +75,43 @@
 
     <section id="tops">
         <!-- Libros -->
-        {{#PersonalBooks}}
         <article id="topSection">
             <div id="topTitleUser">
                 <h4> Mis libros: </h4>
             </div>
             <div id="topList" class="container">
                 <div class="row">
+                    {{#PersonalBooks}}
                     {{> W-Card}}
-                    <br>
+                    <!--br-->
                     {{#PersonalBookshasPrev}}
                     <a href="/Profile?page={{PersonalBooksprevPage}}">Prev Books</a>
                     {{/PersonalBookshasPrev}}
-                    <br>
+                    <!--br-->
                     {{#PersonalBookshasNext}}
                     <a href="/Profile?page={{PersonalBooksnextPage}}">Next Books</a>
                     {{/PersonalBookshasNext}}
+                    {{/PersonalBooks}}
                 </div>
             </div>
-            <br>
+            
+            <!--br-->
             <button id="downloadNamesBtn">Descargar Todos</button>
-            </div>
+            <!--/div-->
         </article>
-        {{/PersonalBooks}}
-
+        
 
         <script src="/Scripts/download.js" defer></script>
 
         <!-- Series -->
-        {{#PersonalSeries}}
+        
         <article id="topSection">
             <div id="topTitleUser">
                 <h4> Mis series: </h4>
             </div>
             <div id="topList" class="container">
                 <div class="row">
+                    {{#PersonalSeries}}
                     {{> W-Card}}
                     <br>
                     {{#PersonalSerieshasPrev}}
@@ -119,18 +121,20 @@
                     {{#PersonalSerieshasNext}}
                     <a href="/Profile?page={{PersonalSeriesnextPage}}">Next Series</a>
                     {{/PersonalSerieshasNext}}
+                    {{/PersonalSeries}}
                 </div>
             </div>
         </article>
-        {{/PersonalSeries}}
+        
         <!-- FILMS -->
-        {{#PersonalFilms}}
+        
         <article id="topSection">
             <div id="topTitleUser">
                 <h4> Mis peliculas:</h4>
             </div>
             <div id="topList" class="container">
                 <div class="row">
+                    {{#PersonalFilms}}
                     {{> W-Card}}
                     <br>
                     {{#PersonalFilmshasPrev}}
@@ -140,10 +144,11 @@
                     {{#PersonalFilmshasNext}}
                     <a href="/Profile?page={{PersonalFilmsnextPage}}">Next Films</a>
                     {{/PersonalFilmshasNext}}
+                    {{/PersonalFilms}}
                 </div>
             </div>
         </article>
-        {{/PersonalFilms}}
+        
         <!-- FAVOURITE BOOKS -->
         <article id="topSection">
             <div id="topTitleUser2">
@@ -168,7 +173,7 @@
         <!-- FAVOURITE SERIES -->
         <article id="topSection">
             <div id="topTitleUser2">
-                <h4> Mis series favoritos:</h4>
+                <h4> Mis series favoritas:</h4>
             </div>
             <div id="topList" class="container">
                 <div class="row">
@@ -189,7 +194,7 @@
         <!-- FAVOURITE FILMS -->
         <article id="topSection">
             <div id="topTitleUser2">
-                <h4> Mis peliculas favoritos:</h4>
+                <h4> Mis peliculas favoritas:</h4>
             </div>
             <div id="topList" class="container">
                 <div class="row">
