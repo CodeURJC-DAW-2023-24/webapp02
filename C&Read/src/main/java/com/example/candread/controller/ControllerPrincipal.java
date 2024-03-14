@@ -2,9 +2,12 @@ package com.example.candread.controller;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -27,11 +30,17 @@ import com.example.candread.repositories.NewRepository;
 import com.example.candread.repositories.PagingRepository;
 import com.example.candread.services.ElementService;
 import com.example.candread.services.UserService;
+import com.itextpdf.io.image.ImageDataFactory;
+import com.itextpdf.kernel.colors.DeviceRgb;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
+import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Text;
+import com.itextpdf.layout.properties.HorizontalAlignment;
+import com.itextpdf.layout.properties.TextAlignment;
+import com.itextpdf.layout.properties.VerticalAlignment;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -90,42 +99,82 @@ public class ControllerPrincipal {
     @GetMapping("/downloadNames")
     @ResponseBody
     public ResponseEntity<byte[]> downloadNames(Model model, HttpSession session, Pageable pageable)
-            throws IOException {
-        List<String> names = obtenerNombresDeLibros(model, pageable);
+            throws IOException, SQLException {
+        List<Map<String, byte[]>> namesAndImages = obtainNamesAndImagesOfBooks(model, pageable);
 
-        byte[] pdfBytes = generatePdf(names);
+        byte[] pdfBytes = generatePdf(namesAndImages);
 
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_PDF);
-        headers.setContentDispositionFormData("attachment", "nombres_de_libros.pdf");
+        headers.setContentDispositionFormData("attachment", "mis_libros.pdf");
 
         return new ResponseEntity<>(pdfBytes, headers, HttpStatus.OK);
     }
 
-    private List<String> obtenerNombresDeLibros(Model model, Pageable pageable) {
+    private List<Map<String, byte[]>> obtainNamesAndImagesOfBooks(Model model, Pageable pageable) throws SQLException, IOException {
         // Logic to get the names of the books
 
         User user = (User) model.getAttribute("user");
-        List<String> names = new ArrayList<>();
+
+        //List of maps with the name of the element as key an the image as value
+        List<Map<String, byte[]>> elementsWithImages = new ArrayList<>();
+
         if (user != null) {
             Long userid = user.getId();
             Page<Element> userBooks = pagingRepository.findByUsersIdAndType(userid, "LIBRO", pageable);
 
             for (Element book : userBooks.getContent()) {
-                names.add(book.getName());
+                Map<String, byte[]> elementMap = new HashMap<>();
+                elementMap.put(book.getName(), getImageBytes(book.getImageFile()));
+                elementsWithImages.add(elementMap);
             }
         }
-        return names;
+        return elementsWithImages;
     }
 
-    public static byte[] generatePdf(List<String> content) throws IOException {
+    private byte[] getImageBytes(Blob blob) throws SQLException, IOException {
+        // Get the byte[] of the blob
+        return blob.getBytes(1, (int) blob.length());
+    }
+
+    public static byte[] generatePdf(List<Map<String, byte[]>> namesAndImages) throws IOException {
         ByteArrayOutputStream pdfOutputStream = new ByteArrayOutputStream();
 
         PdfDocument pdfDoc = new PdfDocument(new PdfWriter(pdfOutputStream));
         Document doc = new Document(pdfDoc);
 
-        for (String name : content) {
-            doc.add(new Paragraph(new Text(name)));
+        Paragraph title = new Paragraph("Lista de mis Libros")
+                        .setFontColor(new DeviceRgb(0, 0, 0)) // Text color: black
+                        .setBold() 
+                        .setFontSize(20) 
+                        .setUnderline()
+                        .setTextAlignment(TextAlignment.CENTER) 
+                        .setVerticalAlignment(VerticalAlignment.MIDDLE); 
+
+        // Adding a title to the document
+        doc.add(title);
+
+        //Spaces between the title and the first image
+        doc.add(new Paragraph("\n"));
+        doc.add(new Paragraph("\n"));
+
+        for (Map<String, byte[]> elementMap : namesAndImages) {
+            for (Map.Entry<String, byte[]> entry : elementMap.entrySet()) {
+                String name = entry.getKey();
+                byte[] imageData = entry.getValue();
+                // Add the image to the PDF
+                Image image = new Image(ImageDataFactory.create(imageData));
+                image.scaleToFit(300, 300);
+                image.setHorizontalAlignment(HorizontalAlignment.CENTER);
+                doc.add(image);
+
+                // Add the name of the element to the PDF
+                Paragraph nameParagraph = new Paragraph(name)
+                    .setTextAlignment(TextAlignment.CENTER)
+                    .setVerticalAlignment(VerticalAlignment.MIDDLE);
+                doc.add(nameParagraph);
+                doc.add(new Paragraph("\n"));
+            }
         }
 
         doc.close();
