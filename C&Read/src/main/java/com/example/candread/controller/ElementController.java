@@ -166,4 +166,71 @@ public class ElementController {
         return "redirect:/Admin";
     }
 
+
+
+    @PostMapping("/edit")
+    public String editElement(@RequestParam("nameSearch") String nameSearch, Model model, HttpServletRequest request) {
+    try {
+        List<Element> optionalElements = elementRepository.findByName(nameSearch);
+
+        if (!optionalElements.isEmpty()) {
+            if (optionalElements.size() == 1) {
+                // Si solo hay un elemento encontrado, proceder con la edición como antes
+                Element element = optionalElements.get(0);
+                List<String> genres = element.getGeneros();
+                model.addAttribute("elemen", element);
+                model.addAttribute("genres", genres);
+                return "W-EditFragment";
+            } else {
+                // Si hay más de un elemento encontrado, mostrar una página para que el usuario elija el tipo de elemento
+                model.addAttribute("name", nameSearch);
+
+                return "W-ChooseElementTypePage"; // Página para que el usuario elija el tipo de elemento
+            }
+        } else {
+            model.addAttribute("errorMessage", "No se encontraron elementos con el nombre proporcionado.");
+        }
+    } catch (Exception e) {
+        model.addAttribute("errorMessage", "Error al buscar el elemento.");
+    }
+
+    if (request.getAttribute("_csrf") != null) {
+        model.addAttribute("token", request.getAttribute("_csrf").toString());
+    }
+
+    return ""; 
+}
+
+    @PostMapping("/edit/type")
+    public String typeElement(@RequestParam("type") String type, @RequestParam("name") String name, Model model, HttpServletRequest request) {
+    try {
+        List<Element> elements = elementRepository.findByName(name);
+
+        for (int i = 0; i < elements.size(); i++) {
+            Element element = elements.get(i);
+            String elementType = element.getType();
+           if ( elementType.equals(type)) {
+                Element choosedElement = element;
+                List<String> genres = choosedElement.getGeneros();
+                model.addAttribute("elemen", choosedElement);
+                model.addAttribute("genres", genres);
+
+
+                return "W-EditFragment";
+            }
+        } 
+        return "";
+        
+    } catch (Exception e) {
+        model.addAttribute("errorMessage", "Error al buscar el elemento.");
+    }
+
+    if (request.getAttribute("_csrf") != null) {
+        model.addAttribute("token", request.getAttribute("_csrf").toString());
+    }
+
+    return ""; // Retornar la página de error o redirigir a otra página según tu lógica
+}
+
+
 }

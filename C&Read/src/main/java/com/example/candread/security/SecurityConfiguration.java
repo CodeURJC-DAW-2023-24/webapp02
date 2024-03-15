@@ -47,10 +47,10 @@ public class SecurityConfiguration {
 
         http.authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers("/", "/CSS/**", "/Images/**", "/Scripts/**","/downloadNames/**", "/SignIn", "/users/**", "/Library/**",
-                        "/SingleElement/**", "/loginerror", "/error")
+                        "/SingleElement/**", "/loginerror", "/error","/EditFragment")
                 .permitAll()
                 .requestMatchers("/*/Profile/**", "/*/Main", "/review/**").hasAnyRole("USER", "ADMIN")
-                .requestMatchers("/Admin", "/news/add").hasRole("ADMIN"))
+                .requestMatchers("/Admin/**", "/news/add","/SingleElement/edit").hasRole("ADMIN"))
                 .formLogin(formLogin -> formLogin
                         .loginPage("/LogIn")
                         .failureUrl("/loginerror")
