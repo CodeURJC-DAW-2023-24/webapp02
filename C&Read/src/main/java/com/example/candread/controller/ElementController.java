@@ -196,10 +196,12 @@ public class ElementController {
                 return "W-ChooseElementTypePage"; // Página para que el usuario elija el tipo de elemento
             }
         } else {
-            model.addAttribute("errorMessage", "No se encontraron elementos con el nombre proporcionado.");
+            model.addAttribute("errorOccurred", true);
+            return "W-ModifyFragment"; // Devuelve la página de modificación
         }
     } catch (Exception e) {
         model.addAttribute("errorMessage", "Error al buscar el elemento.");
+       
     }
 
     if (request.getAttribute("_csrf") != null) {
