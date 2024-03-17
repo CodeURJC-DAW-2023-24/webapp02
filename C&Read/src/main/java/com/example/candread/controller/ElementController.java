@@ -182,8 +182,16 @@ public class ElementController {
                 model.addAttribute("genres", genres);
                 return "W-EditFragment";
             } else {
+
+                List<String> types = new ArrayList<>();
+                for (int i = 0; i < optionalElements.size(); i++) {
+                    Element element = optionalElements.get(i);
+                    String elementType = element.getType();
+                    types.add(elementType);                    
+                } 
                 // Si hay más de un elemento encontrado, mostrar una página para que el usuario elija el tipo de elemento
                 model.addAttribute("name", nameSearch);
+                model.addAttribute("types", types);
 
                 return "W-ChooseElementTypePage"; // Página para que el usuario elija el tipo de elemento
             }
