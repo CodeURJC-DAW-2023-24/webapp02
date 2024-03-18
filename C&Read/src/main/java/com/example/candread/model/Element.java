@@ -73,6 +73,7 @@ public class Element {
     @OneToMany (mappedBy = "elementLinked", cascade = CascadeType.ALL)
     private List<Review> reviews = new ArrayList<>();
 
+
     // CONSTRUCTOR DEL ELEMENT:
 
     public Element(){

@@ -6,8 +6,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.sql.rowset.serial.SerialBlob;
@@ -48,6 +51,10 @@ public class UserService {
             User userPrueba = new User("admin1", passwordEncoder.encode("pass"), "USER", "ADMIN");
             userPrueba.setBannerImage(bannerblob);
             userPrueba.setProfileImage(profileblob);
+            Map<String, List<Long>> listaE = new HashMap<>();
+            List<Long> idEl = Arrays.asList(1L, 2L, 3L);
+            listaE.put("favoritos", idEl);
+            userPrueba.setListasDeElementos(listaE);
             userRepository.save(userPrueba);
         }
         if(!existsByUsernameAndPassword("admin3", "123")){
