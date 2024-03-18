@@ -1,0 +1,104 @@
+
+<head>
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+
+
+    
+</head>
+
+<form id="addSerieForm"  method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+    <div class="col-md-12 mt-5 mb-5">
+        <h4>Modificar Elemento</h4>
+        <div class="card rounded">
+            <div class="card-body">
+                <div class="row">
+                    <!-- Columna para los campos de entrada -->
+                    <div class="col-md-6 mb-3">
+                        <label for="campo1" class="form-label">Nombre:</label>
+                        <input type="text" name="name" class="form-control" id="campo1" value="{{elemen.name}}">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="campo2" class="form-label">Descripción:</label>
+                        <input type="text" name="description" class="form-control datepicker" id="campo2" value="{{elemen.description}}" >
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="campo3" class="form-label">Autor:</label>
+                        <input type="text" name="author" class="form-control" id="campo3" value="{{elemen.author}}" >
+                    </div>
+                    <div id="elementType" data-type="{{elemen.type}}" style="display: none;"></div>
+                    <div class="col-md-12 mb-3">
+                        <label for="campo4" class="form-label">Tipo:</label>
+                        <select name="type" class="form-select" id="type-select">
+                            <option value="SERIE">SERIE</option>
+                            <option value="LIBRO">LIBRO</option>
+                            <option value="PELÍCULA">PELÍCULA</option>
+                        </select>
+                    </div>
+                    <div id="elementSeason" data-season="{{elemen.season}}" style="display: none;"></div>
+                    <div class="col-md-12 mb-3">
+                        <label for="campo5" class="form-label">Estación:</label>
+                        <select name="season" id="season-select" class="form-select">
+                            <option value="VERANO">VERANO</option>
+                            <option value="PRIMAVERA">PRIMAVERA</option>
+                            <option value="OTOÑO">OTOÑO</option>
+                            <option value="INVIERNO">INVIERNO</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="campo6" class="form-label">Estado:</label>
+                        <div id="elementState" data-state="{{elemen.state}}" style="display: none;"></div>
+                        <select name="state" class="form-select" id="state-select">
+                            <option value="COMPLETO">COMPLETO</option>
+                            <option value="EN_EMISION">EN EMISION</option>
+                            <option value="POR_ESTRENARSE">POR_ESTRENARSE</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="campo7" class="form-label">País:</label>
+                        <input type="text" name="country" class="form-control" id="campo7" value="{{elemen.country}}">
+                    </div>
+                    <div id="elementGenre" data-genre="{{genres}}" style="display: none;"></div>
+                    <div class="col-md-12 mb-3">
+                        <label for="campo8" class="form-label">Géneros:</label>
+                        <select name="genres" class="form-select" id="genres-select" multiple>
+                            <option value="ACCION">ACCION</option>
+                            <option value="TERROR">TERROR</option>
+                            <option value="AVENTURA" selected>AVENTURA</option>
+                            <option value="MISTERIO">MISTERIO</option>
+                            <option value="ROMANCE">ROMANCE</option>
+                            <option value="CIENCIAFICCION">CIENCIAFICCION</option>
+                            <option value="DRAMA">DRAMA</option>
+                            <option value="INFANTIL">INFANTIL</option>
+                            <option value="COMEDIA">COMEDIA</option>
+                            <option value="FANTASIA">FANTASIA</option>
+                            <option value="SOBRENATURAL">SOBRENATURAL</option>
+                            <option value="NOVELA">NOVELA</option>
+                            <option value="JUVENIL">JUVENIL</option>
+                        </select>
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="campo9" class="form-label">Año:</label>
+                        <input type="text" name="years" class="form-control" id="campo9" value="{{elemen.year}}">
+                    </div>
+                    <div class="col-md-12 mb-3">
+                        <label for="campo10" class="form-label">Sube su imagen:</label>
+                        <input type="file" name="image" class="form-control" id="campo10" accept="image/jpeg,image/png,image/jpg">
+                    </div>
+                    <!-- Columna para el botón "Agregar" -->
+                    <div class="col-md-12">
+                        <button class="btn btn-primary">Agregar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input type="hidden" name="_csrf" value="{{token}}">
+</form>
+
