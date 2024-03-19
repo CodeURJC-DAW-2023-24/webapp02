@@ -13,7 +13,7 @@
     
 </head>
 
-<form id="addSerieForm"  method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+<form id="addSerieForm"  method="post"action = "/SingleElement/edit/add" enctype="multipart/form-data" accept-charset="UTF-8">
     <div class="col-md-12 mt-5 mb-5">
         <h4>Modificar Elemento</h4>
         <div class="card rounded">
@@ -98,6 +98,7 @@
                 </div>
             </div>
         </div>
+        <input type="hidden" name="elementId" value="{{elemen.id}}">
     </div>
     <input type="hidden" name="_csrf" value="{{token}}">
 </form>

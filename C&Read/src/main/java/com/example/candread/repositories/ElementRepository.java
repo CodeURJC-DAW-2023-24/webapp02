@@ -15,4 +15,6 @@ public interface ElementRepository extends JpaRepository<Element,Long>{
     List<Element> findTop4ByOrderByIdDesc();
 
     List<Element> findByName(String name);
+
+    void deleteByName(String name);
 }
