@@ -1,19 +1,22 @@
 #Create the .jar
-FROM maven:3.8.7-openjdk-18-slim AS builder
+FROM maven:3.8.5-openjdk-17-slim AS builder
 
 WORKDIR /project
 
 COPY pom.xml .
+
+RUN mvn dependency:go-offline
+
 COPY src ./src
 
-RUN mvn package -DskipTests
+RUN mvn clean package -DskipTests
 
 #Execute the .jar
-FROM openjdk:18-jdk-slim
+FROM openjdk:22-ea-17-slim
 
 WORKDIR /app
 
-COPY --from=builder /project/target/*.jar /app/
+COPY --from=builder /project/target/*.jar /app/candread.jar
 EXPOSE 8443
 
-CMD ["java", "-jar", "candread-0.0.1-SNAPSHOT.jar"]
+ENTRYPOINT ["java", "-jar", "candread.jar"]
