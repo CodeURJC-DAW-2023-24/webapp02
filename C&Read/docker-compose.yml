@@ -8,7 +8,7 @@ services:
     ports:
       - "8443:8443"
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://localhost:3306/bdd_candread
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/bdd_candread
       - SPRING_DATASOURCE_USERNAME=rudy
       - SPRING_DATASOURCE_PASSWORD=Rudy2442.
       - SPRING_JPA_HIBERNATE_DDL_AUTO=create-drop
@@ -24,6 +24,7 @@ services:
     environment:
       MYSQL_USER: rudy
       MYSQL_PASSWORD: Rudy2442.
+      MYSQL_ROOT_PASSWORD: Rudy2442.
       MYSQL_DATABASE: bdd_candread
     ports:
      - "3306:3306"
