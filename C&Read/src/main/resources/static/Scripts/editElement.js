@@ -72,16 +72,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     function setDefaultSelection() {
-var seasonElement = document.getElementById('elementSeason');
+    var seasonElement = document.getElementById('elementSeason');
     var typeElement = document.getElementById('elementType');
     var stateElement = document.getElementById('elementState');
-    var genresElement = document.getElementById('elementGenre');
 
-    if (seasonElement && typeElement && stateElement && genresElement) {
+    if (seasonElement && typeElement && stateElement) {
         var seasonValueFromElement = seasonElement.getAttribute('data-season');
         var typeValueFromElement = typeElement.getAttribute('data-type');
         var stateValueFromElement = stateElement.getAttribute('data-state');
-        var genresValueFromElement = genresElement.getAttribute('data-genre');
 
         // ...
     } else {
@@ -89,11 +87,12 @@ var seasonElement = document.getElementById('elementSeason');
     }
 
 
-        
+        console.log(seasonValueFromElement);
+        console.log(typeValueFromElement);
+        console.log(stateValueFromElement);
         var seasonSelect = document.getElementById('season-select'); 
         var typeSelect = document.getElementById('type-select'); 
         var sateSelect = document.getElementById('state-select'); 
-        var genresSelect = document.getElementById('genres-select'); 
 
         if (seasonSelect) {
             // Iterar sobre las opciones del campo de selección
@@ -130,23 +129,6 @@ var seasonElement = document.getElementById('elementSeason');
                 }
             }
         }
-
-
-        if (genresSelect) {
-            console.log(genresValueFromElement);
-            // Iterar sobre las opciones del campo de selección
-            for (var i = 0; i < genresSelect.options.length; i++) {
-                
-                // Verificar si el valor de la opción coincide con el valor de la estación del elemento
-                if ( genresValueFromElement.includes(genresSelect.options[i].value)) {
-                    // Establecer la opción como seleccionada
-                    genresSelect.options[i].selected = true;
-                }
-            }
-        }
-
-
-
 
 
     }

@@ -7,7 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,7 @@ import com.example.candread.repositories.ElementRepository;
 import com.example.candread.services.ElementService;
 import com.example.candread.services.UserService;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,6 +49,11 @@ public class ElementController {
 
     @Autowired
     private UserService userService;
+    
+     List<String> baseGenres = new ArrayList<>(Arrays.asList(
+            "ACCION", "AVENTURA", "TERROR",  "MISTERIO", "ROMANCE", "CIENCIAFICCION", "DRAMA",
+            "INFANTIL", "COMEDIA", "FANTASIA", "SOBRENATURAL", "NOVELA", "JUVENIL"
+        ));
 
     @GetMapping("/{id}")
     public String getSingleElement(@PathVariable("id") Long id, Model model) throws SQLException, IOException {
@@ -142,14 +151,25 @@ public class ElementController {
     @RequestParam(value = "season", required = false) String season,
     @RequestParam(value = "state", required = false) String state,
     @RequestParam(value = "country", required = false) String country,
-    @RequestParam(value = "genres", required = false) List<String> genres,
+    @RequestParam(value = "genres", required = false) String genres,
     @RequestParam(value = "image", required = false) MultipartFile image,
     @RequestParam(value = "years", required = false) Integer years,
     Model model, HttpServletRequest request) {
 
         try {
 
-            Element newElement = new Element(name, description, author, type, season, state, country, genres, years);
+            String genresFormated = genres.toUpperCase().strip();
+            List<String> genreList = Arrays.stream(genresFormated.split(","))
+                                       .map(String::trim)
+                                       .collect(Collectors.toList());            
+            Element newElement = new Element(name, description, author, type, season, state, country, genreList, years);
+            if (genres != null) {
+                for (String genre : genreList) {
+                    if (!this.baseGenres.contains(genre.strip())) {
+                        this.baseGenres.add(genre);
+                    }
+                }
+            }
             byte[] imageData = image.getBytes();
             SerialBlob blob = new SerialBlob(imageData);
             newElement.setImageFile(blob);
@@ -305,8 +325,13 @@ public class ElementController {
                 element.setCountry(Element.Countries.REINO_UNIDO);
             }
             
-            
-            element.setGeneros(genres);
+        
+            List<String> formattedGenres = new ArrayList<>();
+            for (String genre : genres) {
+                String formattedGenre = genre.replaceAll("\\[|\\]", ""); 
+                formattedGenres.add(formattedGenre); 
+            }
+            element.setGeneros(formattedGenres);
             byte[] imageData = image.getBytes();
             SerialBlob blob = new SerialBlob(imageData);
             element.setImageFile(blob);
