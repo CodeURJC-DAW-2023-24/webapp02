@@ -68,11 +68,14 @@
 
 
         <div class="row">
-            <div class="col-md-6">
-                <button onclick="showForm('serieForm')">Agregar Serie</button>
+            <div class="col-md-4">
+                <button onclick="showForm('serieForm')">Agregar Elemento</button>
             </div>
-            <div class="col-md-6">
-                <button onclick="showForm('modifyBookForm')">Modificar Libro</button>
+            <div class="col-md-4">
+                <button onclick="showForm('modifyBookForm')">Modificar Elemento</button>
+            </div>
+            <div class="col-md-4">
+                <button onclick="showForm('addGenre')">Añadir Genero</button>
             </div>
         </div>
     
@@ -155,6 +158,25 @@
         {{> W-ModifyFragment}}
 
 
+        <div id="addGenre" style="display: none;">
+            <form id="addGenreForm" action="/SingleElement/addGenre" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+                <div class="col-md-12 mt-5 mb-5">
+                    <h4>Añadir Genero</h4>
+                    <div class="card rounded">
+                        <div class="card-body">
+                            <div class="row">
+                                <!-- Columna para los campos de entrada -->
+                                <div class="col-md-6 mb-3">
+                                    <label for="campo1" class="form-label">Nombre:</label>
+                                    <input type="text" name="genreName" class="form-control" id="campo1">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <input type="hidden" name="_csrf" value="{{token}}">
+            </form>
+        </div>
         
 
 

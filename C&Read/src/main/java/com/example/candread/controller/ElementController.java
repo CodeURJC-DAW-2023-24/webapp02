@@ -349,6 +349,18 @@ public class ElementController {
     }
 
 
+    @PostMapping("/addGenre")
+    public String addGenre(@RequestParam(value = "genreName") String name,
+    Model model, HttpServletRequest request) {
+
+        baseGenres.add(name);
+
+        if (request.getAttribute("_csrf") != null) {
+            model.addAttribute("token", request.getAttribute("_csrf").toString());
+        }
+
+        return "redirect:/Admin";
+    }
 
 
 
