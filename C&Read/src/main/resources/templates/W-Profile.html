@@ -82,15 +82,15 @@
             <div id="topList" class="container">
                 <div class="row">
                     {{#PersonalBooks}}
-                    {{> W-Card}}
-                    <!--br-->
-                    {{#PersonalBookshasPrev}}
-                    <a href="/Profile?page={{PersonalBooksprevPage}}">Prev Books</a>
-                    {{/PersonalBookshasPrev}}
-                    <!--br-->
-                    {{#PersonalBookshasNext}}
-                    <a href="/Profile?page={{PersonalBooksnextPage}}">Next Books</a>
-                    {{/PersonalBookshasNext}}
+                        {{> W-Card}}
+                        <br>
+                        {{#PersonalBookshasPrev}}
+                        <a href="/Profile?page={{PersonalBooksprevPage}}">Prev Books</a>
+                        {{/PersonalBookshasPrev}}
+                        <br>
+                        {{#PersonalBookshasNext}}
+                        <a href="/Profile?page={{PersonalBooksnextPage}}">Next Books</a>
+                        {{/PersonalBookshasNext}}
                     {{/PersonalBooks}}
                 </div>
             </div>
