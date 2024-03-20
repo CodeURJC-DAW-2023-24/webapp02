@@ -445,7 +445,7 @@ public class ElementService {
         Blob blobSimpson = getBlob("static/Images/Los_Simpson_La_pelicula.jpg");
         Blob blobLionKIng = getBlob("static/Images/Rey_Leon.jpg");
         Blob blobMermaid = getBlob("static/Images/Sirenita.jpg");
-        Blob blobUp = getBlob("static/Images/Up.jpg");
+        Blob blobUp = getBlob("static/Images/UP.jpg");
 
         //BASE USERS ON THE SYSTEM
         Optional<User> userPrueba3 = userRepository.findById((long) 1);
@@ -578,7 +578,7 @@ public class ElementService {
         elementRepository.save(elementoTest9);
 
 
-        Element elementoTest10 = new Element("UP", 
+        Element elementoTest10 = new Element("Up", 
         "Las primeras escenas retoman la infancia de Carl Fredricksen, un niño tímido y serio que idolatra al famoso explorador Charles F. Muntz Jr, cuyas anécdotas suelen relatarse en unos informativos proyectados en las salas de cine de la época. Un día, tras acudir al cine para mirar las nuevas aventuras de Muntz, Carl se entera de que este fue acusado de fabricar el esqueleto de un ave gigante, el cual afirmó que había descubierto en Cataratas del Paraíso. Ante el hallazgo de su supuesta mentira, perdió su empleo. No obstante, se comprometió a regresar a ese sitio para traer consigo un ejemplar vivo de esa ave y así retomar su reputación. La revelación de la mentira de Muntz entristece al joven Carl.", 
         "Walt Disney Pictures", Types.PELICULA.name(), Seasons.PRIMAVERA.name(), 
         States.COMPLETO.name(), Countries.ESTADOS_UNIDOS.name(), generosEjemplo1, 2009);
