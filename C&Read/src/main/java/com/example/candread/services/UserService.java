@@ -53,7 +53,8 @@ public class UserService {
             userPrueba.setProfileImage(profileblob);
             Map<String, List<Long>> listaE = new HashMap<>();
             List<Long> idEl = Arrays.asList(1L, 2L, 3L);
-            listaE.put("favoritos", idEl);
+            listaE.put("Favoritos", idEl);
+            listaE.put("Viendo", idEl);
             userPrueba.setListasDeElementos(listaE);
             userRepository.save(userPrueba);
         }

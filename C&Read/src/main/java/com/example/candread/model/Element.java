@@ -3,6 +3,8 @@ package com.example.candread.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Blob;
 
 import jakarta.persistence.CascadeType;
@@ -56,21 +58,26 @@ public class Element {
     private String country;
 
     @ManyToMany 
+    @JsonIgnore
     private List<User> users;
 
     @ManyToMany
+    @JsonIgnore
     private List<User> usersFavourited;
 
     @Lob 
+    @JsonIgnore
     private Blob imageFile;
 
     @Transient
     private String base64Image;
 
     @ElementCollection(fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<String> genres;
 
     @OneToMany (mappedBy = "elementLinked", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Review> reviews = new ArrayList<>();
 
 

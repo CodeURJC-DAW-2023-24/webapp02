@@ -28,6 +28,7 @@ import com.example.candread.repositories.PagingRepository;
 import com.example.candread.security.RepositoryUserDetailsService;
 import com.example.candread.services.ElementService;
 import com.example.candread.services.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -80,7 +81,7 @@ public class UserViewController {
     public String moveToPerfil(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page,
             Pageable pageable) throws SQLException, IOException {
 
-        // Listas
+        elementService.fullSet64Image();
         User user = (User) model.getAttribute("user");
 
         Map<String, List<Long>> pruebE = user.getListasDeElementos();
@@ -102,7 +103,12 @@ public class UserViewController {
             mapElementosConvertidos.put(nombreLista, listaElementosConvertidos);
         }
 
-        model.addAttribute("listaDeElementos", mapElementosConvertidos);
+        // model.addAttribute("listOfElements", mapElementosConvertidos);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonElementos = objectMapper.writeValueAsString(mapElementosConvertidos);
+
+        // Añadir jsonElementos al modelo para ser enviado al cliente
+        model.addAttribute("listOfElements", jsonElementos);
         // LOAD ELEMENTS LISTS
         int pageNumber = page.orElse(0);
         int pageSize = 10;
@@ -128,8 +134,6 @@ public class UserViewController {
 
         List<String> genresNow = new ArrayList<>();
         int limit = 0;
-
-        elementService.fullSet64Image();
 
         // FOR AND SWITCH CASE TO GET ALL NUMBER OF MEDIA REGISTERED IN THE USER
         if (user != null) {

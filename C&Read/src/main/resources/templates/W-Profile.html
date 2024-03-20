@@ -75,138 +75,14 @@
 
     <section id="tops">
         <!-- Libros -->
-        {{#PersonalBooks}}
-        <article id="topSection">
-            <div id="topTitleUser">
-                <h4> Mis libros: </h4>
-            </div>
-            <div id="topList" class="container">
-                <div class="row">
-                    {{> W-Card}}
-                    <br>
-                    {{#PersonalBookshasPrev}}
-                    <a href="/Profile?page={{PersonalBooksprevPage}}">Prev Books</a>
-                    {{/PersonalBookshasPrev}}
-                    <br>
-                    {{#PersonalBookshasNext}}
-                    <a href="/Profile?page={{PersonalBooksnextPage}}">Next Books</a>
-                    {{/PersonalBookshasNext}}
-                </div>
-            </div>
-            <br>
-            <button id="downloadNamesBtn">Descargar Todos</button>
-            </div>
-        </article>
-        {{/PersonalBooks}}
 
+        <script>
+            var elementsMap = "{{listOfElements}}";
+        </script>
+        <script src="/Scripts/profileLists.js" defer></script>
 
         <script src="/Scripts/download.js" defer></script>
 
-        <!-- Series -->
-        {{#PersonalSeries}}
-        <article id="topSection">
-            <div id="topTitleUser">
-                <h4> Mis series: </h4>
-            </div>
-            <div id="topList" class="container">
-                <div class="row">
-                    {{> W-Card}}
-                    <br>
-                    {{#PersonalSerieshasPrev}}
-                    <a href="/Profile?page={{PersonalSeriesprevPage}}">Prev Series</a>
-                    {{/PersonalSerieshasPrev}}
-                    <br>
-                    {{#PersonalSerieshasNext}}
-                    <a href="/Profile?page={{PersonalSeriesnextPage}}">Next Series</a>
-                    {{/PersonalSerieshasNext}}
-                </div>
-            </div>
-        </article>
-        {{/PersonalSeries}}
-        <!-- FILMS -->
-        {{#PersonalFilms}}
-        <article id="topSection">
-            <div id="topTitleUser">
-                <h4> Mis peliculas:</h4>
-            </div>
-            <div id="topList" class="container">
-                <div class="row">
-                    {{> W-Card}}
-                    <br>
-                    {{#PersonalFilmshasPrev}}
-                    <a href="/Profile?page={{PersonalFilmsprevPage}}">Prev Films</a>
-                    {{/PersonalFilmshasPrev}}
-                    <br>
-                    {{#PersonalFilmshasNext}}
-                    <a href="/Profile?page={{PersonalFilmsnextPage}}">Next Films</a>
-                    {{/PersonalFilmshasNext}}
-                </div>
-            </div>
-        </article>
-        {{/PersonalFilms}}
-        <!-- FAVOURITE BOOKS -->
-        <article id="topSection">
-            <div id="topTitleUser2">
-                <h4> Mis libros favoritos:</h4>
-            </div>
-            <div id="topList" class="container">
-                <div class="row">
-                    {{#PersonalBFavs}}
-                    {{> W-Card}}
-                    {{/PersonalBFavs}}
-                    <br>
-                    {{#PersonalBFavshasPrev}}
-                    <a href="/Profile?page={{PersonalBFavsprevPage}}">Prev Books</a>
-                    {{/PersonalBFavshasPrev}}
-                    <br>
-                    {{#PersonalBFavshasNext}}
-                    <a href="/Profile?page={{PersonalBFavsnextPage}}">Next Books</a>
-                    {{/PersonalBFavshasNext}}
-                </div>
-            </div>
-        </article>
-        <!-- FAVOURITE SERIES -->
-        <article id="topSection">
-            <div id="topTitleUser2">
-                <h4> Mis series favoritos:</h4>
-            </div>
-            <div id="topList" class="container">
-                <div class="row">
-                    {{#PersonalSFavs}}
-                    {{> W-Card}}
-                    {{/PersonalSFavs}}
-                    <br>
-                    {{#PersonalSFavshasPrev}}
-                    <a href="/Profile?page={{PersonalSFavsprevPage}}">Prev Series</a>
-                    {{/PersonalSFavshasPrev}}
-                    <br>
-                    {{#PersonalSFavshasNext}}
-                    <a href="/Profile?page={{PersonalSFavsnextPage}}">Next Series</a>
-                    {{/PersonalSFavshasNext}}
-                </div>
-            </div>
-        </article>
-        <!-- FAVOURITE FILMS -->
-        <article id="topSection">
-            <div id="topTitleUser2">
-                <h4> Mis peliculas favoritos:</h4>
-            </div>
-            <div id="topList" class="container">
-                <div class="row">
-                    {{#PersonalFFavs}}
-                    {{> W-Card}}
-                    {{/PersonalFFavs}}
-                    <br>
-                    {{#PersonalFFavshasPrev}}
-                    <a href="/Profile?page={{PersonalFFavsprevPage}}">Prev Films</a>
-                    {{/PersonalFFavshasPrev}}
-                    <br>
-                    {{#PersonalFFavshasNext}}
-                    <a href="/Profile?page={{PersonalFFavsnextPage}}">Next Films</a>
-                    {{/PersonalFFavshasNext}}
-                </div>
-            </div>
-        </article>
     </section>
     <!--SECCION ESTADISTICAS-->
     <aside id="stadisticSection">
