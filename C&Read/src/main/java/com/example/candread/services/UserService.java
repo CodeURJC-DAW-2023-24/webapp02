@@ -1,6 +1,5 @@
 package com.example.candread.services;
 
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
