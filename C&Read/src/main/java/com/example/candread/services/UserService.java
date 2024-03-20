@@ -40,7 +40,7 @@ public class UserService {
     public void insertUsers() throws SerialException, IOException, SQLException {
 
 
-        Blob profileblob = getBlob("static/Images/img-UserProfile2.png");
+        Blob profileblob = getBlob("static/Images/Img-UserProfile2.png");
         Blob bannerblob = getBlob("static/Images/imagenBanner.jpg");
 
         //BASE USERS IN THE SYSTEM: 1 ADMIN 1 USER 1 ADMIN-USER
