@@ -444,7 +444,7 @@ public class ElementService {
         Blob blobSimpson = getBlob("static/Images/Los_Simpson_La_pelicula.jpg");
         Blob blobLionKIng = getBlob("static/Images/Rey_Leon.jpg");
         Blob blobMermaid = getBlob("static/Images/Sirenita.jpg");
-        Blob blobUp = getBlob("static/Images/Up.jpg");
+        Blob blobUp = getBlob("static/Images/UP.jpg");
 
         //BASE USERS ON THE SYSTEM
         Optional<User> userPrueba3 = userRepository.findById((long) 1);
