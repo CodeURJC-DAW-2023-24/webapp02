@@ -21,6 +21,7 @@ import com.example.candread.model.Review;
 import com.example.candread.model.User;
 
 import com.example.candread.repositories.ElementRepository;
+import com.example.candread.repositories.UserRepository;
 import com.example.candread.services.ElementService;
 import com.example.candread.services.UserService;
 import com.fasterxml.jackson.databind.util.JSONPObject;
@@ -47,6 +48,9 @@ public class ElementController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/{id}")
     public String getSingleElement(@PathVariable("id") Long id, Model model) throws SQLException, IOException {
@@ -123,7 +127,8 @@ public class ElementController {
     }
 
     @PostMapping("/{id}/favourite")
-    public String addFavourite(@PathVariable("id") Long id, Model model, HttpServletRequest request, @RequestParam("listaId") int listaId)
+    public String addFavourite(@PathVariable("id") Long id, Model model, HttpServletRequest request,
+            @RequestParam("listaId") int listaId)
             throws SQLException, IOException {
         userService.fullSet64Image();
         if (id != null) {
@@ -150,17 +155,30 @@ public class ElementController {
     }
 
     @PostMapping("/{id}/add")
-    public String addToUserList(@PathVariable("id") Long id, Model model, HttpServletRequest request, @RequestParam("listaId") int listaId)
+    public String addToUserList(@PathVariable("id") Long id, Model model, HttpServletRequest request,
+            @RequestParam("listaId") int listaId)
             throws SQLException, IOException {
         userService.fullSet64Image();
         if (id != null) {
             Optional<Element> optionalElement = elementRepository.findById(id);
             Element newElement = optionalElement.orElseThrow();
-
-            User user = (User) model.getAttribute("user");
             long elementId = newElement.getId();
 
-            return "redirect:/error";
+            User user = (User) model.getAttribute("user");
+            Map<String, List<Long>> userLists = new HashMap<>(user.getListasDeElementos());
+            int i = 0;
+            for (Map.Entry<String, List<Long>> entry : new HashMap<>(userLists).entrySet()) {
+                i++;
+                if (i==listaId){
+                    String listName = entry.getKey(); // Obtiene la clave (ID de usuario)
+                    List<Long> listOfElements = entry.getValue();
+                    listOfElements.add(elementId);
+                    userLists.put(listName, listOfElements);
+                    user.setListasDeElementos(userLists);
+                }
+            }
+            userRepository.save(user); // URL base
+            return "redirect:/SingleElement/" + elementId;
         } else {
             return "redirect:/error";
         }
