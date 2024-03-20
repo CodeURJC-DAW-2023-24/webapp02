@@ -12,6 +12,7 @@ COPY src ./src
 RUN mvn clean package -DskipTests
 
 #Execute the .jar
+#openjdk:17-oracle
 FROM openjdk:22-ea-17-slim
 
 WORKDIR /app
