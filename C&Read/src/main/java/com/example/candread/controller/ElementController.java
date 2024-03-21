@@ -7,7 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
 import javax.sql.rowset.serial.SerialBlob;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +27,7 @@ import com.example.candread.repositories.ElementRepository;
 import com.example.candread.services.ElementService;
 import com.example.candread.services.UserService;
 
+import jakarta.annotation.PostConstruct;
 import jakarta.servlet.http.HttpServletRequest;
 
 import org.springframework.web.bind.annotation.GetMapping;
@@ -45,6 +49,11 @@ public class ElementController {
 
     @Autowired
     private UserService userService;
+    
+     List<String> baseGenres = new ArrayList<>(Arrays.asList(
+            "ACCION", "AVENTURA", "TERROR",  "MISTERIO", "ROMANCE", "CIENCIAFICCION", "DRAMA",
+            "INFANTIL", "COMEDIA", "FANTASIA", "SOBRENATURAL", "NOVELA", "JUVENIL"
+        ));
 
     @GetMapping("/{id}")
     public String getSingleElement(@PathVariable("id") Long id, Model model) throws SQLException, IOException {
@@ -142,18 +151,30 @@ public class ElementController {
     @RequestParam(value = "season", required = false) String season,
     @RequestParam(value = "state", required = false) String state,
     @RequestParam(value = "country", required = false) String country,
-    @RequestParam(value = "genres", required = false) List<String> genres,
+    @RequestParam(value = "genres", required = false) String genres,
     @RequestParam(value = "image", required = false) MultipartFile image,
     @RequestParam(value = "years", required = false) Integer years,
     Model model, HttpServletRequest request) {
 
         try {
 
-            Element newElement = new Element(name, description, author, type, season, state, country, genres, years);
+            String genresFormated = genres.toUpperCase().strip();
+            List<String> genreList = Arrays.stream(genresFormated.split(","))
+                                       .map(String::trim)
+                                       .collect(Collectors.toList());            
+            Element newElement = new Element(name, description, author, type, season, state, country, genreList, years);
+            if (genres != null) {
+                for (String genre : genreList) {
+                    if (!this.baseGenres.contains(genre.strip())) {
+                        this.baseGenres.add(genre);
+                    }
+                }
+            }
             byte[] imageData = image.getBytes();
             SerialBlob blob = new SerialBlob(imageData);
             newElement.setImageFile(blob);
             elementRepository.save(newElement);
+
 
         } catch (Exception e) {
             model.addAttribute("errorMessage", "Error al guardar la noticia.");
@@ -241,6 +262,106 @@ public class ElementController {
 
     return ""; // Retornar la página de error o redirigir a otra página según tu lógica
 }
+
+
+    @PostMapping("/edit/add")
+    public String changeElement(@RequestParam(value = "name", required = false) String name,
+    @RequestParam(value = "description", required = false) String description,
+    @RequestParam(value = "author", required = false) String author,
+    @RequestParam(value = "type", required = false) String type,
+    @RequestParam(value = "season", required = false) String season,
+    @RequestParam(value = "state", required = false) String state,
+    @RequestParam(value = "country", required = false) String country,
+    @RequestParam(value = "genres", required = false) List<String> genres,
+    @RequestParam(value = "image", required = false) MultipartFile image,
+    @RequestParam(value = "years", required = false) Integer years,
+    @RequestParam(value = "elementId", required = false) Long id,
+    Model model, HttpServletRequest request) {
+
+        try {
+            Optional<Element> optionalElement = elementRepository.findById(id);
+            Element element = optionalElement.orElseThrow();
+            element.setName(name);
+            element.setDescription(description);
+            element.setAuthor(author);
+            if (type.equals("LIBRO")) {
+                element.setType(Element.Types.LIBRO);
+            }
+            else if (type.equals("SERIE")) {
+                element.setType(Element.Types.SERIE);
+            }
+            else if (type.equals("PELICULA")) {
+                element.setType(Element.Types.PELICULA);
+            }
+
+            if (state.equals("COMPLETO")) {
+                element.setState(Element.States.COMPLETO);
+            }
+            else if (state.equals("EN_EMISION")) {
+                element.setState(Element.States.EN_EMISION);
+            }
+            else if (state.equals("POR_ESTRENARSE")) {
+                element.setState(Element.States.POR_ESTRENARSE);
+            }
+
+
+            if (country.toUpperCase().equals("JAPÓN") || country.toUpperCase().equals("JAPON")) {
+                element.setCountry(Element.Countries.JAPON);
+            }
+            else if (country.toUpperCase().equals("CHINA")) {
+                element.setCountry(Element.Countries.CHINA);
+            }
+            else if (country.toUpperCase().equals("COREA")) {
+                element.setCountry(Element.Countries.COREA);
+            }
+
+            if (country.toUpperCase().equals("ESTADOS_UNIDOS")) {
+                element.setCountry(Element.Countries.ESTADOS_UNIDOS);
+            }
+            else if (country.toUpperCase().equals("ESPAÑA")) {
+                element.setCountry(Element.Countries.ESPAÑA);
+            }
+            else if (country.toUpperCase().equals("REINO_UNIDO")) {
+                element.setCountry(Element.Countries.REINO_UNIDO);
+            }
+            
+        
+            List<String> formattedGenres = new ArrayList<>();
+            for (String genre : genres) {
+                String formattedGenre = genre.replaceAll("\\[|\\]", ""); 
+                formattedGenres.add(formattedGenre); 
+            }
+            element.setGeneros(formattedGenres);
+            byte[] imageData = image.getBytes();
+            SerialBlob blob = new SerialBlob(imageData);
+            element.setImageFile(blob);
+            elementRepository.save(element);
+
+        } catch (Exception e) {
+            model.addAttribute("errorMessage", "Error al guardar la noticia.");
+        }
+
+        if (request.getAttribute("_csrf") != null) {
+            model.addAttribute("token", request.getAttribute("_csrf").toString());
+        }
+
+        return "redirect:/Admin";
+    }
+
+
+    @PostMapping("/addGenre")
+    public String addGenre(@RequestParam(value = "genreName") String name,
+    Model model, HttpServletRequest request) {
+
+        baseGenres.add(name);
+
+        if (request.getAttribute("_csrf") != null) {
+            model.addAttribute("token", request.getAttribute("_csrf").toString());
+        }
+
+        return "redirect:/Admin";
+    }
+
 
 
 }

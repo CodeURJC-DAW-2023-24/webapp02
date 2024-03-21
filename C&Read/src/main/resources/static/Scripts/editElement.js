@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(data => {
                     resultsContainer.innerHTML = data;
                     addEventListeners(); 
-                    setDefaultSelection(); // Llamar a la función para establecer la selección por defecto
+                    setDefaultSelection(); 
                 })
                 .catch(error => {
                     console.error('Error al cargar más resultados:', error);    
@@ -60,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 .then(data => {
                     resultsContainer.innerHTML = data;
                     addEventListeners(); 
-                    setDefaultSelection(); // Llamar a la función para establecer la selección por defecto
+                    setDefaultSelection(); 
                 })
                 .catch(error => {
                     console.error('Error al cargar más resultados:', error);         
@@ -72,33 +72,27 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
     function setDefaultSelection() {
-        // Obtener el valor de la estación del elemento desde el atributo de datos personalizados
-var seasonElement = document.getElementById('elementSeason');
+    var seasonElement = document.getElementById('elementSeason');
     var typeElement = document.getElementById('elementType');
     var stateElement = document.getElementById('elementState');
-    var genresElement = document.getElementById('elementGenre');
 
-    // Verificar si los elementos no son nulos antes de acceder a sus atributos
-    if (seasonElement && typeElement && stateElement && genresElement) {
+    if (seasonElement && typeElement && stateElement) {
         var seasonValueFromElement = seasonElement.getAttribute('data-season');
         var typeValueFromElement = typeElement.getAttribute('data-type');
         var stateValueFromElement = stateElement.getAttribute('data-state');
-        var genresValueFromElement = genresElement.getAttribute('data-genre');
 
-        // Resto de tu lógica para establecer las selecciones por defecto
         // ...
     } else {
-        // Manejar el caso en el que uno o más elementos son nulos
         console.error('Alguno de los elementos requeridos no se encontró.');
-        // Aquí puedes mostrar un mensaje de error o realizar alguna otra acción según sea necesario
     }
 
 
-        
+        console.log(seasonValueFromElement);
+        console.log(typeValueFromElement);
+        console.log(stateValueFromElement);
         var seasonSelect = document.getElementById('season-select'); 
         var typeSelect = document.getElementById('type-select'); 
         var sateSelect = document.getElementById('state-select'); 
-        var genresSelect = document.getElementById('genres-select'); 
 
         if (seasonSelect) {
             // Iterar sobre las opciones del campo de selección
@@ -135,23 +129,6 @@ var seasonElement = document.getElementById('elementSeason');
                 }
             }
         }
-
-
-        if (genresSelect) {
-            console.log(genresValueFromElement);
-            // Iterar sobre las opciones del campo de selección
-            for (var i = 0; i < genresSelect.options.length; i++) {
-                
-                // Verificar si el valor de la opción coincide con el valor de la estación del elemento
-                if ( genresValueFromElement.includes(genresSelect.options[i].value)) {
-                    // Establecer la opción como seleccionada
-                    genresSelect.options[i].selected = true;
-                }
-            }
-        }
-
-
-
 
 
     }
