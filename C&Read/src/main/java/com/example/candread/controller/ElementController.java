@@ -294,6 +294,20 @@ public class ElementController {
                 element.setType(Element.Types.PELICULA);
             }
 
+            if (season.equals("VERANO")) {
+                element.setSeason(Element.Seasons.VERANO);
+            }
+            else if (season.equals("OTOÑO")) {
+                element.setSeason(Element.Seasons.OTOÑO);
+            }
+            else if (state.equals("PRIMAVERA")) {
+                element.setSeason(Element.Seasons.PRIMAVERA);
+            }
+
+            else if (state.equals("INVIERNO")) {
+                element.setSeason(Element.Seasons.INVIERNO);
+            }
+
             if (state.equals("COMPLETO")) {
                 element.setState(Element.States.COMPLETO);
             }
