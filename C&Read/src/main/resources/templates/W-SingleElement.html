@@ -15,6 +15,7 @@
   <!--CSS-->
   <link rel="stylesheet" href="../CSS/S-Main.css">
   <link rel="stylesheet" href="../CSS/S-SingleElement.css">
+  <script src="/Scripts/compareUserReview.js"></script>
 </head>
 
 <body>
@@ -23,6 +24,8 @@
 
   <!--MAIN-->
   <main>
+    
+
     <!--MAIN INFO-->
     <div id="elementContent" class="container">
       <div id="mainContent" class="row">
@@ -104,11 +107,18 @@
                 Valoración: {{key.rating}} <!-- La revisión y su rating -->
               </div>
               <p class="mt-0">{{key.body}}</p> <!-- El cuerpo de la revisión -->
+
+              <!-- Boton de Editar/Eliminar si el Nombre usuario coincide con el de la review -->
+              <script>
+                if (isCurrentUser("{{value}}", "{{currentUserName}}")) {
+                  document.write('<button type="button" class="btn">Editar Revisión</button>');
+                }
+              </script>
             </div>
           </div>
           {{/entrySet}}
           {{/reviewsConUsuarios}}
-
+          
         </div>
       </div>
     </div>
@@ -159,6 +169,10 @@
   <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
     crossorigin="anonymous"></script>
+
+  <script src="/Scripts/compareUserReview.js"></script>
+
+  
 </body>
 
 </html>

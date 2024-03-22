@@ -65,6 +65,10 @@ public class ElementController {
                 List<Review> reviews = serie.getReviews();
                 Map<Review, String> reviewsConUsuarios = new HashMap<>();
                 int totalRating = 0;
+
+                User user = (User) model.getAttribute("user");
+                String currentUserName = user.getName();
+
                 for (Review r : reviews) {
                     String userName = (r.getUserLinked() != null) ? r.getUserLinked().getName() : "ANONYMOUS";
                     reviewsConUsuarios.put(r, userName);
@@ -77,6 +81,8 @@ public class ElementController {
                 model.addAttribute("averageRating", averageRating);
                 model.addAttribute("serie", serie);
                 model.addAttribute("reviewsConUsuarios", reviewsConUsuarios);
+
+                model.addAttribute("currentUserName", currentUserName);
 
                 elementService.fullSet64Image();
                 return "W-SingleElement";
