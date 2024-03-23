@@ -60,32 +60,40 @@ public class UserController {
             @RequestParam(value = "base64ProfileImage", required = false) MultipartFile base64ProfileImage,
             @RequestParam(value = "base64BannerImage", required = false) MultipartFile base64BannerImage) {
 
-        try {
-            User user = (User) model.getAttribute("user");
-            if (user != null) {
+        User user = (User) model.getAttribute("user");
+        String userCurrentName = user.getName();
+        if (user != null) {
+            try {
+                // User user = (User) model.getAttribute("user");
                 if (!base64BannerImage.getOriginalFilename().equals("")
-                        && !base64ProfileImage.getOriginalFilename().equals("")) {
+                        || !base64ProfileImage.getOriginalFilename().equals("")
+                        || !name.equals("")) {
 
-                    byte[] imageProfileBytes = base64ProfileImage.getBytes();
-                    byte[] imageBannerBytes = base64BannerImage.getBytes();
-
-                    Blob profileImageBlob = new SerialBlob(imageProfileBytes);
-                    Blob profileBannerBlob = new SerialBlob(imageBannerBytes);
-
-                    user.setBannerImage(profileBannerBlob);
-                    user.setProfileImage(profileImageBlob);
+                    if (!base64BannerImage.getOriginalFilename().equals("")) {
+                        byte[] imageBannerBytes = base64BannerImage.getBytes();
+                        Blob profileBannerBlob = new SerialBlob(imageBannerBytes);
+                        user.setBannerImage(profileBannerBlob);
+                    }
+                    if (!base64ProfileImage.getOriginalFilename().equals("")) {
+                        byte[] imageProfileBytes = base64ProfileImage.getBytes();
+                        Blob profileImageBlob = new SerialBlob(imageProfileBytes);
+                        user.setProfileImage(profileImageBlob);
+                    }
+                    if (!name.equals("")) {
+                        user.setName(name);
+                    }
+                    userRepository.save(user); // URL base
+                    userCurrentName = user.getName();
+                    userDetailsService.updateSecurityContext(userRepository, userCurrentName);
                 }
-                user.setName(name);
-                userRepository.save(user); // URL base
-
-                userDetailsService.updateSecurityContext(userRepository, name);
+                return "redirect:/" + userCurrentName + "/Profile"; // Redirigir sin el token
+            } catch (Exception e) {
+                return "redirect:/" + userCurrentName + "/Profile";
             }
-
-            return "redirect:/" + name + "/Profile"; // Redirigir sin el token
-        } catch (Exception e) {
-            return "redirect:/" + name + "/Profile";
+        } // IF USER NULL
+        else {
+            return "redirect:/error";
         }
 
     }
-
 }

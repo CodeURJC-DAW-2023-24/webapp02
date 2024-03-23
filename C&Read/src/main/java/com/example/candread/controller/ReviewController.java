@@ -38,8 +38,8 @@ public class ReviewController {
                 Optional<Element> optionalElement = elementRepository.findById(elementId);
                 Element element = (Element) optionalElement.get();
                 newReview.setElementLinked(element);
-                //User user = (User) model.getAttribute("user");
-                //newReview.setUserLinked(user);
+                User user = (User) model.getAttribute("user");
+                newReview.setUserLinked(user);
     
                 reviewRepository.save(newReview);
     
