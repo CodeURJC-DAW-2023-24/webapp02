@@ -40,37 +40,24 @@
       {{#user}}
       <div id="listGroup" class="row">
         <div class="d-flex align-items-center">
-          <form id="addElement" action="/SingleElement/{{serie.id}}/addelement" method="post">
-            <div id="addElementDiv">
-              {{#user}}
-              <button type="submit" class="btn">Añadir
-                a mi biblioteca</button>
-              {{/user}}
-            </div>
-            <input type="hidden" name="_csrf" value="{{token}}" />
-          </form>
-          <form id="addFavourite" action="/SingleElement/{{serie.id}}/favourite" method="post">
-            <select id="listaSelect" name="listaId" class="form-select" aria-label="Añadir a lista:">
-              <option selected>Añadir a lista:</option>
-              {{#listas}}
-              {{#entrySet}}
-              <option value="1">{{value}}</option>
-              {{/entrySet}}
-              {{/listas}}
-            </select>
-            <button type="submit" class="btn">Agregar</button>
-            <input type="hidden" name="_csrf" value="{{token}}" />
-          </form>
           <form id="addToUserList" action="/SingleElement/{{serie.id}}/add" method="post">
             <select id="listaSelect" name="listaId" class="form-select" aria-label="Añadir a lista:">
               <option selected>Añadir a lista:</option>
               {{#listas}}
               {{#entrySet}}
-              <option value="1">{{value}}</option>
+              <option value="{{key}}">{{value}}</option>
               {{/entrySet}}
               {{/listas}}
             </select>
             <button type="submit" class="btn">Agregar</button>
+            <input type="hidden" name="_csrf" value="{{token}}" />
+          </form>
+          <form id="addElement" action="/SingleElement/{{serie.id}}/addelement" method="post">
+            <div id="addElementDiv">
+              {{#user}}
+              <button type="submit" class="btn">FAV</button>
+              {{/user}}
+            </div>
             <input type="hidden" name="_csrf" value="{{token}}" />
           </form>
         </div>
