@@ -1,13 +1,12 @@
 document.addEventListener('DOMContentLoaded', function () {
-
     console.log("ma", elementsMap);
 
-    // Obtener el elemento donde quieres agregar el contenido
     function decodeHTMLEntities(elementsMap) {
         var textarea = document.createElement('textarea');
         textarea.innerHTML = elementsMap;
         return textarea.value;
     }
+
     var decodedJsonString = decodeHTMLEntities(elementsMap);
     console.log("ma4", decodedJsonString);
 
@@ -15,18 +14,27 @@ document.addEventListener('DOMContentLoaded', function () {
     console.log("ma2", map);
 
     const container = document.getElementById('tops');
-    const topTitleUser = document.getElementById("topTitleUser");
-    const topListRow = document.querySelector('#topList .row');
 
-
-    // iteramos sobre cada key
     map.forEach((value, key) => {
         const article = document.createElement('article');
-        article.id = 'topSection'; // Assuming you want to give each article the same ID, you may want to use different IDs if needed
+        article.id = 'topSection';
+
+        const articleHeader = document.createElement('div');
+        articleHeader.id = 'articleHeader';
+
         const topTitleUser = document.createElement('div');
         topTitleUser.id = 'topTitleUser';
         topTitleUser.innerHTML = `<h4>${key}</h4>`;
-        article.appendChild(topTitleUser);
+        articleHeader.appendChild(topTitleUser);
+
+        const modalButton = document.createElement('button');
+        modalButton.type = 'button';
+        modalButton.classList.add('btn', 'btn-primary');
+        modalButton.setAttribute('data-bs-toggle', 'modal');
+        modalButton.setAttribute('data-bs-target', `#deleteModal`);
+        modalButton.textContent = 'Open Modal';
+        articleHeader.appendChild(modalButton);
+        article.appendChild(articleHeader);
 
         const topList = document.createElement('div');
         topList.id = 'topList';
@@ -35,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function () {
         topListRow.classList.add('row');
 
         value.forEach(element => {
-            console.log(`Título: ${element.name}, Autor: ${element.author}`); // Usar element.title y element.author
+            console.log(`Título: ${element.name}, Autor: ${element.author}`);
             const wCardHTML = `
                 <div class="col-sm-4">
                     <a href="/SingleElement/${element.id}" class="card-link">
@@ -55,7 +63,38 @@ document.addEventListener('DOMContentLoaded', function () {
         topList.appendChild(topListRow);
         article.appendChild(topList);
 
-        // Add the article to the container element (assuming you have a container element)
+        let modalOptions = '';
+
+        value.forEach(element => {
+            modalOptions += `<option value="${key}/${element.id}">${element.name}</option>`;
+        });
+
+        const modal = `
+            <div class="modal" id="deleteModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form id="deleteFromUserList" action="/users/updateLists" method="post" enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="deleteModalLabel">Eliminar elemento de la lista</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <select id="listSelect" name="listId" class="form-select" aria-label="Eliminar de la lista:">
+                                    ${modalOptions}
+                                </select>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Eliminar</button>
+                            </div>
+                            <input type="hidden" name="_csrf" value="${token}" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        container.insertAdjacentHTML('beforeend', modal);
         container.appendChild(article);
     });
 });

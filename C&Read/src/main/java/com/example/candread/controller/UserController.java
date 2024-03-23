@@ -1,6 +1,8 @@
 package com.example.candread.controller;
 
 import java.sql.Blob;
+import java.util.List;
+import java.util.Map;
 
 import javax.sql.rowset.serial.SerialBlob;
 
@@ -63,7 +65,6 @@ public class UserController {
         User user = (User) model.getAttribute("user");
         String userCurrentName = user.getName();
         try {
-            // User user = (User) model.getAttribute("user");
             if (!base64BannerImage.getOriginalFilename().equals("")
                     || !base64ProfileImage.getOriginalFilename().equals("")
                     || !name.equals("")) {
@@ -81,14 +82,40 @@ public class UserController {
                 if (!name.equals("")) {
                     user.setName(name);
                 }
-                userRepository.save(user); // URL base
+                userRepository.save(user);
                 userCurrentName = user.getName();
                 userDetailsService.updateSecurityContext(userRepository, userCurrentName);
             }
-            return "redirect:/" + userCurrentName + "/Profile"; // Redirigir sin el token
+            return "redirect:/" + userCurrentName + "/Profile";
         } catch (Exception e) {
             return "redirect:/" + userCurrentName + "/Profile";
         }
+    }
+        @PostMapping("/updateLists")
+        public String updateUserLists(Model model, @RequestParam("listId") String listId) {
+    
+            User user = (User) model.getAttribute("user");
+            String userCurrentName = user.getName();
+            try {
+                String[] parts = listId.split("/");
+                String key = parts[0];
+                Long id = Long.parseLong(parts[1]);
+
+                Map<String, List<Long>> userLists = user.getListasDeElementos();
+
+                if (userLists.containsKey(key)) {
+                    List<Long> list = userLists.get(key);
+                    boolean removed = list.remove(id);
+                    if (removed) {
+                        user.setListasDeElementos(userLists);
+                    }
+
+                }
+                userRepository.save(user);
+                return "redirect:/" + userCurrentName + "/Profile";
+            } catch (Exception e) {
+                return "redirect:/" + userCurrentName + "/Profile";
+            }
 
     }
 }
