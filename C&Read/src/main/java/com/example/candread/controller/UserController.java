@@ -1,6 +1,7 @@
 package com.example.candread.controller;
 
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -91,31 +92,48 @@ public class UserController {
             return "redirect:/" + userCurrentName + "/Profile";
         }
     }
-        @PostMapping("/updateLists")
-        public String updateUserLists(Model model, @RequestParam("listId") String listId) {
-    
-            User user = (User) model.getAttribute("user");
-            String userCurrentName = user.getName();
-            try {
-                String[] parts = listId.split("/");
-                String key = parts[0];
-                Long id = Long.parseLong(parts[1]);
 
-                Map<String, List<Long>> userLists = user.getListasDeElementos();
+    @PostMapping("/updateLists")
+    public String updateUserLists(Model model, @RequestParam("listId") String listId) {
 
-                if (userLists.containsKey(key)) {
-                    List<Long> list = userLists.get(key);
-                    boolean removed = list.remove(id);
-                    if (removed) {
-                        user.setListasDeElementos(userLists);
-                    }
+        User user = (User) model.getAttribute("user");
+        String userCurrentName = user.getName();
+        try {
+            String[] parts = listId.split("/");
+            String key = parts[0];
+            Long id = Long.parseLong(parts[1]);
 
+            Map<String, List<Long>> userLists = user.getListasDeElementos();
+
+            if (userLists.containsKey(key)) {
+                List<Long> list = userLists.get(key);
+                boolean removed = list.remove(id);
+                if (removed) {
+                    user.setListasDeElementos(userLists);
                 }
-                userRepository.save(user);
-                return "redirect:/" + userCurrentName + "/Profile";
-            } catch (Exception e) {
-                return "redirect:/" + userCurrentName + "/Profile";
-            }
 
+            }
+            userRepository.save(user);
+            return "redirect:/" + userCurrentName + "/Profile";
+        } catch (Exception e) {
+            return "redirect:/" + userCurrentName + "/Profile";
+        }
+    }
+
+    @PostMapping("/updateNewList")
+    public String updateUserNewList(Model model,  @RequestParam("name") String name) {
+
+        User user = (User) model.getAttribute("user");
+        String userCurrentName = user.getName();
+        try {
+            List<Long> newList = new ArrayList<>();
+            Map<String, List<Long>> userLists = user.getListasDeElementos();
+            userLists.put(name, newList);
+            user.setListasDeElementos(userLists);
+            userRepository.save(user);
+            return "redirect:/" + userCurrentName + "/Profile";
+        } catch (Exception e) {
+            return "redirect:/" + userCurrentName + "/Profile";
+        }
     }
 }

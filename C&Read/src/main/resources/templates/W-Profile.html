@@ -75,7 +75,7 @@
 
     <section id="tops">
         <!-- Libros -->
-
+        <button class="btn" data-bs-toggle="modal" data-bs-target="#newListModal">Crear Lista</button>
         <script>
             var elementsMap = "{{listOfElements}}";
             var token = "{{token}}";
@@ -85,6 +85,30 @@
         <script src="/Scripts/download.js" defer></script>
         </div>
 
+        <div class="modal" id="newListModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="/users/updateNewList" method="post" enctype="multipart/form-data">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Nueva Lista:</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="listName">Nombre de la Lista: </label>
+                                <input type="text" class="form-control" id="listName" name="name">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                        <input type="hidden" name="_csrf" value="{{token}}" />
+                    </form>
+                </div>
+            </div>
+        </div>
     </section>
     <!--SECCION ESTADISTICAS-->
     <aside id="stadisticSection">
