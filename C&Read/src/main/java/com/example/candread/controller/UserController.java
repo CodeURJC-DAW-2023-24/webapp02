@@ -62,37 +62,32 @@ public class UserController {
 
         User user = (User) model.getAttribute("user");
         String userCurrentName = user.getName();
-        if (user != null) {
-            try {
-                // User user = (User) model.getAttribute("user");
-                if (!base64BannerImage.getOriginalFilename().equals("")
-                        || !base64ProfileImage.getOriginalFilename().equals("")
-                        || !name.equals("")) {
+        try {
+            // User user = (User) model.getAttribute("user");
+            if (!base64BannerImage.getOriginalFilename().equals("")
+                    || !base64ProfileImage.getOriginalFilename().equals("")
+                    || !name.equals("")) {
 
-                    if (!base64BannerImage.getOriginalFilename().equals("")) {
-                        byte[] imageBannerBytes = base64BannerImage.getBytes();
-                        Blob profileBannerBlob = new SerialBlob(imageBannerBytes);
-                        user.setBannerImage(profileBannerBlob);
-                    }
-                    if (!base64ProfileImage.getOriginalFilename().equals("")) {
-                        byte[] imageProfileBytes = base64ProfileImage.getBytes();
-                        Blob profileImageBlob = new SerialBlob(imageProfileBytes);
-                        user.setProfileImage(profileImageBlob);
-                    }
-                    if (!name.equals("")) {
-                        user.setName(name);
-                    }
-                    userRepository.save(user); // URL base
-                    userCurrentName = user.getName();
-                    userDetailsService.updateSecurityContext(userRepository, userCurrentName);
+                if (!base64BannerImage.getOriginalFilename().equals("")) {
+                    byte[] imageBannerBytes = base64BannerImage.getBytes();
+                    Blob profileBannerBlob = new SerialBlob(imageBannerBytes);
+                    user.setBannerImage(profileBannerBlob);
                 }
-                return "redirect:/" + userCurrentName + "/Profile"; // Redirigir sin el token
-            } catch (Exception e) {
-                return "redirect:/" + userCurrentName + "/Profile";
+                if (!base64ProfileImage.getOriginalFilename().equals("")) {
+                    byte[] imageProfileBytes = base64ProfileImage.getBytes();
+                    Blob profileImageBlob = new SerialBlob(imageProfileBytes);
+                    user.setProfileImage(profileImageBlob);
+                }
+                if (!name.equals("")) {
+                    user.setName(name);
+                }
+                userRepository.save(user); // URL base
+                userCurrentName = user.getName();
+                userDetailsService.updateSecurityContext(userRepository, userCurrentName);
             }
-        } // IF USER NULL
-        else {
-            return "redirect:/error";
+            return "redirect:/" + userCurrentName + "/Profile"; // Redirigir sin el token
+        } catch (Exception e) {
+            return "redirect:/" + userCurrentName + "/Profile";
         }
 
     }

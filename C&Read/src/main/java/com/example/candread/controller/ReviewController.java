@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.example.candread.model.Element;
 import com.example.candread.model.Review;
+import com.example.candread.model.User;
 import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.ReviewRepository;
 
