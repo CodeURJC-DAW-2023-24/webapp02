@@ -27,6 +27,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 
 import com.example.candread.services.UserService;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import java.util.Base64;
 
 import jakarta.servlet.http.HttpServletRequest;
@@ -54,10 +56,12 @@ public class BookApiController {
     @Autowired
     private ElementRepository elementRepo;
 
+
     @GetMapping("/")
     public Page<Element> getBooks(Pageable pageable) {
         return elementsPaged.findByType("LIBRO", pageable);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Element> getBookById(@PathVariable Long id) {
@@ -70,6 +74,7 @@ public class BookApiController {
             return ResponseEntity.notFound().build();
         }
     }
+
 
     @GetMapping("/{id}/image")
     public ResponseEntity<byte[]> getBookImageById(@PathVariable Long id) {
@@ -100,6 +105,7 @@ public class BookApiController {
     }
 
     //Tengo que mirar con que formato pasar el imageFile 
+
     @PostMapping("/{id}/image")
     public ResponseEntity<Object> uploadBookImageById(@PathVariable Long id, @RequestParam("imageFile") MultipartFile imageFile,  HttpServletRequest request) throws URISyntaxException, IOException {
         Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
@@ -128,6 +134,7 @@ public class BookApiController {
         }
     }
 
+    
     @PutMapping("/{id}/image") 
     public ResponseEntity<Object> updateBookImage(@PathVariable Long id, @RequestBody UpdateBookImageDTO updateBookImageDTO) throws IOException {
                                                    

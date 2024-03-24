@@ -32,7 +32,6 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.candread.model.Element;
-import com.example.candread.model.Element.Basico;
 import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.PagingRepository;
 import com.example.candread.services.UserService;
@@ -53,7 +52,6 @@ public class SeriesApiController {
     @Autowired
     private ElementRepository elementRepo;
 
-    @JsonView(Basico.class)
     @ResponseBody
     @GetMapping("/")
     public ResponseEntity<Page<Element>> getBooks(@RequestParam("page") Optional<Integer> page, Pageable pageable) {
@@ -64,7 +62,6 @@ public class SeriesApiController {
         return ResponseEntity.ok(elementsPaged.findByType("SERIE", pageable));
     }
 
-    @JsonView(Basico.class)
     @GetMapping("/{id}")
     public ResponseEntity<Element> getSeriesById(@PathVariable Long id) {
         Optional<Element> optElement = elementRepo.findById(id);
@@ -77,7 +74,7 @@ public class SeriesApiController {
         }
     }
 
-    @JsonView(Basico.class)
+
     @GetMapping("/{id}/image")
     public ResponseEntity<byte[]> getSerieImageById(@PathVariable Long id) {
         Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
@@ -103,7 +100,7 @@ public class SeriesApiController {
         }
     }
 
-    @JsonView(Basico.class)
+
     @PostMapping("/{id}/image")
     public ResponseEntity<Object> uploadSerieImageById(@PathVariable Long id,
             @RequestParam("imageFile") MultipartFile imageFile, HttpServletRequest request)
@@ -135,7 +132,7 @@ public class SeriesApiController {
         }
     }
 
-    @JsonView(Basico.class)
+
     @PutMapping("/{id}/image")
     public ResponseEntity<Object> updateSerieImage(@PathVariable Long id,
             @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
@@ -160,7 +157,7 @@ public class SeriesApiController {
         return ResponseEntity.noContent().build();
     }
 
-    @JsonView(Basico.class)
+
     @DeleteMapping("/{id}/image")
     public ResponseEntity<Object> deleteSerieImage(@PathVariable Long id) {
         Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");

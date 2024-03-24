@@ -1,6 +1,5 @@
 package com.example.candread.model;
 
-import com.example.candread.model.Element.Basico;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import jakarta.persistence.Column;
@@ -16,14 +15,14 @@ public class Review {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView(Basico.class)
+    // @JsonView(Basico.class)
     private Long id;
 
     @Column (length = 5000)
-    @JsonView(Basico.class)
+    // @JsonView(Basico.class)
     private String body;
 
-    @JsonView(Basico.class)
+    // @JsonView(Basico.class)
     private int rating;
 
     @ManyToOne 

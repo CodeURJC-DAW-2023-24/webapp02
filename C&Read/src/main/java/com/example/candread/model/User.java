@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.example.candread.model.Element.Basico;
 import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -33,16 +32,16 @@ public class User {
     //ATTRIBUTES
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonView(Basico.class)
+    // @JsonView(Basico.class)
     private Long id;
 
-    @JsonView(Basico.class)
+    // @JsonView(Basico.class)
     private String name;
     @ElementCollection(fetch = FetchType.EAGER)
-    @JsonView(Basico.class)
+    // @JsonView(Basico.class)
 	private List<String> roles;
 
-    @JsonView(Basico.class)
+    // @JsonView(Basico.class)
     private String password;
 
     @OneToMany (mappedBy = "userLinked", cascade = CascadeType.ALL)
