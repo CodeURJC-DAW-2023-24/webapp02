@@ -24,10 +24,8 @@ import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.PagingRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 
 import com.example.candread.services.UserService;
-import com.fasterxml.jackson.annotation.JsonView;
 
 import java.util.Base64;
 
@@ -43,7 +41,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 
 
-@Controller
+@RestController
 @RequestMapping("api/books")
 public class BookApiController {
 

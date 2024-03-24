@@ -64,7 +64,7 @@ public class SeriesApiController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Element> getSeriesById(@PathVariable Long id) {
-        Optional<Element> optElement = elementRepo.findById(id);
+        Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
 
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
