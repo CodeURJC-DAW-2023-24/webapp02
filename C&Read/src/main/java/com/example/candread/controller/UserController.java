@@ -1,6 +1,9 @@
 package com.example.candread.controller;
 
 import java.sql.Blob;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 import javax.sql.rowset.serial.SerialBlob;
 
@@ -62,38 +65,75 @@ public class UserController {
 
         User user = (User) model.getAttribute("user");
         String userCurrentName = user.getName();
-        if (user != null) {
-            try {
-                // User user = (User) model.getAttribute("user");
-                if (!base64BannerImage.getOriginalFilename().equals("")
-                        || !base64ProfileImage.getOriginalFilename().equals("")
-                        || !name.equals("")) {
+        try {
+            if (!base64BannerImage.getOriginalFilename().equals("")
+                    || !base64ProfileImage.getOriginalFilename().equals("")
+                    || !name.equals("")) {
 
-                    if (!base64BannerImage.getOriginalFilename().equals("")) {
-                        byte[] imageBannerBytes = base64BannerImage.getBytes();
-                        Blob profileBannerBlob = new SerialBlob(imageBannerBytes);
-                        user.setBannerImage(profileBannerBlob);
-                    }
-                    if (!base64ProfileImage.getOriginalFilename().equals("")) {
-                        byte[] imageProfileBytes = base64ProfileImage.getBytes();
-                        Blob profileImageBlob = new SerialBlob(imageProfileBytes);
-                        user.setProfileImage(profileImageBlob);
-                    }
-                    if (!name.equals("")) {
-                        user.setName(name);
-                    }
-                    userRepository.save(user); // URL base
-                    userCurrentName = user.getName();
-                    userDetailsService.updateSecurityContext(userRepository, userCurrentName);
+                if (!base64BannerImage.getOriginalFilename().equals("")) {
+                    byte[] imageBannerBytes = base64BannerImage.getBytes();
+                    Blob profileBannerBlob = new SerialBlob(imageBannerBytes);
+                    user.setBannerImage(profileBannerBlob);
                 }
-                return "redirect:/" + userCurrentName + "/Profile"; // Redirigir sin el token
-            } catch (Exception e) {
-                return "redirect:/" + userCurrentName + "/Profile";
+                if (!base64ProfileImage.getOriginalFilename().equals("")) {
+                    byte[] imageProfileBytes = base64ProfileImage.getBytes();
+                    Blob profileImageBlob = new SerialBlob(imageProfileBytes);
+                    user.setProfileImage(profileImageBlob);
+                }
+                if (!name.equals("")) {
+                    user.setName(name);
+                }
+                userRepository.save(user);
+                userCurrentName = user.getName();
+                userDetailsService.updateSecurityContext(userRepository, userCurrentName);
             }
-        } // IF USER NULL
-        else {
-            return "redirect:/error";
+            return "redirect:/" + userCurrentName + "/Profile";
+        } catch (Exception e) {
+            return "redirect:/" + userCurrentName + "/Profile";
         }
+    }
 
+    @PostMapping("/updateLists")
+    public String updateUserLists(Model model, @RequestParam("listId") String listId) {
+
+        User user = (User) model.getAttribute("user");
+        String userCurrentName = user.getName();
+        try {
+            String[] parts = listId.split("/");
+            String key = parts[0];
+            Long id = Long.parseLong(parts[1]);
+
+            Map<String, List<Long>> userLists = user.getListasDeElementos();
+
+            if (userLists.containsKey(key)) {
+                List<Long> list = userLists.get(key);
+                boolean removed = list.remove(id);
+                if (removed) {
+                    user.setListasDeElementos(userLists);
+                }
+
+            }
+            userRepository.save(user);
+            return "redirect:/" + userCurrentName + "/Profile";
+        } catch (Exception e) {
+            return "redirect:/" + userCurrentName + "/Profile";
+        }
+    }
+
+    @PostMapping("/updateNewList")
+    public String updateUserNewList(Model model,  @RequestParam("name") String name) {
+
+        User user = (User) model.getAttribute("user");
+        String userCurrentName = user.getName();
+        try {
+            List<Long> newList = new ArrayList<>();
+            Map<String, List<Long>> userLists = user.getListasDeElementos();
+            userLists.put(name, newList);
+            user.setListasDeElementos(userLists);
+            userRepository.save(user);
+            return "redirect:/" + userCurrentName + "/Profile";
+        } catch (Exception e) {
+            return "redirect:/" + userCurrentName + "/Profile";
+        }
     }
 }

@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.candread.dto.UpdateBookImageDTO;
 import com.example.candread.model.Element;
 import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.PagingRepository;
@@ -37,6 +38,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @Controller
@@ -59,7 +61,7 @@ public class BookApiController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Element> getBookById(@PathVariable Long id) {
-        Optional<Element> optElement = elementRepo.findById(id);
+        Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
 
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
@@ -112,7 +114,7 @@ public class BookApiController {
                 // Save in the database
                 elementRepo.save(element);
 
-                String imageUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}/image").buildAndExpand(id).toUriString();
+                String imageUrl = ServletUriComponentsBuilder.fromRequestUri(request).buildAndExpand(id).toUriString();
 
                 return ResponseEntity.created(new URI(imageUrl)).build();
                 
@@ -127,7 +129,7 @@ public class BookApiController {
     }
 
     @PutMapping("/{id}/image") 
-    public ResponseEntity<Object> updateBookImage(@PathVariable Long id, @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
+    public ResponseEntity<Object> updateBookImage(@PathVariable Long id, @RequestBody UpdateBookImageDTO updateBookImageDTO) throws IOException {
                                                    
         // Verify if the book exists
         Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
@@ -136,6 +138,7 @@ public class BookApiController {
         }
 
         Element book = optElement.get();
+        MultipartFile imageFile = updateBookImageDTO.getImageFile();
         byte[] imageBytes = imageFile.getBytes();
         // Update the book's image file
         try {

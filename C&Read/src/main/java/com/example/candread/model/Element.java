@@ -7,6 +7,8 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonView;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.sql.Blob;
 
 import jakarta.persistence.CascadeType;
@@ -49,6 +51,10 @@ public class Element {
     public interface Basico {
 	}
 
+
+    public interface Basico {
+	}
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @JsonView(Basico.class)
@@ -73,22 +79,28 @@ public class Element {
     private String country;
 
     @ManyToMany 
+    @JsonIgnore
     private List<User> users;
 
     @ManyToMany
+    @JsonIgnore
     private List<User> usersFavourited;
 
     @Lob 
+    @JsonIgnore
     private Blob imageFile;
 
     @Transient
     private String base64Image;
 
     @ElementCollection(fetch = FetchType.EAGER)
+    @JsonIgnore
     private List<String> genres;
 
     @OneToMany (mappedBy = "elementLinked", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Review> reviews = new ArrayList<>();
+
 
     // CONSTRUCTOR DEL ELEMENT:
 

@@ -40,31 +40,26 @@
       {{#user}}
       <div id="listGroup" class="row">
         <div class="d-flex align-items-center">
+          <form id="addToUserList" action="/SingleElement/{{serie.id}}/add" method="post">
+            <select id="listaSelect" name="listaId" class="form-select" aria-label="Añadir a lista:">
+              <option selected>Añadir a lista:</option>
+              {{#listas}}
+              {{#entrySet}}
+              <option value="{{key}}">{{value}}</option>
+              {{/entrySet}}
+              {{/listas}}
+            </select>
+            <button type="submit" class="btn">Agregar</button>
+            <input type="hidden" name="_csrf" value="{{token}}" />
+          </form>
           <form id="addElement" action="/SingleElement/{{serie.id}}/addelement" method="post">
             <div id="addElementDiv">
               {{#user}}
-              <button type="submit" class="btn">Añadir
-                a mi biblioteca</button>
+              <button type="submit" class="btn">FAV</button>
               {{/user}}
             </div>
             <input type="hidden" name="_csrf" value="{{token}}" />
           </form>
-          <form id="addFavourite" action="/SingleElement/{{serie.id}}/favourite" method="post">
-            <div id="addFavouriteDiv">
-              {{#user}}
-              <button type="submit" class="btn">Añadir
-                Favorito</button>
-              {{/user}}
-            </div>
-            <input type="hidden" name="_csrf" value="{{token}}" />
-          </form>
-          <select class="form-select" aria-label="Añadir a lista:">
-            <option selected>Añadir a lista:</option>
-            <option value="1">Lista 1</option>
-            <option value="2">Lista 2</option>
-            <option value="3">Lista 3</option>
-          </select>
-          
         </div>
       </div>
       {{/user}}

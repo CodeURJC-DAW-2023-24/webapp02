@@ -3,6 +3,7 @@ package com.example.candread.model;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import com.example.candread.model.Element.Basico;
 import com.fasterxml.jackson.annotation.JsonAlias;
@@ -11,13 +12,17 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.JsonView;
 
 import jakarta.persistence.CascadeType;
+import jakarta.persistence.CollectionTable;
+import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
 import jakarta.persistence.Lob;
 import jakarta.persistence.ManyToMany;
+import jakarta.persistence.MapKeyColumn;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Transient;
 import jakarta.persistence.GenerationType;
@@ -63,6 +68,13 @@ public class User {
 
     @Transient
     private String base64BannerImage;
+
+    
+    @ElementCollection
+    @CollectionTable(name="user_elements_lists", joinColumns = @JoinColumn(name="user_id"))
+    @MapKeyColumn(name = "list_name")
+    @Column(name = "element_id")
+    private Map<String, List<Long>> listasDeElementos;
 
 
     //CONTROLLERS
@@ -164,6 +176,14 @@ public class User {
 
     public void setBase64BannerImage(String base64BannerImage) {
         this.base64BannerImage = base64BannerImage;
+    }
+
+    public Map<String, List<Long>> getListasDeElementos() {
+        return listasDeElementos;
+    }
+
+    public void setListasDeElementos(Map<String, List<Long>> listasDeElementos) {
+        this.listasDeElementos = listasDeElementos;
     }
 
     
