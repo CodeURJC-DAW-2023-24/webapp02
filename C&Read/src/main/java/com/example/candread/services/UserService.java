@@ -68,7 +68,6 @@ public class UserService {
         elementService.insertElement();
         elementService.insertSeries();
         elementService.inserFilms();
-        elementService.startAPi();
     }
     
     public boolean existsByUsernameAndPassword(String username, String password) {
