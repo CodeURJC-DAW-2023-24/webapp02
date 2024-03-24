@@ -1,4 +1,4 @@
-package com.example.apicontroller;
+package com.example.candread.apicontroller;
 
 import java.io.IOException;
 import java.net.URI;
@@ -53,6 +53,7 @@ public class BookApiController {
 
     @GetMapping("/")
     public Page<Element> getBooks(Pageable pageable) {
+        System.out.println("Hola");
         return elementsPaged.findByType("LIBRO", pageable);
     }
 
