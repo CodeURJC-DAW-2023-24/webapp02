@@ -19,13 +19,18 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.candread.model.Element;
+import com.example.candread.model.Element.Countries;
+import com.example.candread.model.Element.Seasons;
+import com.example.candread.model.Element.States;
 import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.PagingRepository;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
-import com.example.candread.services.UserService;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.List;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -36,14 +41,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 
 @RestController
 @RequestMapping("api/books")
 public class BookApiController {
-
-    @Autowired
-    private UserService userService;
 
     @Autowired
     private PagingRepository elementsPaged;
@@ -63,6 +66,85 @@ public class BookApiController {
 
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
+            return ResponseEntity.ok(element);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<Object> uploadBook(@RequestParam("name") String name,
+            @RequestParam("description") String description,
+            @RequestParam("author") String author,
+            @RequestParam("year") int year,
+            @RequestParam("season") String season,
+            @RequestParam("state") String state,
+            @RequestParam("country") String country,
+            @RequestParam("genres") String genres,
+            HttpServletRequest request) throws URISyntaxException {
+
+        List<String> genresList = Arrays.asList(genres.split(","));
+        Element element = new Element(name, description, author, "LIBRO", season, state, country, genresList, year);
+        elementRepo.save(element);
+        Long bookId = element.getId();
+        String bookUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(bookId)
+                .toUriString();
+
+        return ResponseEntity.created(new URI(bookUrl)).build();
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateBook(@PathVariable Long id,
+            @RequestParam(name = "name", required = false) String name,
+            @RequestParam(name = "description", required = false) String description,
+            @RequestParam(name = "author", required = false) String author,
+            @RequestParam(name = "year", required = false) Integer year,
+            @RequestParam(name = "season", required = false) String season,
+            @RequestParam(name = "state", required = false) String state,
+            @RequestParam(name = "country", required = false) String country,
+            @RequestParam(name = "genres", required = false) String genres,
+            HttpServletRequest request) throws URISyntaxException {
+
+        Optional<Element> optElement = elementRepo.findById(id);
+
+        if (optElement.isPresent()) {
+            Element element = (Element) optElement.get();
+            if(name!=null){
+                element.setName(name);
+            }
+            if(description!=null){
+                element.setDescription(description);
+            }
+            if(author!=null){
+                element.setAuthor(author);
+            }
+            if(year != null){
+                element.setYear(year);
+            }
+            if(season!=null){
+                Seasons s = Seasons.valueOf(season);
+                element.setSeason(s);
+            }
+            if (state!=null) {
+                States s = States.valueOf(state);
+                element.setState(s);
+            }
+            if (country!=null) {
+                Countries c = Countries.valueOf(country);
+                element.setCountry(c);
+            }
+            if (genres!=null) {
+                List<String> newGenresList = Arrays.asList(genres.split(","));
+                List<String> genreList = element.getGeneros();
+                for (String genero : newGenresList) {
+                    if (!genreList.contains(genero)) {
+                        genreList.add(genero);
+                    }
+                }
+                element.setGeneros(genreList);
+            }
+
+            elementRepo.save(element);
             return ResponseEntity.ok(element);
         } else {
             return ResponseEntity.notFound().build();
@@ -97,13 +179,15 @@ public class BookApiController {
         }
     }
 
-    //Tengo que mirar con que formato pasar el imageFile 
+    // Tengo que mirar con que formato pasar el imageFile
     @PostMapping("/{id}/image")
-    public ResponseEntity<Object> uploadBookImageById(@PathVariable Long id, @RequestParam("imageFile") MultipartFile imageFile,  HttpServletRequest request) throws URISyntaxException, IOException {
+    public ResponseEntity<Object> uploadBookImageById(@PathVariable Long id,
+            @RequestParam("imageFile") MultipartFile imageFile, HttpServletRequest request)
+            throws URISyntaxException, IOException {
         Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
 
         if (optElement.isPresent()) {
-            Element element =(Element) optElement.get();
+            Element element = (Element) optElement.get();
             try {
                 // Set the image to the element
                 byte[] imageData = imageFile.getBytes();
@@ -112,10 +196,11 @@ public class BookApiController {
                 // Save in the database
                 elementRepo.save(element);
 
-                String imageUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}/image").buildAndExpand(id).toUriString();
+                String imageUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}/image")
+                        .buildAndExpand(id).toUriString();
 
                 return ResponseEntity.created(new URI(imageUrl)).build();
-                
+
             } catch (SQLException e) {
                 e.printStackTrace();
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -126,9 +211,10 @@ public class BookApiController {
         }
     }
 
-    @PutMapping("/{id}/image") 
-    public ResponseEntity<Object> updateBookImage(@PathVariable Long id, @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
-                                                   
+    @PutMapping("/{id}/image")
+    public ResponseEntity<Object> updateBookImage(@PathVariable Long id,
+            @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
+
         // Verify if the book exists
         Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
         if (optElement.isEmpty()) {
@@ -152,9 +238,9 @@ public class BookApiController {
     }
 
     @DeleteMapping("/{id}/image")
-    public ResponseEntity<Object> deleteBookImage(@PathVariable Long id){
+    public ResponseEntity<Object> deleteBookImage(@PathVariable Long id) {
         Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
-        //If the book is not found we return a 404 response
+        // If the book is not found we return a 404 response
         if (optElement.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
