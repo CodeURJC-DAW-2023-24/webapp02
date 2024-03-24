@@ -4,6 +4,12 @@ import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.example.candread.model.Element.Basico;
+import com.fasterxml.jackson.annotation.JsonAlias;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -22,12 +28,16 @@ public class User {
     //ATTRIBUTES
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @JsonView(Basico.class)
     private Long id;
 
+    @JsonView(Basico.class)
     private String name;
     @ElementCollection(fetch = FetchType.EAGER)
+    @JsonView(Basico.class)
 	private List<String> roles;
 
+    @JsonView(Basico.class)
     private String password;
 
     @OneToMany (mappedBy = "userLinked", cascade = CascadeType.ALL)
@@ -38,6 +48,7 @@ public class User {
 
     //@ManyToMany (mappedBy = "userFavourited", cascade = CascadeType.ALL)
     //@ElementCollection(fetch = FetchType.EAGER)  <-FUNCIONA
+  
     @ManyToMany (mappedBy = "usersFavourited", cascade = CascadeType.ALL)
     private List<Element> favourites = new ArrayList<>();
 

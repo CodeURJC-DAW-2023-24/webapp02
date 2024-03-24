@@ -1,12 +1,19 @@
 {
     "configurations": [
-
+        {
+            "type": "java",
+            "name": "DemoApplication",
+            "request": "launch",
+            "mainClass": "com.example.DemoApplication",
+            "projectName": "candread"
+        },
         {
             "type": "java",
             "name": "DemoApplication",
             "request": "launch",
             "mainClass": "com.example.candread.DemoApplication",
-            "projectName": "candread"
+            "projectName": "candread",
+            "vmArgs": " -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.port=51503 -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dspring.jmx.enabled=true -Djava.rmi.server.hostname=localhost -Dspring.application.admin.enabled=true -Dspring.boot.project.name=candread"
         }
     ]
 }
