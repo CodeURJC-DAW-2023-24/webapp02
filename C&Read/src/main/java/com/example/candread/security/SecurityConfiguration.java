@@ -66,6 +66,7 @@ public class SecurityConfiguration {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .permitAll());
+        http.csrf(csrf->csrf.ignoringRequestMatchers("/api/**"));
 
         return http.build();
     }
