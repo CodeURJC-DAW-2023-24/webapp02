@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.candread.dto.ElementDTO;
 import com.example.candread.dto.UpdateBookImageDTO;
 import com.example.candread.model.Element;
 import com.example.candread.model.Element.Countries;
@@ -151,48 +152,40 @@ public class BookApiController {
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateBook(@PathVariable Long id,
-            @RequestParam(name = "name", required = false) String name,
-            @RequestParam(name = "description", required = false) String description,
-            @RequestParam(name = "author", required = false) String author,
-            @RequestParam(name = "year", required = false) Integer year,
-            @RequestParam(name = "season", required = false) String season,
-            @RequestParam(name = "state", required = false) String state,
-            @RequestParam(name = "country", required = false) String country,
-            @RequestParam(name = "genres", required = false) String genres,
+            @RequestBody ElementDTO elementDTO, 
             HttpServletRequest request) throws URISyntaxException {
 
         Optional<Element> optElement = elementRepo.findById(id);
 
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
-            if (name != null) {
-                element.setName(name);
+            if (elementDTO.getName() != null) {
+                element.setName(elementDTO.getName());
             }
-            if (description != null) {
-                element.setDescription(description);
+            if (elementDTO.getDescription() != null) {
+                element.setDescription(elementDTO.getDescription());
             }
-            if (author != null) {
-                element.setAuthor(author);
+            if (elementDTO.getAuthor() != null) {
+                element.setAuthor(elementDTO.getAuthor() );
             }
-            if (year != null) {
-                element.setYear(year);
+            if (elementDTO.getYear() != 0) {
+                element.setYear(elementDTO.getYear());
             }
-            if (season != null) {
-                Seasons s = Seasons.valueOf(season);
+            if (elementDTO.getSeason() != null) {
+                Seasons s = Seasons.valueOf(elementDTO.getSeason());
                 element.setSeason(s);
             }
-            if (state != null) {
-                States s = States.valueOf(state);
+            if (elementDTO.getState() != null) {
+                States s = States.valueOf(elementDTO.getState());
                 element.setState(s);
             }
-            if (country != null) {
-                Countries c = Countries.valueOf(country);
+            if (elementDTO.getCountry() != null) {
+                Countries c = Countries.valueOf(elementDTO.getCountry());
                 element.setCountry(c);
             }
-            if (genres != null) {
-                List<String> newGenresList = Arrays.asList(genres.split(","));
+            if (elementDTO.getGenres() != null) {
                 List<String> genreList = element.getGeneros();
-                for (String genero : newGenresList) {
+                for (String genero : elementDTO.getGenres()) {
                     if (!genreList.contains(genero)) {
                         genreList.add(genero);
                     }
