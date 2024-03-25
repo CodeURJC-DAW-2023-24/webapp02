@@ -1,5 +1,7 @@
 package com.example.candread.dto;
 
+import java.util.List;
+
 import com.example.candread.model.Element;
 
 public class ElementDTO {
@@ -11,12 +13,13 @@ public class ElementDTO {
     private String season;
     private String state;
     private String country;
+    private List<String> genres;
 
     public ElementDTO() {
 
     }
 
-    public ElementDTO(String name, String description, String author, int year, String type, String season, String state, String country) {
+    public ElementDTO(String name, String description, String author, int year, String type, String season, String state, String country, List<String> genres) {
         this.name = name;
         this.description = description;
         this.author = author;
@@ -25,6 +28,7 @@ public class ElementDTO {
         this.season = season;
         this.state = state;
         this.country = country;
+        this.genres = genres;
     }
 
     public ElementDTO(Element element) {
@@ -36,6 +40,7 @@ public class ElementDTO {
         this.season = element.getSeason();
         this.state = element.getState();
         this.country = element.getCountry();
+        this.genres = element.getGeneros();
     }
 
     public String getName() {
@@ -100,6 +105,14 @@ public class ElementDTO {
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public List<String> getGenres() {
+        return genres;
+    }
+
+    public void setGenres(List<String> genres) {
+        this.genres = genres;
     }
 
 }

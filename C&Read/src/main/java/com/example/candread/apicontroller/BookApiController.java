@@ -18,11 +18,13 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.candread.dto.ElementDTO;
 import com.example.candread.dto.UpdateBookImageDTO;
 import com.example.candread.model.Element;
 import com.example.candread.model.Element.Countries;
 import com.example.candread.model.Element.Seasons;
 import com.example.candread.model.Element.States;
+import com.example.candread.model.Element.Types;
 import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.PagingRepository;
 import org.springframework.data.domain.Pageable;
@@ -70,6 +72,86 @@ public class BookApiController {
         }
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateBook(@PathVariable Long id,
+            @RequestBody ElementDTO elementDTO,
+            HttpServletRequest request) throws URISyntaxException {
+
+        Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
+
+        if (optElement.isPresent()) {
+            Element element = (Element) optElement.get();
+            if (elementDTO.getName() != null) {
+                element.setName(elementDTO.getName());
+            }
+            if (elementDTO.getDescription() != null) {
+                element.setDescription(elementDTO.getDescription());
+            }
+            if (elementDTO.getAuthor() != null) {
+                element.setAuthor(elementDTO.getAuthor());
+            }
+            if (elementDTO.getYear() != 0) {
+                element.setYear(elementDTO.getYear());
+            }
+            if (elementDTO.getSeason()!= null) {
+                Seasons s = Seasons.valueOf(elementDTO.getSeason());
+                element.setSeason(s);
+            }
+            if (elementDTO.getState() != null) {
+                States s = States.valueOf(elementDTO.getState());
+                element.setState(s);
+            }
+
+            if (elementDTO.getType() != null) {
+                Types t = Types.valueOf(elementDTO.getType());
+                element.setType(t);
+            }
+
+            if (elementDTO.getCountry() != null) {
+                Countries c = Countries.valueOf(elementDTO.getCountry());
+                element.setCountry(c);
+            }
+            if (elementDTO.getGenres() != null) {
+                List<String> newGenresList = elementDTO.getGenres();
+                List<String> genreList = element.getGeneros();
+                for (String genero : newGenresList) {
+                    if (!genreList.contains(genero)) {
+                        genreList.add(genero);
+                    }
+                }
+                element.setGeneros(genreList);
+            }
+
+            elementRepo.save(element);
+            return ResponseEntity.ok(element);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PostMapping("/")
+    public ResponseEntity<Object> uploadBook(@RequestBody ElementDTO elementDTO,
+            HttpServletRequest request) throws URISyntaxException {
+
+        List<String> genresList = elementDTO.getGenres();
+        Element element = new Element(elementDTO.getName(), elementDTO.getDescription(), elementDTO.getAuthor(),
+            elementDTO.getType(), elementDTO.getSeason(), elementDTO.getState(), elementDTO.getCountry(), genresList, elementDTO.getYear());
+        elementRepo.save(element);
+        Long bookId = element.getId();
+        String bookUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(bookId)
+                .toUriString();
+
+        return ResponseEntity.created(new URI(bookUrl)).build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Object> deleteBook(@PathVariable Long id) {
+
+        elementRepo.deleteById(id);
+
+        return ResponseEntity.noContent().build();
+    }
+
     @GetMapping("/{id}/image")
     public ResponseEntity<byte[]> getBookImageById(@PathVariable Long id) {
         Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
@@ -98,26 +180,8 @@ public class BookApiController {
         }
     }
 
-    @PostMapping("/")
-    public ResponseEntity<Object> uploadBook(@RequestParam("name") String name,
-            @RequestParam("description") String description,
-            @RequestParam("author") String author,
-            @RequestParam("year") int year,
-            @RequestParam("season") String season,
-            @RequestParam("state") String state,
-            @RequestParam("country") String country,
-            @RequestParam("genres") String genres,
-            HttpServletRequest request) throws URISyntaxException {
+    
 
-        List<String> genresList = Arrays.asList(genres.split(","));
-        Element element = new Element(name, description, author, "LIBRO", season, state, country, genresList, year);
-        elementRepo.save(element);
-        Long bookId = element.getId();
-        String bookUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(bookId)
-                .toUriString();
-
-        return ResponseEntity.created(new URI(bookUrl)).build();
-    }
     // Tengo que mirar con que formato pasar el imageFile
     @PostMapping("/{id}/image")
     public ResponseEntity<Object> uploadBookImageById(@PathVariable Long id,
@@ -149,67 +213,10 @@ public class BookApiController {
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updateBook(@PathVariable Long id,
-            @RequestParam(name = "name", required = false) String name,
-            @RequestParam(name = "description", required = false) String description,
-            @RequestParam(name = "author", required = false) String author,
-            @RequestParam(name = "year", required = false) Integer year,
-            @RequestParam(name = "season", required = false) String season,
-            @RequestParam(name = "state", required = false) String state,
-            @RequestParam(name = "country", required = false) String country,
-            @RequestParam(name = "genres", required = false) String genres,
-            HttpServletRequest request) throws URISyntaxException {
-
-        Optional<Element> optElement = elementRepo.findById(id);
-
-        if (optElement.isPresent()) {
-            Element element = (Element) optElement.get();
-            if (name != null) {
-                element.setName(name);
-            }
-            if (description != null) {
-                element.setDescription(description);
-            }
-            if (author != null) {
-                element.setAuthor(author);
-            }
-            if (year != null) {
-                element.setYear(year);
-            }
-            if (season != null) {
-                Seasons s = Seasons.valueOf(season);
-                element.setSeason(s);
-            }
-            if (state != null) {
-                States s = States.valueOf(state);
-                element.setState(s);
-            }
-            if (country != null) {
-                Countries c = Countries.valueOf(country);
-                element.setCountry(c);
-            }
-            if (genres != null) {
-                List<String> newGenresList = Arrays.asList(genres.split(","));
-                List<String> genreList = element.getGeneros();
-                for (String genero : newGenresList) {
-                    if (!genreList.contains(genero)) {
-                        genreList.add(genero);
-                    }
-                }
-                element.setGeneros(genreList);
-            }
-
-            elementRepo.save(element);
-            return ResponseEntity.ok(element);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
 
     @PutMapping("/{id}/image")
     public ResponseEntity<Object> updateBookImage(@PathVariable Long id,
-            @RequestBody UpdateBookImageDTO updateBookImageDTO) throws IOException {
+        @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
 
         // Verify if the book exists
         Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
@@ -218,7 +225,6 @@ public class BookApiController {
         }
 
         Element book = optElement.get();
-        MultipartFile imageFile = updateBookImageDTO.getImageFile();
         byte[] imageBytes = imageFile.getBytes();
         // Update the book's image file
         try {
@@ -234,13 +240,7 @@ public class BookApiController {
         return ResponseEntity.noContent().build();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> deleteBook(@PathVariable Long id) {
-
-        elementRepo.deleteById(id);
-
-        return ResponseEntity.noContent().build();
-    }
+    
     
     @DeleteMapping("/{id}/image")
     public ResponseEntity<Object> deleteBookImage(@PathVariable Long id) {
