@@ -84,19 +84,17 @@ public class ReviewController {
         return "redirect:/SingleElement/" + elementId;
     }
 
-    @PostMapping("/edit/delete")
+    @PostMapping("/delete")
     public String deleteReview (
     @RequestParam("reviewID") Long reviewId,
-    @RequestParam("userRating") int userRating, 
-    @RequestParam("userReview") String userReviewText,
     @RequestParam("elementId") Long elementId, 
     Model model, HttpServletRequest request){
         
         Optional<Review> reviewToEdit = reviewRepository.findById(reviewId);
         Review reviewEditted = reviewToEdit.orElseThrow();
 
-        reviewEditted.setRating(userRating);
-        reviewEditted.setBody(userReviewText);
+        //reviewEditted.setRating(0);
+        //reviewEditted.setBody(null);
 
         //Optional<Element> optionalElement = elementRepository.findById(elementId);
         //Element element = (Element) optionalElement.get();
