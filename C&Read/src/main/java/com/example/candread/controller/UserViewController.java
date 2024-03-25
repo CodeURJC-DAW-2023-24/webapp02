@@ -3,7 +3,9 @@ package com.example.candread.controller;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +28,7 @@ import com.example.candread.repositories.PagingRepository;
 import com.example.candread.security.RepositoryUserDetailsService;
 import com.example.candread.services.ElementService;
 import com.example.candread.services.UserService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
@@ -77,6 +80,35 @@ public class UserViewController {
     @GetMapping("/Profile")
     public String moveToPerfil(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page,
             Pageable pageable) throws SQLException, IOException {
+
+        elementService.fullSet64Image();
+        User user = (User) model.getAttribute("user");
+
+        Map<String, List<Long>> pruebE = user.getListasDeElementos();
+
+        Map<String, List<Element>> mapElementosConvertidos = new HashMap<>();
+
+        for (Map.Entry<String, List<Long>> entry : pruebE.entrySet()) {
+            String nombreLista = entry.getKey();
+            List<Long> listaIds = entry.getValue();
+
+            List<Element> listaElementosConvertidos = new ArrayList<>();
+
+            for (Long id : listaIds) {
+                Element element = elementRepository.findById(id).orElse(null);
+                if (element != null) {
+                    listaElementosConvertidos.add(element);
+                }
+            }
+            mapElementosConvertidos.put(nombreLista, listaElementosConvertidos);
+        }
+
+        // model.addAttribute("listOfElements", mapElementosConvertidos);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonElementos = objectMapper.writeValueAsString(mapElementosConvertidos);
+
+        // Añadir jsonElementos al modelo para ser enviado al cliente
+        model.addAttribute("listOfElements", jsonElementos);
         // LOAD ELEMENTS LISTS
         int pageNumber = page.orElse(0);
         int pageSize = 10;
@@ -102,10 +134,6 @@ public class UserViewController {
 
         List<String> genresNow = new ArrayList<>();
         int limit = 0;
-
-        elementService.fullSet64Image();
-
-        User user = (User) model.getAttribute("user");
 
         // FOR AND SWITCH CASE TO GET ALL NUMBER OF MEDIA REGISTERED IN THE USER
         if (user != null) {

@@ -47,7 +47,7 @@ public class SecurityConfiguration {
 
         http.authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers("/", "/CSS/**", "/Images/**", "/Scripts/**","/downloadNames/**", "/SignIn", "/users/**", "/Library/**",
-                        "/SingleElement/**", "/loginerror", "/error","/EditFragment")
+                        "/SingleElement/**", "/loginerror", "/error","/EditFragment", "/api/books/**")
                 .permitAll()
                 .requestMatchers("/*/Profile/**", "/*/Main", "/review/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/Admin/**", "/news/add","/SingleElement/edit").hasRole("ADMIN"))
@@ -66,7 +66,8 @@ public class SecurityConfiguration {
                         .logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .permitAll());
-
+        
+        http.csrf(csrf->csrf.ignoringRequestMatchers("/api/**"));
         return http.build();
     }
 

@@ -1,13 +1,15 @@
 package com.example.candread.services;
 
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.Base64;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.sql.rowset.serial.SerialBlob;
@@ -40,7 +42,7 @@ public class UserService {
     public void insertUsers() throws SerialException, IOException, SQLException {
 
 
-        Blob profileblob = getBlob("static/Images/img-UserProfile2.png");
+        Blob profileblob = getBlob("static/Images/Img-UserProfile2.png");
         Blob bannerblob = getBlob("static/Images/imagenBanner.jpg");
 
         //BASE USERS IN THE SYSTEM: 1 ADMIN 1 USER 1 ADMIN-USER
@@ -48,6 +50,11 @@ public class UserService {
             User userPrueba = new User("admin1", passwordEncoder.encode("pass"), "USER", "ADMIN");
             userPrueba.setBannerImage(bannerblob);
             userPrueba.setProfileImage(profileblob);
+            Map<String, List<Long>> listaE = new HashMap<>();
+            List<Long> idEl = Arrays.asList(1L, 2L, 3L);
+            listaE.put("Favoritos", idEl);
+            listaE.put("Viendo", idEl);
+            userPrueba.setListasDeElementos(listaE);
             userRepository.save(userPrueba);
         }
         if(!existsByUsernameAndPassword("admin3", "123")){
