@@ -18,10 +18,13 @@ import javax.sql.rowset.serial.SerialException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.candread.model.User;
+import com.example.candread.repositories.UserPagingRepository;
 import com.example.candread.repositories.UserRepository;
 
 import jakarta.annotation.PostConstruct;
@@ -33,10 +36,15 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
+    private UserPagingRepository userPagedRepository;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
     private ElementService elementService;
+
+    
 
     @PostConstruct
     public void insertUsers() throws SerialException, IOException, SQLException {
@@ -77,6 +85,10 @@ public class UserService {
         elementService.insertSeries();
         elementService.inserFilms();
 
+    }
+
+    public Page<User> getAllUsers(Pageable pageable){
+        return userPagedRepository.findAll(pageable);
     }
     
     public boolean existsByUsernameAndPassword(String username, String password) {
