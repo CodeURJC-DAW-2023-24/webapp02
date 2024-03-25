@@ -16,6 +16,7 @@
   <link rel="stylesheet" href="../CSS/S-Main.css">
   <link rel="stylesheet" href="../CSS/S-SingleElement.css">
   <script src="/Scripts/compareUserReview.js"></script>
+  <!--script src="/Scripts/editReview.js"></!--script-->
 </head>
 
 <body>
@@ -107,11 +108,12 @@
                 Valoración: {{key.rating}} <!-- La revisión y su rating -->
               </div>
               <p class="mt-0">{{key.body}}</p> <!-- El cuerpo de la revisión -->
-
+              <p id="reviewID" data-revid="{{key.id}}" style="display: none;"></p>
+              
               <!-- Boton de Editar/Eliminar si el Nombre usuario coincide con el de la review -->
               <script>
                 if (isCurrentUser("{{value}}", "{{currentUserName}}")) {
-                  document.write('<button type="button" class="btn">Editar Revisión</button>');
+                  document.write('<button id="btnEdit" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalEditReview">Editar Reseña</button>');
                 }
               </script>
             </div>
@@ -156,10 +158,48 @@
               <input type="hidden" name="_csrf" value="{{token}}" />
             </form>
           </div>
-
         </div>
       </div>
     </div>
+
+        <!-- Modal para editar una reseña -->
+        <div class="modal fade" id="modalEditReview" tabindex="-1" aria-labelledby="modalAddReviewLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="modalAddReviewLabel">Editar Reseña</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                <!-- Contenido del formulario para editar la reseña -->
+                <form id="editReviewForm" action="/review/edit/add?elementId={{serie.id}}" method="post">
+                  <div class="mb-3">
+                    <label for="userRating" class="form-label">Puntuación</label>
+                    <select class="form-select" id="userRating" name="userRating">
+                      <option selected>Seleccionar puntuación</option>
+                      <option value="1">1 estrella</option>
+                      <option value="2">2 estrellas</option>
+                      <option value="3">3 estrellas</option>
+                      <option value="4">4 estrellas</option>
+                      <option value="5">5 estrellas</option>
+                    </select>
+                  </div>
+                  <div class="mb-3">
+                    <label for="userReview" class="form-label">Reseña</label>
+                    <textarea class="form-control" id="userReview" name="userReview" rows="3"></textarea>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <button id="btnSave" type="submit2" class="btn">Guardar</button>
+                  </div>
+                  <input type="hidden" name="_csrf" value="{{token}}" />
+                  <input id="inputrevid" type="hidden" name="reviewID"/>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+
   </main>
 
   <!--Bootstrap-->
@@ -170,7 +210,9 @@
     integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
     crossorigin="anonymous"></script>
 
+    <!--SCRIPTS-->
   <script src="/Scripts/compareUserReview.js"></script>
+  <script src="/Scripts/editReview.js"></script>
 
   
 </body>

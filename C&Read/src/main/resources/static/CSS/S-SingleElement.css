@@ -192,6 +192,14 @@ main{
   color: white;
 }
 
+#btnEdit {
+  margin: 10px;
+  background-color:#dc5252;
+  border-radius: 5px;
+  width: fit-content;
+  color: white;
+}
+
 
 
 

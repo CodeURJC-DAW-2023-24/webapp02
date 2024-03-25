@@ -67,7 +67,11 @@ public class ElementController {
                 int totalRating = 0;
 
                 User user = (User) model.getAttribute("user");
-                String currentUserName = user.getName();
+                String currentUserName = "";
+
+                if(user!=null){
+                    currentUserName = user.getName();
+                }
 
                 for (Review r : reviews) {
                     String userName = (r.getUserLinked() != null) ? r.getUserLinked().getName() : "ANONYMOUS";
@@ -271,7 +275,8 @@ public class ElementController {
 
 
     @PostMapping("/edit/add")
-    public String changeElement(@RequestParam(value = "name", required = false) String name,
+    public String changeElement(
+    @RequestParam(value = "name", required = false) String name,
     @RequestParam(value = "description", required = false) String description,
     @RequestParam(value = "author", required = false) String author,
     @RequestParam(value = "type", required = false) String type,
@@ -330,7 +335,6 @@ public class ElementController {
             else if (country.toUpperCase().equals("REINO_UNIDO")) {
                 element.setCountry(Element.Countries.REINO_UNIDO);
             }
-            
         
             List<String> formattedGenres = new ArrayList<>();
             for (String genre : genres) {
@@ -344,7 +348,7 @@ public class ElementController {
             elementRepository.save(element);
 
         } catch (Exception e) {
-            model.addAttribute("errorMessage", "Error al guardar la noticia.");
+            model.addAttribute("errorMessage", "Error al guardar el elemento.");
         }
 
         if (request.getAttribute("_csrf") != null) {

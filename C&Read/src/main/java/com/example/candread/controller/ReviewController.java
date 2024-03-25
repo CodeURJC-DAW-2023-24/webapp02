@@ -56,4 +56,30 @@ public class ReviewController {
 
         return "redirect:/SingleElement/" + elementId;
     }
+
+    @PostMapping("/edit/add")
+    public String editReview (
+    @RequestParam("reviewID") Long reviewId,
+    @RequestParam("userRating") int userRating, 
+    @RequestParam("userReview") String userReviewText,
+    @RequestParam("elementId") Long elementId, 
+    Model model, HttpServletRequest request){
+        
+        Optional<Review> reviewToEdit = reviewRepository.findById(reviewId);
+        Review reviewEditted = reviewToEdit.orElseThrow();
+
+        reviewEditted.setRating(userRating);
+        reviewEditted.setBody(userReviewText);
+
+        //Optional<Element> optionalElement = elementRepository.findById(elementId);
+        //Element element = (Element) optionalElement.get();
+
+        reviewRepository.save(reviewEditted);
+
+        if (request.getAttribute("_csrf") != null) {
+            model.addAttribute("token", request.getAttribute("_csrf").toString());
+        }
+        
+        return "redirect:/SingleElement/" + elementId;
+    }
 }
