@@ -3,6 +3,10 @@ package com.example.candread.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonView;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.sql.Blob;
@@ -43,18 +47,32 @@ public class Element {
         ACCION, TERROR, AVENTURA, MISTERIO, ROMANCE, CIENCIAFICCION, DRAMA, INFANTIL, COMEDIA, FANTASIA, SOBRENATURAL, NOVELA, JUVENIL
     }
 
+
+    // public interface Basico {
+	// }
+
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@JsonView(Basico.class)
     private Long id;
 
+    // @JsonView(Basico.class)
     private String name;
     @Column (length = 5000) //More space for large descriptions
+    // @JsonView(Basico.class)
     private String description;
+    // @JsonView(Basico.class)
     private String author;
+    // @JsonView(Basico.class)
     private int year;
+    // @JsonView(Basico.class)
     private String type;
+    // @JsonView(Basico.class)
     private String season;
+    // @JsonView(Basico.class)
     private String state;
+    // @JsonView(Basico.class)
     private String country;
 
     @ManyToMany 

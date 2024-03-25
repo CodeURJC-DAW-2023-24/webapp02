@@ -55,10 +55,12 @@ public class BookApiController {
     @Autowired
     private ElementRepository elementRepo;
 
+
     @GetMapping("/")
     public Page<Element> getBooks(Pageable pageable) {
         return elementsPaged.findByType("LIBRO", pageable);
     }
+
 
     @GetMapping("/{id}")
     public ResponseEntity<Element> getBookById(@PathVariable Long id) {

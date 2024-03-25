@@ -39,7 +39,7 @@ public class UserService {
     private ElementService elementService;
 
     @PostConstruct
-    public void insertUsers() throws SerialException, IOException, SQLException {
+    public void insertUsers() throws Exception {
 
 
         Blob profileblob = getBlob("static/Images/Img-UserProfile2.png");
@@ -76,7 +76,6 @@ public class UserService {
         elementService.insertElement();
         elementService.insertSeries();
         elementService.inserFilms();
-
     }
     
     public boolean existsByUsernameAndPassword(String username, String password) {
