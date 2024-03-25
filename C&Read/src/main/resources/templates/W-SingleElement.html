@@ -109,6 +109,8 @@
               <script>
                 if (isCurrentUser("{{value}}", "{{currentUserName}}")) {
                   document.write('<button id="btnEdit" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalEditReview">Editar Reseña</button>');
+                  //document.write('<div><a id="btnDelete" class="btn" href="/review/edit/delete">Borrar</a></div>');
+                  document.write('<button id="btnDelete" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalDeleteReview">Borrar Reseña</button>');
                 }
               </script>
             </div>
@@ -185,6 +187,8 @@
                   </div>
                   <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    <!--button to delete review-->
+                    <!--button id="btnDelete" class="btn" href="/review/edit/delete">Borrar</!--button-->
                     <button id="btnSave" type="submit2" class="btn">Guardar</button>
                   </div>
                   <input type="hidden" name="_csrf" value="{{token}}" />
@@ -194,6 +198,40 @@
             </div>
           </div>
         </div>
+      
+          <!-- Modal para eliminar una reseña -->
+          <div class="modal fade" id="modalDeleteReview" tabindex="-1" aria-labelledby="modalAddReviewLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="modalAddReviewLabel">Editar Reseña</h5>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <!-- Contenido del formulario para borrar la reseña -->
+                  <form id="deleteReviewForm" action="/review/edit/delete?elementId={{serie.id}}" method="post">
+                    <div class="mb-3">
+                      <label for="userRating" class="form-label">Puntuación: {{key.rating}} </label>
+                      <div>{{key.rating}}</div>
+                    </div>
+                    <div class="mb-3">
+                      <label for="userReview" class="form-label">Reseña:</label>
+                      <div>{{key.body}}</div>
+                      <!--textarea class="form-control" id="userReview" name="userReview" rows="3"></!-textarea-->
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                      <!--button to delete review-->
+                      <!--button id="btnDelete" class="btn" href="/review/edit/delete">Borrar</!--button-->
+                      <button id="btnSave" type="submit2" class="btn">ELIMINAR</button>
+                    </div>
+                    <input type="hidden" name="_csrf" value="{{token}}" />
+                    <input id="inputrevid" type="hidden" name="reviewID"/>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
 
   </main>
 
