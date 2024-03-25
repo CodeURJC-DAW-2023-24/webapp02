@@ -82,7 +82,7 @@ public class ElementController {
                 Map<Review, String> reviewsConUsuarios = new HashMap<>();
                 int totalRating = 0;
 
-                User user = (User) model.getAttribute("user");
+                user = (User) model.getAttribute("user");
                 String currentUserName = "";
 
                 if(user!=null){
