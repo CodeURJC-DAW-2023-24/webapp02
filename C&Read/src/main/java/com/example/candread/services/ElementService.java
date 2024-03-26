@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.sql.rowset.serial.SerialBlob;
 import javax.sql.rowset.serial.SerialException;
@@ -24,6 +25,8 @@ import javax.sql.rowset.serial.SerialException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.example.candread.model.Element;
 import com.example.candread.model.Review;
@@ -619,15 +622,15 @@ public class ElementService {
 
     public void setElementsImage64(long id) throws SQLException, IOException {
         Optional<Element> elementOptional = elementRepository.findById(id);
-        Element element = elementOptional.orElseThrow();
-        Blob blob = element.getImageFile();
-        InputStream inputStream = blob.getBinaryStream();
-        byte[] imageBytes = inputStream.readAllBytes();
-        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-        element.setBase64Image(base64Image);
+       Element element = elementOptional.orElseThrow();
+       Blob blob = element.getImageFile();
+       InputStream inputStream = blob.getBinaryStream();
+       byte[] imageBytes = inputStream.readAllBytes();
+       String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+       element.setBase64Image(base64Image);
 
-        inputStream.close();
-    }
+      
+       inputStream.close();
+   }
 
-    
 }
