@@ -5,6 +5,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
@@ -41,15 +45,15 @@ public class User {
     @ManyToMany (mappedBy = "users", cascade = CascadeType.ALL)
     private List<Element> elements = new ArrayList<>();
 
-    //@ManyToMany (mappedBy = "userFavourited", cascade = CascadeType.ALL)
-    //@ElementCollection(fetch = FetchType.EAGER)  <-FUNCIONA
     @ManyToMany (mappedBy = "usersFavourited", cascade = CascadeType.ALL)
     private List<Element> favourites = new ArrayList<>();
 
-    @Lob 
+    @Lob
+    @JsonIgnore
     private Blob profileImage;
 
     @Lob
+    @JsonIgnore
     private Blob bannerImage;
 
     @Transient
