@@ -214,55 +214,7 @@ public class BookApiController {
         }
     }
 
-    @PutMapping("/{id}")
-    public ResponseEntity<Object> updateBook(@PathVariable Long id,
-            @RequestBody ElementDTO elementDTO, 
-            HttpServletRequest request) throws URISyntaxException {
-
-        Optional<Element> optElement = elementRepo.findById(id);
-
-        if (optElement.isPresent()) {
-            Element element = (Element) optElement.get();
-            if (elementDTO.getName() != null) {
-                element.setName(elementDTO.getName());
-            }
-            if (elementDTO.getDescription() != null) {
-                element.setDescription(elementDTO.getDescription());
-            }
-            if (elementDTO.getAuthor() != null) {
-                element.setAuthor(elementDTO.getAuthor() );
-            }
-            if (elementDTO.getYear() != 0) {
-                element.setYear(elementDTO.getYear());
-            }
-            if (elementDTO.getSeason() != null) {
-                Seasons s = Seasons.valueOf(elementDTO.getSeason());
-                element.setSeason(s);
-            }
-            if (elementDTO.getState() != null) {
-                States s = States.valueOf(elementDTO.getState());
-                element.setState(s);
-            }
-            if (elementDTO.getCountry() != null) {
-                Countries c = Countries.valueOf(elementDTO.getCountry());
-                element.setCountry(c);
-            }
-            if (elementDTO.getGenres() != null) {
-                List<String> genreList = element.getGeneros();
-                for (String genero : elementDTO.getGenres()) {
-                    if (!genreList.contains(genero)) {
-                        genreList.add(genero);
-                    }
-                }
-                element.setGeneros(genreList);
-            }
-
-            elementRepo.save(element);
-            return ResponseEntity.ok(element);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
-    }
+    
 
     @PutMapping("/{id}/image")
     public ResponseEntity<Object> updateBookImage(@PathVariable Long id,

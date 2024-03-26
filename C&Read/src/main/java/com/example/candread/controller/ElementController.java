@@ -50,7 +50,7 @@ public class ElementController {
     @Autowired
     private UserService userService;
     
-     List<String> baseGenres = new ArrayList<>(Arrays.asList(
+    public List<String> baseGenres = new ArrayList<>(Arrays.asList(
             "ACCION", "AVENTURA", "TERROR",  "MISTERIO", "ROMANCE", "CIENCIAFICCION", "DRAMA",
             "INFANTIL", "COMEDIA", "FANTASIA", "SOBRENATURAL", "NOVELA", "JUVENIL"
         ));

@@ -32,16 +32,11 @@ public class User {
     //ATTRIBUTES
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // @JsonView(Basico.class)
     private Long id;
 
-    // @JsonView(Basico.class)
     private String name;
     @ElementCollection(fetch = FetchType.EAGER)
-    // @JsonView(Basico.class)
 	private List<String> roles;
-
-    // @JsonView(Basico.class)
     private String password;
 
     @OneToMany (mappedBy = "userLinked", cascade = CascadeType.ALL)
@@ -57,9 +52,11 @@ public class User {
     private List<Element> favourites = new ArrayList<>();
 
     @Lob 
+    @JsonIgnore
     private Blob profileImage;
 
     @Lob
+    @JsonIgnore
     private Blob bannerImage;
 
     @Transient
