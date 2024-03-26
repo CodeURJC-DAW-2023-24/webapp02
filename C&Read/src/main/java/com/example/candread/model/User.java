@@ -34,18 +34,22 @@ public class User {
     private Long id;
 
     private String name;
+
+    
     @ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
 
     private String password;
 
     @OneToMany (mappedBy = "userLinked", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Review> reviews = new ArrayList<>();
 
     @ManyToMany (mappedBy = "users", cascade = CascadeType.ALL)
     private List<Element> elements = new ArrayList<>();
 
     @ManyToMany (mappedBy = "usersFavourited", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Element> favourites = new ArrayList<>();
 
     @Lob
@@ -57,13 +61,16 @@ public class User {
     private Blob bannerImage;
 
     @Transient
+    @JsonIgnore
     private String base64ProfileImage;
 
     @Transient
+    @JsonIgnore
     private String base64BannerImage;
 
     
     @ElementCollection
+    @JsonIgnore
     @CollectionTable(name="user_elements_lists", joinColumns = @JoinColumn(name="user_id"))
     @MapKeyColumn(name = "list_name")
     @Column(name = "element_id")
