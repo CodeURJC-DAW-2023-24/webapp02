@@ -5,10 +5,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonView;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.CollectionTable;
@@ -35,23 +34,24 @@ public class User {
     private Long id;
 
     private String name;
+
+    
     @ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
     private String password;
 
     @OneToMany (mappedBy = "userLinked", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Review> reviews = new ArrayList<>();
 
     @ManyToMany (mappedBy = "users", cascade = CascadeType.ALL)
     private List<Element> elements = new ArrayList<>();
 
-    //@ManyToMany (mappedBy = "userFavourited", cascade = CascadeType.ALL)
-    //@ElementCollection(fetch = FetchType.EAGER)  <-FUNCIONA
-  
     @ManyToMany (mappedBy = "usersFavourited", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Element> favourites = new ArrayList<>();
 
-    @Lob 
+    @Lob
     @JsonIgnore
     private Blob profileImage;
 
@@ -60,13 +60,16 @@ public class User {
     private Blob bannerImage;
 
     @Transient
+    @JsonIgnore
     private String base64ProfileImage;
 
     @Transient
+    @JsonIgnore
     private String base64BannerImage;
 
     
     @ElementCollection
+    @JsonIgnore
     @CollectionTable(name="user_elements_lists", joinColumns = @JoinColumn(name="user_id"))
     @MapKeyColumn(name = "list_name")
     @Column(name = "element_id")

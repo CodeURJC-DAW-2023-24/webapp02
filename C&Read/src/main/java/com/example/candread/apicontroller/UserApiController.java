@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 
 import com.example.candread.model.User;
+import com.example.candread.repositories.UserRepository;
 import com.example.candread.services.UserService;
 
 @RestController
@@ -16,11 +17,13 @@ import com.example.candread.services.UserService;
 public class UserApiController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRepository userRep;
     
     //va mal
     @GetMapping("/")
     public Page<User> getUsers(Pageable pageable) {
-        Page<User> usuarios = userService.getAllUsers(pageable);
-        return usuarios;
+        return userRep.findAll(pageable);
     }
 }

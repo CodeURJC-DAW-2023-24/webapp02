@@ -60,6 +60,10 @@ public class BookApiController {
         return elementsPaged.findByType("LIBRO", pageable);
     }
 
+    @GetMapping("/top")
+    public Page<Element> getTop5Books(Pageable pageable) {
+        return elementRepo.findTopElementsByRating("LIBRO", pageable);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Element> getBookById(@PathVariable Long id) {
