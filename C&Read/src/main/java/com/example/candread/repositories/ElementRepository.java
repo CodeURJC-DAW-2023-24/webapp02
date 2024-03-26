@@ -16,9 +16,12 @@ public interface ElementRepository extends JpaRepository<Element,Long>{
 
     List<Element> findByName(String name);
 
+    List<Element> findByType(String type);
+
     Optional<Element> findById(long id);
 
     Optional<Element> findByIdAndType(long id, String type);
+
 
     void deleteByName(String name);
 }
