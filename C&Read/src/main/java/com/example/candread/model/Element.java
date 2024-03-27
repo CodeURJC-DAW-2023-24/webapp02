@@ -48,31 +48,20 @@ public class Element {
     }
 
 
-    // public interface Basico {
-	// }
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    //@JsonView(Basico.class)
     private Long id;
 
-    // @JsonView(Basico.class)
     private String name;
     @Column (length = 5000) //More space for large descriptions
-    // @JsonView(Basico.class)
+   
     private String description;
-    // @JsonView(Basico.class)
     private String author;
-    // @JsonView(Basico.class)
     private int year;
-    // @JsonView(Basico.class)
     private String type;
-    // @JsonView(Basico.class)
     private String season;
-    // @JsonView(Basico.class)
     private String state;
-    // @JsonView(Basico.class)
     private String country;
 
     @ManyToMany 

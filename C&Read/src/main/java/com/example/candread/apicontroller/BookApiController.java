@@ -19,6 +19,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.candread.dto.ElementDTO;
+import com.example.candread.dto.UpdateBookImageDTO;
 import com.example.candread.model.Element;
 import com.example.candread.model.Element.Countries;
 import com.example.candread.model.Element.Seasons;
@@ -60,6 +61,10 @@ public class BookApiController {
         return elementsPaged.findByType("LIBRO", pageable);
     }
 
+    @GetMapping("/top")
+    public Page<Element> getTop5Books(Pageable pageable) {
+        return elementRepo.findTopElementsByRating("LIBRO", pageable);
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<Element> getBookById(@PathVariable Long id) {
@@ -220,6 +225,7 @@ public class BookApiController {
         }
     }
 
+    
 
     @PutMapping("/{id}/image")
     public ResponseEntity<Object> updateBookImage(@PathVariable Long id,

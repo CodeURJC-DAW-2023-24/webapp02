@@ -1,6 +1,9 @@
 package com.example.candread.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -22,6 +25,8 @@ public interface PagingRepository extends JpaRepository<Element, Long>{
     Page<Element> findByTypeAndSeason(String string, String season, Pageable pageable);
     Page<Element> findByTypeAndCountry(String string, String country, Pageable pageable);
     Page<Element> findByTypeAndState(String string, String state, Pageable pageable);
-
+    
+    @Query("SELECT e FROM Element e WHERE e.type = :type AND e IN :recomendation")
+    Page<Element> findByTypeAndRecommendations(String type, List<Element> recomendation, Pageable pageable);
     
 } 
