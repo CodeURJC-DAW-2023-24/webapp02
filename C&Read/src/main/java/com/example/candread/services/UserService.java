@@ -130,4 +130,8 @@ public class UserService {
         
         inputStream.close();
    }
+
+   public void repoSaveUser(User userToSave){
+    userRepository.save(userToSave);
+   }
 }

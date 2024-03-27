@@ -629,5 +629,19 @@ public class ElementService {
         inputStream.close();
     }
 
+    public Optional<Element> repoFindById(long id){
+        Optional<Element> elementOptional = elementRepository.findById(id);
+        return elementOptional;
+        //return elementOptional = elementRepository.findById(id);
+    }
+
+    public List<Element> repoFindByName(String nameToSearch){
+        return elementRepository.findByName(nameToSearch);
+    }
+
+    public void repoSaveElement(Element elementToSave){
+        elementRepository.save(elementToSave);
+    }
+
     
 }
