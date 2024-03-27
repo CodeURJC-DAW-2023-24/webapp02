@@ -23,8 +23,6 @@ import com.example.candread.model.Review;
 
 import com.example.candread.model.User;
 
-import com.example.candread.repositories.ElementRepository;
-import com.example.candread.repositories.UserRepository;
 import com.example.candread.services.ElementService;
 import com.example.candread.services.UserService;
 
@@ -42,9 +40,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class ElementController {
 
     @Autowired
-    private ElementRepository elementRepository;
-
-    @Autowired
     private ElementService elementService;
 
     @Autowired
@@ -54,9 +49,6 @@ public class ElementController {
             "ACCION", "AVENTURA", "TERROR",  "MISTERIO", "ROMANCE", "CIENCIAFICCION", "DRAMA",
             "INFANTIL", "COMEDIA", "FANTASIA", "SOBRENATURAL", "NOVELA", "JUVENIL"
         ));
-
-    @Autowired
-    private UserRepository userRepository;
 
     @GetMapping("/{id}")
     public String getSingleElement(@PathVariable("id") Long id, Model model) throws SQLException, IOException {

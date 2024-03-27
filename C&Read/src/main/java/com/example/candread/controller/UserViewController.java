@@ -22,11 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.candread.model.Element;
 import com.example.candread.model.New;
 import com.example.candread.model.User;
-import com.example.candread.repositories.ElementRepository;
-import com.example.candread.repositories.NewRepository;
 import com.example.candread.repositories.PagingRepository;
 import com.example.candread.security.RepositoryUserDetailsService;
 import com.example.candread.services.ElementService;
+import com.example.candread.services.NewService;
 import com.example.candread.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -40,13 +39,10 @@ public class UserViewController {
     public RepositoryUserDetailsService userDetailService;
 
     @Autowired
-    private ElementRepository elementRepository;
-
-    @Autowired
-    private NewRepository newRepository;
-
-    @Autowired
     private ElementService elementService;
+
+    @Autowired
+    private NewService newService;
 
     @Autowired
     private PagingRepository pagingRepository;
@@ -62,15 +58,17 @@ public class UserViewController {
         userService.fullSet64Image();
 
         // CAROUSEL IMG
-        List<Element> elementosEstreno = elementRepository.findTop4ByOrderByIdDesc();
+        //List<Element> elementosEstreno = elementRepository.findTop4ByOrderByIdDesc();
+        List<Element> elementosEstreno = elementService.repofindTop4ByOrderByIdDesc();
         for (int i = 0; i < elementosEstreno.size(); i++) {
             Element e = elementosEstreno.get(i);
             String img = e.getBase64Image();
             String finalimg = "data:image/jpg;base64," + img;
             model.addAttribute("firstSlide" + i, finalimg);
         }
-
-        List<New> newsList = newRepository.findAll(); // Obtener todas las noticias
+        // Obtener todas las noticias
+        //List<New> newsList = newRepository.findAll(); 
+        List<New> newsList = newService.repoFindAll();
         model.addAttribute("news", newsList);
 
         return "W-Main";
@@ -95,7 +93,8 @@ public class UserViewController {
             List<Element> listaElementosConvertidos = new ArrayList<>();
 
             for (Long id : listaIds) {
-                Element element = elementRepository.findById(id).orElse(null);
+                //Element element = elementRepository.findById(id).orElse(null);
+                Element element = elementService.repoFindById(id).orElse(null);
                 if (element != null) {
                     listaElementosConvertidos.add(element);
                 }

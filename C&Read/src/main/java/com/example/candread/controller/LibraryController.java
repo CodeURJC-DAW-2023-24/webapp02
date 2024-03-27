@@ -25,9 +25,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.candread.model.Element;
 import com.example.candread.model.Review;
 import com.example.candread.model.User;
-import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.PagingRepository;
-import com.example.candread.repositories.UserRepository;
 import com.example.candread.services.ElementService;
 import com.example.candread.services.UserService;
 
@@ -49,14 +47,9 @@ public class LibraryController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private ElementRepository elementRepository;
-
     private List<Element> recomendador(User mainUser, List<Element> elements) {
-        List<User> users = userRepository.findAll();
+        //List<User> users = userRepository.findAll();
+        List<User> users = userService.repoFindAll();
 
         Map<Element, Integer> reviewsPorElemento = new HashMap<>();
         Map<Element, Set<String>> generosPorElemento = new HashMap<>();
@@ -174,7 +167,8 @@ public class LibraryController {
             Pageable pageable) throws SQLException, IOException {
 
         User mainUser = (User) model.getAttribute("user");
-        List<Element> b = elementRepository.findByType("LIBRO"); 
+        //List<Element> b = elementRepository.findByType("LIBRO"); 
+        List<Element> b = elementService.repoFindByType("LIBRO");
         userService.fullSet64Image();
         int pageNumber = page.orElse(0);
         int pageSize = 10;

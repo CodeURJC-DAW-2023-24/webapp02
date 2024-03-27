@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import com.example.candread.model.Element;
 import com.example.candread.model.User;
-import com.example.candread.repositories.ElementRepository;
-import com.example.candread.repositories.UserRepository;
+import com.example.candread.services.ElementService;
+import com.example.candread.services.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -21,17 +21,18 @@ import org.springframework.security.web.csrf.CsrfToken;
 public class DefaultModelAttributes {
 
     @Autowired
-    private ElementRepository elementRepository;
+    private UserService userService;
 
     @Autowired
-    private UserRepository userRepository;
+    private ElementService elementService;
 
     @ModelAttribute(name = "user")
     public User getUser(HttpServletRequest request) {
         
         if (request.getUserPrincipal() != null) {
             String name = request.getUserPrincipal().getName();
-            User user = userRepository.findByName(name).orElseThrow();
+            //User user = userRepository.findByName(name).orElseThrow();
+            User user = userService.repoFindByName(name);
             return user;
         }
         return null;
@@ -90,7 +91,8 @@ public class DefaultModelAttributes {
 
     public List<Element> getTypeList(String tipo) {
 
-        List<Element> listaElementos = elementRepository.findAll();
+        //List<Element> listaElementos = elementRepository.findAll();
+        List<Element> listaElementos = elementService.repoFindAll();
         List<Element> lista = new ArrayList<>();
         for (Element i : listaElementos) {
             if (i.getType().equals(tipo)) {

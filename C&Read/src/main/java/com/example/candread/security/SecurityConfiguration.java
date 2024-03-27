@@ -19,6 +19,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.example.candread.model.User;
 import com.example.candread.repositories.UserRepository;
+import com.example.candread.services.UserService;
 
 @Configuration
 @EnableWebSecurity
@@ -85,9 +86,10 @@ public class SecurityConfiguration {
     @Autowired
     private AuthenticationManager authenticationManager;
 
-    public void updateSecurityContext(UserRepository userRepository, String name) {
+    public void updateSecurityContext(UserService userService, String name) {
         // Obtener el usuario actualizado de la base de datos
-        Optional<User> opUser = userRepository.findByName(name);
+        //Optional<User> opUser = userRepository.findByName(name);
+        Optional<User> opUser = userService.repoFindByNameOpt(name);
         User user = opUser.orElseThrow(() -> new RuntimeException("User Aurora not found"));
 
         // Crear una instancia UserDetails basada en los nuevos detalles del usuario

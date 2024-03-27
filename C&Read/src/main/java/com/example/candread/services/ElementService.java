@@ -634,10 +634,18 @@ public class ElementService {
 
     //REPOSITORY FUNCTIONS CALLED IN CONTROLLERS:
 
+    public List<Element> repoFindAll(){
+        return elementRepository.findAll();
+    }
+
     public Optional<Element> repoFindById(long id){
         //Optional<Element> elementOptional = elementRepository.findById(id);
         //return elementOptional;
         return elementRepository.findById(id);
+    }
+
+    public List<Element> repoFindByType(String type){
+        return elementRepository.findByType(type);
     }
 
     public Optional<Element> repoFindByIdAndType (long id, String typeWanted){
@@ -650,6 +658,10 @@ public class ElementService {
 
     public Page<Element> repofindTopElementsByRating (String type, Pageable pageable){
         return elementRepository.findTopElementsByRating(type, pageable);
+    }
+
+    public List<Element> repofindTop4ByOrderByIdDesc(){
+        return elementRepository.findTop4ByOrderByIdDesc();
     }
 
     public void repoSaveElement(Element elementToSave){

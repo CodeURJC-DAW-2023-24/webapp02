@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.candread.model.User;
-import com.example.candread.repositories.UserRepository;
 import com.example.candread.security.SecurityConfiguration;
 import com.example.candread.services.UserService;
 
@@ -25,9 +24,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Controller
 @RequestMapping("/users")
 public class UserController {
-
-    @Autowired
-    private UserRepository userRepository;
 
     @Autowired
     private UserService userService;
@@ -48,7 +44,8 @@ public class UserController {
             User userPrueba = new User(user.getName(), passwordEncoder.encode(user.getPassword()), "USER");
             userPrueba.setBannerImage(bannerblob);
             userPrueba.setProfileImage(profileblob);
-            userRepository.save(userPrueba);
+            //userRepository.save(userPrueba);
+            userService.repoSaveUser(userPrueba);
 
             // userRepository.save(encryptedUser);
 
@@ -83,9 +80,10 @@ public class UserController {
                 if (!name.equals("")) {
                     user.setName(name);
                 }
-                userRepository.save(user);
+                //userRepository.save(user);
+                userService.repoSaveUser(user);
                 userCurrentName = user.getName();
-                userDetailsService.updateSecurityContext(userRepository, userCurrentName);
+                userDetailsService.updateSecurityContext(userService, userCurrentName);
             }
             return "redirect:/" + userCurrentName + "/Profile";
         } catch (Exception e) {
@@ -113,7 +111,8 @@ public class UserController {
                 }
 
             }
-            userRepository.save(user);
+            //userRepository.save(user);
+            userService.repoSaveUser(user);
             return "redirect:/" + userCurrentName + "/Profile";
         } catch (Exception e) {
             return "redirect:/" + userCurrentName + "/Profile";
@@ -130,7 +129,8 @@ public class UserController {
             Map<String, List<Long>> userLists = user.getListasDeElementos();
             userLists.put(name, newList);
             user.setListasDeElementos(userLists);
-            userRepository.save(user);
+            //userRepository.save(user);
+            userService.repoSaveUser(user);
             return "redirect:/" + userCurrentName + "/Profile";
         } catch (Exception e) {
             return "redirect:/" + userCurrentName + "/Profile";

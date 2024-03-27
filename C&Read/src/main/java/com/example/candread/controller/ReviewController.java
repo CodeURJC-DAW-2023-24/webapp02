@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.candread.model.Element;
 import com.example.candread.model.Review;
 import com.example.candread.model.User;
-import com.example.candread.repositories.ElementRepository;
-import com.example.candread.repositories.ReviewRepository;
+import com.example.candread.services.ElementService;
+import com.example.candread.services.ReviewService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -24,10 +24,10 @@ import jakarta.servlet.http.HttpServletRequest;
 public class ReviewController {
 
     @Autowired
-    private ReviewRepository reviewRepository;
+    private ReviewService reviewService;
 
     @Autowired
-    private ElementRepository elementRepository;
+    private ElementService elementService;
 
     @PostMapping("/add")
     public String addReview(@RequestParam("userRating") int userRating, @RequestParam("userReview") String userReview,
@@ -36,13 +36,15 @@ public class ReviewController {
         try {
             Review newReview = new Review(userReview, userRating);
             if(elementId!=null){
-                Optional<Element> optionalElement = elementRepository.findById(elementId);
+                //Optional<Element> optionalElement = elementRepository.findById(elementId);
+                Optional<Element> optionalElement = elementService.repoFindById(elementId);
                 Element element = (Element) optionalElement.get();
                 newReview.setElementLinked(element);
                 User user = (User) model.getAttribute("user");
                 newReview.setUserLinked(user);
     
-                reviewRepository.save(newReview);
+                //reviewRepository.save(newReview);
+                reviewService.repoSaveReview(newReview);
     
                 model.addAttribute("successMessage", "¡Review guardado correctamente!");
             }
@@ -65,7 +67,8 @@ public class ReviewController {
     @RequestParam("elementId") Long elementId, 
     Model model, HttpServletRequest request){
         
-        Optional<Review> reviewToEdit = reviewRepository.findById(reviewId);
+        //Optional<Review> reviewToEdit = reviewRepository.findById(reviewId);
+        Optional<Review> reviewToEdit = reviewService.repoFindById(reviewId);
         Review reviewEditted = reviewToEdit.orElseThrow();
 
         reviewEditted.setRating(userRating);
@@ -74,7 +77,8 @@ public class ReviewController {
         //Optional<Element> optionalElement = elementRepository.findById(elementId);
         //Element element = (Element) optionalElement.get();
 
-        reviewRepository.save(reviewEditted);
+        //reviewRepository.save(reviewEditted);
+        reviewService.repoSaveReview(reviewEditted);
         //reviewRepository.delete(reviewEditted);
 
         if (request.getAttribute("_csrf") != null) {
@@ -90,7 +94,8 @@ public class ReviewController {
     @RequestParam("elementId") Long elementId, 
     Model model, HttpServletRequest request){
         
-        Optional<Review> reviewToEdit = reviewRepository.findById(reviewId);
+        //Optional<Review> reviewToEdit = reviewRepository.findById(reviewId);
+        Optional<Review> reviewToEdit = reviewService.repoFindById(reviewId);
         Review reviewEditted = reviewToEdit.orElseThrow();
 
         //reviewEditted.setRating(0);
@@ -100,7 +105,8 @@ public class ReviewController {
         //Element element = (Element) optionalElement.get();
 
         //reviewRepository.save(reviewEditted);
-        reviewRepository.delete(reviewEditted);
+        //reviewRepository.delete(reviewEditted);
+        reviewService.repoDeleteReview(reviewEditted);
 
         if (request.getAttribute("_csrf") != null) {
             model.addAttribute("token", request.getAttribute("_csrf").toString());

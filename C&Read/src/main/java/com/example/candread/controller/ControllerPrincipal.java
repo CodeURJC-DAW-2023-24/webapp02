@@ -25,10 +25,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.candread.model.Element;
 import com.example.candread.model.New;
 import com.example.candread.model.User;
-import com.example.candread.repositories.ElementRepository;
-import com.example.candread.repositories.NewRepository;
+//import com.example.candread.repositories.ElementRepository;
+//import com.example.candread.repositories.NewRepository;
 import com.example.candread.repositories.PagingRepository;
 import com.example.candread.services.ElementService;
+import com.example.candread.services.NewService;
 import com.example.candread.services.UserService;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.colors.DeviceRgb;
@@ -48,16 +49,13 @@ import jakarta.servlet.http.HttpSession;
 public class ControllerPrincipal {
 
     @Autowired
-    private NewRepository newRepository;
-
-    @Autowired
-    private ElementRepository elementRepository;
-
-    @Autowired
     private UserService userService;
 
     @Autowired
     private ElementService elementService;
+
+    @Autowired
+    private NewService newService;
 
     @Autowired
     private PagingRepository pagingRepository;
@@ -69,7 +67,8 @@ public class ControllerPrincipal {
         elementService.fullSet64Image();
 
         // CAROUSEL IMG
-        List<Element> elementsRelease = elementRepository.findTop4ByOrderByIdDesc();
+        //List<Element> elementsRelease = elementRepository.findTop4ByOrderByIdDesc();
+        List<Element> elementsRelease = elementService.repofindTop4ByOrderByIdDesc();
         for (int i = 0; i < elementsRelease.size(); i++) {
             Element e = elementsRelease.get(i);
             String img = e.getBase64Image();
@@ -78,7 +77,9 @@ public class ControllerPrincipal {
         }
 
         // Pasamos los datos a la vista
-        List<New> newsList = newRepository.findAll(); // Obtener todas las noticias
+        //List<New> newsList = newRepository.findAll(); // Obtener todas las noticias
+        List<New> newsList = newService.repoFindAll();
+
         model.addAttribute("news", newsList);
         return "W-Main";
     }
