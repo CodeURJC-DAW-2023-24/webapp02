@@ -632,10 +632,12 @@ public class ElementService {
         inputStream.close();
     }
 
+    //REPOSITORY FUNCTIONS CALLED IN CONTROLLERS:
+
     public Optional<Element> repoFindById(long id){
-        Optional<Element> elementOptional = elementRepository.findById(id);
-        return elementOptional;
-        //return elementOptional = elementRepository.findById(id);
+        //Optional<Element> elementOptional = elementRepository.findById(id);
+        //return elementOptional;
+        return elementRepository.findById(id);
     }
 
     public Optional<Element> repoFindByIdAndType (long id, String typeWanted){
@@ -644,6 +646,10 @@ public class ElementService {
 
     public List<Element> repoFindByName(String nameToSearch){
         return elementRepository.findByName(nameToSearch);
+    }
+
+    public Page<Element> repofindTopElementsByRating (String type, Pageable pageable){
+        return elementRepository.findTopElementsByRating(type, pageable);
     }
 
     public void repoSaveElement(Element elementToSave){

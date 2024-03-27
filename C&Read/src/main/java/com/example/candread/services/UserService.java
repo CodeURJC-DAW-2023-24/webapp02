@@ -146,4 +146,10 @@ public class UserService {
    public void repoSaveUser(User userToSave){
     userRepository.save(userToSave);
    }
+   public Optional<User> repoFindById(Long id){
+    return userRepository.findById(id);
+   }
+   public Page<User> repoFindAll(Pageable pageable){
+    return userRepository.findAll(pageable);
+   }
 }

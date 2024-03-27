@@ -63,7 +63,8 @@ public class BookApiController {
 
     @GetMapping("/top")
     public Page<Element> getTop5Books(Pageable pageable) {
-        return elementRepo.findTopElementsByRating("LIBRO", pageable);
+        //return elementRepo.findTopElementsByRating("LIBRO", pageable);
+        return elementService.repofindTopElementsByRating("LIBRO", pageable);
     }
 
     @GetMapping("/{id}")
