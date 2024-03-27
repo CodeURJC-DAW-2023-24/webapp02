@@ -635,12 +635,24 @@ public class ElementService {
         //return elementOptional = elementRepository.findById(id);
     }
 
+    public Optional<Element> repoFindByIdAndType (long id, String typeWanted){
+        return elementRepository.findByIdAndType(id, typeWanted);
+    }
+
     public List<Element> repoFindByName(String nameToSearch){
         return elementRepository.findByName(nameToSearch);
     }
 
     public void repoSaveElement(Element elementToSave){
         elementRepository.save(elementToSave);
+    }
+
+    public void repoDeleteById(Long id){
+        elementRepository.deleteById(id);
+    }
+
+    public void repoDeleteByName(String name){
+        elementRepository.deleteByName(name);
     }
 
     

@@ -26,6 +26,8 @@ import com.example.candread.model.Element.States;
 import com.example.candread.model.Element.Types;
 import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.PagingRepository;
+import com.example.candread.services.ElementService;
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
@@ -51,8 +53,7 @@ public class BookApiController {
     private PagingRepository elementsPaged;
 
     @Autowired
-    private ElementRepository elementRepo;
-
+    private ElementService elementService;
 
     @GetMapping("/")
     public Page<Element> getBooks(Pageable pageable) {
@@ -62,7 +63,8 @@ public class BookApiController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Element> getBookById(@PathVariable Long id) {
-        Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
+        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
+        Optional<Element> optElement = elementService.repoFindByIdAndType(id, "LIBRO");
 
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
@@ -77,7 +79,8 @@ public class BookApiController {
             @RequestBody ElementDTO elementDTO,
             HttpServletRequest request) throws URISyntaxException {
 
-        Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
+        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
+        Optional<Element> optElement = elementService.repoFindByIdAndType(id, "LIBRO");
 
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
@@ -122,7 +125,8 @@ public class BookApiController {
                 element.setGeneros(genreList);
             }
 
-            elementRepo.save(element);
+            //elementRepo.save(element);
+            elementService.repoSaveElement(element);
             return ResponseEntity.ok(element);
         } else {
             return ResponseEntity.notFound().build();
@@ -136,7 +140,8 @@ public class BookApiController {
         List<String> genresList = elementDTO.getGenres();
         Element element = new Element(elementDTO.getName(), elementDTO.getDescription(), elementDTO.getAuthor(),
             elementDTO.getType(), elementDTO.getSeason(), elementDTO.getState(), elementDTO.getCountry(), genresList, elementDTO.getYear());
-        elementRepo.save(element);
+        //elementRepo.save(element);
+        elementService.repoSaveElement(element);
         Long bookId = element.getId();
         String bookUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(bookId)
                 .toUriString();
@@ -147,15 +152,16 @@ public class BookApiController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteBook(@PathVariable Long id) {
 
-        elementRepo.deleteById(id);
+        //elementRepo.deleteById(id);
+        elementService.repoDeleteById(id);
 
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/image")
     public ResponseEntity<byte[]> getBookImageById(@PathVariable Long id) {
-        Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
-
+        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
+        Optional<Element> optElement = elementService.repoFindByIdAndType(id, "LIBRO");
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
             Blob imageBlob = element.getImageFile();
@@ -187,8 +193,8 @@ public class BookApiController {
     public ResponseEntity<Object> uploadBookImageById(@PathVariable Long id,
             @RequestParam("imageFile") MultipartFile imageFile, HttpServletRequest request)
             throws URISyntaxException, IOException {
-        Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
-
+        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
+        Optional<Element> optElement = elementService.repoFindByIdAndType(id, "LIBRO");
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
             try {
@@ -197,7 +203,8 @@ public class BookApiController {
                 element.setImageFile(new SerialBlob(imageData));
                 element.setBase64Image(Base64.getEncoder().encodeToString(imageData));
                 // Save in the database
-                elementRepo.save(element);
+                //elementRepo.save(element);
+                elementService.repoSaveElement(element);
 
                 String imageUrl = ServletUriComponentsBuilder.fromRequestUri(request).buildAndExpand(id).toUriString();
 
@@ -219,7 +226,8 @@ public class BookApiController {
         @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
 
         // Verify if the book exists
-        Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
+        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
+        Optional<Element> optElement = elementService.repoFindByIdAndType(id, "LIBRO");
         if (optElement.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -230,7 +238,8 @@ public class BookApiController {
         try {
             book.setImageFile(new SerialBlob(imageBytes));
             book.setBase64Image(Base64.getEncoder().encodeToString(imageBytes));
-            elementRepo.save(book);
+            //elementRepo.save(book);
+            elementService.repoSaveElement(book);
 
         } catch (SerialException e) {
             e.printStackTrace();
@@ -244,7 +253,8 @@ public class BookApiController {
     
     @DeleteMapping("/{id}/image")
     public ResponseEntity<Object> deleteBookImage(@PathVariable Long id) {
-        Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
+        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
+        Optional<Element> optElement = elementService.repoFindByIdAndType(id, "LIBRO");
         // If the book is not found we return a 404 response
         if (optElement.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -254,7 +264,8 @@ public class BookApiController {
         book.setImageFile(null);
         book.setBase64Image(null);
 
-        elementRepo.save(book);
+        //elementRepo.save(book);
+        elementService.repoSaveElement(book);
 
         return ResponseEntity.noContent().build();
     }
