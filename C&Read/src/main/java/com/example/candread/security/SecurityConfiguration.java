@@ -19,6 +19,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.example.candread.model.User;
 import com.example.candread.repositories.UserRepository;
+import com.example.candread.security.jwt.JwtTokenProvider;
+import com.example.candread.security.jwt.Token;
 
 @Configuration
 @EnableWebSecurity
@@ -47,7 +49,7 @@ public class SecurityConfiguration {
 
         http.authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers("/", "/CSS/**", "/Images/**", "/Scripts/**","/downloadNames/**", "/SignIn", "/users/**", "/Library/**",
-                        "/SingleElement/**", "/loginerror", "/error","/EditFragment", "/api/**")
+                        "/SingleElement/**", "/loginerror", "/error","/EditFragment", "/api/books/**","/api/elements/**","/api/films/**","/api/series/**","/api/auth/**","/api/users/**")
                 .permitAll()
                 .requestMatchers("/*/Profile/**", "/*/Main", "/review/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/Admin/**", "/news/add","/SingleElement/edit").hasRole("ADMIN"))
@@ -57,6 +59,18 @@ public class SecurityConfiguration {
                         .successHandler((request, response, authentication) -> {
                             String username = authentication.getName();
                             String redirectUrl = "/" + username + "/Main";
+                            UserDetails user = (UserDetails) authentication.getPrincipal();
+
+                            //Token token = generateToken((UserDetails) authentication.getPrincipal());
+                            JwtTokenProvider jwtTokenProvider = new JwtTokenProvider();
+                            Token token = jwtTokenProvider.generateToken(user);  
+
+    
+                            // Devolver el token JWT en la respuesta
+                            response.setContentType("application/json");
+                            response.setCharacterEncoding("UTF-8");
+                            response.getWriter().write("{\"token\": \"" + token.getTokenValue() + "\"}");
+
                             request.getSession().setAttribute("redirectUrl", redirectUrl);
                             response.sendRedirect(redirectUrl);
                         })

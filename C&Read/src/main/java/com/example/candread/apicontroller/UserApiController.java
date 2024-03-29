@@ -39,7 +39,7 @@ import com.example.candread.services.UserService;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
-@RequestMapping("api/user")
+@RequestMapping("api/users")
 public class UserApiController {
 
     @Autowired
