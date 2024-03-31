@@ -8,7 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
-import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
@@ -20,14 +19,10 @@ import org.springframework.security.web.SecurityFilterChain;
 
 import com.example.candread.model.User;
 import com.example.candread.repositories.UserRepository;
-import com.example.candread.security.jwt.JwtTokenProvider;
-import com.example.candread.security.jwt.Token;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
-
-
 
     @Autowired
     public RepositoryUserDetailsService userDetailService;
@@ -52,28 +47,16 @@ public class SecurityConfiguration {
 
         http.authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers("/", "/CSS/**", "/Images/**", "/Scripts/**","/downloadNames/**", "/SignIn", "/users/**", "/Library/**",
-                        "/SingleElement/**", "/loginerror", "/error","/EditFragment", "/api/books/**","/api/elements/**","/api/films/**","/api/series/**","/api/auth/**")
+                        "/SingleElement/**", "/loginerror", "/error","/EditFragment", "/api/**")
                 .permitAll()
                 .requestMatchers("/*/Profile/**", "/*/Main", "/review/**").hasAnyRole("USER", "ADMIN")
-                .requestMatchers("/Admin/**", "/news/add","/SingleElement/edit","/api/users/**").hasRole("ADMIN"))
+                .requestMatchers("/Admin/**", "/news/add","/SingleElement/edit").hasRole("ADMIN"))
                 .formLogin(formLogin -> formLogin
                         .loginPage("/LogIn")
                         .failureUrl("/loginerror")
                         .successHandler((request, response, authentication) -> {
                             String username = authentication.getName();
                             String redirectUrl = "/" + username + "/Main";
-                            UserDetails user = (UserDetails) authentication.getPrincipal();
-
-                            //Token token = generateToken((UserDetails) authentication.getPrincipal());
-                            JwtTokenProvider jwtTokenProvider = new JwtTokenProvider();
-                            Token token = jwtTokenProvider.generateToken(user);  
-
-    
-                            // Devolver el token JWT en la respuesta
-                            response.setContentType("application/json");
-                            response.setCharacterEncoding("UTF-8");
-                            response.getWriter().write("{\"token\": \"" + token.getTokenValue() + "\"}");
-
                             request.getSession().setAttribute("redirectUrl", redirectUrl);
                             response.sendRedirect(redirectUrl);
                         })
