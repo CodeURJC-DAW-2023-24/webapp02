@@ -23,21 +23,21 @@ public class AuthConfiguration {
     }
 
     
-    @Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-		return authConfig.getAuthenticationManager();
-	}
-
     // @Bean
-    // public AuthenticationManager authenticationManagerBean() throws Exception {
-    //     return authentication -> {
-    //         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-    //         String name = userDetails.getUsername();
-    //         userDetails = userDetailService.loadUserByUsername(name);
-    //         return new UsernamePasswordAuthenticationToken(userDetails, authentication.getCredentials(),
-    //                 userDetails.getAuthorities());
-    //     };
-    // }
+	// public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+	// 	return authConfig.getAuthenticationManager();
+	// }
+
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return authentication -> {
+            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+            String name = userDetails.getUsername();
+            userDetails = userDetailService.loadUserByUsername(name);
+            return new UsernamePasswordAuthenticationToken(userDetails, authentication.getCredentials(),
+                    userDetails.getAuthorities());
+        };
+    }
 }
 
 
