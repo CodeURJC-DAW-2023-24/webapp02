@@ -22,11 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.candread.model.Element;
 import com.example.candread.model.New;
 import com.example.candread.model.User;
-import com.example.candread.repositories.ElementRepository;
-import com.example.candread.repositories.NewRepository;
-import com.example.candread.repositories.PagingRepository;
 import com.example.candread.security.RepositoryUserDetailsService;
 import com.example.candread.services.ElementService;
+import com.example.candread.services.NewService;
+import com.example.candread.services.PagingService;
 import com.example.candread.services.UserService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -40,16 +39,13 @@ public class UserViewController {
     public RepositoryUserDetailsService userDetailService;
 
     @Autowired
-    private ElementRepository elementRepository;
-
-    @Autowired
-    private NewRepository newRepository;
-
-    @Autowired
     private ElementService elementService;
 
     @Autowired
-    private PagingRepository pagingRepository;
+    private NewService newService;
+
+    @Autowired
+    private PagingService pagingService;
 
     @Autowired
     private UserService userService;
@@ -62,15 +58,17 @@ public class UserViewController {
         userService.fullSet64Image();
 
         // CAROUSEL IMG
-        List<Element> elementosEstreno = elementRepository.findTop4ByOrderByIdDesc();
+        //List<Element> elementosEstreno = elementRepository.findTop4ByOrderByIdDesc();
+        List<Element> elementosEstreno = elementService.repofindTop4ByOrderByIdDesc();
         for (int i = 0; i < elementosEstreno.size(); i++) {
             Element e = elementosEstreno.get(i);
             String img = e.getBase64Image();
             String finalimg = "data:image/jpg;base64," + img;
             model.addAttribute("firstSlide" + i, finalimg);
         }
-
-        List<New> newsList = newRepository.findAll(); // Obtener todas las noticias
+        // Obtener todas las noticias
+        //List<New> newsList = newRepository.findAll(); 
+        List<New> newsList = newService.repoFindAll();
         model.addAttribute("news", newsList);
 
         return "W-Main";
@@ -95,7 +93,8 @@ public class UserViewController {
             List<Element> listaElementosConvertidos = new ArrayList<>();
 
             for (Long id : listaIds) {
-                Element element = elementRepository.findById(id).orElse(null);
+                //Element element = elementRepository.findById(id).orElse(null);
+                Element element = elementService.repoFindById(id).orElse(null);
                 if (element != null) {
                     listaElementosConvertidos.add(element);
                 }
@@ -208,21 +207,24 @@ public class UserViewController {
                 }
             }
             Long userid = user.getId();
-            Page<Element> userBooks = pagingRepository.findByUsersIdAndType(userid, "LIBRO", pageable);
+            //Page<Element> userBooks = pagingRepository.findByUsersIdAndType(userid, "LIBRO", pageable);
+            Page<Element> userBooks = pagingService.repoFindByUsersIdAndType(userid, "LIBRO", pageable);
             model.addAttribute("PersonalBooks", userBooks);
             model.addAttribute("PersonalBookshasPrev", userBooks.hasPrevious());
             model.addAttribute("PersonalBookshasNext", userBooks.hasNext());
             model.addAttribute("PersonalBooksnextPage", userBooks.getNumber() + 1);
             model.addAttribute("PersonalBooksprevPage", userBooks.getNumber() - 1);
 
-            Page<Element> userSeries = pagingRepository.findByUsersIdAndType(userid, "SERIE", pageable);
+            //Page<Element> userSeries = pagingRepository.findByUsersIdAndType(userid, "SERIE", pageable);
+            Page<Element> userSeries = pagingService.repoFindByUsersIdAndType(userid, "SERIE", pageable);
             model.addAttribute("PersonalSeries", userSeries);
             model.addAttribute("PersonalSerieshasPrev", userSeries.hasPrevious());
             model.addAttribute("PersonalSerieshasNext", userSeries.hasNext());
             model.addAttribute("PersonalSeriesnextPage", userSeries.getNumber() + 1);
             model.addAttribute("PersonalSeriesprevPage", userSeries.getNumber() - 1);
 
-            Page<Element> userFilms = pagingRepository.findByUsersIdAndType(userid, "PELICULA", pageable);
+            //Page<Element> userFilms = pagingRepository.findByUsersIdAndType(userid, "PELICULA", pageable);
+            Page<Element> userFilms = pagingService.repoFindByUsersIdAndType(userid, "PELICULA", pageable);
             model.addAttribute("PersonalFilms", userFilms);
             model.addAttribute("PersonalFilmshasPrev", userFilms.hasPrevious());
             model.addAttribute("PersonalFilmshasNext", userFilms.hasNext());
@@ -230,22 +232,23 @@ public class UserViewController {
             model.addAttribute("PersonalFilmsprevPage", userFilms.getNumber() - 1);
 
             // ATTRIBUTES FOR FAVOURITES
-            Page<Element> userBFavourites = pagingRepository.findByUsersFavouritedIdAndType(userid, "LIBRO", pageable);
+            //Page<Element> userBFavourites = pagingRepository.findByUsersFavouritedIdAndType(userid, "LIBRO", pageable);
+            Page<Element> userBFavourites = pagingService.repoFindByUsersFavouritedIdAndType(userid, "LIBRO", pageable);
             model.addAttribute("PersonalBFavs", userBFavourites);
             model.addAttribute("PersonalBFavshasPrev", userBFavourites.hasPrevious());
             model.addAttribute("PersonalBFavshasNext", userBFavourites.hasNext());
             model.addAttribute("PersonalBFavsnextPage", userBFavourites.getNumber() + 1);
             model.addAttribute("PersonalBFavsprevPage", userBFavourites.getNumber() - 1);
 
-            Page<Element> userSFavourites = pagingRepository.findByUsersFavouritedIdAndType(userid, "SERIE", pageable);
+            Page<Element> userSFavourites = pagingService.repoFindByUsersFavouritedIdAndType(userid, "SERIE", pageable);
             model.addAttribute("PersonalSFavs", userSFavourites);
             model.addAttribute("PersonalSFavshasPrev", userSFavourites.hasPrevious());
             model.addAttribute("PersonalSFavshasNext", userSFavourites.hasNext());
             model.addAttribute("PersonalSFavsnextPage", userSFavourites.getNumber() + 1);
             model.addAttribute("PersonalSFavsprevPage", userSFavourites.getNumber() - 1);
 
-            Page<Element> userFFavourites = pagingRepository.findByUsersFavouritedIdAndType(userid, "PELICULA",
-                    pageable);
+            //Page<Element> userFFavourites = pagingRepository.findByUsersFavouritedIdAndType(userid, "PELICULA", pageable);
+            Page<Element> userFFavourites = pagingService.repoFindByUsersFavouritedIdAndType(userid, "PELICULA", pageable);
             model.addAttribute("PersonalFFavs", userFFavourites);
             model.addAttribute("PersonalFFavshasPrev", userFFavourites.hasPrevious());
             model.addAttribute("PersonalFFavshasNext", userFFavourites.hasNext());

@@ -30,4 +30,8 @@ public class NewService {
             }
         }
     }
+
+    public List<New> repoFindAll(){
+        return newRepository.findAll();
+    }
 }

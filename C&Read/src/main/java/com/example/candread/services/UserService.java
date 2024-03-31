@@ -142,4 +142,28 @@ public class UserService {
         
         inputStream.close();
    }
+
+   public void repoSaveUser(User userToSave){
+    userRepository.save(userToSave);
+   }
+   
+   public Optional<User> repoFindById(Long id){
+    return userRepository.findById(id);
+   }
+
+   public User repoFindByName(String name){
+    return userRepository.findByName(name).orElseThrow();
+   }
+
+   public Optional<User> repoFindByNameOpt(String name){
+    return userRepository.findByName(name);
+   }
+
+   public Page<User> repoFindAll(Pageable pageable){
+    return userRepository.findAll(pageable);
+   }
+
+   public List<User> repoFindAll(){
+    return userRepository.findAll();
+   }
 }

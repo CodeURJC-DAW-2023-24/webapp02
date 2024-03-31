@@ -5,7 +5,6 @@ import java.util.List;
 import com.example.candread.model.User;
 
 public class UserDTO {
-    private Long id;
     private String name;
     private List<String> roles;
     private String password;
@@ -13,28 +12,16 @@ public class UserDTO {
     public UserDTO() {
 
     }
-
-    public UserDTO(Long id, String name, List<String> roles, String password) {
-        this.id = id;
+    public UserDTO(String name, List<String> roles, String password) {
         this.name = name;
         this.roles = roles;
         this.password = password;
     }
 
     public UserDTO(User user) {
-
-        this.id = user.getId();
         this.name = user.getName();
         this.roles = user.getRoles();
         this.password = user.getPassword();
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -60,10 +47,5 @@ public class UserDTO {
     public void setPassword(String password) {
         this.password = password;
     }
-
-
-    
-
-    
 
 }

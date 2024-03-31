@@ -622,15 +622,58 @@ public class ElementService {
 
     public void setElementsImage64(long id) throws SQLException, IOException {
         Optional<Element> elementOptional = elementRepository.findById(id);
-       Element element = elementOptional.orElseThrow();
-       Blob blob = element.getImageFile();
-       InputStream inputStream = blob.getBinaryStream();
-       byte[] imageBytes = inputStream.readAllBytes();
-       String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-       element.setBase64Image(base64Image);
+        Element element = elementOptional.orElseThrow();
+        Blob blob = element.getImageFile();
+        InputStream inputStream = blob.getBinaryStream();
+        byte[] imageBytes = inputStream.readAllBytes();
+        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+        element.setBase64Image(base64Image);
 
-      
-       inputStream.close();
-   }
+        inputStream.close();
+    }
+
+    //REPOSITORY FUNCTIONS CALLED IN CONTROLLERS:
+
+    public List<Element> repoFindAll(){
+        return elementRepository.findAll();
+    }
+
+    public Optional<Element> repoFindById(long id){
+        //Optional<Element> elementOptional = elementRepository.findById(id);
+        //return elementOptional;
+        return elementRepository.findById(id);
+    }
+
+    public List<Element> repoFindByType(String type){
+        return elementRepository.findByType(type);
+    }
+
+    public Optional<Element> repoFindByIdAndType (long id, String typeWanted){
+        return elementRepository.findByIdAndType(id, typeWanted);
+    }
+
+    public List<Element> repoFindByName(String nameToSearch){
+        return elementRepository.findByName(nameToSearch);
+    }
+
+    public Page<Element> repofindTopElementsByRating (String type, Pageable pageable){
+        return elementRepository.findTopElementsByRating(type, pageable);
+    }
+
+    public List<Element> repofindTop4ByOrderByIdDesc(){
+        return elementRepository.findTop4ByOrderByIdDesc();
+    }
+
+    public void repoSaveElement(Element elementToSave){
+        elementRepository.save(elementToSave);
+    }
+
+    public void repoDeleteById(Long id){
+        elementRepository.deleteById(id);
+    }
+
+    public void repoDeleteByName(String name){
+        elementRepository.deleteByName(name);
+    }
 
 }

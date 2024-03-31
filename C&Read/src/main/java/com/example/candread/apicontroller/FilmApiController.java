@@ -37,8 +37,8 @@ import com.example.candread.model.Element.Countries;
 import com.example.candread.model.Element.Seasons;
 import com.example.candread.model.Element.States;
 import com.example.candread.model.Element.Types;
-import com.example.candread.repositories.ElementRepository;
-import com.example.candread.repositories.PagingRepository;
+import com.example.candread.services.ElementService;
+import com.example.candread.services.PagingService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -46,21 +46,25 @@ import jakarta.servlet.http.HttpServletRequest;
 @RequestMapping("api/films")
 public class FilmApiController {
 
-    @Autowired
-    private PagingRepository elementsPaged;
+    /**@Autowired
+    private PagingRepository elementsPaged;**/
 
     @Autowired
-    private ElementRepository elementRepo;
+    private PagingService elementsPaged;
+
+    @Autowired
+    private ElementService elementService;
 
     @ResponseBody
     @GetMapping("/")
     public Page<Element> getFilms(Pageable pageable) {
-        return elementsPaged.findByType("PELICULA", pageable);
+        return elementsPaged.repoFindByType("PELICULA", pageable);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Element> getFilmsById(@PathVariable Long id) {
-        Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
+        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
+        Optional<Element> optElement = elementService.repoFindByIdAndType(id, "PELICULA");
 
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
@@ -75,7 +79,8 @@ public class FilmApiController {
             @RequestBody ElementDTO elementDTO,
             HttpServletRequest request) throws URISyntaxException {
 
-        Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
+        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
+        Optional<Element> optElement = elementService.repoFindByIdAndType(id, "PELICULA");
 
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
@@ -120,7 +125,8 @@ public class FilmApiController {
                 element.setGeneros(genreList);
             }
 
-            elementRepo.save(element);
+            //elementRepo.save(element);
+            elementService.repoSaveElement(element);
             return ResponseEntity.ok(element);
         } else {
             return ResponseEntity.notFound().build();
@@ -134,7 +140,8 @@ public class FilmApiController {
         List<String> genresList = elementDTO.getGenres();
         Element element = new Element(elementDTO.getName(), elementDTO.getDescription(), elementDTO.getAuthor(),
             elementDTO.getType(), elementDTO.getSeason(), elementDTO.getState(), elementDTO.getCountry(), genresList, elementDTO.getYear());
-        elementRepo.save(element);
+        //elementRepo.save(element);
+        elementService.repoSaveElement(element);
         Long bookId = element.getId();
         String bookUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(bookId)
                 .toUriString();
@@ -145,14 +152,16 @@ public class FilmApiController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteFilm(@PathVariable Long id) {
 
-        elementRepo.deleteById(id);
+        //elementRepo.deleteById(id);
+        elementService.repoDeleteById(id);
 
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/image")
     public ResponseEntity<byte[]> getFilmImageById(@PathVariable Long id) {
-        Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
+        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
+        Optional<Element> optElement = elementService.repoFindByIdAndType(id, "PELICULA");
 
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
@@ -182,7 +191,8 @@ public class FilmApiController {
     public ResponseEntity<Object> uploadFilmImageById(@PathVariable Long id,
             @RequestParam("imageFile") MultipartFile imageFile, HttpServletRequest request)
             throws URISyntaxException, IOException {
-        Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
+        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
+        Optional<Element> optElement = elementService.repoFindByIdAndType(id, "PELICULA");
 
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
@@ -192,7 +202,8 @@ public class FilmApiController {
                 element.setImageFile(new SerialBlob(imageData));
                 element.setBase64Image(Base64.getEncoder().encodeToString(imageData));
                 // Save in the database
-                elementRepo.save(element);
+                // elementRepo.save(element);
+                elementService.repoSaveElement(element);
 
                 String imageUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}/image")
                         .buildAndExpand(id).toUriString();
@@ -214,7 +225,8 @@ public class FilmApiController {
             @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
 
         // Verify if the film exists
-        Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
+        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
+        Optional<Element> optElement = elementService.repoFindByIdAndType(id, "PELICULA");
         if (optElement.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -225,7 +237,8 @@ public class FilmApiController {
         try {
             film.setImageFile(new SerialBlob(imageBytes));
             film.setBase64Image(Base64.getEncoder().encodeToString(imageBytes));
-            elementRepo.save(film);
+            //elementRepo.save(film);
+            elementService.repoSaveElement(film);
 
         } catch (SerialException e) {
             e.printStackTrace();
@@ -237,7 +250,8 @@ public class FilmApiController {
 
     @DeleteMapping("/{id}/image")
     public ResponseEntity<Object> deleteFilmImage(@PathVariable Long id) {
-        Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
+        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
+        Optional<Element> optElement = elementService.repoFindByIdAndType(id, "PELICULA");
         if (optElement.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -246,7 +260,8 @@ public class FilmApiController {
         film.setImageFile(null);
         film.setBase64Image(null);
 
-        elementRepo.save(film);
+        //elementRepo.save(film);
+        elementService.repoSaveElement(film);
 
         return ResponseEntity.noContent().build();
     }

@@ -37,8 +37,8 @@ import com.example.candread.model.Element.Countries;
 import com.example.candread.model.Element.Seasons;
 import com.example.candread.model.Element.States;
 import com.example.candread.model.Element.Types;
-import com.example.candread.repositories.ElementRepository;
-import com.example.candread.repositories.PagingRepository;
+import com.example.candread.services.ElementService;
+import com.example.candread.services.PagingService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -47,20 +47,21 @@ import jakarta.servlet.http.HttpServletRequest;
 public class SeriesApiController {
 
     @Autowired
-    private PagingRepository elementsPaged;
+    private PagingService elementsPaged;
 
     @Autowired
-    private ElementRepository elementRepo;
+    private ElementService elementService;
 
     @ResponseBody
     @GetMapping("/")
     public Page<Element> getSeries(Pageable pageable) {
-        return elementsPaged.findByType("SERIE", pageable);
+        return elementsPaged.repoFindByType("SERIE", pageable);
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<Element> getSeriesById(@PathVariable Long id) {
-        Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
+        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
+        Optional<Element> optElement = elementService.repoFindByIdAndType(id, "SERIE");
 
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
@@ -75,8 +76,8 @@ public class SeriesApiController {
             @RequestBody ElementDTO elementDTO,
             HttpServletRequest request) throws URISyntaxException {
 
-        Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
-
+        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
+        Optional<Element> optElement = elementService.repoFindByIdAndType(id, "SERIE");
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
             if (elementDTO.getName() != null) {
@@ -120,7 +121,8 @@ public class SeriesApiController {
                 element.setGeneros(genreList);
             }
 
-            elementRepo.save(element);
+            //elementRepo.save(element);
+            elementService.repoSaveElement(element);
             return ResponseEntity.ok(element);
         } else {
             return ResponseEntity.notFound().build();
@@ -134,7 +136,8 @@ public class SeriesApiController {
         List<String> genresList = elementDTO.getGenres();
         Element element = new Element(elementDTO.getName(), elementDTO.getDescription(), elementDTO.getAuthor(),
             elementDTO.getType(), elementDTO.getSeason(), elementDTO.getState(), elementDTO.getCountry(), genresList, elementDTO.getYear());
-        elementRepo.save(element);
+        //elementRepo.save(element);
+        elementService.repoSaveElement(element);
         Long bookId = element.getId();
         String bookUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(bookId)
                 .toUriString();
@@ -145,15 +148,16 @@ public class SeriesApiController {
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteSerie(@PathVariable Long id) {
 
-        elementRepo.deleteById(id);
+        //elementRepo.deleteById(id);
+        elementService.repoDeleteById(id);
 
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}/image")
     public ResponseEntity<byte[]> getSerieImageById(@PathVariable Long id) {
-        Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
-
+        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
+        Optional<Element> optElement = elementService.repoFindByIdAndType(id, "SERIE");
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
             Blob imageBlob = element.getImageFile();
@@ -182,8 +186,8 @@ public class SeriesApiController {
     public ResponseEntity<Object> uploadSerieImageById(@PathVariable Long id,
             @RequestParam("imageFile") MultipartFile imageFile, HttpServletRequest request)
             throws URISyntaxException, IOException {
-        Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
-
+        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
+        Optional<Element> optElement = elementService.repoFindByIdAndType(id, "SERIE");
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
             try {
@@ -192,7 +196,8 @@ public class SeriesApiController {
                 element.setImageFile(new SerialBlob(imageData));
                 element.setBase64Image(Base64.getEncoder().encodeToString(imageData));
                 // Save in the database
-                elementRepo.save(element);
+                //elementRepo.save(element);
+                elementService.repoSaveElement(element);
 
                 String imageUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}/image")
                         .buildAndExpand(id).toUriString();
@@ -214,7 +219,8 @@ public class SeriesApiController {
             @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
 
         // Verify if the book exists
-        Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
+        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
+        Optional<Element> optElement = elementService.repoFindByIdAndType(id, "SERIE");
         if (optElement.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -225,7 +231,8 @@ public class SeriesApiController {
         try {
             serie.setImageFile(new SerialBlob(imageBytes));
             serie.setBase64Image(Base64.getEncoder().encodeToString(imageBytes));
-            elementRepo.save(serie);
+            //elementRepo.save(serie);
+            elementService.repoSaveElement(serie);
 
         } catch (SerialException e) {
             e.printStackTrace();
@@ -237,7 +244,8 @@ public class SeriesApiController {
 
     @DeleteMapping("/{id}/image")
     public ResponseEntity<Object> deleteSerieImage(@PathVariable Long id) {
-        Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
+        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
+        Optional<Element> optElement = elementService.repoFindByIdAndType(id, "SERIE");
         if (optElement.isEmpty()) {
             return ResponseEntity.notFound().build();
         }
@@ -246,7 +254,8 @@ public class SeriesApiController {
         serie.setImageFile(null);
         serie.setBase64Image(null);
 
-        elementRepo.save(serie);
+        //elementRepo.save(serie);
+        elementService.repoSaveElement(serie);
 
         return ResponseEntity.noContent().build();
     }

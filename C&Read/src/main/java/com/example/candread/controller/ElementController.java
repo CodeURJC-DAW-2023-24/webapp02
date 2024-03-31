@@ -23,8 +23,6 @@ import com.example.candread.model.Review;
 
 import com.example.candread.model.User;
 
-import com.example.candread.repositories.ElementRepository;
-import com.example.candread.repositories.UserRepository;
 import com.example.candread.services.ElementService;
 import com.example.candread.services.UserService;
 
@@ -42,9 +40,6 @@ import org.springframework.web.multipart.MultipartFile;
 public class ElementController {
 
     @Autowired
-    private ElementRepository elementRepository;
-
-    @Autowired
     private ElementService elementService;
 
     @Autowired
@@ -54,9 +49,6 @@ public class ElementController {
             "ACCION", "AVENTURA", "TERROR",  "MISTERIO", "ROMANCE", "CIENCIAFICCION", "DRAMA",
             "INFANTIL", "COMEDIA", "FANTASIA", "SOBRENATURAL", "NOVELA", "JUVENIL"
         ));
-
-    @Autowired
-    private UserRepository userRepository;
 
     @GetMapping("/{id}")
     public String getSingleElement(@PathVariable("id") Long id, Model model) throws SQLException, IOException {
@@ -75,7 +67,8 @@ public class ElementController {
         }
         model.addAttribute("listas", lists);
         if (id != null) {
-            Optional<Element> optionalElement = elementRepository.findById(id);
+            //Optional<Element> optionalElement = elementRepository.findById(id);
+            Optional<Element> optionalElement = elementService.repoFindById(id);
             if (optionalElement.isPresent()) {
                 Element serie = optionalElement.get();
                 List<Review> reviews = serie.getReviews();
@@ -119,7 +112,9 @@ public class ElementController {
             throws SQLException, IOException {
         userService.fullSet64Image();
         if (id != null) {
-            Optional<Element> optionalElement = elementRepository.findById(id);
+
+            //Optional<Element> optionalElement = elementRepository.findById(id);
+            Optional<Element> optionalElement = elementService.repoFindById(id);
             Element newElement = optionalElement.orElseThrow();
 
             User user = (User) model.getAttribute("user");
@@ -134,7 +129,8 @@ public class ElementController {
                 newElement.getUsers().add(user);
                 // user.getElements().clear();
                 // user.setElements(newList);
-                elementRepository.save(newElement);
+                //elementRepository.save(newElement);
+                elementService.repoSaveElement(newElement);
                 return "redirect:/SingleElement/" + elementId;
             }
         } else {
@@ -148,7 +144,8 @@ public class ElementController {
             throws SQLException, IOException {
         userService.fullSet64Image();
         if (id != null) {
-            Optional<Element> optionalElement = elementRepository.findById(id);
+            //Optional<Element> optionalElement = elementRepository.findById(id);
+            Optional<Element> optionalElement = elementService.repoFindById(id);
             Element newElement = optionalElement.orElseThrow();
 
             User user = (User) model.getAttribute("user");
@@ -161,7 +158,8 @@ public class ElementController {
                 return "redirect:/SingleElement/" + elementId;
             } else {
                 newElement.getUsersFavourited().add(user);
-                elementRepository.save(newElement);
+                //elementRepository.save(newElement);
+                elementService.repoSaveElement(newElement);
                 return "redirect:/SingleElement/" + elementId;
             }
         } else {
@@ -176,7 +174,8 @@ public class ElementController {
             throws SQLException, IOException {
         userService.fullSet64Image();
         if (id != null) {
-            Optional<Element> optionalElement = elementRepository.findById(id);
+            //Optional<Element> optionalElement = elementRepository.findById(id);
+            Optional<Element> optionalElement = elementService.repoFindById(id);
             Element newElement = optionalElement.orElseThrow();
             long elementId = newElement.getId();
 
@@ -193,7 +192,8 @@ public class ElementController {
                     user.setListasDeElementos(userLists);
                 }
             }
-            userRepository.save(user); // URL base
+            //userRepository.save(user); // URL base
+            userService.repoSaveUser(user);
             return "redirect:/SingleElement/" + elementId;
         } else {
             return "redirect:/error";
@@ -231,7 +231,8 @@ public class ElementController {
             byte[] imageData = image.getBytes();
             SerialBlob blob = new SerialBlob(imageData);
             newElement.setImageFile(blob);
-            elementRepository.save(newElement);
+            //elementRepository.save(newElement);
+            elementService.repoSaveElement(newElement);
 
 
         } catch (Exception e) {
@@ -250,7 +251,8 @@ public class ElementController {
     @PostMapping("/edit")
     public String editElement(@RequestParam("nameSearch") String nameSearch, Model model, HttpServletRequest request) {
     try {
-        List<Element> optionalElements = elementRepository.findByName(nameSearch);
+        //List<Element> optionalElements = elementRepository.findByName(nameSearch);
+        List<Element> optionalElements = elementService.repoFindByName(nameSearch);
 
         if (!optionalElements.isEmpty()) {
             if (optionalElements.size() == 1) {
@@ -293,7 +295,8 @@ public class ElementController {
     @PostMapping("/edit/type")
     public String typeElement(@RequestParam("type") String type, @RequestParam("name") String name, Model model, HttpServletRequest request) {
     try {
-        List<Element> elements = elementRepository.findByName(name);
+        //List<Element> elements = elementRepository.findByName(name);
+        List<Element> elements = elementService.repoFindByName(name);
 
         for (int i = 0; i < elements.size(); i++) {
             Element element = elements.get(i);
@@ -338,7 +341,8 @@ public class ElementController {
     Model model, HttpServletRequest request) {
 
         try {
-            Optional<Element> optionalElement = elementRepository.findById(id);
+            //Optional<Element> optionalElement = elementRepository.findById(id);
+            Optional<Element> optionalElement = elementService.repoFindById(id);
             Element element = optionalElement.orElseThrow();
             element.setName(name);
             element.setDescription(description);
@@ -407,8 +411,8 @@ public class ElementController {
             byte[] imageData = image.getBytes();
             SerialBlob blob = new SerialBlob(imageData);
             element.setImageFile(blob);
-            elementRepository.save(element);
-
+            //elementRepository.save(element);
+            elementService.repoSaveElement(element);
         } catch (Exception e) {
             model.addAttribute("errorMessage", "Error al guardar el elemento.");
         }
