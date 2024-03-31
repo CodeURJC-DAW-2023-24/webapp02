@@ -27,6 +27,11 @@ import com.example.candread.model.Element.Types;
 import com.example.candread.services.ElementService;
 import com.example.candread.services.PagingService;
 
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
@@ -57,6 +62,9 @@ public class BookApiController {
     @Autowired
     private ElementService elementService;
 
+    //API RESPONSES:
+    
+
     @GetMapping("/")
     public Page<Element> getBooks(Pageable pageable) {
         //return elementsPaged.findByType("LIBRO", pageable);
@@ -68,6 +76,14 @@ public class BookApiController {
         //return elementRepo.findTopElementsByRating("LIBRO", pageable);
         return elementService.repofindTopElementsByRating("LIBRO", pageable);
     }
+
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "200", description = "BOOK FOUND", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
+    })
 
     @GetMapping("/{id}")
     public ResponseEntity<Element> getBookById(@PathVariable Long id) {

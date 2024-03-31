@@ -69,7 +69,8 @@ public class SecurityConfiguration {
                         "/SingleElement/**", "/loginerror", "/error","/EditFragment")
                 .permitAll()
                 .requestMatchers("/*/Profile/**", "/*/Main", "/review/**").hasAnyRole("USER", "ADMIN")
-                .requestMatchers("/Admin/**", "/news/add","/SingleElement/edit").hasRole("ADMIN"))
+                .requestMatchers("/Admin/**", "/news/add","/SingleElement/edit").hasRole("ADMIN")
+                .requestMatchers("/swagger-ui/**").permitAll())
                 .formLogin(formLogin -> formLogin
                         .loginPage("/LogIn")
                         .failureUrl("/loginerror")
