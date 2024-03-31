@@ -23,10 +23,7 @@ public class AuthConfiguration {
     }
 
     
-    @Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-		return authConfig.getAuthenticationManager();
-	}
+    
 
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
