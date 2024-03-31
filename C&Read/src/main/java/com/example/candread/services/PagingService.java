@@ -3,6 +3,7 @@ package com.example.candread.services;
 import org.springframework.data.domain.Page;
 import com.example.candread.model.Element;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.example.candread.repositories.PagingRepository;
 
+@Service
 public class PagingService {
     
     @Autowired

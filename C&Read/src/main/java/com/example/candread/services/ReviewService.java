@@ -3,12 +3,13 @@ package com.example.candread.services;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.example.candread.model.Review;
 import com.example.candread.repositories.ReviewRepository;
 
 
-
+@Service
 public class ReviewService {
 
     @Autowired
