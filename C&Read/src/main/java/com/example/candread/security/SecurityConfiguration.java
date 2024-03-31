@@ -52,7 +52,7 @@ public class SecurityConfiguration {
                 .permitAll()
                 .requestMatchers("/*/Profile/**", "/*/Main", "/review/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/Admin/**", "/news/add","/SingleElement/edit").hasRole("ADMIN")
-                .requestMatchers("/swagger-ui/**").permitAll())
+                .requestMatchers("/swagger-ui/**", "/v3/**").permitAll())
                 .formLogin(formLogin -> formLogin
                         .loginPage("/LogIn")
                         .failureUrl("/loginerror")
