@@ -21,7 +21,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.candread.dto.UserDTO;
 import com.example.candread.model.User;
-import com.example.candread.repositories.UserRepository;
 import com.example.candread.services.UserService;
 
 import jakarta.servlet.http.HttpServletRequest;

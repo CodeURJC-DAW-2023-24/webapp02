@@ -25,11 +25,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.example.candread.model.Element;
 import com.example.candread.model.New;
 import com.example.candread.model.User;
-//import com.example.candread.repositories.ElementRepository;
-//import com.example.candread.repositories.NewRepository;
-import com.example.candread.repositories.PagingRepository;
 import com.example.candread.services.ElementService;
 import com.example.candread.services.NewService;
+import com.example.candread.services.PagingService;
 import com.example.candread.services.UserService;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.colors.DeviceRgb;
@@ -58,7 +56,7 @@ public class ControllerPrincipal {
     private NewService newService;
 
     @Autowired
-    private PagingRepository pagingRepository;
+    private PagingService pagingService;
 
     // Moverse al main, es la pagina principal y la primera que sale al entrar
     @GetMapping("/")
@@ -121,7 +119,8 @@ public class ControllerPrincipal {
 
         if (user != null) {
             Long userid = user.getId();
-            Page<Element> userBooks = pagingRepository.findByUsersIdAndType(userid, "LIBRO", pageable);
+            //Page<Element> userBooks = pagingRepository.findByUsersIdAndType(userid, "LIBRO", pageable);
+            Page<Element> userBooks = pagingService.repoFindByUsersIdAndType(userid, "LIBRO", pageable);
 
             for (Element book : userBooks.getContent()) {
                 Map<String, byte[]> elementMap = new HashMap<>();

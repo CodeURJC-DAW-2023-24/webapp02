@@ -37,9 +37,8 @@ import com.example.candread.model.Element.Countries;
 import com.example.candread.model.Element.Seasons;
 import com.example.candread.model.Element.States;
 import com.example.candread.model.Element.Types;
-import com.example.candread.repositories.ElementRepository;
-import com.example.candread.repositories.PagingRepository;
 import com.example.candread.services.ElementService;
+import com.example.candread.services.PagingService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -47,8 +46,11 @@ import jakarta.servlet.http.HttpServletRequest;
 @RequestMapping("api/films")
 public class FilmApiController {
 
+    /**@Autowired
+    private PagingRepository elementsPaged;**/
+
     @Autowired
-    private PagingRepository elementsPaged;
+    private PagingService elementsPaged;
 
     @Autowired
     private ElementService elementService;
@@ -56,7 +58,7 @@ public class FilmApiController {
     @ResponseBody
     @GetMapping("/")
     public Page<Element> getFilms(Pageable pageable) {
-        return elementsPaged.findByType("PELICULA", pageable);
+        return elementsPaged.repoFindByType("PELICULA", pageable);
     }
 
     @GetMapping("/{id}")

@@ -37,9 +37,8 @@ import com.example.candread.model.Element.Countries;
 import com.example.candread.model.Element.Seasons;
 import com.example.candread.model.Element.States;
 import com.example.candread.model.Element.Types;
-import com.example.candread.repositories.ElementRepository;
-import com.example.candread.repositories.PagingRepository;
 import com.example.candread.services.ElementService;
+import com.example.candread.services.PagingService;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -48,7 +47,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class SeriesApiController {
 
     @Autowired
-    private PagingRepository elementsPaged;
+    private PagingService elementsPaged;
 
     @Autowired
     private ElementService elementService;
@@ -56,7 +55,7 @@ public class SeriesApiController {
     @ResponseBody
     @GetMapping("/")
     public Page<Element> getSeries(Pageable pageable) {
-        return elementsPaged.findByType("SERIE", pageable);
+        return elementsPaged.repoFindByType("SERIE", pageable);
     }
 
     @GetMapping("/{id}")

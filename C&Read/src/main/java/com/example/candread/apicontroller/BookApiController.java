@@ -19,15 +19,13 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.candread.dto.ElementDTO;
-import com.example.candread.dto.UpdateBookImageDTO;
 import com.example.candread.model.Element;
 import com.example.candread.model.Element.Countries;
 import com.example.candread.model.Element.Seasons;
 import com.example.candread.model.Element.States;
 import com.example.candread.model.Element.Types;
-import com.example.candread.repositories.ElementRepository;
-import com.example.candread.repositories.PagingRepository;
 import com.example.candread.services.ElementService;
+import com.example.candread.services.PagingService;
 
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -50,15 +48,19 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("api/books")
 public class BookApiController {
 
+    //@Autowired
+    //private PagingRepository elementsPaged;
+
     @Autowired
-    private PagingRepository elementsPaged;
+    private PagingService elementsPaged;
 
     @Autowired
     private ElementService elementService;
 
     @GetMapping("/")
     public Page<Element> getBooks(Pageable pageable) {
-        return elementsPaged.findByType("LIBRO", pageable);
+        //return elementsPaged.findByType("LIBRO", pageable);
+        return elementsPaged.repoFindByType("LIBRO", pageable);
     }
 
     @GetMapping("/top")
