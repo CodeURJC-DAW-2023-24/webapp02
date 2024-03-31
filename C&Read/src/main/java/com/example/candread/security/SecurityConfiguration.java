@@ -23,7 +23,7 @@ import com.example.candread.repositories.UserRepository;
 
 @Configuration
 @EnableWebSecurity
-@Import(AuthConfiguration.class)
+
 public class SecurityConfiguration {
 
     @Autowired
