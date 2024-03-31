@@ -18,8 +18,8 @@ import jakarta.servlet.http.HttpSession;
 @Service
 public class UserLoginService {
 	
-	@Autowired
-	private AuthenticationManager authenticationManager;
+	// @Autowired
+	// private AuthenticationManager authenticationManager;
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
@@ -29,6 +29,8 @@ public class UserLoginService {
 
 	@Autowired
 	private JwtCookieManager cookieUtil;
+
+	private AuthenticationManager authenticationManager;
 
 	public ResponseEntity<AuthResponse> login(LoginRequest loginRequest, String encryptedAccessToken, String 
 			encryptedRefreshToken) {
