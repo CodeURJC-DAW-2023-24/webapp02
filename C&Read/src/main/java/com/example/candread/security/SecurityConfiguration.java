@@ -28,10 +28,6 @@ import com.example.candread.security.jwt.Token;
 public class SecurityConfiguration {
 
 
-    @Bean
-	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
-		return authConfig.getAuthenticationManager();
-	}
 
     @Autowired
     public RepositoryUserDetailsService userDetailService;
