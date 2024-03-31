@@ -32,7 +32,7 @@ public class JwtTokenProvider {
 	private static final Logger LOG = LoggerFactory.getLogger(JwtRequestFilter.class);
 	
 	//@Value("${jwt.secret}")
-	private String jwtSecret = "change_me";
+	private String jwtSecret = "secret";
 	
 	private static long JWT_EXPIRATION_IN_MS = 5400000;
 	private static Long REFRESH_TOKEN_EXPIRATION_MSEC = 10800000l;
