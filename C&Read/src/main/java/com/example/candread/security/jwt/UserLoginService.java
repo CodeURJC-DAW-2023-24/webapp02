@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Service
-@Import(AuthConfiguration.class)
+//@Import(AuthConfiguration.class)
 public class UserLoginService {
 	
 	@Autowired
