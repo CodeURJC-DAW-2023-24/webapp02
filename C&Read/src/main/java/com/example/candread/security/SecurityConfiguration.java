@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
@@ -25,6 +26,12 @@ import com.example.candread.security.jwt.Token;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+
+
+    @Bean
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+		return authConfig.getAuthenticationManager();
+	}
 
     @Autowired
     public RepositoryUserDetailsService userDetailService;
@@ -49,10 +56,10 @@ public class SecurityConfiguration {
 
         http.authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers("/", "/CSS/**", "/Images/**", "/Scripts/**","/downloadNames/**", "/SignIn", "/users/**", "/Library/**",
-                        "/SingleElement/**", "/loginerror", "/error","/EditFragment", "/api/books/**","/api/elements/**","/api/films/**","/api/series/**","/api/auth/**","/api/users/**")
+                        "/SingleElement/**", "/loginerror", "/error","/EditFragment", "/api/books/**","/api/elements/**","/api/films/**","/api/series/**","/api/auth/**")
                 .permitAll()
                 .requestMatchers("/*/Profile/**", "/*/Main", "/review/**").hasAnyRole("USER", "ADMIN")
-                .requestMatchers("/Admin/**", "/news/add","/SingleElement/edit").hasRole("ADMIN"))
+                .requestMatchers("/Admin/**", "/news/add","/SingleElement/edit","/api/users/**").hasRole("ADMIN"))
                 .formLogin(formLogin -> formLogin
                         .loginPage("/LogIn")
                         .failureUrl("/loginerror")

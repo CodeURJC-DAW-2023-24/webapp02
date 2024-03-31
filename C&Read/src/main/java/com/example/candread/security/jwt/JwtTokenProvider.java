@@ -82,7 +82,7 @@ public class JwtTokenProvider {
 
 		Claims claims = Jwts.claims().setSubject(user.getUsername());
 
-		claims.put("auth", user.getAuthorities().stream().map(s -> new SimpleGrantedAuthority("ROLE_"+s))
+		claims.put("auth", user.getAuthorities().stream().map(s -> new SimpleGrantedAuthority(""+s))
 				.filter(Objects::nonNull).collect(Collectors.toList()));
 
 		Date now = new Date();

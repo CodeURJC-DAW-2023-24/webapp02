@@ -16,6 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import com.example.candread.security.jwt.JwtRequestFilter;
+import com.example.candread.security.jwt.UnauthorizedHandlerJwt;
 
 
 @Configuration
@@ -27,6 +28,9 @@ public class RestSecurityConfig {
 
 	@Autowired
 	private JwtRequestFilter jwtRequestFilter;
+
+	@Autowired
+  	private UnauthorizedHandlerJwt unauthorizedHandlerJwt;
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
@@ -51,6 +55,11 @@ public class RestSecurityConfig {
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 		
+
+		http
+			.securityMatcher("/api/**")
+			.exceptionHandling(handling -> handling.authenticationEntryPoint(unauthorizedHandlerJwt));
+
 		http.authenticationProvider(authenticationProvider());
 		
 		http
@@ -60,6 +69,8 @@ public class RestSecurityConfig {
 					// PUBLIC ENDPOINTS
 					.anyRequest().permitAll()
 			);
+
+			
 		
         // Disable Form login Authentication
         http.formLogin(formLogin -> formLogin.disable());
