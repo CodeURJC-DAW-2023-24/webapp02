@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
@@ -23,6 +24,9 @@ import com.example.candread.repositories.UserRepository;
 @Configuration
 @EnableWebSecurity
 public class SecurityConfiguration {
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
 
     @Autowired
     public RepositoryUserDetailsService userDetailService;
@@ -71,6 +75,12 @@ public class SecurityConfiguration {
         return http.build();
     }
 
+
+    @Bean
+	public AuthenticationManager authenticationManager(AuthenticationConfiguration authConfig) throws Exception {
+		return authConfig.getAuthenticationManager();
+	}
+
     @Bean
     public AuthenticationManager authenticationManagerBean() throws Exception {
         return authentication -> {
@@ -82,8 +92,7 @@ public class SecurityConfiguration {
         };
     }
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    
 
     public void updateSecurityContext(UserRepository userRepository, String name) {
         // Obtener el usuario actualizado de la base de datos
