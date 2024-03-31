@@ -81,16 +81,16 @@ public class SecurityConfiguration {
 		return authConfig.getAuthenticationManager();
 	}
 
-    @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return authentication -> {
-            UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-            String name = userDetails.getUsername();
-            userDetails = userDetailService.loadUserByUsername(name);
-            return new UsernamePasswordAuthenticationToken(userDetails, authentication.getCredentials(),
-                    userDetails.getAuthorities());
-        };
-    }
+    // @Bean
+    // public AuthenticationManager authenticationManagerBean() throws Exception {
+    //     return authentication -> {
+    //         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+    //         String name = userDetails.getUsername();
+    //         userDetails = userDetailService.loadUserByUsername(name);
+    //         return new UsernamePasswordAuthenticationToken(userDetails, authentication.getCredentials(),
+    //                 userDetails.getAuthorities());
+    //     };
+    // }
 
     
 
