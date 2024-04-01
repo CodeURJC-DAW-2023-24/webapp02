@@ -168,3 +168,105 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
      - 3: DefaultModelAttribute: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase2/C%26Read/src/main/java/com/example/candread/Controller/DefaultModelAttributes.java
      - 4: Review: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase2/C%26Read/src/main/java/com/example/candread/model/Review.java
      - 5: UserController: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase2/C%26Read/src/main/java/com/example/candread/Controller/UserController.java
+
+# FASE 3:
+
+## Navegación
+![image](https://github.com/CodeURJC-DAW-2023-24/webapp02/assets/80918271/6f12781e-c0da-4e07-a44b-5d898f9d8f8f)
+
+## Instrucciones
+Componentes Necesarios:
+ - Para la Base de Datos:
+   - Descargar MySQL Installer Community: https://dev.mysql.com/downloads/file/?id=526408
+   - Versión de MySQL: 8.0.36  
+ - Versión de java: Preferiblemente la versiñon de jdk más actualizada.
+ - Versión de SpringBoot: 3.2.2 <br> 
+
+Pasos a seguir para su correcta ejecución:
+ - Clonar el repositorio de GitHub:
+   Para ello hay dos metodos:
+    - Utiliza el comando git clone seguido de la URL del repositorio de GitHub que deseas clonar. Puedes obtener la URL en la página principal del repositorio en GitHub. Por ejemplo:
+      - git clone https://github.com/usuario/nombre-repositorio.git (Asegúrate de reemplazar "https://github.com/usuario/nombre-repositorio.git" con la URL real del repositorio que deseas clonar)
+      - Abre el proyecto en Visual Studio Code: Una vez que el repositorio se ha clonado, puedes abrir el proyecto en Visual Studio Code utilizando el comando: code nombre-repositorio.
+    - Otro metodo si se utiliza Visual Studio Code sería:
+      - Asegurarse de tener la extendión de github correspondiente que sería: x
+      - Ir a Source Controll clickeando en el siguiente icono: o con el atajo de teclado: Cntrl + Shift + G.
+      - Una vez dentro, puklsar en Clone Repository:
+      - En la pestaña emergente insertar la url del repositorio y darle a enter:
+      - Elegir en que carpeta se querra guardar el projecto clonado y una vez guardado, simplemente aceptar el abrirlo.
+      - Listo, ya estará el projecto disponible en su entorno de desarrollom, podemos pasar al siguiente paso.
+ - Abrir el WorkBench:
+   - Darle a Añadir una nueva conexión y aladirla en el puerto 3306 con Hostname localhost
+   - Crear una base de datos llamada bdd_candread
+   - Crear otro usuario de la base de datos con estos datos:
+     - Username=rudy
+     - Password=Rudy2442.
+
+Siguiendo estos pasos ya puede empezar a usar la aplicación, simplemente vaya al siguiente icono: y pulse el boton de ejecutar:
+Para ver la aplicación en el navegador introduzca la siguiente ruta: https://localhost:8443 y acepte los riesgos de la conexión.
+   
+
+## Diagramas Entidades
+![image](https://github.com/CodeURJC-DAW-2023-24/webapp02/assets/80918271/808a9b05-a7d7-4c9f-a374-0c2832f2e62a)
+
+## Diagramas Clases Y Templates
+![image](https://github.com/CodeURJC-DAW-2023-24/webapp02/assets/80918271/f8bd9a04-b503-4f2a-b663-7b110b3a5131)
+
+## Participación
+ - David Ovidio Rubio Caballero:
+   - Descripción: Completada dockerización tanto con el dockerfile como con el dockercompose| Diseño de la apiController de libros y de usuarios|Creados DTOs de los elementos| Cambio en la estructura de carpetas del proyecto para tenerlo solo en dos, una de backend y una de docker| Creación de una varias solicitudes en postman dentro de una coleccion compartida por todos los integrantes del grupo
+   - 5 Commits: 
+     - 1: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/9b64bf919bb492da2f6829a4fcee2a6b7ddddc4d
+     - 2: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/9f2a81faa42a5b616c60715abd5eaa188e58031a
+     - 3: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/381e67aa21b4e442d94a6f4d7dca290f62799efb
+     - 4: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/4c2747427db03c69efd6565a9c79d5375ee71c03
+     - 5: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/b2e5497d241cda99b7c76209c549a7e4e7ec8824 (Luego realicé otro comit arreglando el error añadiendo varios jsonIgnore)
+     - 6: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/8e47590209a998fe08f15eace21eb538c7bf3f91
+   - 5 Ficheros:
+     - 1: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/3c21c5cfffd3357f3bdc1bd51c47aa23c76e4503/backend/src/main/java/com/example/candread/apicontroller/BookApiController.java
+     - 2: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/3c21c5cfffd3357f3bdc1bd51c47aa23c76e4503/backend/src/main/java/com/example/candread/apicontroller/UserApiController.java
+     - 3: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/3c21c5cfffd3357f3bdc1bd51c47aa23c76e4503/backend/src/main/java/com/example/candread/dto/ElementDTO.java
+     - 4: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/3c21c5cfffd3357f3bdc1bd51c47aa23c76e4503/docker/Dockerfile.dockerfile
+     - 5: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/3c21c5cfffd3357f3bdc1bd51c47aa23c76e4503/docker/docker-compose.yml
+ - Javier Vallejo Fernández:
+   - Descripción: 
+   - 5 Commits:
+     - 1: 
+     - 2: 
+     - 3:
+     - 4: 
+     - 5:
+   - 5 Ficheros:
+     - 1:
+     - 2
+     - 3:
+     - 4:
+     - 5:
+- Juan Álvarez Loeches:
+   - Descripción: 
+   - 5 Commits:
+     - 1:
+     - 2:
+     - 3:
+     - 4:
+     - 5:
+   - 5 Ficheros:
+     - 1:
+     - 2:
+     - 3:
+     - 4:
+     - 5:
+ - Aurora María Fernández Basanta:
+    - Descripción: 
+   - 5 Commits:
+     - 1:
+     - 2:
+     - 3:
+     - 4:
+     - 5:
+   - 5 Ficheros:
+     - 1:
+     - 2:
+     - 3:
+     - 4:
+     - 5: UserController: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase2/C%26Read/src/main/java/com/example/candread/Controller/UserController.java
