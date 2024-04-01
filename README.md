@@ -215,7 +215,7 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
 ## Documentación
  - API REST:
    https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/main/backend/api-docs/api-docs.yaml
-   https://rawcdn.githack.com/CodeURJC-DAW-2023-24/webapp02/ff437803d13f84d0d257488405c165e524a7cd18/backend/api-docs/api-docs.html
+   https://rawcdn.githack.com/CodeURJC-DAW-2023-24/webapp02/1a6d5dc14599ccdc16d213708dc061228be23a06/backend/api-docs/api-docs.html
    
  - Intrucciones de la aplicación dockerizada:
    Para que la aplicación pueda ejecutar el docker-compose.yml previamente se tiene que haber creado el dockerfile (archivo responsable de crear la imagen de nuestra aplicación) y escribir correctamente el contexto donde se encuentra, tener disponible el puerto 8443 y tener algún mecanismo para que la aplicación se espere a que la BBDD se haya lanzado por completo para ejecutarse.
