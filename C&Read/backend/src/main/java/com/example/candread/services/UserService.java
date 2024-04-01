@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.HashMap;
@@ -68,12 +69,18 @@ public class UserService {
         if(!existsByUsernameAndPassword("admin3", "123")){
             User userPrueba = new User("admin3", passwordEncoder.encode("123"),  "ADMIN");
             userPrueba.setBannerImage(bannerblob);
+            Map<String, List<Long>> listaE = new HashMap<>();
+            List<Long> idEl = new ArrayList<>();
+            listaE.put("Favoritos", idEl);
             userPrueba.setProfileImage(profileblob);
             userRepository.save(userPrueba);
         }
 
         if(!existsByUsernameAndPassword("Antonio27", "pass")){
             User userPrueba = new User("Antonio27", passwordEncoder.encode("pass"), "USER");
+            Map<String, List<Long>> listaE = new HashMap<>();
+            List<Long> idEl = new ArrayList<>();
+            listaE.put("Favoritos", idEl);
             userPrueba.setBannerImage(bannerblob);
             userPrueba.setProfileImage(profileblob);
             userRepository.save(userPrueba);
