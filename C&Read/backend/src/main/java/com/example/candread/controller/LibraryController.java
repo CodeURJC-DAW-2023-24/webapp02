@@ -22,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.example.candread.model.Element;
 import com.example.candread.model.Review;
 import com.example.candread.model.User;
-import com.example.candread.repositories.ElementRepository;
 import com.example.candread.services.ElementService;
 import com.example.candread.services.PagingService;
 import com.example.candread.services.UserService;
@@ -45,9 +44,6 @@ public class LibraryController {
     @Autowired
     private UserService userService;
 
-    @Autowired
-    private ElementRepository elementRepository;
-
     private List<Element> recomendation(User mainUser, List<Element> elements) {
         
         Map<Integer, List<Element>> filmRate = new HashMap<>();
@@ -57,7 +53,7 @@ public class LibraryController {
         List<Element> userFavorites = new ArrayList<>();
         List<Long> userFavoritesId  = mainUser.getListasDeElementos().get("Favoritos");
         for (Long id: userFavoritesId){
-            Optional<Element> element = elementRepository.findById(id);
+            Optional<Element> element = elementService.repoFindById(id);
             Element e = element.get();
             userFavorites.add(e);
         }
@@ -127,17 +123,15 @@ public class LibraryController {
         if (mainUser != null) {
             List<Element> recomendation = recomendation(mainUser, e);
             
-            //Page<Element> booksPage = pagingRepository.findByTypeAndRecommendations("LIBRO", recomendation, pageable);
             Page<Element> booksPage = pagingService.repoFindByTypeAndRecommendations(type, recomendation, pageable);
 
-            List<Element> allBooks = booksPage.getContent(); // Obtener todos los elementos de la página
+            List<Element> allBooks = booksPage.getContent();
             List<Element> booksInRecommendationOrder = recomendation.stream()
-                .filter(allBooks::contains) // Mantener solo los elementos presentes en la lista de recomendaciones
+                .filter(allBooks::contains) 
                 .collect(Collectors.toList());
 
             return new PageImpl<>(booksInRecommendationOrder, booksPage.getPageable(), booksPage.getTotalElements());
         } else {
-            //return pagingRepository.findByType(type, pageable);
             return pagingService.repoFindByType(type, pageable);
         }
     }
@@ -315,7 +309,6 @@ public class LibraryController {
 
         elementService.fullSet64Image();
 
-        //Page<Element> books = pagingRepository.findByTypeAndGenres("LIBRO", genre, pageable);
         Page<Element> books = pagingService.repoFindByTypeAndGenres("LIBRO", genre, pageable);
         model.addAttribute("controllerRoute", "Books");
         model.addAttribute("elements", books);
@@ -342,7 +335,6 @@ public class LibraryController {
 
         elementService.fullSet64Image();
 
-        //Page<Element> films = pagingRepository.findByTypeAndGenres("PELICULA", genre, pageable);
         Page<Element> films = pagingService.repoFindByTypeAndGenres("PELICULA", genre, pageable);
         model.addAttribute("controllerRoute", "Films");
         model.addAttribute("elements", films);
@@ -369,7 +361,6 @@ public class LibraryController {
 
         elementService.fullSet64Image();
 
-        //Page<Element> series = pagingRepository.findByTypeAndGenres("SERIE", genre, pageable);
         Page<Element> series = pagingService.repoFindByTypeAndGenres("SERIE", genre, pageable);
         model.addAttribute("controllerRoute", "Series");
         model.addAttribute("elements", series);
@@ -396,7 +387,6 @@ public class LibraryController {
 
         elementService.fullSet64Image();
 
-        //Page<Element> books = pagingRepository.findByTypeAndSeason("LIBRO", season, pageable);
         Page<Element> books = pagingService.repoFindByTypeAndSeason("LIBRO", season, pageable);
         model.addAttribute("controllerRoute", "Books");
         model.addAttribute("elements", books);
@@ -423,7 +413,6 @@ public class LibraryController {
 
         elementService.fullSet64Image();
 
-        //Page<Element> series = pagingRepository.findByTypeAndSeason("PELICULA", season, pageable);
         Page<Element> films = pagingService.repoFindByTypeAndSeason("PELICULA", season, pageable);
         model.addAttribute("controllerRoute", "Films");
         model.addAttribute("elements", films);
@@ -450,7 +439,6 @@ public class LibraryController {
 
         elementService.fullSet64Image();
 
-        //Page<Element> films = pagingRepository.findByTypeAndSeason("SERIE", season, pageable);
         Page<Element> series = pagingService.repoFindByTypeAndSeason("SERIE", season, pageable);
         model.addAttribute("controllerRoute", "Series");
         model.addAttribute("elements", series);
@@ -477,7 +465,6 @@ public class LibraryController {
 
         elementService.fullSet64Image();
 
-        //Page<Element> books = pagingRepository.findByTypeAndCountry("LIBRO", country, pageable);
         Page<Element> books = pagingService.repoFindByTypeAndCountry("LIBRO", country, pageable);
         model.addAttribute("controllerRoute", "Books");
         model.addAttribute("elements", books);
@@ -504,7 +491,6 @@ public class LibraryController {
 
         elementService.fullSet64Image();
 
-        //Page<Element> books = pagingRepository.findByTypeAndCountry("PELICULA", country, pageable);
         Page<Element> books = pagingService.repoFindByTypeAndCountry("PELICULA", country, pageable);
         model.addAttribute("controllerRoute", "Films");
         model.addAttribute("elements", books);
@@ -531,7 +517,6 @@ public class LibraryController {
 
         elementService.fullSet64Image();
 
-        //Page<Element> books = pagingRepository.findByTypeAndCountry("SERIE", country, pageable);
         Page<Element> books = pagingService.repoFindByTypeAndCountry("SERIE", country, pageable);
         model.addAttribute("controllerRoute", "Series");
         model.addAttribute("elements", books);
@@ -558,7 +543,6 @@ public class LibraryController {
 
         elementService.fullSet64Image();
 
-        //Page<Element> books = pagingRepository.findByTypeAndState("LIBRO", state, pageable);
         Page<Element> books = pagingService.repoFindByTypeAndState("LIBRO", state, pageable);
         model.addAttribute("controllerRoute", "Books");
         model.addAttribute("elements", books);
@@ -585,7 +569,6 @@ public class LibraryController {
 
         elementService.fullSet64Image();
 
-        //Page<Element> books = pagingRepository.findByTypeAndState("PELICULA", state, pageable);
         Page<Element> books = pagingService.repoFindByTypeAndState("PELICULA", state, pageable);
         model.addAttribute("controllerRoute", "Films");
         model.addAttribute("elements", books);
@@ -612,7 +595,6 @@ public class LibraryController {
 
         elementService.fullSet64Image();
 
-        //Page<Element> books = pagingRepository.findByTypeAndState("SERIE", state, pageable);
         Page<Element> books = pagingService.repoFindByTypeAndState("SERIE", state, pageable);
         model.addAttribute("controllerRoute", "Series");
         model.addAttribute("elements", books);
