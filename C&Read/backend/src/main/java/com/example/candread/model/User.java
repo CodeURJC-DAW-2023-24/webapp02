@@ -38,6 +38,7 @@ public class User {
     
     @ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;
+    @JsonIgnore
     private String password;
 
     @OneToMany (mappedBy = "userLinked", cascade = CascadeType.ALL)
