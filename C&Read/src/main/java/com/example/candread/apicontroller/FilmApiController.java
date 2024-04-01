@@ -40,6 +40,10 @@ import com.example.candread.model.Element.Types;
 import com.example.candread.services.ElementService;
 import com.example.candread.services.PagingService;
 
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
@@ -61,6 +65,13 @@ public class FilmApiController {
         return elementsPaged.repoFindByType("PELICULA", pageable);
     }
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "200", description = "FILM ID CORRECT", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Film not found", content = @Content)
+    })
     @GetMapping("/{id}")
     public ResponseEntity<Element> getFilmsById(@PathVariable Long id) {
         //Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
@@ -74,6 +85,13 @@ public class FilmApiController {
         }
     }
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "200", description = "FILM PUT CORRECTLY", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Film not found", content = @Content)
+    })
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateFilm(@PathVariable Long id,
             @RequestBody ElementDTO elementDTO,
@@ -133,6 +151,13 @@ public class FilmApiController {
         }
     }
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "201", description = "FILM POST CORRECT", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
+    })
     @PostMapping("/")
     public ResponseEntity<Object> uploadFilm(@RequestBody ElementDTO elementDTO,
             HttpServletRequest request) throws URISyntaxException {
@@ -149,6 +174,14 @@ public class FilmApiController {
         return ResponseEntity.created(new URI(bookUrl)).build();
     }
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "200", description = "FILM DELETED CORRECT", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+        @ApiResponse(responseCode = "404", description = "FILM not found", content = @Content)
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteFilm(@PathVariable Long id) {
 
@@ -158,6 +191,13 @@ public class FilmApiController {
         return ResponseEntity.noContent().build();
     }
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "200", description = "FILM IMAGE CORRECT", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Film not found", content = @Content)
+    })
     @GetMapping("/{id}/image")
     public ResponseEntity<byte[]> getFilmImageById(@PathVariable Long id) {
         //Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
@@ -187,6 +227,13 @@ public class FilmApiController {
         }
     }
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "201", description = "FILM IMAGE POST CORRECT", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Film not found", content = @Content)
+    })
     @PostMapping("/{id}/image")
     public ResponseEntity<Object> uploadFilmImageById(@PathVariable Long id,
             @RequestParam("imageFile") MultipartFile imageFile, HttpServletRequest request)
@@ -220,6 +267,13 @@ public class FilmApiController {
         }
     }
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "200", description = "FILM IMAGE PUT CORRECT", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Film not found", content = @Content)
+    })
     @PutMapping("/{id}/image")
     public ResponseEntity<Object> updateFilmImage(@PathVariable Long id,
             @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
@@ -248,6 +302,14 @@ public class FilmApiController {
         return ResponseEntity.noContent().build();
     }
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "200", description = "FILM IMAGE DELETE CORRECT", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Film not found", content = @Content)
+    })
     @DeleteMapping("/{id}/image")
     public ResponseEntity<Object> deleteFilmImage(@PathVariable Long id) {
         //Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");

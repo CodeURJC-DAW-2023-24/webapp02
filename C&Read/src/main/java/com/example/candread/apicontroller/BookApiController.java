@@ -192,6 +192,7 @@ public class BookApiController {
             @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
         }),
         @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
         @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
     })
     @DeleteMapping("/{id}")
@@ -323,6 +324,7 @@ public class BookApiController {
             @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
         }),
         @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
         @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
     })
     @DeleteMapping("/{id}/image")

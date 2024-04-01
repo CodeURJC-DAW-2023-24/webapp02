@@ -35,6 +35,11 @@ import com.example.candread.model.Element;
 import com.example.candread.model.User;
 import com.example.candread.services.UserService;
 
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
+
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -71,6 +76,13 @@ public class UserApiController {
         return null;
     }
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "200", description = "USER ID CORRECT", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "404", description = "USER not found", content = @Content)
+    })
     @GetMapping("/{id}")
     public ResponseEntity<User> getSpecificUser(@PathVariable Long id) {
 
@@ -85,6 +97,14 @@ public class UserApiController {
         }
     }
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "200", description = "USER PUT CORRECT", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+        @ApiResponse(responseCode = "404", description = "USER not found", content = @Content)
+    })
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateUser(@PathVariable Long id,
             @RequestBody UserDTO userDTO,
@@ -118,6 +138,14 @@ public class UserApiController {
         }
     }
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "200", description = "USER DELETE CORRECT", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+        @ApiResponse(responseCode = "404", description = "USER not found", content = @Content)
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteUser(@PathVariable Long id) {
         //elementRepo.deleteById(id);
@@ -126,6 +154,14 @@ public class UserApiController {
         return ResponseEntity.noContent().build();
     }
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "200", description = "USER ID CORRECT", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+        @ApiResponse(responseCode = "404", description = "USER image not found", content = @Content)
+    })
     @GetMapping("/{id}/image")
     public ResponseEntity<byte[]> getUserImage(@PathVariable Long id) {
         Optional<User> optUser = userService.repoFindById(id);
@@ -153,6 +189,14 @@ public class UserApiController {
         }
     }
     
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "201", description = "USER IMAGE POST CORRECT", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+        @ApiResponse(responseCode = "404", description = "USER not found", content = @Content)
+    })
     @PostMapping("/{id}/image")
     public ResponseEntity<Object> uploadUserImage(@PathVariable Long id,
             @RequestParam("profileImage") MultipartFile imageFile, HttpServletRequest request)
@@ -184,6 +228,14 @@ public class UserApiController {
         }
     }
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "200", description = "USER IMAGE PUT CORRECT", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+        @ApiResponse(responseCode = "404", description = "USER not found", content = @Content)
+    })
     @PutMapping("/{id}/image")
     public ResponseEntity<Object> updateUserImage(@PathVariable Long id,
         @RequestParam("profileImage") MultipartFile imageFile) throws IOException {
@@ -211,6 +263,14 @@ public class UserApiController {
         return ResponseEntity.noContent().build();
     }
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "200", description = "USER IMAGE DELETE CORRECT", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+        @ApiResponse(responseCode = "404", description = "USER not found", content = @Content)
+    })
     @DeleteMapping("/{id}/image")
     public ResponseEntity<Object> deleteUserImage(@PathVariable Long id) {
         
