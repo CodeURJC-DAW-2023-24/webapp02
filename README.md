@@ -243,19 +243,19 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
      - 4:
      - 5:
 - Juan Álvarez Loeches:
-   - Descripción: 
+   - Descripción: Permitir editar y eliminar Reviews del usuario | Cambiar el uso de las clases repositories a través de las clases services | Añadir nuevas clases services | API controller del usuario | Documentación de la API REST | Actualizó los datos de las estadísticas para usar las de las listas que posea el usuario | Configurar ApiResponses en ApiControllers | Diagramas UML
    - 5 Commits:
-     - 1:
-     - 2:
-     - 3:
-     - 4:
-     - 5:
+     - 1: UserApiController Add&Edit Functions: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/330ab67426662e939e8c27e61e4bd3a8b12f3336
+     - 2: Edit Review Done: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/5119a4d4b08338962a2f811381846615c5615469
+     - 3: Delete Reviews Added: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/78b7bdff535e32ad210f675ea0e37bcc7315d7e4
+     - 4: ControllerServiceRepo relations in all controllers: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/59950008a3a8da691b184c59edda96fe340c74ac
+     - 5: User Stadistics Updated to use Lists Elements: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/6b0188b899a43eb745f1d96ed59bba205265f7f4
    - 5 Ficheros:
-     - 1:
-     - 2:
-     - 3:
-     - 4:
-     - 5:
+     - 1: UserApiController.java:
+     - 2: ReviewController.java:
+     - 3: W-SingleElement.html:
+     - 4: UserViewController.java:
+     - 5: LibraryController.java:
  - Aurora María Fernández Basanta:
     - Descripción: 
    - 5 Commits:
