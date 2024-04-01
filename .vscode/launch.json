@@ -4,6 +4,12 @@
             "type": "java",
             "name": "DemoApplication",
             "request": "launch",
+            "mainClass": "com.example.candread.DemoApplication"
+        },
+        {
+            "type": "java",
+            "name": "DemoApplication",
+            "request": "launch",
             "mainClass": "backend.com.example.candread.DemoApplication",
             "projectName": "candread"
         },
