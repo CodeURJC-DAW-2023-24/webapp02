@@ -210,7 +210,8 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
 ![image](https://github.com/CodeURJC-DAW-2023-24/webapp02/assets/80918271/808a9b05-a7d7-4c9f-a374-0c2832f2e62a)
 
 ## Diagramas Clases Y Templates
-![image](https://github.com/CodeURJC-DAW-2023-24/webapp02/assets/80918271/f8bd9a04-b503-4f2a-b663-7b110b3a5131)
+![diagramafase3](https://github.com/CodeURJC-DAW-2023-24/webapp02/assets/80918054/bf7c0a33-3b94-4255-8d50-00539b6590ba)
+
 
 ## Participación
  - David Ovidio Rubio Caballero:
