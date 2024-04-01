@@ -168,3 +168,17 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
      - 3: DefaultModelAttribute: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase2/C%26Read/src/main/java/com/example/candread/Controller/DefaultModelAttributes.java
      - 4: Review: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase2/C%26Read/src/main/java/com/example/candread/model/Review.java
      - 5: UserController: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase2/C%26Read/src/main/java/com/example/candread/Controller/UserController.java
+- Javier Vallejo Fernández:
+   - Descripción: Parametros opcionales enañadir elemento|Funcionalidad de editar elemento|Creacion de la API REST de series|Finalizacion de api rest de usuarios para la creacion y edicion de usuarios| principio de utilizacion de tokens jwt para permitir el uso de admin desde postman |creacion de llamada auth a la api tambien para llamdadas api desde postman| modificacion de añadir elemento para permitir que el genero sea input texto| DTO de use| elementAPi
+   - 5 Commits:
+     - 1: Series Api: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/72518c1ebb45d2c64f67e8283f3d12c138109574
+     - 2: Editar elemento: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/fad9a630abc7cfff17dafca3c18f1bc7ee66b782
+     - 3: Mejorado funcionalidad de añadir elemento: https://github.com/CodeURJCDAW202324/webapp02/commit/1118cfe6797e7fbc3265da991a91d7c3836581d3
+     - 4: Añadir imagen despues de crear usuario de api: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/32c0dcb8c74d0b0b08f1ea66f170d3a9ce5e7d45
+     - 5: Ficheros JWT para llamda postman: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/71cf2b833ea017103fbcf40df6e2be011519ef46
+   - 5 Ficheros:
+     - 1: Series Api: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/c56e9507cd3577e78d5b7fad0523cc1ab54fe46e/backend/src/main/java/com/example/candread/apicontroller/SeriesApiController.java
+     - 2: ElementController: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/c56e9507cd3577e78d5b7fad0523cc1ab54fe46e/backend/src/main/java/com/example/candread/controller/ElementController.java
+     - 3: USER DTO: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/c56e9507cd3577e78d5b7fad0523cc1ab54fe46e/backend/src/main/java/com/example/candread/dto/UserDTO.java
+     - 4: Login Controller: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/c56e9507cd3577e78d5b7fad0523cc1ab54fe46e/backend/src/main/java/com/example/candread/apicontroller/auth/LoginController.java
+     - 5: Token Provider: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/c56e9507cd3577e78d5b7fad0523cc1ab54fe46e/backend/src/main/java/com/example/candread/security/jwt/JwtTokenProvider.java
