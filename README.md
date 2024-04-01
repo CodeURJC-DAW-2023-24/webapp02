@@ -214,15 +214,33 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
 
 ## Documentación
  - API REST:
+   
  - Intrucciones de la aplicación dockerizada:
+   Para que la aplicación pueda ejecutar el docker-compose.yml previamente se tiene que haber creado el dockerfile (archivo responsable de crear la imagen de nuestra aplicación) y escribir correctamente el contexto donde se encuentra, tener disponible el puerto 8443 y tener algún mecanismo para que la aplicación se espere a que la BBDD se haya lanzado por completo para ejecutarse.
+   El comando necesario para lanzar el docker-compose sería: docker compose up, si se ha realizado algún cambio habría que poner --build al final.
+   Una vez lanzado el docker-compose se puede acceder a la página poniendo en el navegador el siguiente enlace: https://10.100.139.218:8443/
+   
  - Construcción de la imagen docker:
+   Para construir la imagen dockerizada se necesitara previamente tener localizado tanto el pom.xml como la carpeta src de tu proyecto para poder ponerlas en el copy del dockerfile. También se necesitará tener permisos de escritura en la propia carpeta de mvn para que se puedan descargar todas las dependencias necesarias para poder empaquetar la aplicación.
+   Una vez comprobados los requisitos previos, la construcción de la imagen se hace escribiendo el siguiente comando: docker -build -t nombreImagen:tag -f Dockerfile.dockerfile contexto.
+   Otra opción podría ser lanzando directament eel docker-compose, y con eso se crearía automaticamente la imagen.
+   Por último, si se quiere subir la imagen al dockerHub se deberiá hacer lo siguiente
+     - Iniciar sesión en dockerHub con el comando docker login
+     - Pusheamos la imagen al dockerhub: docker push nombreImagen:tag
+
  - Despliegue en la máquina virtual:
    - Para acceder a la máquina virtual de nuestro grupo donde se almacena la aplicación se necesitará ejecutar el siguiente comando utilizando la red “eduroam” de la universidad o la VPN proporcionada por esta, y además poseer el archivo .key específico para poder utilizarlo en la petición ssh.
    - Además, primero se le debe conceder al archivo key permisos de administrador con el siguiente comando desde un dispositivo Linux:
    	 - chmod 600 prAppWeb02.key
    - A continuación, el comando a ejecutar será el siguiente:
      - ssh -i prAppWeb02.key vmuser@10.100.139.218
+       
  - URL aplicación desplegada en la MV:
+     - URL: https://10.100.139.218:8443/
+     - Usuarios de base:
+       - Usuario: Antonio27, Contraseña: pass
+       - Usuario: admin1, Contraseña: pass
+       - Usuario admin3, Contraseña: 123 
 
 ## Participación
  - David Ovidio Rubio Caballero:
