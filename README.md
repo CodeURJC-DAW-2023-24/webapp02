@@ -289,16 +289,17 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
      - 4: UserViewController.java: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JuanFase3/C%26Read/backend/src/main/java/com/example/candread/controller/UserViewController.java
      - 5: LibraryController.java: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JuanFase3/C%26Read/backend/src/main/java/com/example/candread/controller/LibraryController.java
  - Aurora María Fernández Basanta:
-    - Descripción: 
+    - Descripción: Algoritmo de recomendaciones para cada usuario | Creación y manejo de las lista de listas de los usuarios, que cada usuario pueda crear sus propias listas y editarlas | Arreglo de el carrusel principal de estrenos de la página | Colaboración junto con david en la api inicial de libros | Creación del equipo de Postma, la collección y algunos comandos | Colaboración junto con david en la creación y ejecución de docker en la app.
    - 5 Commits:
-     - 1:
-     - 2:
-     - 3:
-     - 4:
-     - 5:
+     - 1: Algoritmo de recomendaciónes terminado: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/ea0cb12734418bbd74255308814db175c8ac0d27
+     - 2: Fin de la creación del manejo de listas con eliminar y generas nuevas listas: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/7121fe6715546f41cab299115eaa2e390f13feb2
+     - 3: Creación de las listas de listas en la base de datos: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/d817826d112d9226634f3988187109229dc84ba5
+     - 4: Añadidir nuevo contenido a listas: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/d817826d112d9226634f3988187109229dc84ba5
+     - 5: Creación de ciertas funciones de la api: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/d817826d112d9226634f3988187109229dc84ba5
    - 5 Ficheros:
-     - 1:
-     - 2:
-     - 3:
-     - 4:
-     - 5: UserController: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase2/C%26Read/src/main/java/com/example/candread/Controller/UserController.java
+     - 1: LibraryController: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase3/backend/src/main/java/com/example/candread/controller/LibraryController.java
+     - 2: UserViewController: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase3/backend/src/main/java/com/example/candread/controller/UserViewController.java
+     - 3: Profile.html: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase3/backend/src/main/resources/templates/W-Profile.html
+     - 4: ProfileLists.js: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase3/backend/src/main/resources/static/Scripts/profileLists.js
+     - 5: BookApiController: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase3/backend/src/main/java/com/example/candread/apicontroller/BookApiController.java
+     - 6: User.java: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase3/backend/src/main/java/com/example/candread/model/User.java
