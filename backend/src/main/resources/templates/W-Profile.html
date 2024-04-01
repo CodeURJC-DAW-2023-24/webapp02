@@ -1,0 +1,178 @@
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../CSS/S-Main.css">
+    <link rel="stylesheet" href="../CSS/S-NavBar.css">
+    <link rel="stylesheet" href="../CSS/S-Card.css">
+    <link rel="stylesheet" href="../CSS/S-UserProfile.css">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+
+    <title> Pagina Usuario C&Reed </title>
+
+</head>
+
+<body>
+    <!-- NAVBAR -->
+    {{> W-Header}}
+
+    <!-- PROFILE PAGE -->
+
+    <!-- BANNER USER -->
+    <section id="bannerSection" class="bannerSection">
+        <img src="data:image/jpg;base64, {{user.base64BannerImage}}" alt="Imagen 1" class="ib">
+        <img src="data:image/jpg;base64, {{user.base64ProfileImage}}" alt="Logo" width="50" height="50" id="bannerLogo">
+        <div id="prueba">
+            <p id="bannerUsername">{{user.name}}<a href="#exampleModal">
+                    <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
+                            src="/Images/Icon-Edit.png" alt="HTML tutorial" style="width:30px;height:30px;"></button>
+                </a></p>
+
+            <!-- Modal -->
+            <div class="modal" id="exampleModal">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form action="/users/update" method="post" enctype="multipart/form-data">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <label for="profileImage">Profile Image</label>
+                                    <input type="file" class="form-control" id="profileImage" name="base64ProfileImage">
+                                </div>
+                                <div class="form-group">
+                                    <label for="bannerImage">Banner Image</label>
+                                    <input type="file" class="form-control" id="bannerImage" name="base64BannerImage">
+                                </div>
+                                <div class="form-group">
+                                    <label for="username">Username</label>
+                                    <input type="text" class="form-control" id="username" name="name">
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                            <input type="hidden" name="_csrf" value="{{token}}" />
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- FAVORITOS USUARIO -->
+
+    <section id="tops">
+        <!-- ELEMENTOS DE LAS LISTAS DEL USUARIO -->
+        <button class="btn" data-bs-toggle="modal" data-bs-target="#newListModal">Crear Lista</button>
+        <script>
+            var elementsMap = "{{listOfElements}}";
+            var token = "{{token}}";
+        </script>
+        <script src="/Scripts/profileLists.js" defer></script>
+
+        <script src="/Scripts/download.js" defer></script>
+        </div>
+
+        <div class="modal" id="newListModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="/users/updateNewList" method="post" enctype="multipart/form-data">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Nueva Lista:</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="listName">Nombre de la Lista: </label>
+                                <input type="text" class="form-control" id="listName" name="name">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Guardar</button>
+                        </div>
+                        <input type="hidden" name="_csrf" value="{{token}}" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--SECCION ESTADISTICAS-->
+    <aside id="stadisticSection">
+        <div id="stadisticTitle">
+            <h4> Mis Estadísticas </h4>
+        </div>
+        <div id="stadisticList" class="container">
+            <div class="row">
+                <!--div class="col-sm-2"-->
+                <canvas id="myChart" style="width:100%;max-width:400px"></canvas>
+                <script>
+                    const xValues = ["LIBROS", "PELICULAS", "SERIES"];
+                    const yValues = ["{{numBooks}}", "{{numFilms}}", "{{numSeries}}"];
+                    const barColors = ["red", "blue", "#5cd65c"];
+                    new Chart("myChart", {
+                        type: "pie",
+                        data: {
+                            labels: xValues,
+                            datasets: [{
+                                backgroundColor: barColors,
+                                data: yValues
+                            }]
+                        },
+                        options: {
+                            title: {
+                                display: false,
+                                text: "Medios Guardados"
+                            }
+                        }
+                    });
+                </script>
+
+                <canvas id="myChart2" style="width:100%;max-width:500px"></canvas>
+                <script>
+                    const zValues = ["ACCION", "TERROR", "AVENTURA", "MISTERIO", "ROMANCE", "CIENCIAFICCION", "DRAMA", "INFANTIL", "COMEDIA", "FANTASIA", "SOBRENATURAL", "NOVELA", "JUVENIL"];
+                    const wValues = ["{{numAccion}}", "{{numTerror}}", "{{numAventura}}", "{{numMisterio}}", "{{numRomance}}",
+                        "{{numCiencia}}", "{{numDrama}}", "{{numInfantil}}", "{{numComedia}}",
+                        "{{numFantasia}}", "{{numSobrenatural}}", "{{numNovela}}", "{{numJuvenil}}"];
+                    const barColors2 = ["red", "black", "#5cd65c", "orange", "yellow", "#00ffcc", "purple", "#99ccff", "#0000b3", "#ffb3cc", "#ffbf80", "#cc0066", "brown"];
+                    new Chart("myChart2", {
+                        type: "pie",
+                        data: {
+                            labels: zValues,
+                            datasets: [{
+                                backgroundColor: barColors2,
+                                data: wValues
+                            }]
+                        },
+                        options: {
+                            title: {
+                                display: false,
+                                text: "Generos Guardados"
+                            }
+                        }
+                    });
+                </script>
+            </div>
+        </div>
+    </aside>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>

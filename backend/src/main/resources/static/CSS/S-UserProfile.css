@@ -1,0 +1,127 @@
+/*NAVBAR*/
+#nav{
+    opacity: 0.8;
+}
+/* STADISTICS */
+#stadisticSection{
+    width : 30%;
+    float: left;
+    margin:30px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    border:3px;
+    border-color: #b4d2ff;
+    border-style: solid;
+}
+#stadisticTitle{
+    background-color: #3253ad;
+    color:white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 1px;
+    padding-top: 5px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    width: max-content;
+    font-size: 30px;
+}
+#stadisticList{
+    margin: 15px;
+}
+#tops
+{
+    float: left;
+    width: 60%;
+}
+/* USER BANNER */
+#bannerSection {
+    height: 400px; /* Establece la altura deseada */
+    width: 100%;
+    position: relative;
+    background-color: white; /* Opcional: si deseas un color de fondo */
+    border: 5px solid #494F87; /* Cambiado para simplificar */
+    box-sizing: border-box; /* Asegura que el borde se incluya en el cálculo de la altura y el ancho */
+}
+
+.ib {
+    width: 100%;
+    height: 100%; /* Cambiado para ocupar toda la altura del #bannerSection */
+    display: block;
+    object-fit: cover; /* Ajusta la imagen de fondo para cubrir todo el espacio disponible */
+}
+
+#bannerLogo {
+    position: absolute;
+    top: 50%; /* Centra verticalmente */
+    left: 50%; /* Centra horizontalmente */
+    transform: translate(-50%, -50%);
+    width: 150px;
+    height: 150px;
+    border: 3px solid #494F87; /* Cambiado para simplificar */
+    border-radius: 50%;
+}
+
+
+
+#bannerUsername{
+    position: absolute;
+    top: calc(50% + 75px); /* Coloca el #bannerUsername justo debajo del #bannerLogo */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #494F87;
+    text-align: center;
+    color: white;
+    width: auto;
+    padding: 10px;
+    border-radius: 10%;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+/* ADMIN SECTION */
+#adminSection{
+    float: initial;
+    width: fit-content;
+    margin:30px;
+    margin-top: 105px;
+    padding: 30px;
+    background-color: white;
+    border-radius: 10px;
+    border:3px;
+    border-color: #D4D8FF;
+    border-style: solid;
+    
+}
+
+#adminTitle{
+    background-color: #dd257b;
+    color:white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 1px;
+    padding-top: 1px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    width: max-content;
+    font-size: 30px;
+}
+#adminItem{
+    margin-top: 2px;
+    margin-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.btnAdd {
+    margin: 20px;
+    background-color:#d752dc;
+    border-radius: 5px;
+    width: fit-content;
+    color: white;
+  }
+
+a {
+    text-decoration: auto !important;
+}
