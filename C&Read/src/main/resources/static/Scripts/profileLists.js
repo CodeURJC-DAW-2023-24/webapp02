@@ -32,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
         modalButton.classList.add('btn', 'btn-primary');
         modalButton.setAttribute('data-bs-toggle', 'modal');
         modalButton.setAttribute('data-bs-target', `#deleteModal`);
-        modalButton.textContent = 'Open Modal';
+        modalButton.textContent = 'Eliminar Elemento';
         articleHeader.appendChild(modalButton);
         article.appendChild(articleHeader);
 

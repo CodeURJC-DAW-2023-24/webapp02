@@ -134,7 +134,7 @@
 				<groupId>org.openapitools</groupId>
 				<artifactId>openapi-generator-maven-plugin</artifactId>
 				<version>5.4.0</version>
-				<executions>
+			<!--<executions>
 					<execution>
 						<phase>integration-test</phase>
 						<goals>
@@ -149,7 +149,7 @@
 							</configOptions>
 						</configuration>
 					</execution>
-				</executions>
+				</executions> -->
 			</plugin>
 		</plugins>
 	</build>

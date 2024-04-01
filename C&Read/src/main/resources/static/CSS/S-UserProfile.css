@@ -114,6 +114,14 @@
     margin-right: 10px;
 }
 
+.btnAdd {
+    margin: 20px;
+    background-color:#d752dc;
+    border-radius: 5px;
+    width: fit-content;
+    color: white;
+  }
+
 a {
     text-decoration: auto !important;
 }

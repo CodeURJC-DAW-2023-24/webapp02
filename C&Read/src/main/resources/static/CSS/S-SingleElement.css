@@ -208,6 +208,14 @@ main{
   color: white;
 }
 
+.btnAdd {
+  margin: 10px;
+  background-color:#dc52a7;
+  border-radius: 5px;
+  width: fit-content;
+  color: white;
+}
+
 
 
 

@@ -44,6 +44,7 @@
       {{#user}}
       <div id="listGroup" class="row">
         <div class="d-flex align-items-center">
+          {{#user}}
           <form id="addToUserList" action="/SingleElement/{{serie.id}}/add" method="post">
             <select id="listaSelect" name="listaId" class="form-select" aria-label="Añadir a lista:">
               <option selected>Añadir a lista:</option>
@@ -53,15 +54,18 @@
               {{/entrySet}}
               {{/listas}}
             </select>
-            <button type="submit" class="btn">Agregar</button>
+            <button type="submit" class="btnAdd">Agregar</button>
             <input type="hidden" name="_csrf" value="{{token}}" />
           </form>
+          {{/user}}
           <form id="addElement" action="/SingleElement/{{serie.id}}/addelement" method="post">
+            <!--
             <div id="addElementDiv">
               {{#user}}
               <button type="submit" class="btn">FAV</button>
               {{/user}}
             </div>
+            -->
             <input type="hidden" name="_csrf" value="{{token}}" />
           </form>
         </div>

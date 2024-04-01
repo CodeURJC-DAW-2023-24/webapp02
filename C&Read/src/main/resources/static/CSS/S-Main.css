@@ -43,7 +43,7 @@ main{
     border-style: solid;
 }
 .carousel-item{
-    height: 13rem;
+    height: fit-content;
     background-color: #D4D8FF;
 }
 
