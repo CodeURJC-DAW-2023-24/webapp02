@@ -31,8 +31,8 @@ public class JwtTokenProvider {
 	
 	private static final Logger LOG = LoggerFactory.getLogger(JwtRequestFilter.class);
 	
-	//@Value("${jwt.secret}")
-	private String jwtSecret = "secret";
+	@Value("${jwt.secret}")
+	private String jwtSecret;
 	
 	private static long JWT_EXPIRATION_IN_MS = 5400000;
 	private static Long REFRESH_TOKEN_EXPIRATION_MSEC = 10800000l;
@@ -79,7 +79,7 @@ public class JwtTokenProvider {
 
 		Claims claims = Jwts.claims().setSubject(user.getUsername());
 
-		claims.put("auth", user.getAuthorities().stream().map(s -> new SimpleGrantedAuthority("ROLE_"+s))
+		claims.put("auth", user.getAuthorities().stream().map(s -> new SimpleGrantedAuthority(""+s))
 				.filter(Objects::nonNull).collect(Collectors.toList()));
 
 		Date now = new Date();
@@ -101,7 +101,7 @@ public class JwtTokenProvider {
 
 		Claims claims = Jwts.claims().setSubject(user.getUsername());
 
-		claims.put("auth", user.getAuthorities().stream().map(s -> new SimpleGrantedAuthority("ROLE_"+s))
+		claims.put("auth", user.getAuthorities().stream().map(s -> new SimpleGrantedAuthority(""+s))
 				.filter(Objects::nonNull).collect(Collectors.toList()));
 		Date now = new Date();
 		Long duration = now.getTime() + REFRESH_TOKEN_EXPIRATION_MSEC;

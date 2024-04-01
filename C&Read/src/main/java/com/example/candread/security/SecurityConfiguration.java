@@ -119,8 +119,8 @@ public class SecurityConfiguration {
         // Disable Basic Authentication
         http.httpBasic(httpBasic -> httpBasic.disable());
 
-        // Stateless session
-        //http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+        //Stateless session;
+        http.sessionManagement(management -> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
 
 		// Add JWT Token filter
 		http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
