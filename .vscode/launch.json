@@ -19,17 +19,7 @@
             "name": "Spring Boot-DemoApplication<candread>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "mainClass": "backend.com.example.DemoApplication",
-            "projectName": "candread",
-            "args": "",
-            "envFile": "${workspaceFolder}/.env"
-        },
-        {
-            "type": "java",
-            "name": "Spring Boot-DemoApplication<candread>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "mainClass": "com.example.candread.DemoApplication",
+            "mainClass": "backend.com.example.candread.DemoApplication",
             "projectName": "candread",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
