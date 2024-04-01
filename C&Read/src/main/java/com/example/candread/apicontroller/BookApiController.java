@@ -98,6 +98,13 @@ public class BookApiController {
         }
     }
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "200", description = "BOOK PUT CORRECTLY", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
+    })
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateBook(@PathVariable Long id,
             @RequestBody ElementDTO elementDTO,
@@ -157,6 +164,13 @@ public class BookApiController {
         }
     }
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "201", description = "BOOK POSTED CORRECTLY", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
+    })
     @PostMapping("/")
     public ResponseEntity<Object> uploadBook(@RequestBody ElementDTO elementDTO,
             HttpServletRequest request) throws URISyntaxException {
@@ -173,6 +187,13 @@ public class BookApiController {
         return ResponseEntity.created(new URI(bookUrl)).build();
     }
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "200", description = "BOOK DELETED CORRECTLY", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
+    })
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteBook(@PathVariable Long id) {
 
@@ -182,6 +203,13 @@ public class BookApiController {
         return ResponseEntity.noContent().build();
     }
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "200", description = "GET BOOK IMAGE CORRECTLY", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Book image not found", content = @Content)
+    })
     @GetMapping("/{id}/image")
     public ResponseEntity<byte[]> getBookImageById(@PathVariable Long id) {
         //Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
@@ -213,6 +241,13 @@ public class BookApiController {
     
 
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "201", description = "BOOK IMAGE POSTED CORRECTLY", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
+    })
     @PostMapping("/{id}/image")
     public ResponseEntity<Object> uploadBookImageById(@PathVariable Long id,
             @RequestParam("imageFile") MultipartFile imageFile, HttpServletRequest request)
@@ -246,6 +281,13 @@ public class BookApiController {
 
     
 
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "200", description = "BOOK IMAGE PUT CORRECTLY", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
+    })
     @PutMapping("/{id}/image")
     public ResponseEntity<Object> updateBookImage(@PathVariable Long id,
         @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
@@ -276,6 +318,13 @@ public class BookApiController {
 
     
     
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "200", description = "BOOK IMAGE DELETED CORRECTLY", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
+    })
     @DeleteMapping("/{id}/image")
     public ResponseEntity<Object> deleteBookImage(@PathVariable Long id) {
         //Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
