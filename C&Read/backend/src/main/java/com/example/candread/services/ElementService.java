@@ -651,8 +651,8 @@ public class ElementService {
         return elementRepository.findTopElementsByRating(type, pageable);
     }
 
-    public List<Element> repofindTop4ByOrderByIdDesc(){
-        return elementRepository.findTop4ByOrderByIdDesc();
+    public List<Element> repofindTop5ByOrderByIdDesc(){
+        return elementRepository.findTop5ByOrderByIdDesc();
     }
 
     public void repoSaveElement(Element elementToSave){

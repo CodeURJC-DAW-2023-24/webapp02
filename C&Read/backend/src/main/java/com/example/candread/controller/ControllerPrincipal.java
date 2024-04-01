@@ -66,12 +66,13 @@ public class ControllerPrincipal {
 
         // CAROUSEL IMG
         //List<Element> elementsRelease = elementRepository.findTop4ByOrderByIdDesc();
-        List<Element> elementsRelease = elementService.repofindTop4ByOrderByIdDesc();
+        List<Element> elementsRelease = elementService.repofindTop5ByOrderByIdDesc();
         for (int i = 0; i < elementsRelease.size(); i++) {
             Element e = elementsRelease.get(i);
             String img = e.getBase64Image();
             String finalImg = "data:image/jpg;base64," + img;
             model.addAttribute("firstSlide" + i, finalImg);
+            model.addAttribute("firstSlideSinopsis" + i, e.getDescription());
         }
 
         // Pasamos los datos a la vista

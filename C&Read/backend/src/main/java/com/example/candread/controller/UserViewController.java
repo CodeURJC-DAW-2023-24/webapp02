@@ -59,12 +59,13 @@ public class UserViewController {
 
         // CAROUSEL IMG
         // List<Element> elementosEstreno = elementRepository.findTop4ByOrderByIdDesc();
-        List<Element> elementosEstreno = elementService.repofindTop4ByOrderByIdDesc();
+        List<Element> elementosEstreno = elementService.repofindTop5ByOrderByIdDesc();
         for (int i = 0; i < elementosEstreno.size(); i++) {
             Element e = elementosEstreno.get(i);
             String img = e.getBase64Image();
             String finalimg = "data:image/jpg;base64," + img;
             model.addAttribute("firstSlide" + i, finalimg);
+            model.addAttribute("firstSlideSinopsis" + i, e.getDescription());
         }
         // Obtener todas las noticias
         // List<New> newsList = newRepository.findAll();
