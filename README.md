@@ -251,11 +251,11 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
      - 4: ControllerServiceRepo relations in all controllers: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/59950008a3a8da691b184c59edda96fe340c74ac
      - 5: User Stadistics Updated to use Lists Elements: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/6b0188b899a43eb745f1d96ed59bba205265f7f4
    - 5 Ficheros:
-     - 1: UserApiController.java:
-     - 2: ReviewController.java:
-     - 3: W-SingleElement.html:
-     - 4: UserViewController.java:
-     - 5: LibraryController.java:
+     - 1: UserApiController.java: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JuanFase3/C%26Read/backend/src/main/java/com/example/candread/apicontroller/UserApiController.java
+     - 2: ReviewController.java: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JuanFase3/C%26Read/backend/src/main/java/com/example/candread/controller/ReviewController.java
+     - 3: W-SingleElement.html: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JuanFase3/C%26Read/backend/src/main/resources/templates/W-SingleElement.html
+     - 4: UserViewController.java: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JuanFase3/C%26Read/backend/src/main/java/com/example/candread/controller/UserViewController.java
+     - 5: LibraryController.java: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JuanFase3/C%26Read/backend/src/main/java/com/example/candread/controller/LibraryController.java
  - Aurora María Fernández Basanta:
     - Descripción: 
    - 5 Commits:
