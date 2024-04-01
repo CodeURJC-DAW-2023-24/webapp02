@@ -212,6 +212,17 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
 ## Diagramas Clases Y Templates
 ![diagramafase3](https://github.com/CodeURJC-DAW-2023-24/webapp02/assets/80918054/bf7c0a33-3b94-4255-8d50-00539b6590ba)
 
+## Documentación
+ - API REST:
+ - Intrucciones de la aplicación dockerizada:
+ - Construcción de la imagen docker:
+ - Despliegue en la máquina virtual:
+   - Para acceder a la máquina virtual de nuestro grupo donde se almacena la aplicación se necesitará ejecutar el siguiente comando utilizando la red “eduroam” de la universidad o la VPN proporcionada por esta, y además poseer el archivo .key específico para poder utilizarlo en la petición ssh.
+   - Además, primero se le debe conceder al archivo key permisos de administrador con el siguiente comando desde un dispositivo Linux:
+   	 - chmod 600 prAppWeb02.key
+   - A continuación, el comando a ejecutar será el siguiente:
+     - ssh -i prAppWeb02.key vmuser@10.100.139.218
+ - URL aplicación desplegada en la MV:
 
 ## Participación
  - David Ovidio Rubio Caballero:
