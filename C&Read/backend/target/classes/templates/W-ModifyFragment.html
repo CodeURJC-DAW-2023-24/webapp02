@@ -1,0 +1,23 @@
+<script src="/Scripts/editElement.js"></script>
+
+<div id="modifyBookForm" style="display: {{#errorOccurred}}block{{/errorOccurred}} {{^errorOccurred}}none{{/errorOccurred}};">
+    <form id="modifyForm"  method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+        <div class="col-md-12 mt-5 mb-5">
+            <h4>Modificar Elemento</h4>
+            <div class="card rounded">
+                <div class="card-body">
+                    <div class="row">
+                        <!-- Columna para los campos de entrada -->
+                        <div class="col-md-6 mb-3">
+                            <label for="campo1" class="form-label">Nombre del elemento a modificar:</label>
+                            <input type="text" name="nameSearch" class="form-control" id="campo1">
+                            <button type="submit" class="btn btn-primary">Buscar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <input type="hidden" name="_csrf" value="{{token}}">
+    </form>
+</div>
