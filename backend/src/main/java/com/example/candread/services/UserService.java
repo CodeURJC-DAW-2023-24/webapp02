@@ -63,6 +63,8 @@ public class UserService {
             listaE.put("Favoritos", idEl);
             listaE.put("Viendo", idEl);
             userPrueba.setListasDeElementos(listaE);
+            userPrueba.setBannerImage(bannerblob);
+            userPrueba.setProfileImage(profileblob);
             userRepository.save(userPrueba);
         }
         if(!existsByUsernameAndPassword("admin3", "123")){
@@ -129,18 +131,34 @@ public class UserService {
         Optional<User> userOptional = userRepository.findById(id);
         User user = userOptional.orElseThrow();
         Blob blob = user.getProfileImage();
-        InputStream inputStream = blob.getBinaryStream();
-        byte[] imageBytes = inputStream.readAllBytes();
-        String base64Image = Base64.getEncoder().encodeToString(imageBytes);
-        user.setBase64ProfileImage(base64Image);
-
-        blob = user.getBannerImage();
-        inputStream = blob.getBinaryStream();
-        imageBytes = inputStream.readAllBytes();
-        base64Image = Base64.getEncoder().encodeToString(imageBytes);
-        user.setBase64BannerImage(base64Image);
+        if (blob != null){
+            InputStream inputStream = blob.getBinaryStream();
+            byte[] imageBytes = inputStream.readAllBytes();
+            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+            user.setBase64ProfileImage(base64Image);
+            blob = user.getBannerImage();
+            inputStream = blob.getBinaryStream();
+            imageBytes = inputStream.readAllBytes();
+            base64Image = Base64.getEncoder().encodeToString(imageBytes);
+            user.setBase64BannerImage(base64Image);
+            
+            inputStream.close();  
+        }
+        else{
+            Blob blobAladdin = getBlob("static/Images/Aladdin.jpg");
+            InputStream inputStream = blobAladdin.getBinaryStream();
+            byte[] imageBytes = inputStream.readAllBytes();
+            String base64Image = Base64.getEncoder().encodeToString(imageBytes);
+            user.setBase64ProfileImage(base64Image);
+            Blob blobBanner = getBlob("static/Images/imagenBanner.jpg");
+            inputStream = blobBanner.getBinaryStream();
+            byte[] bannerImageBytes = inputStream.readAllBytes();
+            String base64BannerImage = Base64.getEncoder().encodeToString(bannerImageBytes);
+            user.setBase64BannerImage(base64BannerImage);
+        }
         
-        inputStream.close();
+
+        
    }
 
    public void repoSaveUser(User userToSave){
