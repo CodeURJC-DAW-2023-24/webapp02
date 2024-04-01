@@ -4,12 +4,9 @@ import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +24,6 @@ import com.example.candread.model.Review;
 import com.example.candread.model.User;
 import com.example.candread.repositories.ElementRepository;
 import com.example.candread.repositories.PagingRepository;
-import com.example.candread.repositories.UserRepository;
 import com.example.candread.services.ElementService;
 import com.example.candread.services.UserService;
 
@@ -50,141 +46,86 @@ public class LibraryController {
     private UserService userService;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private ElementRepository elementRepository;
 
-    private List<Element> recomendador(User mainUser, List<Element> elements) {
-        List<User> users = userRepository.findAll();
+    private List<Element> recomendation(User mainUser, List<Element> elements) {
+        
+        Map<Integer, List<Element>> filmRate = new HashMap<>();
+        Map<String, Integer> genreAppear = new HashMap<>(); 
 
-        Map<Element, Integer> reviewsPorElemento = new HashMap<>();
-        Map<Element, Set<String>> generosPorElemento = new HashMap<>();
-
-        // por cada usuario, que calificación tiene un elemento.
-        for (User user : users) {
-            for (Review review : user.getReviews()) {
-                if (review.getElementLinked().getType().equals("LIBRO")){
-                    int calificacion = review.getRating();
-                    int ca = reviewsPorElemento.getOrDefault(review.getElementLinked(), 0);
-                    ca += calificacion;
-                    reviewsPorElemento.put(review.getElementLinked(), ca);
-                }
-            }
+        // Estract User Favorite List
+        List<Element> userFavorites = new ArrayList<>();
+        List<Long> userFavoritesId  = mainUser.getListasDeElementos().get("Favoritos");
+        for (Long id: userFavoritesId){
+            Optional<Element> element = elementRepository.findById(id);
+            Element e = element.get();
+            userFavorites.add(e);
         }
-        // generos que tiene cada elemento
-        for (Element element : elements) {
-            Set<String> generos = new HashSet<>(element.getGeneros());
-            generosPorElemento.put(element, generos);
-        }
-
-        return elementRecomendation(reviewsPorElemento, generosPorElemento, mainUser, elements);
-    }
-
-    private List<Element> elementRecomendation(Map<Element, Integer> reviewsPorElemento,
-            Map<Element, Set<String>> generosPorElemento, User mainUser, List<Element> elements) {
-
-        // sacar favoritos y reviews del usuario
-        List<Review> reviewsMainUser = mainUser.getReviews();
-
-        // lista de que puntuación tiene el usuario por cada genero
-        Map<String, Integer> elementosRevisados = new HashMap<>();
-
-        // Inicializar listas de elementos por género: G1 -> E1, E2..ETC
-        Map<String, List<Element>> elementosPorGenero = new HashMap<>();
-        for (Element element : elements) {
-            for (String genero : element.getGeneros()) {
-                elementosPorGenero.putIfAbsent(genero, new ArrayList<>());
-                elementosPorGenero.get(genero).add(element);
+        // Estract User Reviews
+        List<Review> userReviews = mainUser.getReviews();
+        
+        // Save rate and films, films whitch are in favorite have a rate 6.
+        filmRate.put(6, userFavorites);
+        for(Review review: userReviews){
+            int rate = review.getRating();
+            Element element = review.getElementLinked();
+            if (filmRate.containsKey(rate)){
+                filmRate.get(rate).add(element);
+            }else{
+                List<Element> newList = new ArrayList<>();
+                newList.add(element);
+                filmRate.put(rate, newList);
             }
         }
 
-        // Por cada genero, que puntuacion le ha dado el usuario
-        // Calcular puntajes por género
-        for (Map.Entry<String, List<Element>> entry : elementosPorGenero.entrySet()) {
-            String genero = entry.getKey();
-            List<Element> elementosDelGenero = entry.getValue();
-            
-            int c = 0;
-            for (Element elemento : elementosDelGenero) {
-                int cantidadEstrellas = 0; // Reiniciar la cantidad de estrellas para cada elemento
-                
-                //si el usuario tiene una review de algun elemento de este genero, este genero aumenta su puntuación.
-                for (Review review : reviewsMainUser) {
-                    if (review.getElementLinked().getName().equals(elemento.getName())) { // Verificar si la review está asociada al elemento actual
-                        cantidadEstrellas += review.getRating(); // Sumar la calificación de la revisión al total
+        // Go through filmRate and take the rate of each genre.
+        for(Map.Entry<Integer, List<Element>> entry : filmRate.entrySet()){
+            int rate = entry.getKey();
+            List<Element> elementsList = entry.getValue();
+
+            for (Element e: elementsList){
+                List<String> elementGenres = e.getGeneros();
+                for (String genre: elementGenres){
+                    if (genreAppear.containsKey(genre)){
+                        int genreRate = genreAppear.get(genre);
+                        genreRate += rate;
+                        genreAppear.put(genre, genreRate);
+                    }else{
+                        genreAppear.put(genre, rate);
                     }
                 }
-                elementosRevisados.put(genero, c += cantidadEstrellas);
-                // Guardar la cantidad total de estrellas que el usuario ha dado para este género
             }
 
-            // Ordenar el mapa de mayor a menor
-            List<Map.Entry<String, Integer>> listaOrdenada = new ArrayList<>(elementosRevisados.entrySet());
-            listaOrdenada.sort((entry1, entry2) -> entry2.getValue().compareTo(entry1.getValue()));
-
-            // Reconstruir el mapa ordenado
-            Map<String, Integer> elementosRevisadosOrdenados = new LinkedHashMap<>();
-            for (Map.Entry<String, Integer> e : listaOrdenada) {
-                elementosRevisadosOrdenados.put(e.getKey(), e.getValue());
-            }
-
-            elementosRevisados = elementosRevisadosOrdenados;
-
-            // ordenamos los elementos del genero para que esten los mejor valorados delante:
-            elementosDelGenero.sort((elemento1, elemento2) -> {
-                // Obtener la puntuación de cada elemento
-                // reviews por elemento guarad la suma de las reviews otorgadas al elemento,
-                // sacamos de ahi la comparación
-                int puntuacionElemento1 = reviewsPorElemento.getOrDefault(elemento1, 0);
-                int puntuacionElemento2 = reviewsPorElemento.getOrDefault(elemento2, 0);
-
-                // Comparar las puntuaciones en orden descendente
-                return Integer.compare(puntuacionElemento2, puntuacionElemento1);
-            });
-
-            elementosPorGenero.put(genero, elementosDelGenero);
-            // al salir de aqui tenemos:
-            // - elementosRevisados -> Puntuación que tiene el usuario por cada genero de manera ordenada, tipo, usuario1 tiene de aventura un 10 por qu etiene os reseñas de un elemento con este genero
-            // - elementosPorGenero -> Elementos que tiene cada genero ordenados por puntuación total de otros usuarios
         }
 
-        List<Element> elementosOrdenados = new ArrayList<>();
-        Set<Element> elementosAgregados = new HashSet<>(); // Conjunto para rastrear elementos ya agregados
+        // Sort element:
+        elements.sort((element1, element2) -> {
+            int score1 = calculateScore(element1, genreAppear);
+            int score2 = calculateScore(element2, genreAppear);
+            return Integer.compare(score1, score2);
+        });
 
-        //por cada genero que el usuario prefiera, más consuma:
-        for (Map.Entry<String, Integer> entry : elementosRevisados.entrySet()) {
-            String genero = entry.getKey();
-            List<Element> elOfGenre = elementosPorGenero.get(genero);
 
-            //se agregan lso elementos por orden de mejor valorados en elementos ordenados, el cual será el resultado:
-            for (Element elemento : elOfGenre) {
-                if (!elementosAgregados.contains(elemento)) { // Verificar si el elemento ya está en la lista
-                    elementosOrdenados.add(elemento);
-                    elementosAgregados.add(elemento); // Agregar el elemento al conjunto de elementos agregados
-                }
-            }
-        }
-
-        return elementosOrdenados;
+        return elements;
     }
 
-    @GetMapping("/Books")
-    public String moveToBookLibrary(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page,
-            Pageable pageable) throws SQLException, IOException {
+    private Integer calculateScore(Element e1, Map<String, Integer> genresByScore) {
 
-        User mainUser = (User) model.getAttribute("user");
-        List<Element> b = elementRepository.findByType("LIBRO"); 
-        userService.fullSet64Image();
-        int pageNumber = page.orElse(0);
-        int pageSize = 10;
-        pageable = PageRequest.of(pageNumber, pageSize);
+        int score = 0;
+        List<String> elementGenres = e1.getGeneros();
+        for (String genre : elementGenres) {
+            if (genresByScore.containsKey(genre)) {
+                score += genresByScore.get(genre);
+            }
+        }
+        return score;
+    }
 
-        elementService.fullSet64Image();
+    private Page<Element> getPaging (String type, Pageable pageable, User mainUser){
+        List<Element> e = elementRepository.findByType(type);
 
-        Page<Element> books;
         if (mainUser != null) {
-            List<Element> recomendation = recomendador(mainUser, b);
+            List<Element> recomendation = recomendation(mainUser, e);
             
             Page<Element> booksPage = pagingRepository.findByTypeAndRecommendations("LIBRO", recomendation, pageable);
 
@@ -193,10 +134,27 @@ public class LibraryController {
                 .filter(allBooks::contains) // Mantener solo los elementos presentes en la lista de recomendaciones
                 .collect(Collectors.toList());
 
-            books = new PageImpl<>(booksInRecommendationOrder, booksPage.getPageable(), booksPage.getTotalElements());
+            return new PageImpl<>(booksInRecommendationOrder, booksPage.getPageable(), booksPage.getTotalElements());
         } else {
-            books = pagingRepository.findByType("LIBRO", pageable);
+            return pagingRepository.findByType("LIBRO", pageable);
         }
+    }
+
+    @GetMapping("/Books")
+    public String moveToBookLibrary(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page,
+            Pageable pageable) throws SQLException, IOException {
+
+        userService.fullSet64Image();
+        elementService.fullSet64Image();
+        
+        // Page attributes
+        int pageNumber = page.orElse(0);
+        int pageSize = 10;
+        pageable = PageRequest.of(pageNumber, pageSize);
+        
+        User mainUser = (User) model.getAttribute("user");
+        Page<Element> books = getPaging("LIBRO", pageable, mainUser);
+
         model.addAttribute("elements", books);
         model.addAttribute("controllerRoute", "Books");
         model.addAttribute("hasPrev", books.hasPrevious());
@@ -210,16 +168,18 @@ public class LibraryController {
     @GetMapping("/Books/js")
     public String moveToBookLibraryjs(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page,
             Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
+
         userService.fullSet64Image();
+        elementService.fullSet64Image();
+
+        // Page Attributes
         int pageNumber = page.orElse(0);
         int pageSize = 10;
-
         pageSize = (pageNumber + 1) * pageSize;
         pageable = PageRequest.of(0, pageSize);
 
-        elementService.fullSet64Image();
-
-        Page<Element> books = pagingRepository.findByType("LIBRO", pageable);
+        User mainUser = (User) model.getAttribute("user");
+        Page<Element> books = getPaging("LIBRO", pageable, mainUser);
 
         model.addAttribute("elements", books);
         model.addAttribute("controllerRoute", "Books");
@@ -239,13 +199,16 @@ public class LibraryController {
     public String moveToFilmLibrary(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page,
             Pageable pageable) throws SQLException, IOException {
         userService.fullSet64Image();
+        elementService.fullSet64Image();
+
+        //Page Attributes
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
 
-        elementService.fullSet64Image();
+        User mainUser = (User) model.getAttribute("user");
+        Page<Element> films = getPaging("PELICULA", pageable, mainUser);
 
-        Page<Element> films = pagingRepository.findByType("PELICULA", pageable);
         model.addAttribute("elements", films);
         model.addAttribute("controllerRoute", "Films");
         model.addAttribute("hasPrev", films.hasPrevious());
@@ -260,15 +223,17 @@ public class LibraryController {
     public String moveToFilmLibraryjs(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page,
             Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
         userService.fullSet64Image();
+        elementService.fullSet64Image();
+
+        //Page Attributes
         int pageNumber = page.orElse(0);
         int pageSize = 10;
-
         pageSize = (pageNumber + 1) * pageSize;
         pageable = PageRequest.of(0, pageSize);
 
-        elementService.fullSet64Image();
+        User mainUser = (User) model.getAttribute("user");
+        Page<Element> films = getPaging("PELICULA", pageable, mainUser);
 
-        Page<Element> films = pagingRepository.findByType("PELICULA", pageable);
         model.addAttribute("elements", films);
         model.addAttribute("controllerRoute", "Films");
         model.addAttribute("hasPrev", pageSize > 10);
@@ -287,13 +252,16 @@ public class LibraryController {
     public String moveToSeriesLibrary(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page,
             Pageable pageable) throws SQLException, IOException {
         userService.fullSet64Image();
+        elementService.fullSet64Image();
+
+        // Page Attributes
         int pageNumber = page.orElse(0);
         int pageSize = 10;
         pageable = PageRequest.of(pageNumber, pageSize);
 
-        elementService.fullSet64Image();
+        User mainUser = (User) model.getAttribute("user");
+        Page<Element> series = getPaging("SERIE", pageable, mainUser);
 
-        Page<Element> series = pagingRepository.findByType("SERIE", pageable);
         model.addAttribute("elements", series);
         model.addAttribute("controllerRoute", "Series");
         model.addAttribute("hasPrev", series.hasPrevious());
@@ -307,16 +275,19 @@ public class LibraryController {
     @GetMapping("/Series/js")
     public String moveToSeriesLibraryjs(Model model, HttpSession session, @RequestParam("page") Optional<Integer> page,
             Pageable pageable, HttpServletRequest request) throws SQLException, IOException {
+
         userService.fullSet64Image();
+        elementService.fullSet64Image();
+
+        // Page Attributes
         int pageNumber = page.orElse(0);
         int pageSize = 10;
-
         pageSize = (pageNumber + 1) * pageSize;
         pageable = PageRequest.of(0, pageSize);
 
-        elementService.fullSet64Image();
+        User mainUser = (User) model.getAttribute("user");
+        Page<Element> series = getPaging("SERIE", pageable, mainUser);
 
-        Page<Element> series = pagingRepository.findByType("SERIE", pageable);
         model.addAttribute("elements", series);
         model.addAttribute("controllerRoute", "Series");
         model.addAttribute("hasPrev", pageSize > 10);
