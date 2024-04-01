@@ -4,7 +4,7 @@
             "type": "java",
             "name": "DemoApplication",
             "request": "launch",
-            "mainClass": "com.example.candread.DemoApplication",
+            "mainClass": "backend.com.example.candread.DemoApplication",
             "projectName": "candread"
         },
         {
@@ -12,7 +12,7 @@
             "name": "Spring Boot-DemoApplication<candread>",
             "request": "launch",
             "cwd": "${workspaceFolder}",
-            "mainClass": "com.example.DemoApplication",
+            "mainClass": "backend.com.example.DemoApplication",
             "projectName": "candread",
             "args": "",
             "envFile": "${workspaceFolder}/.env"
