@@ -1,0 +1,32 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: ../
+      dockerfile: docker/Dockerfile.dockerfile
+    ports:
+      - "8443:8443"
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:3306/bdd_candread
+      - SPRING_DATASOURCE_USERNAME=rudy
+      - SPRING_DATASOURCE_PASSWORD=Rudy2442.
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=create
+      - SERVER_PORT=8443
+      - SERVER_SSL_KEY_STORE=classpath:keystore.jks
+      - SERVER_SSL_KEY_STORE_PASSWORD=password
+    depends_on:
+      - db
+    restart: on-failure
+
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_USER: rudy
+      MYSQL_PASSWORD: Rudy2442.
+      MYSQL_ROOT_PASSWORD: Rudy2442.
+      MYSQL_DATABASE: bdd_candread
+    ports:
+     - "3306:3306"
+    volumes:
+     - ./mysql:/var/lib/mysql
