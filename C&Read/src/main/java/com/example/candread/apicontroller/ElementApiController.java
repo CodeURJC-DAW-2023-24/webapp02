@@ -11,7 +11,7 @@ import com.example.candread.model.Element.States;
 import com.example.candread.model.Element.Types;
 
 @RestController
-@RequestMapping("api/element")
+@RequestMapping("api/elements")
 public class ElementApiController {
 
     @GetMapping("/genres")

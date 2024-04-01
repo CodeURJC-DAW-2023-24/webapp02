@@ -151,6 +151,11 @@ public class UserService {
     return userRepository.findById(id);
    }
 
+   public void repoDeleteById(Long id){
+        userRepository.deleteById(id);
+        return;
+   }
+
    public User repoFindByName(String name){
     return userRepository.findByName(name).orElseThrow();
    }
