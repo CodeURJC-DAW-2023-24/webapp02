@@ -188,7 +188,7 @@ public class BookApiController {
     }
 
     @ApiResponses( value = {
-        @ApiResponse(responseCode = "200", description = "BOOK DELETED CORRECTLY", content = {
+        @ApiResponse(responseCode = "204", description = "BOOK DELETED CORRECTLY", content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
         }),
         @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),

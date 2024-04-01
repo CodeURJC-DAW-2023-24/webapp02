@@ -19,6 +19,8 @@ paths:
           type: integer
           format: int64
       responses:
+        "404":
+          description: USER not found
         "200":
           description: USER ID CORRECT
           content:
@@ -27,8 +29,6 @@ paths:
                 $ref: '#/components/schemas/Element'
         "400":
           description: Invalid id supplied
-        "404":
-          description: USER not found
     put:
       tags:
       - user-api-controller
@@ -47,18 +47,18 @@ paths:
               $ref: '#/components/schemas/UserDTO'
         required: true
       responses:
-        "401":
-          description: Unauthorized
         "200":
           description: USER PUT CORRECT
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
-        "400":
-          description: Invalid id supplied
         "404":
           description: USER not found
+        "401":
+          description: Unauthorized
+        "400":
+          description: Invalid id supplied
     delete:
       tags:
       - user-api-controller
@@ -71,10 +71,6 @@ paths:
           type: integer
           format: int64
       responses:
-        "401":
-          description: Unauthorized
-        "400":
-          description: Invalid id supplied
         "200":
           description: USER DELETE CORRECT
           content:
@@ -83,6 +79,10 @@ paths:
                 $ref: '#/components/schemas/Element'
         "404":
           description: USER not found
+        "401":
+          description: Unauthorized
+        "400":
+          description: Invalid id supplied
   /api/users/{id}/image:
     get:
       tags:
@@ -131,18 +131,18 @@ paths:
                   type: string
                   format: binary
       responses:
-        "401":
-          description: Unauthorized
+        "404":
+          description: USER not found
         "200":
           description: USER IMAGE PUT CORRECT
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
+        "401":
+          description: Unauthorized
         "400":
           description: Invalid id supplied
-        "404":
-          description: USER not found
     post:
       tags:
       - user-api-controller
@@ -166,10 +166,6 @@ paths:
                   type: string
                   format: binary
       responses:
-        "401":
-          description: Unauthorized
-        "400":
-          description: Invalid id supplied
         "201":
           description: USER IMAGE POST CORRECT
           content:
@@ -178,6 +174,10 @@ paths:
                 $ref: '#/components/schemas/Element'
         "404":
           description: USER not found
+        "401":
+          description: Unauthorized
+        "400":
+          description: Invalid id supplied
     delete:
       tags:
       - user-api-controller
@@ -190,18 +190,18 @@ paths:
           type: integer
           format: int64
       responses:
-        "401":
-          description: Unauthorized
-        "200":
+        "404":
+          description: USER not found
+        "204":
           description: USER IMAGE DELETE CORRECT
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
+        "401":
+          description: Unauthorized
         "400":
           description: Invalid id supplied
-        "404":
-          description: USER not found
   /api/series/{id}:
     get:
       tags:
@@ -215,14 +215,14 @@ paths:
           type: integer
           format: int64
       responses:
+        "404":
+          description: Serie not found
         "200":
           description: SERIE ID CORRECT
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
-        "404":
-          description: Serie not found
         "400":
           description: Invalid id supplied
     put:
@@ -243,16 +243,16 @@ paths:
               $ref: '#/components/schemas/ElementDTO'
         required: true
       responses:
-        "404":
-          description: Serie not found
-        "400":
-          description: Invalid id supplied
         "200":
           description: SERIE PUT CORRECT
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
+        "404":
+          description: Serie not found
+        "400":
+          description: Invalid id supplied
     delete:
       tags:
       - series-api-controller
@@ -265,18 +265,18 @@ paths:
           type: integer
           format: int64
       responses:
-        "401":
-          description: Unauthorized
         "404":
           description: Serie not found
-        "400":
-          description: Invalid id supplied
         "200":
           description: SERIE DELETE CORRECT
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
+        "401":
+          description: Unauthorized
+        "400":
+          description: Invalid id supplied
   /api/series/{id}/image:
     get:
       tags:
@@ -290,14 +290,14 @@ paths:
           type: integer
           format: int64
       responses:
-        "404":
-          description: Serie not found
         "200":
           description: SERIE IMAGE ID CORRECT
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
+        "404":
+          description: Serie not found
         "400":
           description: Invalid id supplied
     put:
@@ -323,14 +323,14 @@ paths:
                   type: string
                   format: binary
       responses:
+        "404":
+          description: Serie not found
         "200":
           description: SERIE IMAGE PUT CORRECT
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
-        "404":
-          description: Serie not found
         "400":
           description: Invalid id supplied
     post:
@@ -378,16 +378,16 @@ paths:
           type: integer
           format: int64
       responses:
-        "401":
-          description: Unauthorized
         "404":
           description: Serie not found
-        "200":
+        "204":
           description: SERIE IMAGE DELETE CORRECT
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
+        "401":
+          description: Unauthorized
         "400":
           description: Invalid id supplied
   /api/films/{id}:
@@ -409,10 +409,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
-        "400":
-          description: Invalid id supplied
         "404":
           description: Film not found
+        "400":
+          description: Invalid id supplied
     put:
       tags:
       - film-api-controller
@@ -431,6 +431,8 @@ paths:
               $ref: '#/components/schemas/ElementDTO'
         required: true
       responses:
+        "404":
+          description: Film not found
         "200":
           description: FILM PUT CORRECTLY
           content:
@@ -439,8 +441,6 @@ paths:
                 $ref: '#/components/schemas/Element'
         "400":
           description: Invalid id supplied
-        "404":
-          description: Film not found
     delete:
       tags:
       - film-api-controller
@@ -453,18 +453,18 @@ paths:
           type: integer
           format: int64
       responses:
-        "401":
-          description: Unauthorized
         "200":
           description: FILM DELETED CORRECT
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
-        "400":
-          description: Invalid id supplied
         "404":
           description: FILM not found
+        "401":
+          description: Unauthorized
+        "400":
+          description: Invalid id supplied
   /api/films/{id}/image:
     get:
       tags:
@@ -484,10 +484,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
-        "400":
-          description: Invalid id supplied
         "404":
           description: Film not found
+        "400":
+          description: Invalid id supplied
     put:
       tags:
       - film-api-controller
@@ -517,10 +517,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
-        "400":
-          description: Invalid id supplied
         "404":
           description: Film not found
+        "400":
+          description: Invalid id supplied
     post:
       tags:
       - film-api-controller
@@ -544,6 +544,8 @@ paths:
                   type: string
                   format: binary
       responses:
+        "404":
+          description: Film not found
         "201":
           description: FILM IMAGE POST CORRECT
           content:
@@ -552,8 +554,6 @@ paths:
                 $ref: '#/components/schemas/Element'
         "400":
           description: Invalid id supplied
-        "404":
-          description: Film not found
     delete:
       tags:
       - film-api-controller
@@ -566,11 +566,7 @@ paths:
           type: integer
           format: int64
       responses:
-        "401":
-          description: Unauthorized
-        "400":
-          description: Invalid id supplied
-        "200":
+        "204":
           description: FILM IMAGE DELETE CORRECT
           content:
             application/json:
@@ -578,6 +574,10 @@ paths:
                 $ref: '#/components/schemas/Element'
         "404":
           description: Film not found
+        "401":
+          description: Unauthorized
+        "400":
+          description: Invalid id supplied
   /api/books/{id}:
     get:
       tags:
@@ -591,14 +591,14 @@ paths:
           type: integer
           format: int64
       responses:
+        "404":
+          description: Book not found
         "200":
           description: BOOK FOUND
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
-        "404":
-          description: Book not found
         "400":
           description: Invalid id supplied
     put:
@@ -619,16 +619,16 @@ paths:
               $ref: '#/components/schemas/ElementDTO'
         required: true
       responses:
-        "404":
-          description: Book not found
-        "400":
-          description: Invalid id supplied
         "200":
           description: BOOK PUT CORRECTLY
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
+        "404":
+          description: Book not found
+        "400":
+          description: Invalid id supplied
     delete:
       tags:
       - book-api-controller
@@ -641,16 +641,16 @@ paths:
           type: integer
           format: int64
       responses:
-        "401":
-          description: Unauthorized
-        "404":
-          description: Book not found
-        "200":
+        "204":
           description: BOOK DELETED CORRECTLY
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
+        "404":
+          description: Book not found
+        "401":
+          description: Unauthorized
         "400":
           description: Invalid id supplied
   /api/books/{id}/image:
@@ -668,14 +668,14 @@ paths:
       responses:
         "404":
           description: Book image not found
-        "400":
-          description: Invalid id supplied
         "200":
           description: GET BOOK IMAGE CORRECTLY
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
+        "400":
+          description: Invalid id supplied
     put:
       tags:
       - book-api-controller
@@ -699,14 +699,14 @@ paths:
                   type: string
                   format: binary
       responses:
-        "404":
-          description: Book not found
         "200":
           description: BOOK IMAGE PUT CORRECTLY
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
+        "404":
+          description: Book not found
         "400":
           description: Invalid id supplied
     post:
@@ -732,14 +732,14 @@ paths:
                   type: string
                   format: binary
       responses:
+        "404":
+          description: Book not found
         "201":
           description: BOOK IMAGE POSTED CORRECTLY
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
-        "404":
-          description: Book not found
         "400":
           description: Invalid id supplied
     delete:
@@ -754,16 +754,16 @@ paths:
           type: integer
           format: int64
       responses:
-        "401":
-          description: Unauthorized
-        "404":
-          description: Book not found
         "200":
           description: BOOK IMAGE DELETED CORRECTLY
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
+        "404":
+          description: Book not found
+        "401":
+          description: Unauthorized
         "400":
           description: Invalid id supplied
   /api/users/:
@@ -830,14 +830,14 @@ paths:
               $ref: '#/components/schemas/ElementDTO'
         required: true
       responses:
+        "404":
+          description: Serie not found
         "201":
           description: SERIE POST CORRECT
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
-        "404":
-          description: Serie not found
         "400":
           description: Invalid id supplied
   /api/films/:
@@ -871,14 +871,14 @@ paths:
       responses:
         "404":
           description: Book not found
-        "400":
-          description: Invalid id supplied
         "201":
           description: FILM POST CORRECT
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
+        "400":
+          description: Invalid id supplied
   /api/books/:
     get:
       tags:
@@ -908,14 +908,14 @@ paths:
               $ref: '#/components/schemas/ElementDTO'
         required: true
       responses:
+        "404":
+          description: Book not found
         "201":
           description: BOOK POSTED CORRECTLY
           content:
             application/json:
               schema:
                 $ref: '#/components/schemas/Element'
-        "404":
-          description: Book not found
         "400":
           description: Invalid id supplied
   /api/auth/refresh:
@@ -1226,12 +1226,12 @@ components:
     PageUser:
       type: object
       properties:
-        totalPages:
-          type: integer
-          format: int32
         totalElements:
           type: integer
           format: int64
+        totalPages:
+          type: integer
+          format: int32
         size:
           type: integer
           format: int32
@@ -1244,13 +1244,13 @@ components:
           format: int32
         sort:
           $ref: '#/components/schemas/SortObject'
-        numberOfElements:
-          type: integer
-          format: int32
         first:
           type: boolean
         last:
           type: boolean
+        numberOfElements:
+          type: integer
+          format: int32
         pageable:
           $ref: '#/components/schemas/PageableObject'
         empty:
@@ -1278,9 +1278,9 @@ components:
       properties:
         empty:
           type: boolean
-        sorted:
-          type: boolean
         unsorted:
+          type: boolean
+        sorted:
           type: boolean
     User:
       type: object
@@ -1301,12 +1301,12 @@ components:
     PageElement:
       type: object
       properties:
-        totalPages:
-          type: integer
-          format: int32
         totalElements:
           type: integer
           format: int64
+        totalPages:
+          type: integer
+          format: int32
         size:
           type: integer
           format: int32
@@ -1319,13 +1319,13 @@ components:
           format: int32
         sort:
           $ref: '#/components/schemas/SortObject'
-        numberOfElements:
-          type: integer
-          format: int32
         first:
           type: boolean
         last:
           type: boolean
+        numberOfElements:
+          type: integer
+          format: int32
         pageable:
           $ref: '#/components/schemas/PageableObject'
         empty:

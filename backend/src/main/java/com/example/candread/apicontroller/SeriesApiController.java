@@ -298,7 +298,7 @@ public class SeriesApiController {
     }
 
     @ApiResponses( value = {
-        @ApiResponse(responseCode = "200", description = "SERIE IMAGE DELETE CORRECT", content = {
+        @ApiResponse(responseCode = "204", description = "SERIE IMAGE DELETE CORRECT", content = {
             @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
         }),
         @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),

@@ -1034,13 +1034,13 @@ ul.nav-tabs {
     defs["PageElement"] = {
   "type" : "object",
   "properties" : {
-    "totalPages" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
     "totalElements" : {
       "type" : "integer",
       "format" : "int64"
+    },
+    "totalPages" : {
+      "type" : "integer",
+      "format" : "int32"
     },
     "size" : {
       "type" : "integer",
@@ -1059,15 +1059,15 @@ ul.nav-tabs {
     "sort" : {
       "$ref" : "#/components/schemas/SortObject"
     },
-    "numberOfElements" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
     "first" : {
       "type" : "boolean"
     },
     "last" : {
       "type" : "boolean"
+    },
+    "numberOfElements" : {
+      "type" : "integer",
+      "format" : "int32"
     },
     "pageable" : {
       "$ref" : "#/components/schemas/PageableObject"
@@ -1080,13 +1080,13 @@ ul.nav-tabs {
     defs["PageUser"] = {
   "type" : "object",
   "properties" : {
-    "totalPages" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
     "totalElements" : {
       "type" : "integer",
       "format" : "int64"
+    },
+    "totalPages" : {
+      "type" : "integer",
+      "format" : "int32"
     },
     "size" : {
       "type" : "integer",
@@ -1105,15 +1105,15 @@ ul.nav-tabs {
     "sort" : {
       "$ref" : "#/components/schemas/SortObject"
     },
-    "numberOfElements" : {
-      "type" : "integer",
-      "format" : "int32"
-    },
     "first" : {
       "type" : "boolean"
     },
     "last" : {
       "type" : "boolean"
+    },
+    "numberOfElements" : {
+      "type" : "integer",
+      "format" : "int32"
     },
     "pageable" : {
       "$ref" : "#/components/schemas/PageableObject"
@@ -1176,10 +1176,10 @@ ul.nav-tabs {
     "empty" : {
       "type" : "boolean"
     },
-    "sorted" : {
+    "unsorted" : {
       "type" : "boolean"
     },
-    "unsorted" : {
+    "sorted" : {
       "type" : "boolean"
     }
   }
@@ -1677,67 +1677,23 @@ pub fn main() {
 
 
                           <h2>Responses</h2>
-                            <h3 id="examples-BookApiController-deleteBook-title-401"></h3>
-                            <p id="examples-BookApiController-deleteBook-description-401" class="marked"></p>
+                            <h3 id="examples-BookApiController-deleteBook-title-204"></h3>
+                            <p id="examples-BookApiController-deleteBook-description-204" class="marked"></p>
                             <script>
-                              var responseBookApiController401_description = `Unauthorized`;
-                              var responseBookApiController401_description_break = responseBookApiController401_description.indexOf('\n');
-                              if (responseBookApiController401_description_break == -1) {
-                                $("#examples-BookApiController-deleteBook-title-401").text("Status: 401 - " + responseBookApiController401_description);
+                              var responseBookApiController204_description = `BOOK DELETED CORRECTLY`;
+                              var responseBookApiController204_description_break = responseBookApiController204_description.indexOf('\n');
+                              if (responseBookApiController204_description_break == -1) {
+                                $("#examples-BookApiController-deleteBook-title-204").text("Status: 204 - " + responseBookApiController204_description);
                               } else {
-                                $("#examples-BookApiController-deleteBook-title-401").text("Status: 401 - " + responseBookApiController401_description.substring(0, responseBookApiController401_description_break));
-                                $("#examples-BookApiController-deleteBook-description-401").html(responseBookApiController401_description.substring(responseBookApiController401_description_break));
+                                $("#examples-BookApiController-deleteBook-title-204").text("Status: 204 - " + responseBookApiController204_description.substring(0, responseBookApiController204_description_break));
+                                $("#examples-BookApiController-deleteBook-description-204").html(responseBookApiController204_description.substring(responseBookApiController204_description_break));
                               }
                             </script>
 
 
-                            <ul id="responses-detail-BookApiController-deleteBook-401" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-BookApiController-deleteBook-401-wrapper" style='margin-bottom: 10px;'>
-                            </div>
-                            <h3 id="examples-BookApiController-deleteBook-title-404"></h3>
-                            <p id="examples-BookApiController-deleteBook-description-404" class="marked"></p>
-                            <script>
-                              var responseBookApiController404_description = `Book not found`;
-                              var responseBookApiController404_description_break = responseBookApiController404_description.indexOf('\n');
-                              if (responseBookApiController404_description_break == -1) {
-                                $("#examples-BookApiController-deleteBook-title-404").text("Status: 404 - " + responseBookApiController404_description);
-                              } else {
-                                $("#examples-BookApiController-deleteBook-title-404").text("Status: 404 - " + responseBookApiController404_description.substring(0, responseBookApiController404_description_break));
-                                $("#examples-BookApiController-deleteBook-description-404").html(responseBookApiController404_description.substring(responseBookApiController404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-BookApiController-deleteBook-404" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-BookApiController-deleteBook-404-wrapper" style='margin-bottom: 10px;'>
-                            </div>
-                            <h3 id="examples-BookApiController-deleteBook-title-200"></h3>
-                            <p id="examples-BookApiController-deleteBook-description-200" class="marked"></p>
-                            <script>
-                              var responseBookApiController200_description = `BOOK DELETED CORRECTLY`;
-                              var responseBookApiController200_description_break = responseBookApiController200_description.indexOf('\n');
-                              if (responseBookApiController200_description_break == -1) {
-                                $("#examples-BookApiController-deleteBook-title-200").text("Status: 200 - " + responseBookApiController200_description);
-                              } else {
-                                $("#examples-BookApiController-deleteBook-title-200").text("Status: 200 - " + responseBookApiController200_description.substring(0, responseBookApiController200_description_break));
-                                $("#examples-BookApiController-deleteBook-description-200").html(responseBookApiController200_description.substring(responseBookApiController200_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-BookApiController-deleteBook-200" class="nav nav-tabs nav-tabs-examples" >
+                            <ul id="responses-detail-BookApiController-deleteBook-204" class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-BookApiController-deleteBook-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-BookApiController-deleteBook-204-schema">Schema</a>
                                 </li>
 
 
@@ -1746,9 +1702,9 @@ pub fn main() {
                             </ul>
 
 
-                            <div class="tab-content" id="responses-BookApiController-deleteBook-200-wrapper" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-BookApiController-deleteBook-200-schema">
-                                  <div id="responses-BookApiController-deleteBook-schema-200" class="exampleStyle">
+                            <div class="tab-content" id="responses-BookApiController-deleteBook-204-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-BookApiController-deleteBook-204-schema">
+                                  <div id="responses-BookApiController-deleteBook-schema-204" class="exampleStyle">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -1777,15 +1733,59 @@ pub fn main() {
                                         }
 
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-BookApiController-deleteBook-200-schema-data').val(JSON.stringify(schema));
-                                        var result = $('#responses-BookApiController-deleteBook-schema-200');
+                                        $('#responses-BookApiController-deleteBook-204-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-BookApiController-deleteBook-schema-204');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-BookApiController-deleteBook-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-BookApiController-deleteBook-204-schema-data' type='hidden' value=''></input>
                                 </div>
+                            </div>
+                            <h3 id="examples-BookApiController-deleteBook-title-404"></h3>
+                            <p id="examples-BookApiController-deleteBook-description-404" class="marked"></p>
+                            <script>
+                              var responseBookApiController404_description = `Book not found`;
+                              var responseBookApiController404_description_break = responseBookApiController404_description.indexOf('\n');
+                              if (responseBookApiController404_description_break == -1) {
+                                $("#examples-BookApiController-deleteBook-title-404").text("Status: 404 - " + responseBookApiController404_description);
+                              } else {
+                                $("#examples-BookApiController-deleteBook-title-404").text("Status: 404 - " + responseBookApiController404_description.substring(0, responseBookApiController404_description_break));
+                                $("#examples-BookApiController-deleteBook-description-404").html(responseBookApiController404_description.substring(responseBookApiController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-BookApiController-deleteBook-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-BookApiController-deleteBook-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-BookApiController-deleteBook-title-401"></h3>
+                            <p id="examples-BookApiController-deleteBook-description-401" class="marked"></p>
+                            <script>
+                              var responseBookApiController401_description = `Unauthorized`;
+                              var responseBookApiController401_description_break = responseBookApiController401_description.indexOf('\n');
+                              if (responseBookApiController401_description_break == -1) {
+                                $("#examples-BookApiController-deleteBook-title-401").text("Status: 401 - " + responseBookApiController401_description);
+                              } else {
+                                $("#examples-BookApiController-deleteBook-title-401").text("Status: 401 - " + responseBookApiController401_description.substring(0, responseBookApiController401_description_break));
+                                $("#examples-BookApiController-deleteBook-description-401").html(responseBookApiController401_description.substring(responseBookApiController401_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-BookApiController-deleteBook-401" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-BookApiController-deleteBook-401-wrapper" style='margin-bottom: 10px;'>
                             </div>
                             <h3 id="examples-BookApiController-deleteBook-title-400"></h3>
                             <p id="examples-BookApiController-deleteBook-description-400" class="marked"></p>
@@ -2081,50 +2081,6 @@ pub fn main() {
 
 
                           <h2>Responses</h2>
-                            <h3 id="examples-BookApiController-deleteBookImage-title-401"></h3>
-                            <p id="examples-BookApiController-deleteBookImage-description-401" class="marked"></p>
-                            <script>
-                              var responseBookApiController401_description = `Unauthorized`;
-                              var responseBookApiController401_description_break = responseBookApiController401_description.indexOf('\n');
-                              if (responseBookApiController401_description_break == -1) {
-                                $("#examples-BookApiController-deleteBookImage-title-401").text("Status: 401 - " + responseBookApiController401_description);
-                              } else {
-                                $("#examples-BookApiController-deleteBookImage-title-401").text("Status: 401 - " + responseBookApiController401_description.substring(0, responseBookApiController401_description_break));
-                                $("#examples-BookApiController-deleteBookImage-description-401").html(responseBookApiController401_description.substring(responseBookApiController401_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-BookApiController-deleteBookImage-401" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-BookApiController-deleteBookImage-401-wrapper" style='margin-bottom: 10px;'>
-                            </div>
-                            <h3 id="examples-BookApiController-deleteBookImage-title-404"></h3>
-                            <p id="examples-BookApiController-deleteBookImage-description-404" class="marked"></p>
-                            <script>
-                              var responseBookApiController404_description = `Book not found`;
-                              var responseBookApiController404_description_break = responseBookApiController404_description.indexOf('\n');
-                              if (responseBookApiController404_description_break == -1) {
-                                $("#examples-BookApiController-deleteBookImage-title-404").text("Status: 404 - " + responseBookApiController404_description);
-                              } else {
-                                $("#examples-BookApiController-deleteBookImage-title-404").text("Status: 404 - " + responseBookApiController404_description.substring(0, responseBookApiController404_description_break));
-                                $("#examples-BookApiController-deleteBookImage-description-404").html(responseBookApiController404_description.substring(responseBookApiController404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-BookApiController-deleteBookImage-404" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-BookApiController-deleteBookImage-404-wrapper" style='margin-bottom: 10px;'>
-                            </div>
                             <h3 id="examples-BookApiController-deleteBookImage-title-200"></h3>
                             <p id="examples-BookApiController-deleteBookImage-description-200" class="marked"></p>
                             <script>
@@ -2190,6 +2146,50 @@ pub fn main() {
                                   </div>
                                   <input id='responses-BookApiController-deleteBookImage-200-schema-data' type='hidden' value=''></input>
                                 </div>
+                            </div>
+                            <h3 id="examples-BookApiController-deleteBookImage-title-404"></h3>
+                            <p id="examples-BookApiController-deleteBookImage-description-404" class="marked"></p>
+                            <script>
+                              var responseBookApiController404_description = `Book not found`;
+                              var responseBookApiController404_description_break = responseBookApiController404_description.indexOf('\n');
+                              if (responseBookApiController404_description_break == -1) {
+                                $("#examples-BookApiController-deleteBookImage-title-404").text("Status: 404 - " + responseBookApiController404_description);
+                              } else {
+                                $("#examples-BookApiController-deleteBookImage-title-404").text("Status: 404 - " + responseBookApiController404_description.substring(0, responseBookApiController404_description_break));
+                                $("#examples-BookApiController-deleteBookImage-description-404").html(responseBookApiController404_description.substring(responseBookApiController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-BookApiController-deleteBookImage-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-BookApiController-deleteBookImage-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-BookApiController-deleteBookImage-title-401"></h3>
+                            <p id="examples-BookApiController-deleteBookImage-description-401" class="marked"></p>
+                            <script>
+                              var responseBookApiController401_description = `Unauthorized`;
+                              var responseBookApiController401_description_break = responseBookApiController401_description.indexOf('\n');
+                              if (responseBookApiController401_description_break == -1) {
+                                $("#examples-BookApiController-deleteBookImage-title-401").text("Status: 401 - " + responseBookApiController401_description);
+                              } else {
+                                $("#examples-BookApiController-deleteBookImage-title-401").text("Status: 401 - " + responseBookApiController401_description.substring(0, responseBookApiController401_description_break));
+                                $("#examples-BookApiController-deleteBookImage-description-401").html(responseBookApiController401_description.substring(responseBookApiController401_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-BookApiController-deleteBookImage-401" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-BookApiController-deleteBookImage-401-wrapper" style='margin-bottom: 10px;'>
                             </div>
                             <h3 id="examples-BookApiController-deleteBookImage-title-400"></h3>
                             <p id="examples-BookApiController-deleteBookImage-description-400" class="marked"></p>
@@ -2485,6 +2485,28 @@ pub fn main() {
 
 
                           <h2>Responses</h2>
+                            <h3 id="examples-BookApiController-getBookById-title-404"></h3>
+                            <p id="examples-BookApiController-getBookById-description-404" class="marked"></p>
+                            <script>
+                              var responseBookApiController404_description = `Book not found`;
+                              var responseBookApiController404_description_break = responseBookApiController404_description.indexOf('\n');
+                              if (responseBookApiController404_description_break == -1) {
+                                $("#examples-BookApiController-getBookById-title-404").text("Status: 404 - " + responseBookApiController404_description);
+                              } else {
+                                $("#examples-BookApiController-getBookById-title-404").text("Status: 404 - " + responseBookApiController404_description.substring(0, responseBookApiController404_description_break));
+                                $("#examples-BookApiController-getBookById-description-404").html(responseBookApiController404_description.substring(responseBookApiController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-BookApiController-getBookById-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-BookApiController-getBookById-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
                             <h3 id="examples-BookApiController-getBookById-title-200"></h3>
                             <p id="examples-BookApiController-getBookById-description-200" class="marked"></p>
                             <script>
@@ -2550,28 +2572,6 @@ pub fn main() {
                                   </div>
                                   <input id='responses-BookApiController-getBookById-200-schema-data' type='hidden' value=''></input>
                                 </div>
-                            </div>
-                            <h3 id="examples-BookApiController-getBookById-title-404"></h3>
-                            <p id="examples-BookApiController-getBookById-description-404" class="marked"></p>
-                            <script>
-                              var responseBookApiController404_description = `Book not found`;
-                              var responseBookApiController404_description_break = responseBookApiController404_description.indexOf('\n');
-                              if (responseBookApiController404_description_break == -1) {
-                                $("#examples-BookApiController-getBookById-title-404").text("Status: 404 - " + responseBookApiController404_description);
-                              } else {
-                                $("#examples-BookApiController-getBookById-title-404").text("Status: 404 - " + responseBookApiController404_description.substring(0, responseBookApiController404_description_break));
-                                $("#examples-BookApiController-getBookById-description-404").html(responseBookApiController404_description.substring(responseBookApiController404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-BookApiController-getBookById-404" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-BookApiController-getBookById-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
                             <h3 id="examples-BookApiController-getBookById-title-400"></h3>
                             <p id="examples-BookApiController-getBookById-description-400" class="marked"></p>
@@ -2889,28 +2889,6 @@ pub fn main() {
 
                             <div class="tab-content" id="responses-BookApiController-getBookImageById-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
-                            <h3 id="examples-BookApiController-getBookImageById-title-400"></h3>
-                            <p id="examples-BookApiController-getBookImageById-description-400" class="marked"></p>
-                            <script>
-                              var responseBookApiController400_description = `Invalid id supplied`;
-                              var responseBookApiController400_description_break = responseBookApiController400_description.indexOf('\n');
-                              if (responseBookApiController400_description_break == -1) {
-                                $("#examples-BookApiController-getBookImageById-title-400").text("Status: 400 - " + responseBookApiController400_description);
-                              } else {
-                                $("#examples-BookApiController-getBookImageById-title-400").text("Status: 400 - " + responseBookApiController400_description.substring(0, responseBookApiController400_description_break));
-                                $("#examples-BookApiController-getBookImageById-description-400").html(responseBookApiController400_description.substring(responseBookApiController400_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-BookApiController-getBookImageById-400" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-BookApiController-getBookImageById-400-wrapper" style='margin-bottom: 10px;'>
-                            </div>
                             <h3 id="examples-BookApiController-getBookImageById-title-200"></h3>
                             <p id="examples-BookApiController-getBookImageById-description-200" class="marked"></p>
                             <script>
@@ -2976,6 +2954,28 @@ pub fn main() {
                                   </div>
                                   <input id='responses-BookApiController-getBookImageById-200-schema-data' type='hidden' value=''></input>
                                 </div>
+                            </div>
+                            <h3 id="examples-BookApiController-getBookImageById-title-400"></h3>
+                            <p id="examples-BookApiController-getBookImageById-description-400" class="marked"></p>
+                            <script>
+                              var responseBookApiController400_description = `Invalid id supplied`;
+                              var responseBookApiController400_description_break = responseBookApiController400_description.indexOf('\n');
+                              if (responseBookApiController400_description_break == -1) {
+                                $("#examples-BookApiController-getBookImageById-title-400").text("Status: 400 - " + responseBookApiController400_description);
+                              } else {
+                                $("#examples-BookApiController-getBookImageById-title-400").text("Status: 400 - " + responseBookApiController400_description.substring(0, responseBookApiController400_description_break));
+                                $("#examples-BookApiController-getBookImageById-description-400").html(responseBookApiController400_description.substring(responseBookApiController400_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-BookApiController-getBookImageById-400" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-BookApiController-getBookImageById-400-wrapper" style='margin-bottom: 10px;'>
                             </div>
                         </article>
                       </div>
@@ -3987,50 +3987,6 @@ $(document).ready(function() {
 
 
                           <h2>Responses</h2>
-                            <h3 id="examples-BookApiController-updateBook-title-404"></h3>
-                            <p id="examples-BookApiController-updateBook-description-404" class="marked"></p>
-                            <script>
-                              var responseBookApiController404_description = `Book not found`;
-                              var responseBookApiController404_description_break = responseBookApiController404_description.indexOf('\n');
-                              if (responseBookApiController404_description_break == -1) {
-                                $("#examples-BookApiController-updateBook-title-404").text("Status: 404 - " + responseBookApiController404_description);
-                              } else {
-                                $("#examples-BookApiController-updateBook-title-404").text("Status: 404 - " + responseBookApiController404_description.substring(0, responseBookApiController404_description_break));
-                                $("#examples-BookApiController-updateBook-description-404").html(responseBookApiController404_description.substring(responseBookApiController404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-BookApiController-updateBook-404" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-BookApiController-updateBook-404-wrapper" style='margin-bottom: 10px;'>
-                            </div>
-                            <h3 id="examples-BookApiController-updateBook-title-400"></h3>
-                            <p id="examples-BookApiController-updateBook-description-400" class="marked"></p>
-                            <script>
-                              var responseBookApiController400_description = `Invalid id supplied`;
-                              var responseBookApiController400_description_break = responseBookApiController400_description.indexOf('\n');
-                              if (responseBookApiController400_description_break == -1) {
-                                $("#examples-BookApiController-updateBook-title-400").text("Status: 400 - " + responseBookApiController400_description);
-                              } else {
-                                $("#examples-BookApiController-updateBook-title-400").text("Status: 400 - " + responseBookApiController400_description.substring(0, responseBookApiController400_description_break));
-                                $("#examples-BookApiController-updateBook-description-400").html(responseBookApiController400_description.substring(responseBookApiController400_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-BookApiController-updateBook-400" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-BookApiController-updateBook-400-wrapper" style='margin-bottom: 10px;'>
-                            </div>
                             <h3 id="examples-BookApiController-updateBook-title-200"></h3>
                             <p id="examples-BookApiController-updateBook-description-200" class="marked"></p>
                             <script>
@@ -4096,6 +4052,50 @@ $(document).ready(function() {
                                   </div>
                                   <input id='responses-BookApiController-updateBook-200-schema-data' type='hidden' value=''></input>
                                 </div>
+                            </div>
+                            <h3 id="examples-BookApiController-updateBook-title-404"></h3>
+                            <p id="examples-BookApiController-updateBook-description-404" class="marked"></p>
+                            <script>
+                              var responseBookApiController404_description = `Book not found`;
+                              var responseBookApiController404_description_break = responseBookApiController404_description.indexOf('\n');
+                              if (responseBookApiController404_description_break == -1) {
+                                $("#examples-BookApiController-updateBook-title-404").text("Status: 404 - " + responseBookApiController404_description);
+                              } else {
+                                $("#examples-BookApiController-updateBook-title-404").text("Status: 404 - " + responseBookApiController404_description.substring(0, responseBookApiController404_description_break));
+                                $("#examples-BookApiController-updateBook-description-404").html(responseBookApiController404_description.substring(responseBookApiController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-BookApiController-updateBook-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-BookApiController-updateBook-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-BookApiController-updateBook-title-400"></h3>
+                            <p id="examples-BookApiController-updateBook-description-400" class="marked"></p>
+                            <script>
+                              var responseBookApiController400_description = `Invalid id supplied`;
+                              var responseBookApiController400_description_break = responseBookApiController400_description.indexOf('\n');
+                              if (responseBookApiController400_description_break == -1) {
+                                $("#examples-BookApiController-updateBook-title-400").text("Status: 400 - " + responseBookApiController400_description);
+                              } else {
+                                $("#examples-BookApiController-updateBook-title-400").text("Status: 400 - " + responseBookApiController400_description.substring(0, responseBookApiController400_description_break));
+                                $("#examples-BookApiController-updateBook-description-400").html(responseBookApiController400_description.substring(responseBookApiController400_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-BookApiController-updateBook-400" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-BookApiController-updateBook-400-wrapper" style='margin-bottom: 10px;'>
                             </div>
                         </article>
                       </div>
@@ -4428,28 +4428,6 @@ $(document).ready(function() {
 
 
                           <h2>Responses</h2>
-                            <h3 id="examples-BookApiController-updateBookImage-title-404"></h3>
-                            <p id="examples-BookApiController-updateBookImage-description-404" class="marked"></p>
-                            <script>
-                              var responseBookApiController404_description = `Book not found`;
-                              var responseBookApiController404_description_break = responseBookApiController404_description.indexOf('\n');
-                              if (responseBookApiController404_description_break == -1) {
-                                $("#examples-BookApiController-updateBookImage-title-404").text("Status: 404 - " + responseBookApiController404_description);
-                              } else {
-                                $("#examples-BookApiController-updateBookImage-title-404").text("Status: 404 - " + responseBookApiController404_description.substring(0, responseBookApiController404_description_break));
-                                $("#examples-BookApiController-updateBookImage-description-404").html(responseBookApiController404_description.substring(responseBookApiController404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-BookApiController-updateBookImage-404" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-BookApiController-updateBookImage-404-wrapper" style='margin-bottom: 10px;'>
-                            </div>
                             <h3 id="examples-BookApiController-updateBookImage-title-200"></h3>
                             <p id="examples-BookApiController-updateBookImage-description-200" class="marked"></p>
                             <script>
@@ -4515,6 +4493,28 @@ $(document).ready(function() {
                                   </div>
                                   <input id='responses-BookApiController-updateBookImage-200-schema-data' type='hidden' value=''></input>
                                 </div>
+                            </div>
+                            <h3 id="examples-BookApiController-updateBookImage-title-404"></h3>
+                            <p id="examples-BookApiController-updateBookImage-description-404" class="marked"></p>
+                            <script>
+                              var responseBookApiController404_description = `Book not found`;
+                              var responseBookApiController404_description_break = responseBookApiController404_description.indexOf('\n');
+                              if (responseBookApiController404_description_break == -1) {
+                                $("#examples-BookApiController-updateBookImage-title-404").text("Status: 404 - " + responseBookApiController404_description);
+                              } else {
+                                $("#examples-BookApiController-updateBookImage-title-404").text("Status: 404 - " + responseBookApiController404_description.substring(0, responseBookApiController404_description_break));
+                                $("#examples-BookApiController-updateBookImage-description-404").html(responseBookApiController404_description.substring(responseBookApiController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-BookApiController-updateBookImage-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-BookApiController-updateBookImage-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
                             <h3 id="examples-BookApiController-updateBookImage-title-400"></h3>
                             <p id="examples-BookApiController-updateBookImage-description-400" class="marked"></p>
@@ -4838,6 +4838,28 @@ $(document).ready(function() {
 
 
                           <h2>Responses</h2>
+                            <h3 id="examples-BookApiController-uploadBook-title-404"></h3>
+                            <p id="examples-BookApiController-uploadBook-description-404" class="marked"></p>
+                            <script>
+                              var responseBookApiController404_description = `Book not found`;
+                              var responseBookApiController404_description_break = responseBookApiController404_description.indexOf('\n');
+                              if (responseBookApiController404_description_break == -1) {
+                                $("#examples-BookApiController-uploadBook-title-404").text("Status: 404 - " + responseBookApiController404_description);
+                              } else {
+                                $("#examples-BookApiController-uploadBook-title-404").text("Status: 404 - " + responseBookApiController404_description.substring(0, responseBookApiController404_description_break));
+                                $("#examples-BookApiController-uploadBook-description-404").html(responseBookApiController404_description.substring(responseBookApiController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-BookApiController-uploadBook-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-BookApiController-uploadBook-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
                             <h3 id="examples-BookApiController-uploadBook-title-201"></h3>
                             <p id="examples-BookApiController-uploadBook-description-201" class="marked"></p>
                             <script>
@@ -4903,28 +4925,6 @@ $(document).ready(function() {
                                   </div>
                                   <input id='responses-BookApiController-uploadBook-201-schema-data' type='hidden' value=''></input>
                                 </div>
-                            </div>
-                            <h3 id="examples-BookApiController-uploadBook-title-404"></h3>
-                            <p id="examples-BookApiController-uploadBook-description-404" class="marked"></p>
-                            <script>
-                              var responseBookApiController404_description = `Book not found`;
-                              var responseBookApiController404_description_break = responseBookApiController404_description.indexOf('\n');
-                              if (responseBookApiController404_description_break == -1) {
-                                $("#examples-BookApiController-uploadBook-title-404").text("Status: 404 - " + responseBookApiController404_description);
-                              } else {
-                                $("#examples-BookApiController-uploadBook-title-404").text("Status: 404 - " + responseBookApiController404_description.substring(0, responseBookApiController404_description_break));
-                                $("#examples-BookApiController-uploadBook-description-404").html(responseBookApiController404_description.substring(responseBookApiController404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-BookApiController-uploadBook-404" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-BookApiController-uploadBook-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
                             <h3 id="examples-BookApiController-uploadBook-title-400"></h3>
                             <p id="examples-BookApiController-uploadBook-description-400" class="marked"></p>
@@ -5279,6 +5279,28 @@ $(document).ready(function() {
 
 
                           <h2>Responses</h2>
+                            <h3 id="examples-BookApiController-uploadBookImageById-title-404"></h3>
+                            <p id="examples-BookApiController-uploadBookImageById-description-404" class="marked"></p>
+                            <script>
+                              var responseBookApiController404_description = `Book not found`;
+                              var responseBookApiController404_description_break = responseBookApiController404_description.indexOf('\n');
+                              if (responseBookApiController404_description_break == -1) {
+                                $("#examples-BookApiController-uploadBookImageById-title-404").text("Status: 404 - " + responseBookApiController404_description);
+                              } else {
+                                $("#examples-BookApiController-uploadBookImageById-title-404").text("Status: 404 - " + responseBookApiController404_description.substring(0, responseBookApiController404_description_break));
+                                $("#examples-BookApiController-uploadBookImageById-description-404").html(responseBookApiController404_description.substring(responseBookApiController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-BookApiController-uploadBookImageById-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-BookApiController-uploadBookImageById-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
                             <h3 id="examples-BookApiController-uploadBookImageById-title-201"></h3>
                             <p id="examples-BookApiController-uploadBookImageById-description-201" class="marked"></p>
                             <script>
@@ -5344,28 +5366,6 @@ $(document).ready(function() {
                                   </div>
                                   <input id='responses-BookApiController-uploadBookImageById-201-schema-data' type='hidden' value=''></input>
                                 </div>
-                            </div>
-                            <h3 id="examples-BookApiController-uploadBookImageById-title-404"></h3>
-                            <p id="examples-BookApiController-uploadBookImageById-description-404" class="marked"></p>
-                            <script>
-                              var responseBookApiController404_description = `Book not found`;
-                              var responseBookApiController404_description_break = responseBookApiController404_description.indexOf('\n');
-                              if (responseBookApiController404_description_break == -1) {
-                                $("#examples-BookApiController-uploadBookImageById-title-404").text("Status: 404 - " + responseBookApiController404_description);
-                              } else {
-                                $("#examples-BookApiController-uploadBookImageById-title-404").text("Status: 404 - " + responseBookApiController404_description.substring(0, responseBookApiController404_description_break));
-                                $("#examples-BookApiController-uploadBookImageById-description-404").html(responseBookApiController404_description.substring(responseBookApiController404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-BookApiController-uploadBookImageById-404" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-BookApiController-uploadBookImageById-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
                             <h3 id="examples-BookApiController-uploadBookImageById-title-400"></h3>
                             <p id="examples-BookApiController-uploadBookImageById-description-400" class="marked"></p>
@@ -7365,28 +7365,6 @@ pub fn main() {
 
 
                           <h2>Responses</h2>
-                            <h3 id="examples-FilmApiController-deleteFilm-title-401"></h3>
-                            <p id="examples-FilmApiController-deleteFilm-description-401" class="marked"></p>
-                            <script>
-                              var responseFilmApiController401_description = `Unauthorized`;
-                              var responseFilmApiController401_description_break = responseFilmApiController401_description.indexOf('\n');
-                              if (responseFilmApiController401_description_break == -1) {
-                                $("#examples-FilmApiController-deleteFilm-title-401").text("Status: 401 - " + responseFilmApiController401_description);
-                              } else {
-                                $("#examples-FilmApiController-deleteFilm-title-401").text("Status: 401 - " + responseFilmApiController401_description.substring(0, responseFilmApiController401_description_break));
-                                $("#examples-FilmApiController-deleteFilm-description-401").html(responseFilmApiController401_description.substring(responseFilmApiController401_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-FilmApiController-deleteFilm-401" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-FilmApiController-deleteFilm-401-wrapper" style='margin-bottom: 10px;'>
-                            </div>
                             <h3 id="examples-FilmApiController-deleteFilm-title-200"></h3>
                             <p id="examples-FilmApiController-deleteFilm-description-200" class="marked"></p>
                             <script>
@@ -7453,28 +7431,6 @@ pub fn main() {
                                   <input id='responses-FilmApiController-deleteFilm-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
-                            <h3 id="examples-FilmApiController-deleteFilm-title-400"></h3>
-                            <p id="examples-FilmApiController-deleteFilm-description-400" class="marked"></p>
-                            <script>
-                              var responseFilmApiController400_description = `Invalid id supplied`;
-                              var responseFilmApiController400_description_break = responseFilmApiController400_description.indexOf('\n');
-                              if (responseFilmApiController400_description_break == -1) {
-                                $("#examples-FilmApiController-deleteFilm-title-400").text("Status: 400 - " + responseFilmApiController400_description);
-                              } else {
-                                $("#examples-FilmApiController-deleteFilm-title-400").text("Status: 400 - " + responseFilmApiController400_description.substring(0, responseFilmApiController400_description_break));
-                                $("#examples-FilmApiController-deleteFilm-description-400").html(responseFilmApiController400_description.substring(responseFilmApiController400_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-FilmApiController-deleteFilm-400" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-FilmApiController-deleteFilm-400-wrapper" style='margin-bottom: 10px;'>
-                            </div>
                             <h3 id="examples-FilmApiController-deleteFilm-title-404"></h3>
                             <p id="examples-FilmApiController-deleteFilm-description-404" class="marked"></p>
                             <script>
@@ -7496,6 +7452,50 @@ pub fn main() {
 
 
                             <div class="tab-content" id="responses-FilmApiController-deleteFilm-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-FilmApiController-deleteFilm-title-401"></h3>
+                            <p id="examples-FilmApiController-deleteFilm-description-401" class="marked"></p>
+                            <script>
+                              var responseFilmApiController401_description = `Unauthorized`;
+                              var responseFilmApiController401_description_break = responseFilmApiController401_description.indexOf('\n');
+                              if (responseFilmApiController401_description_break == -1) {
+                                $("#examples-FilmApiController-deleteFilm-title-401").text("Status: 401 - " + responseFilmApiController401_description);
+                              } else {
+                                $("#examples-FilmApiController-deleteFilm-title-401").text("Status: 401 - " + responseFilmApiController401_description.substring(0, responseFilmApiController401_description_break));
+                                $("#examples-FilmApiController-deleteFilm-description-401").html(responseFilmApiController401_description.substring(responseFilmApiController401_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-FilmApiController-deleteFilm-401" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-FilmApiController-deleteFilm-401-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-FilmApiController-deleteFilm-title-400"></h3>
+                            <p id="examples-FilmApiController-deleteFilm-description-400" class="marked"></p>
+                            <script>
+                              var responseFilmApiController400_description = `Invalid id supplied`;
+                              var responseFilmApiController400_description_break = responseFilmApiController400_description.indexOf('\n');
+                              if (responseFilmApiController400_description_break == -1) {
+                                $("#examples-FilmApiController-deleteFilm-title-400").text("Status: 400 - " + responseFilmApiController400_description);
+                              } else {
+                                $("#examples-FilmApiController-deleteFilm-title-400").text("Status: 400 - " + responseFilmApiController400_description.substring(0, responseFilmApiController400_description_break));
+                                $("#examples-FilmApiController-deleteFilm-description-400").html(responseFilmApiController400_description.substring(responseFilmApiController400_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-FilmApiController-deleteFilm-400" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-FilmApiController-deleteFilm-400-wrapper" style='margin-bottom: 10px;'>
                             </div>
                         </article>
                       </div>
@@ -7769,6 +7769,94 @@ pub fn main() {
 
 
                           <h2>Responses</h2>
+                            <h3 id="examples-FilmApiController-deleteFilmImage-title-204"></h3>
+                            <p id="examples-FilmApiController-deleteFilmImage-description-204" class="marked"></p>
+                            <script>
+                              var responseFilmApiController204_description = `FILM IMAGE DELETE CORRECT`;
+                              var responseFilmApiController204_description_break = responseFilmApiController204_description.indexOf('\n');
+                              if (responseFilmApiController204_description_break == -1) {
+                                $("#examples-FilmApiController-deleteFilmImage-title-204").text("Status: 204 - " + responseFilmApiController204_description);
+                              } else {
+                                $("#examples-FilmApiController-deleteFilmImage-title-204").text("Status: 204 - " + responseFilmApiController204_description.substring(0, responseFilmApiController204_description_break));
+                                $("#examples-FilmApiController-deleteFilmImage-description-204").html(responseFilmApiController204_description.substring(responseFilmApiController204_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-FilmApiController-deleteFilmImage-204" class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-FilmApiController-deleteFilmImage-204-schema">Schema</a>
+                                </li>
+
+
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-FilmApiController-deleteFilmImage-204-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-FilmApiController-deleteFilmImage-204-schema">
+                                  <div id="responses-FilmApiController-deleteFilmImage-schema-204" class="exampleStyle">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "FILM IMAGE DELETE CORRECT",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/Element"
+      }
+    }
+  }
+};
+                                        var schema = findNode('schema',schemaWrapper).schema;
+                                        if (!schema) {
+                                          schema = schemaWrapper.schema;
+                                        }
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else if (schema.items != null && schema.items.$ref != null) {
+                                            schema.items = defsParser.$refs.get(schema.items.$ref);
+                                        } else {
+                                          schemaWrapper.definitions = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-FilmApiController-deleteFilmImage-204-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-FilmApiController-deleteFilmImage-schema-204');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-FilmApiController-deleteFilmImage-204-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+                            <h3 id="examples-FilmApiController-deleteFilmImage-title-404"></h3>
+                            <p id="examples-FilmApiController-deleteFilmImage-description-404" class="marked"></p>
+                            <script>
+                              var responseFilmApiController404_description = `Film not found`;
+                              var responseFilmApiController404_description_break = responseFilmApiController404_description.indexOf('\n');
+                              if (responseFilmApiController404_description_break == -1) {
+                                $("#examples-FilmApiController-deleteFilmImage-title-404").text("Status: 404 - " + responseFilmApiController404_description);
+                              } else {
+                                $("#examples-FilmApiController-deleteFilmImage-title-404").text("Status: 404 - " + responseFilmApiController404_description.substring(0, responseFilmApiController404_description_break));
+                                $("#examples-FilmApiController-deleteFilmImage-description-404").html(responseFilmApiController404_description.substring(responseFilmApiController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-FilmApiController-deleteFilmImage-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-FilmApiController-deleteFilmImage-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
                             <h3 id="examples-FilmApiController-deleteFilmImage-title-401"></h3>
                             <p id="examples-FilmApiController-deleteFilmImage-description-401" class="marked"></p>
                             <script>
@@ -7812,94 +7900,6 @@ pub fn main() {
 
 
                             <div class="tab-content" id="responses-FilmApiController-deleteFilmImage-400-wrapper" style='margin-bottom: 10px;'>
-                            </div>
-                            <h3 id="examples-FilmApiController-deleteFilmImage-title-200"></h3>
-                            <p id="examples-FilmApiController-deleteFilmImage-description-200" class="marked"></p>
-                            <script>
-                              var responseFilmApiController200_description = `FILM IMAGE DELETE CORRECT`;
-                              var responseFilmApiController200_description_break = responseFilmApiController200_description.indexOf('\n');
-                              if (responseFilmApiController200_description_break == -1) {
-                                $("#examples-FilmApiController-deleteFilmImage-title-200").text("Status: 200 - " + responseFilmApiController200_description);
-                              } else {
-                                $("#examples-FilmApiController-deleteFilmImage-title-200").text("Status: 200 - " + responseFilmApiController200_description.substring(0, responseFilmApiController200_description_break));
-                                $("#examples-FilmApiController-deleteFilmImage-description-200").html(responseFilmApiController200_description.substring(responseFilmApiController200_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-FilmApiController-deleteFilmImage-200" class="nav nav-tabs nav-tabs-examples" >
-                                <li class="active">
-                                  <a data-toggle="tab" href="#responses-FilmApiController-deleteFilmImage-200-schema">Schema</a>
-                                </li>
-
-
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-FilmApiController-deleteFilmImage-200-wrapper" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-FilmApiController-deleteFilmImage-200-schema">
-                                  <div id="responses-FilmApiController-deleteFilmImage-schema-200" class="exampleStyle">
-                                    <script>
-                                      $(document).ready(function() {
-                                        var schemaWrapper = {
-  "description" : "FILM IMAGE DELETE CORRECT",
-  "content" : {
-    "application/json" : {
-      "schema" : {
-        "$ref" : "#/components/schemas/Element"
-      }
-    }
-  }
-};
-                                        var schema = findNode('schema',schemaWrapper).schema;
-                                        if (!schema) {
-                                          schema = schemaWrapper.schema;
-                                        }
-                                        if (schema.$ref != null) {
-                                          schema = defsParser.$refs.get(schema.$ref);
-                                        } else if (schema.items != null && schema.items.$ref != null) {
-                                            schema.items = defsParser.$refs.get(schema.items.$ref);
-                                        } else {
-                                          schemaWrapper.definitions = Object.assign({}, defs);
-                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
-                                            console.log(err);
-                                          });
-                                        }
-
-                                        var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-FilmApiController-deleteFilmImage-200-schema-data').val(JSON.stringify(schema));
-                                        var result = $('#responses-FilmApiController-deleteFilmImage-schema-200');
-                                        result.empty();
-                                        result.append(view.render());
-                                      });
-                                    </script>
-                                  </div>
-                                  <input id='responses-FilmApiController-deleteFilmImage-200-schema-data' type='hidden' value=''></input>
-                                </div>
-                            </div>
-                            <h3 id="examples-FilmApiController-deleteFilmImage-title-404"></h3>
-                            <p id="examples-FilmApiController-deleteFilmImage-description-404" class="marked"></p>
-                            <script>
-                              var responseFilmApiController404_description = `Film not found`;
-                              var responseFilmApiController404_description_break = responseFilmApiController404_description.indexOf('\n');
-                              if (responseFilmApiController404_description_break == -1) {
-                                $("#examples-FilmApiController-deleteFilmImage-title-404").text("Status: 404 - " + responseFilmApiController404_description);
-                              } else {
-                                $("#examples-FilmApiController-deleteFilmImage-title-404").text("Status: 404 - " + responseFilmApiController404_description.substring(0, responseFilmApiController404_description_break));
-                                $("#examples-FilmApiController-deleteFilmImage-description-404").html(responseFilmApiController404_description.substring(responseFilmApiController404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-FilmApiController-deleteFilmImage-404" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-FilmApiController-deleteFilmImage-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
                         </article>
                       </div>
@@ -8239,28 +8239,6 @@ pub fn main() {
                                   <input id='responses-FilmApiController-getFilmImageById-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
-                            <h3 id="examples-FilmApiController-getFilmImageById-title-400"></h3>
-                            <p id="examples-FilmApiController-getFilmImageById-description-400" class="marked"></p>
-                            <script>
-                              var responseFilmApiController400_description = `Invalid id supplied`;
-                              var responseFilmApiController400_description_break = responseFilmApiController400_description.indexOf('\n');
-                              if (responseFilmApiController400_description_break == -1) {
-                                $("#examples-FilmApiController-getFilmImageById-title-400").text("Status: 400 - " + responseFilmApiController400_description);
-                              } else {
-                                $("#examples-FilmApiController-getFilmImageById-title-400").text("Status: 400 - " + responseFilmApiController400_description.substring(0, responseFilmApiController400_description_break));
-                                $("#examples-FilmApiController-getFilmImageById-description-400").html(responseFilmApiController400_description.substring(responseFilmApiController400_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-FilmApiController-getFilmImageById-400" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-FilmApiController-getFilmImageById-400-wrapper" style='margin-bottom: 10px;'>
-                            </div>
                             <h3 id="examples-FilmApiController-getFilmImageById-title-404"></h3>
                             <p id="examples-FilmApiController-getFilmImageById-description-404" class="marked"></p>
                             <script>
@@ -8282,6 +8260,28 @@ pub fn main() {
 
 
                             <div class="tab-content" id="responses-FilmApiController-getFilmImageById-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-FilmApiController-getFilmImageById-title-400"></h3>
+                            <p id="examples-FilmApiController-getFilmImageById-description-400" class="marked"></p>
+                            <script>
+                              var responseFilmApiController400_description = `Invalid id supplied`;
+                              var responseFilmApiController400_description_break = responseFilmApiController400_description.indexOf('\n');
+                              if (responseFilmApiController400_description_break == -1) {
+                                $("#examples-FilmApiController-getFilmImageById-title-400").text("Status: 400 - " + responseFilmApiController400_description);
+                              } else {
+                                $("#examples-FilmApiController-getFilmImageById-title-400").text("Status: 400 - " + responseFilmApiController400_description.substring(0, responseFilmApiController400_description_break));
+                                $("#examples-FilmApiController-getFilmImageById-description-400").html(responseFilmApiController400_description.substring(responseFilmApiController400_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-FilmApiController-getFilmImageById-400" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-FilmApiController-getFilmImageById-400-wrapper" style='margin-bottom: 10px;'>
                             </div>
                         </article>
                       </div>
@@ -8956,28 +8956,6 @@ pub fn main() {
                                   <input id='responses-FilmApiController-getFilmsById-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
-                            <h3 id="examples-FilmApiController-getFilmsById-title-400"></h3>
-                            <p id="examples-FilmApiController-getFilmsById-description-400" class="marked"></p>
-                            <script>
-                              var responseFilmApiController400_description = `Invalid id supplied`;
-                              var responseFilmApiController400_description_break = responseFilmApiController400_description.indexOf('\n');
-                              if (responseFilmApiController400_description_break == -1) {
-                                $("#examples-FilmApiController-getFilmsById-title-400").text("Status: 400 - " + responseFilmApiController400_description);
-                              } else {
-                                $("#examples-FilmApiController-getFilmsById-title-400").text("Status: 400 - " + responseFilmApiController400_description.substring(0, responseFilmApiController400_description_break));
-                                $("#examples-FilmApiController-getFilmsById-description-400").html(responseFilmApiController400_description.substring(responseFilmApiController400_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-FilmApiController-getFilmsById-400" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-FilmApiController-getFilmsById-400-wrapper" style='margin-bottom: 10px;'>
-                            </div>
                             <h3 id="examples-FilmApiController-getFilmsById-title-404"></h3>
                             <p id="examples-FilmApiController-getFilmsById-description-404" class="marked"></p>
                             <script>
@@ -8999,6 +8977,28 @@ pub fn main() {
 
 
                             <div class="tab-content" id="responses-FilmApiController-getFilmsById-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-FilmApiController-getFilmsById-title-400"></h3>
+                            <p id="examples-FilmApiController-getFilmsById-description-400" class="marked"></p>
+                            <script>
+                              var responseFilmApiController400_description = `Invalid id supplied`;
+                              var responseFilmApiController400_description_break = responseFilmApiController400_description.indexOf('\n');
+                              if (responseFilmApiController400_description_break == -1) {
+                                $("#examples-FilmApiController-getFilmsById-title-400").text("Status: 400 - " + responseFilmApiController400_description);
+                              } else {
+                                $("#examples-FilmApiController-getFilmsById-title-400").text("Status: 400 - " + responseFilmApiController400_description.substring(0, responseFilmApiController400_description_break));
+                                $("#examples-FilmApiController-getFilmsById-description-400").html(responseFilmApiController400_description.substring(responseFilmApiController400_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-FilmApiController-getFilmsById-400" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-FilmApiController-getFilmsById-400-wrapper" style='margin-bottom: 10px;'>
                             </div>
                         </article>
                       </div>
@@ -9340,6 +9340,28 @@ $(document).ready(function() {
 
 
                           <h2>Responses</h2>
+                            <h3 id="examples-FilmApiController-updateFilm-title-404"></h3>
+                            <p id="examples-FilmApiController-updateFilm-description-404" class="marked"></p>
+                            <script>
+                              var responseFilmApiController404_description = `Film not found`;
+                              var responseFilmApiController404_description_break = responseFilmApiController404_description.indexOf('\n');
+                              if (responseFilmApiController404_description_break == -1) {
+                                $("#examples-FilmApiController-updateFilm-title-404").text("Status: 404 - " + responseFilmApiController404_description);
+                              } else {
+                                $("#examples-FilmApiController-updateFilm-title-404").text("Status: 404 - " + responseFilmApiController404_description.substring(0, responseFilmApiController404_description_break));
+                                $("#examples-FilmApiController-updateFilm-description-404").html(responseFilmApiController404_description.substring(responseFilmApiController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-FilmApiController-updateFilm-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-FilmApiController-updateFilm-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
                             <h3 id="examples-FilmApiController-updateFilm-title-200"></h3>
                             <p id="examples-FilmApiController-updateFilm-description-200" class="marked"></p>
                             <script>
@@ -9427,28 +9449,6 @@ $(document).ready(function() {
 
 
                             <div class="tab-content" id="responses-FilmApiController-updateFilm-400-wrapper" style='margin-bottom: 10px;'>
-                            </div>
-                            <h3 id="examples-FilmApiController-updateFilm-title-404"></h3>
-                            <p id="examples-FilmApiController-updateFilm-description-404" class="marked"></p>
-                            <script>
-                              var responseFilmApiController404_description = `Film not found`;
-                              var responseFilmApiController404_description_break = responseFilmApiController404_description.indexOf('\n');
-                              if (responseFilmApiController404_description_break == -1) {
-                                $("#examples-FilmApiController-updateFilm-title-404").text("Status: 404 - " + responseFilmApiController404_description);
-                              } else {
-                                $("#examples-FilmApiController-updateFilm-title-404").text("Status: 404 - " + responseFilmApiController404_description.substring(0, responseFilmApiController404_description_break));
-                                $("#examples-FilmApiController-updateFilm-description-404").html(responseFilmApiController404_description.substring(responseFilmApiController404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-FilmApiController-updateFilm-404" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-FilmApiController-updateFilm-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
                         </article>
                       </div>
@@ -9847,28 +9847,6 @@ $(document).ready(function() {
                                   <input id='responses-FilmApiController-updateFilmImage-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
-                            <h3 id="examples-FilmApiController-updateFilmImage-title-400"></h3>
-                            <p id="examples-FilmApiController-updateFilmImage-description-400" class="marked"></p>
-                            <script>
-                              var responseFilmApiController400_description = `Invalid id supplied`;
-                              var responseFilmApiController400_description_break = responseFilmApiController400_description.indexOf('\n');
-                              if (responseFilmApiController400_description_break == -1) {
-                                $("#examples-FilmApiController-updateFilmImage-title-400").text("Status: 400 - " + responseFilmApiController400_description);
-                              } else {
-                                $("#examples-FilmApiController-updateFilmImage-title-400").text("Status: 400 - " + responseFilmApiController400_description.substring(0, responseFilmApiController400_description_break));
-                                $("#examples-FilmApiController-updateFilmImage-description-400").html(responseFilmApiController400_description.substring(responseFilmApiController400_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-FilmApiController-updateFilmImage-400" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-FilmApiController-updateFilmImage-400-wrapper" style='margin-bottom: 10px;'>
-                            </div>
                             <h3 id="examples-FilmApiController-updateFilmImage-title-404"></h3>
                             <p id="examples-FilmApiController-updateFilmImage-description-404" class="marked"></p>
                             <script>
@@ -9890,6 +9868,28 @@ $(document).ready(function() {
 
 
                             <div class="tab-content" id="responses-FilmApiController-updateFilmImage-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-FilmApiController-updateFilmImage-title-400"></h3>
+                            <p id="examples-FilmApiController-updateFilmImage-description-400" class="marked"></p>
+                            <script>
+                              var responseFilmApiController400_description = `Invalid id supplied`;
+                              var responseFilmApiController400_description_break = responseFilmApiController400_description.indexOf('\n');
+                              if (responseFilmApiController400_description_break == -1) {
+                                $("#examples-FilmApiController-updateFilmImage-title-400").text("Status: 400 - " + responseFilmApiController400_description);
+                              } else {
+                                $("#examples-FilmApiController-updateFilmImage-title-400").text("Status: 400 - " + responseFilmApiController400_description.substring(0, responseFilmApiController400_description_break));
+                                $("#examples-FilmApiController-updateFilmImage-description-400").html(responseFilmApiController400_description.substring(responseFilmApiController400_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-FilmApiController-updateFilmImage-400" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-FilmApiController-updateFilmImage-400-wrapper" style='margin-bottom: 10px;'>
                             </div>
                         </article>
                       </div>
@@ -10213,28 +10213,6 @@ $(document).ready(function() {
 
                             <div class="tab-content" id="responses-FilmApiController-uploadFilm-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
-                            <h3 id="examples-FilmApiController-uploadFilm-title-400"></h3>
-                            <p id="examples-FilmApiController-uploadFilm-description-400" class="marked"></p>
-                            <script>
-                              var responseFilmApiController400_description = `Invalid id supplied`;
-                              var responseFilmApiController400_description_break = responseFilmApiController400_description.indexOf('\n');
-                              if (responseFilmApiController400_description_break == -1) {
-                                $("#examples-FilmApiController-uploadFilm-title-400").text("Status: 400 - " + responseFilmApiController400_description);
-                              } else {
-                                $("#examples-FilmApiController-uploadFilm-title-400").text("Status: 400 - " + responseFilmApiController400_description.substring(0, responseFilmApiController400_description_break));
-                                $("#examples-FilmApiController-uploadFilm-description-400").html(responseFilmApiController400_description.substring(responseFilmApiController400_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-FilmApiController-uploadFilm-400" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-FilmApiController-uploadFilm-400-wrapper" style='margin-bottom: 10px;'>
-                            </div>
                             <h3 id="examples-FilmApiController-uploadFilm-title-201"></h3>
                             <p id="examples-FilmApiController-uploadFilm-description-201" class="marked"></p>
                             <script>
@@ -10300,6 +10278,28 @@ $(document).ready(function() {
                                   </div>
                                   <input id='responses-FilmApiController-uploadFilm-201-schema-data' type='hidden' value=''></input>
                                 </div>
+                            </div>
+                            <h3 id="examples-FilmApiController-uploadFilm-title-400"></h3>
+                            <p id="examples-FilmApiController-uploadFilm-description-400" class="marked"></p>
+                            <script>
+                              var responseFilmApiController400_description = `Invalid id supplied`;
+                              var responseFilmApiController400_description_break = responseFilmApiController400_description.indexOf('\n');
+                              if (responseFilmApiController400_description_break == -1) {
+                                $("#examples-FilmApiController-uploadFilm-title-400").text("Status: 400 - " + responseFilmApiController400_description);
+                              } else {
+                                $("#examples-FilmApiController-uploadFilm-title-400").text("Status: 400 - " + responseFilmApiController400_description.substring(0, responseFilmApiController400_description_break));
+                                $("#examples-FilmApiController-uploadFilm-description-400").html(responseFilmApiController400_description.substring(responseFilmApiController400_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-FilmApiController-uploadFilm-400" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-FilmApiController-uploadFilm-400-wrapper" style='margin-bottom: 10px;'>
                             </div>
                         </article>
                       </div>
@@ -10632,6 +10632,28 @@ $(document).ready(function() {
 
 
                           <h2>Responses</h2>
+                            <h3 id="examples-FilmApiController-uploadFilmImageById-title-404"></h3>
+                            <p id="examples-FilmApiController-uploadFilmImageById-description-404" class="marked"></p>
+                            <script>
+                              var responseFilmApiController404_description = `Film not found`;
+                              var responseFilmApiController404_description_break = responseFilmApiController404_description.indexOf('\n');
+                              if (responseFilmApiController404_description_break == -1) {
+                                $("#examples-FilmApiController-uploadFilmImageById-title-404").text("Status: 404 - " + responseFilmApiController404_description);
+                              } else {
+                                $("#examples-FilmApiController-uploadFilmImageById-title-404").text("Status: 404 - " + responseFilmApiController404_description.substring(0, responseFilmApiController404_description_break));
+                                $("#examples-FilmApiController-uploadFilmImageById-description-404").html(responseFilmApiController404_description.substring(responseFilmApiController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-FilmApiController-uploadFilmImageById-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-FilmApiController-uploadFilmImageById-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
                             <h3 id="examples-FilmApiController-uploadFilmImageById-title-201"></h3>
                             <p id="examples-FilmApiController-uploadFilmImageById-description-201" class="marked"></p>
                             <script>
@@ -10719,28 +10741,6 @@ $(document).ready(function() {
 
 
                             <div class="tab-content" id="responses-FilmApiController-uploadFilmImageById-400-wrapper" style='margin-bottom: 10px;'>
-                            </div>
-                            <h3 id="examples-FilmApiController-uploadFilmImageById-title-404"></h3>
-                            <p id="examples-FilmApiController-uploadFilmImageById-description-404" class="marked"></p>
-                            <script>
-                              var responseFilmApiController404_description = `Film not found`;
-                              var responseFilmApiController404_description_break = responseFilmApiController404_description.indexOf('\n');
-                              if (responseFilmApiController404_description_break == -1) {
-                                $("#examples-FilmApiController-uploadFilmImageById-title-404").text("Status: 404 - " + responseFilmApiController404_description);
-                              } else {
-                                $("#examples-FilmApiController-uploadFilmImageById-title-404").text("Status: 404 - " + responseFilmApiController404_description.substring(0, responseFilmApiController404_description_break));
-                                $("#examples-FilmApiController-uploadFilmImageById-description-404").html(responseFilmApiController404_description.substring(responseFilmApiController404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-FilmApiController-uploadFilmImageById-404" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-FilmApiController-uploadFilmImageById-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
                         </article>
                       </div>
@@ -12009,28 +12009,6 @@ pub fn main() {
 
 
                           <h2>Responses</h2>
-                            <h3 id="examples-SeriesApiController-deleteSerie-title-401"></h3>
-                            <p id="examples-SeriesApiController-deleteSerie-description-401" class="marked"></p>
-                            <script>
-                              var responseSeriesApiController401_description = `Unauthorized`;
-                              var responseSeriesApiController401_description_break = responseSeriesApiController401_description.indexOf('\n');
-                              if (responseSeriesApiController401_description_break == -1) {
-                                $("#examples-SeriesApiController-deleteSerie-title-401").text("Status: 401 - " + responseSeriesApiController401_description);
-                              } else {
-                                $("#examples-SeriesApiController-deleteSerie-title-401").text("Status: 401 - " + responseSeriesApiController401_description.substring(0, responseSeriesApiController401_description_break));
-                                $("#examples-SeriesApiController-deleteSerie-description-401").html(responseSeriesApiController401_description.substring(responseSeriesApiController401_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-SeriesApiController-deleteSerie-401" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-SeriesApiController-deleteSerie-401-wrapper" style='margin-bottom: 10px;'>
-                            </div>
                             <h3 id="examples-SeriesApiController-deleteSerie-title-404"></h3>
                             <p id="examples-SeriesApiController-deleteSerie-description-404" class="marked"></p>
                             <script>
@@ -12052,28 +12030,6 @@ pub fn main() {
 
 
                             <div class="tab-content" id="responses-SeriesApiController-deleteSerie-404-wrapper" style='margin-bottom: 10px;'>
-                            </div>
-                            <h3 id="examples-SeriesApiController-deleteSerie-title-400"></h3>
-                            <p id="examples-SeriesApiController-deleteSerie-description-400" class="marked"></p>
-                            <script>
-                              var responseSeriesApiController400_description = `Invalid id supplied`;
-                              var responseSeriesApiController400_description_break = responseSeriesApiController400_description.indexOf('\n');
-                              if (responseSeriesApiController400_description_break == -1) {
-                                $("#examples-SeriesApiController-deleteSerie-title-400").text("Status: 400 - " + responseSeriesApiController400_description);
-                              } else {
-                                $("#examples-SeriesApiController-deleteSerie-title-400").text("Status: 400 - " + responseSeriesApiController400_description.substring(0, responseSeriesApiController400_description_break));
-                                $("#examples-SeriesApiController-deleteSerie-description-400").html(responseSeriesApiController400_description.substring(responseSeriesApiController400_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-SeriesApiController-deleteSerie-400" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-SeriesApiController-deleteSerie-400-wrapper" style='margin-bottom: 10px;'>
                             </div>
                             <h3 id="examples-SeriesApiController-deleteSerie-title-200"></h3>
                             <p id="examples-SeriesApiController-deleteSerie-description-200" class="marked"></p>
@@ -12140,6 +12096,50 @@ pub fn main() {
                                   </div>
                                   <input id='responses-SeriesApiController-deleteSerie-200-schema-data' type='hidden' value=''></input>
                                 </div>
+                            </div>
+                            <h3 id="examples-SeriesApiController-deleteSerie-title-401"></h3>
+                            <p id="examples-SeriesApiController-deleteSerie-description-401" class="marked"></p>
+                            <script>
+                              var responseSeriesApiController401_description = `Unauthorized`;
+                              var responseSeriesApiController401_description_break = responseSeriesApiController401_description.indexOf('\n');
+                              if (responseSeriesApiController401_description_break == -1) {
+                                $("#examples-SeriesApiController-deleteSerie-title-401").text("Status: 401 - " + responseSeriesApiController401_description);
+                              } else {
+                                $("#examples-SeriesApiController-deleteSerie-title-401").text("Status: 401 - " + responseSeriesApiController401_description.substring(0, responseSeriesApiController401_description_break));
+                                $("#examples-SeriesApiController-deleteSerie-description-401").html(responseSeriesApiController401_description.substring(responseSeriesApiController401_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-SeriesApiController-deleteSerie-401" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-SeriesApiController-deleteSerie-401-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-SeriesApiController-deleteSerie-title-400"></h3>
+                            <p id="examples-SeriesApiController-deleteSerie-description-400" class="marked"></p>
+                            <script>
+                              var responseSeriesApiController400_description = `Invalid id supplied`;
+                              var responseSeriesApiController400_description_break = responseSeriesApiController400_description.indexOf('\n');
+                              if (responseSeriesApiController400_description_break == -1) {
+                                $("#examples-SeriesApiController-deleteSerie-title-400").text("Status: 400 - " + responseSeriesApiController400_description);
+                              } else {
+                                $("#examples-SeriesApiController-deleteSerie-title-400").text("Status: 400 - " + responseSeriesApiController400_description.substring(0, responseSeriesApiController400_description_break));
+                                $("#examples-SeriesApiController-deleteSerie-description-400").html(responseSeriesApiController400_description.substring(responseSeriesApiController400_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-SeriesApiController-deleteSerie-400" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-SeriesApiController-deleteSerie-400-wrapper" style='margin-bottom: 10px;'>
                             </div>
                         </article>
                       </div>
@@ -12413,28 +12413,6 @@ pub fn main() {
 
 
                           <h2>Responses</h2>
-                            <h3 id="examples-SeriesApiController-deleteSerieImage-title-401"></h3>
-                            <p id="examples-SeriesApiController-deleteSerieImage-description-401" class="marked"></p>
-                            <script>
-                              var responseSeriesApiController401_description = `Unauthorized`;
-                              var responseSeriesApiController401_description_break = responseSeriesApiController401_description.indexOf('\n');
-                              if (responseSeriesApiController401_description_break == -1) {
-                                $("#examples-SeriesApiController-deleteSerieImage-title-401").text("Status: 401 - " + responseSeriesApiController401_description);
-                              } else {
-                                $("#examples-SeriesApiController-deleteSerieImage-title-401").text("Status: 401 - " + responseSeriesApiController401_description.substring(0, responseSeriesApiController401_description_break));
-                                $("#examples-SeriesApiController-deleteSerieImage-description-401").html(responseSeriesApiController401_description.substring(responseSeriesApiController401_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-SeriesApiController-deleteSerieImage-401" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-SeriesApiController-deleteSerieImage-401-wrapper" style='margin-bottom: 10px;'>
-                            </div>
                             <h3 id="examples-SeriesApiController-deleteSerieImage-title-404"></h3>
                             <p id="examples-SeriesApiController-deleteSerieImage-description-404" class="marked"></p>
                             <script>
@@ -12457,23 +12435,23 @@ pub fn main() {
 
                             <div class="tab-content" id="responses-SeriesApiController-deleteSerieImage-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
-                            <h3 id="examples-SeriesApiController-deleteSerieImage-title-200"></h3>
-                            <p id="examples-SeriesApiController-deleteSerieImage-description-200" class="marked"></p>
+                            <h3 id="examples-SeriesApiController-deleteSerieImage-title-204"></h3>
+                            <p id="examples-SeriesApiController-deleteSerieImage-description-204" class="marked"></p>
                             <script>
-                              var responseSeriesApiController200_description = `SERIE IMAGE DELETE CORRECT`;
-                              var responseSeriesApiController200_description_break = responseSeriesApiController200_description.indexOf('\n');
-                              if (responseSeriesApiController200_description_break == -1) {
-                                $("#examples-SeriesApiController-deleteSerieImage-title-200").text("Status: 200 - " + responseSeriesApiController200_description);
+                              var responseSeriesApiController204_description = `SERIE IMAGE DELETE CORRECT`;
+                              var responseSeriesApiController204_description_break = responseSeriesApiController204_description.indexOf('\n');
+                              if (responseSeriesApiController204_description_break == -1) {
+                                $("#examples-SeriesApiController-deleteSerieImage-title-204").text("Status: 204 - " + responseSeriesApiController204_description);
                               } else {
-                                $("#examples-SeriesApiController-deleteSerieImage-title-200").text("Status: 200 - " + responseSeriesApiController200_description.substring(0, responseSeriesApiController200_description_break));
-                                $("#examples-SeriesApiController-deleteSerieImage-description-200").html(responseSeriesApiController200_description.substring(responseSeriesApiController200_description_break));
+                                $("#examples-SeriesApiController-deleteSerieImage-title-204").text("Status: 204 - " + responseSeriesApiController204_description.substring(0, responseSeriesApiController204_description_break));
+                                $("#examples-SeriesApiController-deleteSerieImage-description-204").html(responseSeriesApiController204_description.substring(responseSeriesApiController204_description_break));
                               }
                             </script>
 
 
-                            <ul id="responses-detail-SeriesApiController-deleteSerieImage-200" class="nav nav-tabs nav-tabs-examples" >
+                            <ul id="responses-detail-SeriesApiController-deleteSerieImage-204" class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-SeriesApiController-deleteSerieImage-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-SeriesApiController-deleteSerieImage-204-schema">Schema</a>
                                 </li>
 
 
@@ -12482,9 +12460,9 @@ pub fn main() {
                             </ul>
 
 
-                            <div class="tab-content" id="responses-SeriesApiController-deleteSerieImage-200-wrapper" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-SeriesApiController-deleteSerieImage-200-schema">
-                                  <div id="responses-SeriesApiController-deleteSerieImage-schema-200" class="exampleStyle">
+                            <div class="tab-content" id="responses-SeriesApiController-deleteSerieImage-204-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-SeriesApiController-deleteSerieImage-204-schema">
+                                  <div id="responses-SeriesApiController-deleteSerieImage-schema-204" class="exampleStyle">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -12513,15 +12491,37 @@ pub fn main() {
                                         }
 
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-SeriesApiController-deleteSerieImage-200-schema-data').val(JSON.stringify(schema));
-                                        var result = $('#responses-SeriesApiController-deleteSerieImage-schema-200');
+                                        $('#responses-SeriesApiController-deleteSerieImage-204-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-SeriesApiController-deleteSerieImage-schema-204');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-SeriesApiController-deleteSerieImage-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-SeriesApiController-deleteSerieImage-204-schema-data' type='hidden' value=''></input>
                                 </div>
+                            </div>
+                            <h3 id="examples-SeriesApiController-deleteSerieImage-title-401"></h3>
+                            <p id="examples-SeriesApiController-deleteSerieImage-description-401" class="marked"></p>
+                            <script>
+                              var responseSeriesApiController401_description = `Unauthorized`;
+                              var responseSeriesApiController401_description_break = responseSeriesApiController401_description.indexOf('\n');
+                              if (responseSeriesApiController401_description_break == -1) {
+                                $("#examples-SeriesApiController-deleteSerieImage-title-401").text("Status: 401 - " + responseSeriesApiController401_description);
+                              } else {
+                                $("#examples-SeriesApiController-deleteSerieImage-title-401").text("Status: 401 - " + responseSeriesApiController401_description.substring(0, responseSeriesApiController401_description_break));
+                                $("#examples-SeriesApiController-deleteSerieImage-description-401").html(responseSeriesApiController401_description.substring(responseSeriesApiController401_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-SeriesApiController-deleteSerieImage-401" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-SeriesApiController-deleteSerieImage-401-wrapper" style='margin-bottom: 10px;'>
                             </div>
                             <h3 id="examples-SeriesApiController-deleteSerieImage-title-400"></h3>
                             <p id="examples-SeriesApiController-deleteSerieImage-description-400" class="marked"></p>
@@ -12817,28 +12817,6 @@ pub fn main() {
 
 
                           <h2>Responses</h2>
-                            <h3 id="examples-SeriesApiController-getSerieImageById-title-404"></h3>
-                            <p id="examples-SeriesApiController-getSerieImageById-description-404" class="marked"></p>
-                            <script>
-                              var responseSeriesApiController404_description = `Serie not found`;
-                              var responseSeriesApiController404_description_break = responseSeriesApiController404_description.indexOf('\n');
-                              if (responseSeriesApiController404_description_break == -1) {
-                                $("#examples-SeriesApiController-getSerieImageById-title-404").text("Status: 404 - " + responseSeriesApiController404_description);
-                              } else {
-                                $("#examples-SeriesApiController-getSerieImageById-title-404").text("Status: 404 - " + responseSeriesApiController404_description.substring(0, responseSeriesApiController404_description_break));
-                                $("#examples-SeriesApiController-getSerieImageById-description-404").html(responseSeriesApiController404_description.substring(responseSeriesApiController404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-SeriesApiController-getSerieImageById-404" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-SeriesApiController-getSerieImageById-404-wrapper" style='margin-bottom: 10px;'>
-                            </div>
                             <h3 id="examples-SeriesApiController-getSerieImageById-title-200"></h3>
                             <p id="examples-SeriesApiController-getSerieImageById-description-200" class="marked"></p>
                             <script>
@@ -12904,6 +12882,28 @@ pub fn main() {
                                   </div>
                                   <input id='responses-SeriesApiController-getSerieImageById-200-schema-data' type='hidden' value=''></input>
                                 </div>
+                            </div>
+                            <h3 id="examples-SeriesApiController-getSerieImageById-title-404"></h3>
+                            <p id="examples-SeriesApiController-getSerieImageById-description-404" class="marked"></p>
+                            <script>
+                              var responseSeriesApiController404_description = `Serie not found`;
+                              var responseSeriesApiController404_description_break = responseSeriesApiController404_description.indexOf('\n');
+                              if (responseSeriesApiController404_description_break == -1) {
+                                $("#examples-SeriesApiController-getSerieImageById-title-404").text("Status: 404 - " + responseSeriesApiController404_description);
+                              } else {
+                                $("#examples-SeriesApiController-getSerieImageById-title-404").text("Status: 404 - " + responseSeriesApiController404_description.substring(0, responseSeriesApiController404_description_break));
+                                $("#examples-SeriesApiController-getSerieImageById-description-404").html(responseSeriesApiController404_description.substring(responseSeriesApiController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-SeriesApiController-getSerieImageById-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-SeriesApiController-getSerieImageById-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
                             <h3 id="examples-SeriesApiController-getSerieImageById-title-400"></h3>
                             <p id="examples-SeriesApiController-getSerieImageById-description-400" class="marked"></p>
@@ -13534,6 +13534,28 @@ pub fn main() {
 
 
                           <h2>Responses</h2>
+                            <h3 id="examples-SeriesApiController-getSeriesById-title-404"></h3>
+                            <p id="examples-SeriesApiController-getSeriesById-description-404" class="marked"></p>
+                            <script>
+                              var responseSeriesApiController404_description = `Serie not found`;
+                              var responseSeriesApiController404_description_break = responseSeriesApiController404_description.indexOf('\n');
+                              if (responseSeriesApiController404_description_break == -1) {
+                                $("#examples-SeriesApiController-getSeriesById-title-404").text("Status: 404 - " + responseSeriesApiController404_description);
+                              } else {
+                                $("#examples-SeriesApiController-getSeriesById-title-404").text("Status: 404 - " + responseSeriesApiController404_description.substring(0, responseSeriesApiController404_description_break));
+                                $("#examples-SeriesApiController-getSeriesById-description-404").html(responseSeriesApiController404_description.substring(responseSeriesApiController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-SeriesApiController-getSeriesById-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-SeriesApiController-getSeriesById-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
                             <h3 id="examples-SeriesApiController-getSeriesById-title-200"></h3>
                             <p id="examples-SeriesApiController-getSeriesById-description-200" class="marked"></p>
                             <script>
@@ -13599,28 +13621,6 @@ pub fn main() {
                                   </div>
                                   <input id='responses-SeriesApiController-getSeriesById-200-schema-data' type='hidden' value=''></input>
                                 </div>
-                            </div>
-                            <h3 id="examples-SeriesApiController-getSeriesById-title-404"></h3>
-                            <p id="examples-SeriesApiController-getSeriesById-description-404" class="marked"></p>
-                            <script>
-                              var responseSeriesApiController404_description = `Serie not found`;
-                              var responseSeriesApiController404_description_break = responseSeriesApiController404_description.indexOf('\n');
-                              if (responseSeriesApiController404_description_break == -1) {
-                                $("#examples-SeriesApiController-getSeriesById-title-404").text("Status: 404 - " + responseSeriesApiController404_description);
-                              } else {
-                                $("#examples-SeriesApiController-getSeriesById-title-404").text("Status: 404 - " + responseSeriesApiController404_description.substring(0, responseSeriesApiController404_description_break));
-                                $("#examples-SeriesApiController-getSeriesById-description-404").html(responseSeriesApiController404_description.substring(responseSeriesApiController404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-SeriesApiController-getSeriesById-404" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-SeriesApiController-getSeriesById-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
                             <h3 id="examples-SeriesApiController-getSeriesById-title-400"></h3>
                             <p id="examples-SeriesApiController-getSeriesById-description-400" class="marked"></p>
@@ -13984,50 +13984,6 @@ $(document).ready(function() {
 
 
                           <h2>Responses</h2>
-                            <h3 id="examples-SeriesApiController-updateSerie-title-404"></h3>
-                            <p id="examples-SeriesApiController-updateSerie-description-404" class="marked"></p>
-                            <script>
-                              var responseSeriesApiController404_description = `Serie not found`;
-                              var responseSeriesApiController404_description_break = responseSeriesApiController404_description.indexOf('\n');
-                              if (responseSeriesApiController404_description_break == -1) {
-                                $("#examples-SeriesApiController-updateSerie-title-404").text("Status: 404 - " + responseSeriesApiController404_description);
-                              } else {
-                                $("#examples-SeriesApiController-updateSerie-title-404").text("Status: 404 - " + responseSeriesApiController404_description.substring(0, responseSeriesApiController404_description_break));
-                                $("#examples-SeriesApiController-updateSerie-description-404").html(responseSeriesApiController404_description.substring(responseSeriesApiController404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-SeriesApiController-updateSerie-404" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-SeriesApiController-updateSerie-404-wrapper" style='margin-bottom: 10px;'>
-                            </div>
-                            <h3 id="examples-SeriesApiController-updateSerie-title-400"></h3>
-                            <p id="examples-SeriesApiController-updateSerie-description-400" class="marked"></p>
-                            <script>
-                              var responseSeriesApiController400_description = `Invalid id supplied`;
-                              var responseSeriesApiController400_description_break = responseSeriesApiController400_description.indexOf('\n');
-                              if (responseSeriesApiController400_description_break == -1) {
-                                $("#examples-SeriesApiController-updateSerie-title-400").text("Status: 400 - " + responseSeriesApiController400_description);
-                              } else {
-                                $("#examples-SeriesApiController-updateSerie-title-400").text("Status: 400 - " + responseSeriesApiController400_description.substring(0, responseSeriesApiController400_description_break));
-                                $("#examples-SeriesApiController-updateSerie-description-400").html(responseSeriesApiController400_description.substring(responseSeriesApiController400_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-SeriesApiController-updateSerie-400" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-SeriesApiController-updateSerie-400-wrapper" style='margin-bottom: 10px;'>
-                            </div>
                             <h3 id="examples-SeriesApiController-updateSerie-title-200"></h3>
                             <p id="examples-SeriesApiController-updateSerie-description-200" class="marked"></p>
                             <script>
@@ -14093,6 +14049,50 @@ $(document).ready(function() {
                                   </div>
                                   <input id='responses-SeriesApiController-updateSerie-200-schema-data' type='hidden' value=''></input>
                                 </div>
+                            </div>
+                            <h3 id="examples-SeriesApiController-updateSerie-title-404"></h3>
+                            <p id="examples-SeriesApiController-updateSerie-description-404" class="marked"></p>
+                            <script>
+                              var responseSeriesApiController404_description = `Serie not found`;
+                              var responseSeriesApiController404_description_break = responseSeriesApiController404_description.indexOf('\n');
+                              if (responseSeriesApiController404_description_break == -1) {
+                                $("#examples-SeriesApiController-updateSerie-title-404").text("Status: 404 - " + responseSeriesApiController404_description);
+                              } else {
+                                $("#examples-SeriesApiController-updateSerie-title-404").text("Status: 404 - " + responseSeriesApiController404_description.substring(0, responseSeriesApiController404_description_break));
+                                $("#examples-SeriesApiController-updateSerie-description-404").html(responseSeriesApiController404_description.substring(responseSeriesApiController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-SeriesApiController-updateSerie-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-SeriesApiController-updateSerie-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-SeriesApiController-updateSerie-title-400"></h3>
+                            <p id="examples-SeriesApiController-updateSerie-description-400" class="marked"></p>
+                            <script>
+                              var responseSeriesApiController400_description = `Invalid id supplied`;
+                              var responseSeriesApiController400_description_break = responseSeriesApiController400_description.indexOf('\n');
+                              if (responseSeriesApiController400_description_break == -1) {
+                                $("#examples-SeriesApiController-updateSerie-title-400").text("Status: 400 - " + responseSeriesApiController400_description);
+                              } else {
+                                $("#examples-SeriesApiController-updateSerie-title-400").text("Status: 400 - " + responseSeriesApiController400_description.substring(0, responseSeriesApiController400_description_break));
+                                $("#examples-SeriesApiController-updateSerie-description-400").html(responseSeriesApiController400_description.substring(responseSeriesApiController400_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-SeriesApiController-updateSerie-400" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-SeriesApiController-updateSerie-400-wrapper" style='margin-bottom: 10px;'>
                             </div>
                         </article>
                       </div>
@@ -14425,6 +14425,28 @@ $(document).ready(function() {
 
 
                           <h2>Responses</h2>
+                            <h3 id="examples-SeriesApiController-updateSerieImage-title-404"></h3>
+                            <p id="examples-SeriesApiController-updateSerieImage-description-404" class="marked"></p>
+                            <script>
+                              var responseSeriesApiController404_description = `Serie not found`;
+                              var responseSeriesApiController404_description_break = responseSeriesApiController404_description.indexOf('\n');
+                              if (responseSeriesApiController404_description_break == -1) {
+                                $("#examples-SeriesApiController-updateSerieImage-title-404").text("Status: 404 - " + responseSeriesApiController404_description);
+                              } else {
+                                $("#examples-SeriesApiController-updateSerieImage-title-404").text("Status: 404 - " + responseSeriesApiController404_description.substring(0, responseSeriesApiController404_description_break));
+                                $("#examples-SeriesApiController-updateSerieImage-description-404").html(responseSeriesApiController404_description.substring(responseSeriesApiController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-SeriesApiController-updateSerieImage-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-SeriesApiController-updateSerieImage-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
                             <h3 id="examples-SeriesApiController-updateSerieImage-title-200"></h3>
                             <p id="examples-SeriesApiController-updateSerieImage-description-200" class="marked"></p>
                             <script>
@@ -14490,28 +14512,6 @@ $(document).ready(function() {
                                   </div>
                                   <input id='responses-SeriesApiController-updateSerieImage-200-schema-data' type='hidden' value=''></input>
                                 </div>
-                            </div>
-                            <h3 id="examples-SeriesApiController-updateSerieImage-title-404"></h3>
-                            <p id="examples-SeriesApiController-updateSerieImage-description-404" class="marked"></p>
-                            <script>
-                              var responseSeriesApiController404_description = `Serie not found`;
-                              var responseSeriesApiController404_description_break = responseSeriesApiController404_description.indexOf('\n');
-                              if (responseSeriesApiController404_description_break == -1) {
-                                $("#examples-SeriesApiController-updateSerieImage-title-404").text("Status: 404 - " + responseSeriesApiController404_description);
-                              } else {
-                                $("#examples-SeriesApiController-updateSerieImage-title-404").text("Status: 404 - " + responseSeriesApiController404_description.substring(0, responseSeriesApiController404_description_break));
-                                $("#examples-SeriesApiController-updateSerieImage-description-404").html(responseSeriesApiController404_description.substring(responseSeriesApiController404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-SeriesApiController-updateSerieImage-404" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-SeriesApiController-updateSerieImage-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
                             <h3 id="examples-SeriesApiController-updateSerieImage-title-400"></h3>
                             <p id="examples-SeriesApiController-updateSerieImage-description-400" class="marked"></p>
@@ -14835,6 +14835,28 @@ $(document).ready(function() {
 
 
                           <h2>Responses</h2>
+                            <h3 id="examples-SeriesApiController-uploadSerie-title-404"></h3>
+                            <p id="examples-SeriesApiController-uploadSerie-description-404" class="marked"></p>
+                            <script>
+                              var responseSeriesApiController404_description = `Serie not found`;
+                              var responseSeriesApiController404_description_break = responseSeriesApiController404_description.indexOf('\n');
+                              if (responseSeriesApiController404_description_break == -1) {
+                                $("#examples-SeriesApiController-uploadSerie-title-404").text("Status: 404 - " + responseSeriesApiController404_description);
+                              } else {
+                                $("#examples-SeriesApiController-uploadSerie-title-404").text("Status: 404 - " + responseSeriesApiController404_description.substring(0, responseSeriesApiController404_description_break));
+                                $("#examples-SeriesApiController-uploadSerie-description-404").html(responseSeriesApiController404_description.substring(responseSeriesApiController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-SeriesApiController-uploadSerie-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-SeriesApiController-uploadSerie-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
                             <h3 id="examples-SeriesApiController-uploadSerie-title-201"></h3>
                             <p id="examples-SeriesApiController-uploadSerie-description-201" class="marked"></p>
                             <script>
@@ -14900,28 +14922,6 @@ $(document).ready(function() {
                                   </div>
                                   <input id='responses-SeriesApiController-uploadSerie-201-schema-data' type='hidden' value=''></input>
                                 </div>
-                            </div>
-                            <h3 id="examples-SeriesApiController-uploadSerie-title-404"></h3>
-                            <p id="examples-SeriesApiController-uploadSerie-description-404" class="marked"></p>
-                            <script>
-                              var responseSeriesApiController404_description = `Serie not found`;
-                              var responseSeriesApiController404_description_break = responseSeriesApiController404_description.indexOf('\n');
-                              if (responseSeriesApiController404_description_break == -1) {
-                                $("#examples-SeriesApiController-uploadSerie-title-404").text("Status: 404 - " + responseSeriesApiController404_description);
-                              } else {
-                                $("#examples-SeriesApiController-uploadSerie-title-404").text("Status: 404 - " + responseSeriesApiController404_description.substring(0, responseSeriesApiController404_description_break));
-                                $("#examples-SeriesApiController-uploadSerie-description-404").html(responseSeriesApiController404_description.substring(responseSeriesApiController404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-SeriesApiController-uploadSerie-404" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-SeriesApiController-uploadSerie-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
                             <h3 id="examples-SeriesApiController-uploadSerie-title-400"></h3>
                             <p id="examples-SeriesApiController-uploadSerie-description-400" class="marked"></p>
@@ -16021,50 +16021,6 @@ pub fn main() {
 
 
                           <h2>Responses</h2>
-                            <h3 id="examples-UserApiController-deleteUser-title-401"></h3>
-                            <p id="examples-UserApiController-deleteUser-description-401" class="marked"></p>
-                            <script>
-                              var responseUserApiController401_description = `Unauthorized`;
-                              var responseUserApiController401_description_break = responseUserApiController401_description.indexOf('\n');
-                              if (responseUserApiController401_description_break == -1) {
-                                $("#examples-UserApiController-deleteUser-title-401").text("Status: 401 - " + responseUserApiController401_description);
-                              } else {
-                                $("#examples-UserApiController-deleteUser-title-401").text("Status: 401 - " + responseUserApiController401_description.substring(0, responseUserApiController401_description_break));
-                                $("#examples-UserApiController-deleteUser-description-401").html(responseUserApiController401_description.substring(responseUserApiController401_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-UserApiController-deleteUser-401" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-UserApiController-deleteUser-401-wrapper" style='margin-bottom: 10px;'>
-                            </div>
-                            <h3 id="examples-UserApiController-deleteUser-title-400"></h3>
-                            <p id="examples-UserApiController-deleteUser-description-400" class="marked"></p>
-                            <script>
-                              var responseUserApiController400_description = `Invalid id supplied`;
-                              var responseUserApiController400_description_break = responseUserApiController400_description.indexOf('\n');
-                              if (responseUserApiController400_description_break == -1) {
-                                $("#examples-UserApiController-deleteUser-title-400").text("Status: 400 - " + responseUserApiController400_description);
-                              } else {
-                                $("#examples-UserApiController-deleteUser-title-400").text("Status: 400 - " + responseUserApiController400_description.substring(0, responseUserApiController400_description_break));
-                                $("#examples-UserApiController-deleteUser-description-400").html(responseUserApiController400_description.substring(responseUserApiController400_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-UserApiController-deleteUser-400" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-UserApiController-deleteUser-400-wrapper" style='margin-bottom: 10px;'>
-                            </div>
                             <h3 id="examples-UserApiController-deleteUser-title-200"></h3>
                             <p id="examples-UserApiController-deleteUser-description-200" class="marked"></p>
                             <script>
@@ -16152,6 +16108,50 @@ pub fn main() {
 
 
                             <div class="tab-content" id="responses-UserApiController-deleteUser-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-UserApiController-deleteUser-title-401"></h3>
+                            <p id="examples-UserApiController-deleteUser-description-401" class="marked"></p>
+                            <script>
+                              var responseUserApiController401_description = `Unauthorized`;
+                              var responseUserApiController401_description_break = responseUserApiController401_description.indexOf('\n');
+                              if (responseUserApiController401_description_break == -1) {
+                                $("#examples-UserApiController-deleteUser-title-401").text("Status: 401 - " + responseUserApiController401_description);
+                              } else {
+                                $("#examples-UserApiController-deleteUser-title-401").text("Status: 401 - " + responseUserApiController401_description.substring(0, responseUserApiController401_description_break));
+                                $("#examples-UserApiController-deleteUser-description-401").html(responseUserApiController401_description.substring(responseUserApiController401_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-UserApiController-deleteUser-401" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-UserApiController-deleteUser-401-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-UserApiController-deleteUser-title-400"></h3>
+                            <p id="examples-UserApiController-deleteUser-description-400" class="marked"></p>
+                            <script>
+                              var responseUserApiController400_description = `Invalid id supplied`;
+                              var responseUserApiController400_description_break = responseUserApiController400_description.indexOf('\n');
+                              if (responseUserApiController400_description_break == -1) {
+                                $("#examples-UserApiController-deleteUser-title-400").text("Status: 400 - " + responseUserApiController400_description);
+                              } else {
+                                $("#examples-UserApiController-deleteUser-title-400").text("Status: 400 - " + responseUserApiController400_description.substring(0, responseUserApiController400_description_break));
+                                $("#examples-UserApiController-deleteUser-description-400").html(responseUserApiController400_description.substring(responseUserApiController400_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-UserApiController-deleteUser-400" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-UserApiController-deleteUser-400-wrapper" style='margin-bottom: 10px;'>
                             </div>
                         </article>
                       </div>
@@ -16425,45 +16425,45 @@ pub fn main() {
 
 
                           <h2>Responses</h2>
-                            <h3 id="examples-UserApiController-deleteUserImage-title-401"></h3>
-                            <p id="examples-UserApiController-deleteUserImage-description-401" class="marked"></p>
+                            <h3 id="examples-UserApiController-deleteUserImage-title-404"></h3>
+                            <p id="examples-UserApiController-deleteUserImage-description-404" class="marked"></p>
                             <script>
-                              var responseUserApiController401_description = `Unauthorized`;
-                              var responseUserApiController401_description_break = responseUserApiController401_description.indexOf('\n');
-                              if (responseUserApiController401_description_break == -1) {
-                                $("#examples-UserApiController-deleteUserImage-title-401").text("Status: 401 - " + responseUserApiController401_description);
+                              var responseUserApiController404_description = `USER not found`;
+                              var responseUserApiController404_description_break = responseUserApiController404_description.indexOf('\n');
+                              if (responseUserApiController404_description_break == -1) {
+                                $("#examples-UserApiController-deleteUserImage-title-404").text("Status: 404 - " + responseUserApiController404_description);
                               } else {
-                                $("#examples-UserApiController-deleteUserImage-title-401").text("Status: 401 - " + responseUserApiController401_description.substring(0, responseUserApiController401_description_break));
-                                $("#examples-UserApiController-deleteUserImage-description-401").html(responseUserApiController401_description.substring(responseUserApiController401_description_break));
+                                $("#examples-UserApiController-deleteUserImage-title-404").text("Status: 404 - " + responseUserApiController404_description.substring(0, responseUserApiController404_description_break));
+                                $("#examples-UserApiController-deleteUserImage-description-404").html(responseUserApiController404_description.substring(responseUserApiController404_description_break));
                               }
                             </script>
 
 
-                            <ul id="responses-detail-UserApiController-deleteUserImage-401" class="nav nav-tabs nav-tabs-examples" >
+                            <ul id="responses-detail-UserApiController-deleteUserImage-404" class="nav nav-tabs nav-tabs-examples" >
 
 
                             </ul>
 
 
-                            <div class="tab-content" id="responses-UserApiController-deleteUserImage-401-wrapper" style='margin-bottom: 10px;'>
+                            <div class="tab-content" id="responses-UserApiController-deleteUserImage-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
-                            <h3 id="examples-UserApiController-deleteUserImage-title-200"></h3>
-                            <p id="examples-UserApiController-deleteUserImage-description-200" class="marked"></p>
+                            <h3 id="examples-UserApiController-deleteUserImage-title-204"></h3>
+                            <p id="examples-UserApiController-deleteUserImage-description-204" class="marked"></p>
                             <script>
-                              var responseUserApiController200_description = `USER IMAGE DELETE CORRECT`;
-                              var responseUserApiController200_description_break = responseUserApiController200_description.indexOf('\n');
-                              if (responseUserApiController200_description_break == -1) {
-                                $("#examples-UserApiController-deleteUserImage-title-200").text("Status: 200 - " + responseUserApiController200_description);
+                              var responseUserApiController204_description = `USER IMAGE DELETE CORRECT`;
+                              var responseUserApiController204_description_break = responseUserApiController204_description.indexOf('\n');
+                              if (responseUserApiController204_description_break == -1) {
+                                $("#examples-UserApiController-deleteUserImage-title-204").text("Status: 204 - " + responseUserApiController204_description);
                               } else {
-                                $("#examples-UserApiController-deleteUserImage-title-200").text("Status: 200 - " + responseUserApiController200_description.substring(0, responseUserApiController200_description_break));
-                                $("#examples-UserApiController-deleteUserImage-description-200").html(responseUserApiController200_description.substring(responseUserApiController200_description_break));
+                                $("#examples-UserApiController-deleteUserImage-title-204").text("Status: 204 - " + responseUserApiController204_description.substring(0, responseUserApiController204_description_break));
+                                $("#examples-UserApiController-deleteUserImage-description-204").html(responseUserApiController204_description.substring(responseUserApiController204_description_break));
                               }
                             </script>
 
 
-                            <ul id="responses-detail-UserApiController-deleteUserImage-200" class="nav nav-tabs nav-tabs-examples" >
+                            <ul id="responses-detail-UserApiController-deleteUserImage-204" class="nav nav-tabs nav-tabs-examples" >
                                 <li class="active">
-                                  <a data-toggle="tab" href="#responses-UserApiController-deleteUserImage-200-schema">Schema</a>
+                                  <a data-toggle="tab" href="#responses-UserApiController-deleteUserImage-204-schema">Schema</a>
                                 </li>
 
 
@@ -16472,9 +16472,9 @@ pub fn main() {
                             </ul>
 
 
-                            <div class="tab-content" id="responses-UserApiController-deleteUserImage-200-wrapper" style='margin-bottom: 10px;'>
-                                <div class="tab-pane active" id="responses-UserApiController-deleteUserImage-200-schema">
-                                  <div id="responses-UserApiController-deleteUserImage-schema-200" class="exampleStyle">
+                            <div class="tab-content" id="responses-UserApiController-deleteUserImage-204-wrapper" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-UserApiController-deleteUserImage-204-schema">
+                                  <div id="responses-UserApiController-deleteUserImage-schema-204" class="exampleStyle">
                                     <script>
                                       $(document).ready(function() {
                                         var schemaWrapper = {
@@ -16503,15 +16503,37 @@ pub fn main() {
                                         }
 
                                         var view = new JSONSchemaView(schema, 3);
-                                        $('#responses-UserApiController-deleteUserImage-200-schema-data').val(JSON.stringify(schema));
-                                        var result = $('#responses-UserApiController-deleteUserImage-schema-200');
+                                        $('#responses-UserApiController-deleteUserImage-204-schema-data').val(JSON.stringify(schema));
+                                        var result = $('#responses-UserApiController-deleteUserImage-schema-204');
                                         result.empty();
                                         result.append(view.render());
                                       });
                                     </script>
                                   </div>
-                                  <input id='responses-UserApiController-deleteUserImage-200-schema-data' type='hidden' value=''></input>
+                                  <input id='responses-UserApiController-deleteUserImage-204-schema-data' type='hidden' value=''></input>
                                 </div>
+                            </div>
+                            <h3 id="examples-UserApiController-deleteUserImage-title-401"></h3>
+                            <p id="examples-UserApiController-deleteUserImage-description-401" class="marked"></p>
+                            <script>
+                              var responseUserApiController401_description = `Unauthorized`;
+                              var responseUserApiController401_description_break = responseUserApiController401_description.indexOf('\n');
+                              if (responseUserApiController401_description_break == -1) {
+                                $("#examples-UserApiController-deleteUserImage-title-401").text("Status: 401 - " + responseUserApiController401_description);
+                              } else {
+                                $("#examples-UserApiController-deleteUserImage-title-401").text("Status: 401 - " + responseUserApiController401_description.substring(0, responseUserApiController401_description_break));
+                                $("#examples-UserApiController-deleteUserImage-description-401").html(responseUserApiController401_description.substring(responseUserApiController401_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-UserApiController-deleteUserImage-401" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-UserApiController-deleteUserImage-401-wrapper" style='margin-bottom: 10px;'>
                             </div>
                             <h3 id="examples-UserApiController-deleteUserImage-title-400"></h3>
                             <p id="examples-UserApiController-deleteUserImage-description-400" class="marked"></p>
@@ -16534,28 +16556,6 @@ pub fn main() {
 
 
                             <div class="tab-content" id="responses-UserApiController-deleteUserImage-400-wrapper" style='margin-bottom: 10px;'>
-                            </div>
-                            <h3 id="examples-UserApiController-deleteUserImage-title-404"></h3>
-                            <p id="examples-UserApiController-deleteUserImage-description-404" class="marked"></p>
-                            <script>
-                              var responseUserApiController404_description = `USER not found`;
-                              var responseUserApiController404_description_break = responseUserApiController404_description.indexOf('\n');
-                              if (responseUserApiController404_description_break == -1) {
-                                $("#examples-UserApiController-deleteUserImage-title-404").text("Status: 404 - " + responseUserApiController404_description);
-                              } else {
-                                $("#examples-UserApiController-deleteUserImage-title-404").text("Status: 404 - " + responseUserApiController404_description.substring(0, responseUserApiController404_description_break));
-                                $("#examples-UserApiController-deleteUserImage-description-404").html(responseUserApiController404_description.substring(responseUserApiController404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-UserApiController-deleteUserImage-404" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-UserApiController-deleteUserImage-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
                         </article>
                       </div>
@@ -16829,6 +16829,28 @@ pub fn main() {
 
 
                           <h2>Responses</h2>
+                            <h3 id="examples-UserApiController-getSpecificUser-title-404"></h3>
+                            <p id="examples-UserApiController-getSpecificUser-description-404" class="marked"></p>
+                            <script>
+                              var responseUserApiController404_description = `USER not found`;
+                              var responseUserApiController404_description_break = responseUserApiController404_description.indexOf('\n');
+                              if (responseUserApiController404_description_break == -1) {
+                                $("#examples-UserApiController-getSpecificUser-title-404").text("Status: 404 - " + responseUserApiController404_description);
+                              } else {
+                                $("#examples-UserApiController-getSpecificUser-title-404").text("Status: 404 - " + responseUserApiController404_description.substring(0, responseUserApiController404_description_break));
+                                $("#examples-UserApiController-getSpecificUser-description-404").html(responseUserApiController404_description.substring(responseUserApiController404_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-UserApiController-getSpecificUser-404" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-UserApiController-getSpecificUser-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
                             <h3 id="examples-UserApiController-getSpecificUser-title-200"></h3>
                             <p id="examples-UserApiController-getSpecificUser-description-200" class="marked"></p>
                             <script>
@@ -16916,28 +16938,6 @@ pub fn main() {
 
 
                             <div class="tab-content" id="responses-UserApiController-getSpecificUser-400-wrapper" style='margin-bottom: 10px;'>
-                            </div>
-                            <h3 id="examples-UserApiController-getSpecificUser-title-404"></h3>
-                            <p id="examples-UserApiController-getSpecificUser-description-404" class="marked"></p>
-                            <script>
-                              var responseUserApiController404_description = `USER not found`;
-                              var responseUserApiController404_description_break = responseUserApiController404_description.indexOf('\n');
-                              if (responseUserApiController404_description_break == -1) {
-                                $("#examples-UserApiController-getSpecificUser-title-404").text("Status: 404 - " + responseUserApiController404_description);
-                              } else {
-                                $("#examples-UserApiController-getSpecificUser-title-404").text("Status: 404 - " + responseUserApiController404_description.substring(0, responseUserApiController404_description_break));
-                                $("#examples-UserApiController-getSpecificUser-description-404").html(responseUserApiController404_description.substring(responseUserApiController404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-UserApiController-getSpecificUser-404" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-UserApiController-getSpecificUser-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
                         </article>
                       </div>
@@ -18012,28 +18012,6 @@ $(document).ready(function() {
 
 
                           <h2>Responses</h2>
-                            <h3 id="examples-UserApiController-updateUser-title-401"></h3>
-                            <p id="examples-UserApiController-updateUser-description-401" class="marked"></p>
-                            <script>
-                              var responseUserApiController401_description = `Unauthorized`;
-                              var responseUserApiController401_description_break = responseUserApiController401_description.indexOf('\n');
-                              if (responseUserApiController401_description_break == -1) {
-                                $("#examples-UserApiController-updateUser-title-401").text("Status: 401 - " + responseUserApiController401_description);
-                              } else {
-                                $("#examples-UserApiController-updateUser-title-401").text("Status: 401 - " + responseUserApiController401_description.substring(0, responseUserApiController401_description_break));
-                                $("#examples-UserApiController-updateUser-description-401").html(responseUserApiController401_description.substring(responseUserApiController401_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-UserApiController-updateUser-401" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-UserApiController-updateUser-401-wrapper" style='margin-bottom: 10px;'>
-                            </div>
                             <h3 id="examples-UserApiController-updateUser-title-200"></h3>
                             <p id="examples-UserApiController-updateUser-description-200" class="marked"></p>
                             <script>
@@ -18100,28 +18078,6 @@ $(document).ready(function() {
                                   <input id='responses-UserApiController-updateUser-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
-                            <h3 id="examples-UserApiController-updateUser-title-400"></h3>
-                            <p id="examples-UserApiController-updateUser-description-400" class="marked"></p>
-                            <script>
-                              var responseUserApiController400_description = `Invalid id supplied`;
-                              var responseUserApiController400_description_break = responseUserApiController400_description.indexOf('\n');
-                              if (responseUserApiController400_description_break == -1) {
-                                $("#examples-UserApiController-updateUser-title-400").text("Status: 400 - " + responseUserApiController400_description);
-                              } else {
-                                $("#examples-UserApiController-updateUser-title-400").text("Status: 400 - " + responseUserApiController400_description.substring(0, responseUserApiController400_description_break));
-                                $("#examples-UserApiController-updateUser-description-400").html(responseUserApiController400_description.substring(responseUserApiController400_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-UserApiController-updateUser-400" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-UserApiController-updateUser-400-wrapper" style='margin-bottom: 10px;'>
-                            </div>
                             <h3 id="examples-UserApiController-updateUser-title-404"></h3>
                             <p id="examples-UserApiController-updateUser-description-404" class="marked"></p>
                             <script>
@@ -18143,6 +18099,50 @@ $(document).ready(function() {
 
 
                             <div class="tab-content" id="responses-UserApiController-updateUser-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-UserApiController-updateUser-title-401"></h3>
+                            <p id="examples-UserApiController-updateUser-description-401" class="marked"></p>
+                            <script>
+                              var responseUserApiController401_description = `Unauthorized`;
+                              var responseUserApiController401_description_break = responseUserApiController401_description.indexOf('\n');
+                              if (responseUserApiController401_description_break == -1) {
+                                $("#examples-UserApiController-updateUser-title-401").text("Status: 401 - " + responseUserApiController401_description);
+                              } else {
+                                $("#examples-UserApiController-updateUser-title-401").text("Status: 401 - " + responseUserApiController401_description.substring(0, responseUserApiController401_description_break));
+                                $("#examples-UserApiController-updateUser-description-401").html(responseUserApiController401_description.substring(responseUserApiController401_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-UserApiController-updateUser-401" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-UserApiController-updateUser-401-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-UserApiController-updateUser-title-400"></h3>
+                            <p id="examples-UserApiController-updateUser-description-400" class="marked"></p>
+                            <script>
+                              var responseUserApiController400_description = `Invalid id supplied`;
+                              var responseUserApiController400_description_break = responseUserApiController400_description.indexOf('\n');
+                              if (responseUserApiController400_description_break == -1) {
+                                $("#examples-UserApiController-updateUser-title-400").text("Status: 400 - " + responseUserApiController400_description);
+                              } else {
+                                $("#examples-UserApiController-updateUser-title-400").text("Status: 400 - " + responseUserApiController400_description.substring(0, responseUserApiController400_description_break));
+                                $("#examples-UserApiController-updateUser-description-400").html(responseUserApiController400_description.substring(responseUserApiController400_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-UserApiController-updateUser-400" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-UserApiController-updateUser-400-wrapper" style='margin-bottom: 10px;'>
                             </div>
                         </article>
                       </div>
@@ -18475,27 +18475,27 @@ $(document).ready(function() {
 
 
                           <h2>Responses</h2>
-                            <h3 id="examples-UserApiController-updateUserImage-title-401"></h3>
-                            <p id="examples-UserApiController-updateUserImage-description-401" class="marked"></p>
+                            <h3 id="examples-UserApiController-updateUserImage-title-404"></h3>
+                            <p id="examples-UserApiController-updateUserImage-description-404" class="marked"></p>
                             <script>
-                              var responseUserApiController401_description = `Unauthorized`;
-                              var responseUserApiController401_description_break = responseUserApiController401_description.indexOf('\n');
-                              if (responseUserApiController401_description_break == -1) {
-                                $("#examples-UserApiController-updateUserImage-title-401").text("Status: 401 - " + responseUserApiController401_description);
+                              var responseUserApiController404_description = `USER not found`;
+                              var responseUserApiController404_description_break = responseUserApiController404_description.indexOf('\n');
+                              if (responseUserApiController404_description_break == -1) {
+                                $("#examples-UserApiController-updateUserImage-title-404").text("Status: 404 - " + responseUserApiController404_description);
                               } else {
-                                $("#examples-UserApiController-updateUserImage-title-401").text("Status: 401 - " + responseUserApiController401_description.substring(0, responseUserApiController401_description_break));
-                                $("#examples-UserApiController-updateUserImage-description-401").html(responseUserApiController401_description.substring(responseUserApiController401_description_break));
+                                $("#examples-UserApiController-updateUserImage-title-404").text("Status: 404 - " + responseUserApiController404_description.substring(0, responseUserApiController404_description_break));
+                                $("#examples-UserApiController-updateUserImage-description-404").html(responseUserApiController404_description.substring(responseUserApiController404_description_break));
                               }
                             </script>
 
 
-                            <ul id="responses-detail-UserApiController-updateUserImage-401" class="nav nav-tabs nav-tabs-examples" >
+                            <ul id="responses-detail-UserApiController-updateUserImage-404" class="nav nav-tabs nav-tabs-examples" >
 
 
                             </ul>
 
 
-                            <div class="tab-content" id="responses-UserApiController-updateUserImage-401-wrapper" style='margin-bottom: 10px;'>
+                            <div class="tab-content" id="responses-UserApiController-updateUserImage-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
                             <h3 id="examples-UserApiController-updateUserImage-title-200"></h3>
                             <p id="examples-UserApiController-updateUserImage-description-200" class="marked"></p>
@@ -18563,6 +18563,28 @@ $(document).ready(function() {
                                   <input id='responses-UserApiController-updateUserImage-200-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
+                            <h3 id="examples-UserApiController-updateUserImage-title-401"></h3>
+                            <p id="examples-UserApiController-updateUserImage-description-401" class="marked"></p>
+                            <script>
+                              var responseUserApiController401_description = `Unauthorized`;
+                              var responseUserApiController401_description_break = responseUserApiController401_description.indexOf('\n');
+                              if (responseUserApiController401_description_break == -1) {
+                                $("#examples-UserApiController-updateUserImage-title-401").text("Status: 401 - " + responseUserApiController401_description);
+                              } else {
+                                $("#examples-UserApiController-updateUserImage-title-401").text("Status: 401 - " + responseUserApiController401_description.substring(0, responseUserApiController401_description_break));
+                                $("#examples-UserApiController-updateUserImage-description-401").html(responseUserApiController401_description.substring(responseUserApiController401_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-UserApiController-updateUserImage-401" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-UserApiController-updateUserImage-401-wrapper" style='margin-bottom: 10px;'>
+                            </div>
                             <h3 id="examples-UserApiController-updateUserImage-title-400"></h3>
                             <p id="examples-UserApiController-updateUserImage-description-400" class="marked"></p>
                             <script>
@@ -18584,28 +18606,6 @@ $(document).ready(function() {
 
 
                             <div class="tab-content" id="responses-UserApiController-updateUserImage-400-wrapper" style='margin-bottom: 10px;'>
-                            </div>
-                            <h3 id="examples-UserApiController-updateUserImage-title-404"></h3>
-                            <p id="examples-UserApiController-updateUserImage-description-404" class="marked"></p>
-                            <script>
-                              var responseUserApiController404_description = `USER not found`;
-                              var responseUserApiController404_description_break = responseUserApiController404_description.indexOf('\n');
-                              if (responseUserApiController404_description_break == -1) {
-                                $("#examples-UserApiController-updateUserImage-title-404").text("Status: 404 - " + responseUserApiController404_description);
-                              } else {
-                                $("#examples-UserApiController-updateUserImage-title-404").text("Status: 404 - " + responseUserApiController404_description.substring(0, responseUserApiController404_description_break));
-                                $("#examples-UserApiController-updateUserImage-description-404").html(responseUserApiController404_description.substring(responseUserApiController404_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-UserApiController-updateUserImage-404" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-UserApiController-updateUserImage-404-wrapper" style='margin-bottom: 10px;'>
                             </div>
                         </article>
                       </div>
@@ -18938,50 +18938,6 @@ $(document).ready(function() {
 
 
                           <h2>Responses</h2>
-                            <h3 id="examples-UserApiController-uploadUserImage-title-401"></h3>
-                            <p id="examples-UserApiController-uploadUserImage-description-401" class="marked"></p>
-                            <script>
-                              var responseUserApiController401_description = `Unauthorized`;
-                              var responseUserApiController401_description_break = responseUserApiController401_description.indexOf('\n');
-                              if (responseUserApiController401_description_break == -1) {
-                                $("#examples-UserApiController-uploadUserImage-title-401").text("Status: 401 - " + responseUserApiController401_description);
-                              } else {
-                                $("#examples-UserApiController-uploadUserImage-title-401").text("Status: 401 - " + responseUserApiController401_description.substring(0, responseUserApiController401_description_break));
-                                $("#examples-UserApiController-uploadUserImage-description-401").html(responseUserApiController401_description.substring(responseUserApiController401_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-UserApiController-uploadUserImage-401" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-UserApiController-uploadUserImage-401-wrapper" style='margin-bottom: 10px;'>
-                            </div>
-                            <h3 id="examples-UserApiController-uploadUserImage-title-400"></h3>
-                            <p id="examples-UserApiController-uploadUserImage-description-400" class="marked"></p>
-                            <script>
-                              var responseUserApiController400_description = `Invalid id supplied`;
-                              var responseUserApiController400_description_break = responseUserApiController400_description.indexOf('\n');
-                              if (responseUserApiController400_description_break == -1) {
-                                $("#examples-UserApiController-uploadUserImage-title-400").text("Status: 400 - " + responseUserApiController400_description);
-                              } else {
-                                $("#examples-UserApiController-uploadUserImage-title-400").text("Status: 400 - " + responseUserApiController400_description.substring(0, responseUserApiController400_description_break));
-                                $("#examples-UserApiController-uploadUserImage-description-400").html(responseUserApiController400_description.substring(responseUserApiController400_description_break));
-                              }
-                            </script>
-
-
-                            <ul id="responses-detail-UserApiController-uploadUserImage-400" class="nav nav-tabs nav-tabs-examples" >
-
-
-                            </ul>
-
-
-                            <div class="tab-content" id="responses-UserApiController-uploadUserImage-400-wrapper" style='margin-bottom: 10px;'>
-                            </div>
                             <h3 id="examples-UserApiController-uploadUserImage-title-201"></h3>
                             <p id="examples-UserApiController-uploadUserImage-description-201" class="marked"></p>
                             <script>
@@ -19069,6 +19025,50 @@ $(document).ready(function() {
 
 
                             <div class="tab-content" id="responses-UserApiController-uploadUserImage-404-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-UserApiController-uploadUserImage-title-401"></h3>
+                            <p id="examples-UserApiController-uploadUserImage-description-401" class="marked"></p>
+                            <script>
+                              var responseUserApiController401_description = `Unauthorized`;
+                              var responseUserApiController401_description_break = responseUserApiController401_description.indexOf('\n');
+                              if (responseUserApiController401_description_break == -1) {
+                                $("#examples-UserApiController-uploadUserImage-title-401").text("Status: 401 - " + responseUserApiController401_description);
+                              } else {
+                                $("#examples-UserApiController-uploadUserImage-title-401").text("Status: 401 - " + responseUserApiController401_description.substring(0, responseUserApiController401_description_break));
+                                $("#examples-UserApiController-uploadUserImage-description-401").html(responseUserApiController401_description.substring(responseUserApiController401_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-UserApiController-uploadUserImage-401" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-UserApiController-uploadUserImage-401-wrapper" style='margin-bottom: 10px;'>
+                            </div>
+                            <h3 id="examples-UserApiController-uploadUserImage-title-400"></h3>
+                            <p id="examples-UserApiController-uploadUserImage-description-400" class="marked"></p>
+                            <script>
+                              var responseUserApiController400_description = `Invalid id supplied`;
+                              var responseUserApiController400_description_break = responseUserApiController400_description.indexOf('\n');
+                              if (responseUserApiController400_description_break == -1) {
+                                $("#examples-UserApiController-uploadUserImage-title-400").text("Status: 400 - " + responseUserApiController400_description);
+                              } else {
+                                $("#examples-UserApiController-uploadUserImage-title-400").text("Status: 400 - " + responseUserApiController400_description.substring(0, responseUserApiController400_description_break));
+                                $("#examples-UserApiController-uploadUserImage-description-400").html(responseUserApiController400_description.substring(responseUserApiController400_description_break));
+                              }
+                            </script>
+
+
+                            <ul id="responses-detail-UserApiController-uploadUserImage-400" class="nav nav-tabs nav-tabs-examples" >
+
+
+                            </ul>
+
+
+                            <div class="tab-content" id="responses-UserApiController-uploadUserImage-400-wrapper" style='margin-bottom: 10px;'>
                             </div>
                         </article>
                       </div>
