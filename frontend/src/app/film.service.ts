@@ -1,30 +1,30 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Film } from './film.model';
+import { Element } from './element.model';
 
-const BASE_URL = '/api/Films/';
+const BASE_URL = '/api/films/';
 
 @Injectable({ providedIn: 'root' })
 export class FilmsService {
 
 	constructor(private httpClient: HttpClient) { }
 
-	getFilms(): Observable<Film[]> {
+	getFilms(): Observable<Element[]> {
 		return this.httpClient.get(BASE_URL).pipe(
 			//catchError(error => this.handleError(error))
-		) as Observable<Film[]>;
+		) as Observable<Element[]>;
 	}
 
-	getFilm(id: number | string): Observable<Film> {
+	getFilm(id: number | string): Observable<Element> {
 		return this.httpClient.get(BASE_URL + id).pipe(
 			//catchError(error => this.handleError(error))
-		) as Observable<Film>;
+		) as Observable<Element>;
 	}
 
-	addOrUpdateFilm(Film: Film) {
+	addOrUpdateFilm(Film: Element) {
 		if (!Film.id) {
 			return this.addFilm(Film);
 		} else {
@@ -32,26 +32,34 @@ export class FilmsService {
 		}
 	}
 
-	private addFilm(Film: Film) {
+	private addFilm(Film: Element) {
 		return this.httpClient.post(BASE_URL, Film).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
 
-	private updateFilm(Film: Film) {
+	private updateFilm(Film: Element) {
 		return this.httpClient.put(BASE_URL + Film.id, Film).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
 
-	removeFilm(Film: Film) {
+	removeFilm(Film: Element) {
 		return this.httpClient.delete(BASE_URL + Film.id).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
 
 	private handleError(error: any) {
-		console.error(error);
-		return throwError("Server error (" + error.status + "): " + error.text())
+		if (error instanceof HttpErrorResponse) {
+      // Manejar errores de HTTP
+      console.error(`Error de HTTP: ${error.status}`);
+      console.error(`Mensaje: ${error.message}`);
+    } else {
+      // Manejar otros tipos de errores
+      console.error('Se produjo un error:');
+      console.error(error);
+    }
+		return throwError(() => new Error("Server error (" + error.status + "): " + error.text()));
 	}
 }

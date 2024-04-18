@@ -1,5 +1,7 @@
 export interface User {
 	id?: number;
-	title: string;
-	description: string;
+	name: string;
+	password: string;
+  banner_image: Blob;
+  profile_image: Blob;
 }

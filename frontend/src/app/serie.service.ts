@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Serie } from './serie.model';
+import { Element } from './element.model';
 
 const BASE_URL = '/api/series/';
 
@@ -12,19 +12,19 @@ export class SeriesService {
 
 	constructor(private httpClient: HttpClient) { }
 
-	getSeries(): Observable<Serie[]> {
+	getSeries(): Observable<Element[]> {
 		return this.httpClient.get(BASE_URL).pipe(
 			//catchError(error => this.handleError(error))
-		) as Observable<Serie[]>;
+		) as Observable<Element[]>;
 	}
 
-	getSerie(id: number | string): Observable<Serie> {
+	getSerie(id: number | string): Observable<Element> {
 		return this.httpClient.get(BASE_URL + id).pipe(
 			//catchError(error => this.handleError(error))
-		) as Observable<Serie>;
+		) as Observable<Element>;
 	}
 
-	addOrUpdateSerie(Serie: Serie) {
+	addOrUpdateSerie(Serie: Element) {
 		if (!Serie.id) {
 			return this.addSerie(Serie);
 		} else {
@@ -32,19 +32,19 @@ export class SeriesService {
 		}
 	}
 
-	private addSerie(Serie: Serie) {
+	private addSerie(Serie: Element) {
 		return this.httpClient.post(BASE_URL, Serie).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
 
-	private updateSerie(Serie: Serie) {
+	private updateSerie(Serie: Element) {
 		return this.httpClient.put(BASE_URL + Serie.id, Serie).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
 
-	removeSerie(Serie: Serie) {
+	removeSerie(Serie: Element) {
 		return this.httpClient.delete(BASE_URL + Serie.id).pipe(
 			catchError(error => this.handleError(error))
 		);
@@ -52,6 +52,6 @@ export class SeriesService {
 
 	private handleError(error: any) {
 		console.error(error);
-		return throwError("Server error (" + error.status + "): " + error.text())
+		return throwError(() => new Error("Server error (" + error.status + "): " + error.text()));
 	}
 }
