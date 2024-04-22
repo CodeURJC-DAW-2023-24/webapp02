@@ -4,7 +4,7 @@ body {
     justify-content: center;
     height: 100vh;
     margin: 0;
-    background: url('../Images/Wallpaper-LogIn.jpg') center center fixed;
+    background: url('../../assets/Images/Wallpaper-LogIn.jpg') center center fixed;
     background-size: cover;
 }
 
@@ -33,15 +33,15 @@ form {
 }
 
 .avatar {
-    width: 120px; 
+    width: 120px;
     height: 120px;
     border-radius: 50%;
     overflow: hidden;
 }
 
 input {
-    width: 100%; 
-    padding: 12px; 
+    width: 100%;
+    padding: 12px;
     margin-bottom: 16px;
     box-sizing: border-box;
 }
@@ -50,7 +50,7 @@ input[type="submit"] {
     background-color: #f57926;
     color: #000000;
     font-size: medium;
-    padding: 14px; 
+    padding: 14px;
     border: none;
     border-radius: 6px;
     cursor: pointer;

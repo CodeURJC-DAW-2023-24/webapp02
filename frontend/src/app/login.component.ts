@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { LoginService } from './login.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -7,9 +9,12 @@ import { Component } from '@angular/core';
   styleUrl: './Css/S-LogIn.css'
 })
 export class LoginComponent {
-  constructor(){}
+  constructor(private loginService: LoginService, private router: Router){}
+  //calls the loginService to send the name and the password
   submitForm(name: string, password: string){
-
+    this.loginService.logIn(name, password);
+    if (this.loginService.isLogged()){
+      this.router.navigate(['Main']);
+    }
   }
-  checkCredentials(name: string, password: string)
 }
