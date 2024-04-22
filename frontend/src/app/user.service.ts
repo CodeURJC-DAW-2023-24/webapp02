@@ -5,13 +5,20 @@ import { catchError } from 'rxjs/operators';
 
 import { User } from './user.model';
 
-const BASE_URL = '/api/Users/';
+const BASE_URL = '/api/users/';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
+  private currentUser: any;
 
 	constructor(private httpClient: HttpClient) { }
+  setCurrentUser(user: any) {
+    this.currentUser = user;
+  }
 
+  getCurrentUser() {
+    return this.currentUser;
+  }
 	getUsers(): Observable<User[]> {
 		return this.httpClient.get(BASE_URL).pipe(
 			//catchError(error => this.handleError(error))

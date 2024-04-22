@@ -7,4 +7,9 @@ import { Component } from '@angular/core';
   styleUrl: './Css/S-LogIn.css'
 })
 export class LoginComponent {
+  constructor(){}
+  submitForm(name: string, password: string){
+
+  }
+  checkCredentials(name: string, password: string)
 }

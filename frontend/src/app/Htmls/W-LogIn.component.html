@@ -7,25 +7,26 @@
 </head>
 <body>
 
-    <form id="loginForm" method="post">
+    <div id="loginForm">
         <div class="circle-container">
             <div class="avatar-container">
                 <img src="Images/Logo-URJC.png" alt="Avatar" class="avatar">
             </div>
         </div>
         <br>
-        <input type="text" id="usuario" name="username" placeholder="Usuario" required>
+        <input type="text" id="usuario" name="username" placeholder="Usuario" required #name>
         <br>
-        <input type="password" id="contrasena" name="password" placeholder="Contraseña" required>
+        <input type="password" id="contrasena" name="password" placeholder="Contraseña" required #password>
         <br>
-        <input type="submit" value="Iniciar Sesión">
+        <button (click)="submitForm(name.value, password.value)">Iniciar Sesión </button>
+
         <div class="links">
           <!-- Permite navegar a esas rutas usando el ruting -->
           <a routerLink="/signIn">Registrarse</a> |
           <a routerLink="/Main">Continuar sin iniciar sesión</a>
         </div>
         <!-- <input type="hidden" name="_csrf" value="{{token}}"/> -->
-    </form>
+    </div>
 
 </body>
 </html>

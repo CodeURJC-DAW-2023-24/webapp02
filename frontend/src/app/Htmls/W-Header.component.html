@@ -47,6 +47,7 @@
                 </ul>
 
             <!-- SIDEBAR PROFILE OR LOGIN/SINGOUT-->
+                <!-- Cogeré los usuarios de un service -->
                 <div class="d-flex justify-content-center align-item-center gap-3">
                     {{#user}}
                     <a class="navbar-brand text-white align-text-center text-uppercase" href="/{{user.name}}/Profile">
@@ -54,7 +55,7 @@
                     <strong>{{user.name}}</strong></a>
                     <form id = "logoutbutton" class = "btn" action="/logout" method="post">
                         <input id = "logoutbuttonText" type="submit" value="Sign Out" />
-                        <input type="hidden" name="_csrf" value="{{token}}"/>
+                        <!-- <input type="hidden" name="_csrf" value="{{token}}"/> -->
                     </form>
                     {{/user}}
                     {{^user}}
