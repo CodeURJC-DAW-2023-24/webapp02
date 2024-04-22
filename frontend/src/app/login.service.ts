@@ -11,7 +11,6 @@ export class LoginService {
   user: User | undefined;
 
   constructor(private http: HttpClient) {
-    this.reqIsLogged();
   }
 
   reqIsLogged() {
