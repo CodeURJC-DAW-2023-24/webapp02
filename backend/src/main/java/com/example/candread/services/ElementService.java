@@ -629,6 +629,10 @@ public class ElementService {
         return elementRepository.findAll();
     }
 
+    public List<Element> repoFind5NewElements(){
+        return elementRepository.findFirst5ByOrderByIdDesc();
+    }
+
     public Optional<Element> repoFindById(long id){
         //Optional<Element> elementOptional = elementRepository.findById(id);
         //return elementOptional;
