@@ -3,11 +3,11 @@ import { catchError, of } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'admin',
-  templateUrl: './Htmls/W-Admin.component.html',
-  styleUrls: ['./Css/S-Main.css',"./Css/S-Admin.css","./Css/S-NavBar.css"]
+  selector: 'modifyFragment',
+  templateUrl: './Htmls/W-ModifyFragment.component.html',
+  styleUrls: ['./Css/S-Main.css']
 })
-export class AdminComponent  {
+export class ModifyFragment  {
   csrfToken: string | undefined;
 
   constructor(private http: HttpClient) { }
