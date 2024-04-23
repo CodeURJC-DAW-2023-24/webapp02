@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ElementsService } from './element.service';
+import { ElementsService } from './services/element.service';
 import { Element } from './models/element.model';
 
 
