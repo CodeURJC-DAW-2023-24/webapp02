@@ -5,9 +5,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
+import { ProfileComponent } from './profile.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, ProfileComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   bootstrap: [AppComponent]
 })
