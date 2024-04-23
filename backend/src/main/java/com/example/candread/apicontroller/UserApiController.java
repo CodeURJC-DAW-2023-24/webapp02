@@ -5,7 +5,9 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Base64;
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +20,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -83,6 +88,32 @@ public class UserApiController {
         @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
         @ApiResponse(responseCode = "404", description = "USER not found", content = @Content)
     })
+
+    //get the current user
+    @GetMapping("/me")
+    public ResponseEntity<User> getCurrentUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        
+        if (authentication.isAuthenticated()) {
+
+            String username = authentication.getName(); 
+            Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+            List<String> roles = new ArrayList<>();
+            for (GrantedAuthority authority : authorities) {
+                roles.add(authority.getAuthority());
+            }
+            Optional<User> optUser = userService.repoFindByNameAndRoles(username, roles);
+            
+            User user = (User) optUser.get();
+
+            return ResponseEntity.ok(user);
+        } else {
+
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+    }
+
+    
     @GetMapping("/{id}")
     public ResponseEntity<User> getSpecificUser(@PathVariable Long id) {
 

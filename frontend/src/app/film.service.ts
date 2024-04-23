@@ -3,7 +3,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Element } from './element.model';
+import { Element } from './models/element.model';
 
 const BASE_URL = '/api/films/';
 
