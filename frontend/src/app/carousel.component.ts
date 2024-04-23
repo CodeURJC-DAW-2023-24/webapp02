@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Element } from './element.model';
+import { Element } from './models/element.model';
 
 @Component({
   selector: 'carousel',

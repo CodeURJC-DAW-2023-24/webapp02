@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { ElementsService } from './element.service';
-import { Element } from './element.model';
+import { Element } from './models/element.model';
 
 
 @Component({
