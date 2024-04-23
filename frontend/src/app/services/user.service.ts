@@ -55,4 +55,9 @@ export class UsersService {
 		console.error(error);
 		return throwError("Server error (" + error.status + "): " + error.text())
 	}
+
+	//Function to get the user elements
+	// getElements(){
+	// 	return this.User.elements;
+	// }
 }

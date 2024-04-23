@@ -8,5 +8,7 @@ export interface Element {
   state: string;
   author: string;
   country: string;
-  imageFile: Blob;
+  base64Image: string;
+  generos: string[];
+  //imageFile: Blob;
 }
