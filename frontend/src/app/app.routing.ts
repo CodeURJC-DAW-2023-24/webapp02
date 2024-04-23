@@ -5,10 +5,10 @@ import { AdminComponent } from './admin.component';
 
 
 const appRoutes: Routes = [
+  { path: 'Admin', component: AdminComponent},
   { path: 'Main', component: MainComponent},
   { path: 'Login', component: LoginComponent},
-  { path: 'Admin', component: AdminComponent},
-  { path: '', redirectTo: 'Login', pathMatch: 'full' }
+  { path: '', redirectTo: 'Admin', pathMatch: 'full' }
 ]
 
 export const routing = RouterModule.forRoot(appRoutes);
