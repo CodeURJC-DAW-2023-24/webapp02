@@ -7,10 +7,12 @@ import { AppComponent } from './app.component';
 import { routing } from './app.routing';
 import { MainComponent } from './main.component';
 import { LoginComponent } from './login.component';
+import { UserDataComponent } from './userData.component';
+import { HeaderComponent } from './header.component';
 import { CarouselComponent } from './carousel.component';
 
 @NgModule({
-  declarations: [AppComponent, MainComponent, LoginComponent, CarouselComponent],
+  declarations: [AppComponent, MainComponent, LoginComponent, HeaderComponent, UserDataComponent, CarouselComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   bootstrap: [AppComponent]
 })

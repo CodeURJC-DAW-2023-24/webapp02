@@ -29,15 +29,19 @@ export class LoginService {
 
   }
 
-  logIn(user: string, pass: string) {
+  //the callback helps to know
+  logIn(user: string, pass: string, callback: (isLoggedIn: boolean) => void) {
 
     this.http.post(BASE_URL + "/login", { username: user, password: pass }, { withCredentials: true })
       .subscribe({
         next: (response) => {
           this.reqIsLogged();
+          callback(true);
         },
         error: (err) => {
           alert("Wrong credentials");
+          this.logged = false;
+          callback(false);
         }
       });
   }
@@ -53,7 +57,8 @@ export class LoginService {
 
   }
 
-  isLogged() {
+  async isLogged() {
+    await this.reqIsLogged();
     return this.logged;
   }
 
