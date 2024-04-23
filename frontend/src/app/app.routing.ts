@@ -8,7 +8,7 @@ const appRoutes: Routes = [
   { path: 'Admin', component: AdminComponent},
   { path: 'Main', component: MainComponent},
   { path: 'Login', component: LoginComponent},
-  { path: '', redirectTo: 'Admin', pathMatch: 'full' }
+  { path: '', redirectTo: 'Login', pathMatch: 'full' }
 ]
 
 export const routing = RouterModule.forRoot(appRoutes);

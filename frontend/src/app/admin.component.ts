@@ -26,17 +26,17 @@ export class AdminComponent {
     if (imageInput && imageInput.files) {
       const imageFile = imageInput.files[0];
       this.http.post(BASE_URL,
-        {
-          name: name, description: description, author: author, type: type,
-          season: season, state: state, country: country, genres: genres, years: years
-        }).subscribe({
-          next: (response) => {
-            this.http.get("/Admin");
-          },
-          error: (err) => {
-            alert("Wrong credentials");
-          }
-        });
+        { name: name, description: description, author: author, type: type,
+          season: season, state: state, country: country, genres: genres, years: years },
+        { withCredentials: true }
+      ).subscribe({
+        next: (response) => {
+          this.http.get("/Admin");
+        },
+        error: (err) => {
+          alert("Wrong credentials");
+        }
+      });
     }
 
     else {
