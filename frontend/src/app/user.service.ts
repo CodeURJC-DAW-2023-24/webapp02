@@ -3,12 +3,13 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { User } from './user.model';
+import { User } from './models/user.model';
 
-const BASE_URL = '/api/Users/';
+const BASE_URL = '/api/users/';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
+
 
 	constructor(private httpClient: HttpClient) { }
 

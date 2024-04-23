@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './Css/S-Main.css'
 })
 export class HeaderComponent {
+  constructor(){}
+
 }
