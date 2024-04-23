@@ -10,11 +10,14 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent {
   constructor(private loginService: LoginService, private router: Router){}
-  //calls the loginService to send the name and the password
-  submitForm(name: string, password: string){
-    this.loginService.logIn(name, password);
-    if (this.loginService.isLogged()){
+
+  handleLoginResult(isLoggedIn: boolean) {
+    if (isLoggedIn) {
       this.router.navigate(['Main']);
     }
+  }
+  //calls the loginService to send the name and the password
+  submitForm(name: string, password: string){
+    this.loginService.logIn(name, password, this.handleLoginResult.bind(this));
   }
 }
