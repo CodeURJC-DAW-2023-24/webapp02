@@ -57,9 +57,21 @@ export class LoginService {
 
   }
 
-  async isLogged() {
-    await this.reqIsLogged();
-    return this.logged;
+  isLogged(): Promise<boolean>{
+    return new Promise<boolean>((resolve, reject) => {
+      // Verificar si ya se ha iniciado sesión
+      if (this.logged) {
+        resolve(true);
+      }else{
+        this.reqIsLogged();
+        const interval = setInterval(() => {
+          if (this.logged) {
+            clearInterval(interval);
+            resolve(true);
+          }
+        }, 100);
+      }
+    });
   }
 
   isAdmin() {
