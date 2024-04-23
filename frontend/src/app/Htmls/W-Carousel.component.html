@@ -13,17 +13,57 @@
             <button type="button" data-bs-target="#carouselMain" data-bs-slide-to="3"
                 aria-label="Slide 4"></button>
             <button type="button" data-bs-target="#carouselMain" data-bs-slide-to="4"
-                aria-label="Slide 6"></button>
+                aria-label="Slide 5"></button>
 
         </div>
         <div class="carousel-inner">
-            <div class="carousel-item active" *ngFor="let element of elements; let i = index">
+            <div class="carousel-item active">
                 <div class="d-flex align-items-center">
                     <div class="col-md-3" id="itemImg">
-                        <img [src]="element.imageFile" class="d-block w-100" alt="...">
+                        <img [src]="elements[0].imageFile" class="d-block w-100" alt="...">
                     </div>
                     <div class="col-md-9" id="itemSinopsis">
-                        <p>{{ element.description }}</p>
+                        <p>{{ elements[0].description }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex align-items-center">
+                    <div class="col-md-3" id="itemImg">
+                        <img [src]="elements[1].imageFile" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="col-md-9" id="itemSinopsis">
+                        <p>{{ elements[1].description }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex align-items-center">
+                    <div class="col-md-3" id="itemImg">
+                        <img [src]="elements[2].imageFile" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="col-md-9" id="itemSinopsis">
+                        <p>{{ elements[2].description }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex align-items-center">
+                    <div class="col-md-3" id="itemImg">
+                        <img [src]="elements[3].imageFile" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="col-md-9" id="itemSinopsis">
+                        <p>{{ elements[3].description }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item" *ngFor="let element of elements; let i = index">
+                <div class="d-flex align-items-center">
+                    <div class="col-md-3" id="itemImg">
+                        <img [src]="elements[4].imageFile" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="col-md-9" id="itemSinopsis">
+                        <p>{{ elements[4].description }}</p>
                     </div>
                 </div>
             </div>
