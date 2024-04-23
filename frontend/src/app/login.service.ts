@@ -57,7 +57,8 @@ export class LoginService {
 
   }
 
-  isLogged() {
+  async isLogged() {
+    await this.reqIsLogged();
     return this.logged;
   }
 
