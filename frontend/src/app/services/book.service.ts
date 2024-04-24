@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
-import { Element } from './models/element.model';
+import { Element } from '../models/element.model';
 
 const BASE_URL = '/api/books/';
 
@@ -16,6 +16,21 @@ export class BooksService {
 		return this.httpClient.get(BASE_URL).pipe(
 			//catchError(error => this.handleError(error))
 		) as Observable<Element[]>;
+	}
+
+  //ask for 10 books
+  getBookPage(page: number): Observable<any> {
+    const url = `${BASE_URL}?page=${page}&size=${10}`;
+		return this.httpClient.get(url).pipe(
+      tap((data: any) => {
+        const totalPages = data.totalPages;
+        const hasPrev = data.number > 0;
+        const hasNext = data.number < totalPages - 1;
+        const books = data.content;
+        return { books, hasPrev, hasNext, totalPages } as any;
+      })
+			//catchError(error => this.handleError(error))
+		)
 	}
 
 	getBook(id: number | string): Observable<Element> {

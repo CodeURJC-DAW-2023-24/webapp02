@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { User } from './models/user.model';
+import { User } from '../models/user.model';
 
 const BASE_URL = '/api/users/';
 
@@ -25,10 +25,8 @@ export class UsersService {
 		) as Observable<User>;
 	}
 
-  getUserImage(id: number | string): Observable<ArrayBuffer> {
-		return this.httpClient.get(BASE_URL + id + '/image').pipe(
-			//catchError(error => this.handleError(error))
-		) as Observable<ArrayBuffer>;
+  getUserImage(id: number | string){
+		return this.httpClient.get(BASE_URL + id + '/image' , { responseType: 'arraybuffer' })
 	}
 
 	addOrUpdateUser(User: User) {

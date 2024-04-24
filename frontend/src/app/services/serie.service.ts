@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Element } from './models/element.model';
+import { Element } from '../models/element.model';
 
 const BASE_URL = '/api/series/';
 
@@ -14,6 +14,14 @@ export class SeriesService {
 
 	getSeries(): Observable<Element[]> {
 		return this.httpClient.get(BASE_URL).pipe(
+			//catchError(error => this.handleError(error))
+		) as Observable<Element[]>;
+	}
+
+  //ask for 10 series
+  getSeriePage(page: number): Observable<Element[]> {
+    const url = `${BASE_URL}?page=${page}&size=${10}`;
+		return this.httpClient.get(url).pipe(
 			//catchError(error => this.handleError(error))
 		) as Observable<Element[]>;
 	}

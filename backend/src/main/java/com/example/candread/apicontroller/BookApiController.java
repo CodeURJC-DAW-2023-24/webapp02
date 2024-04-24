@@ -67,13 +67,11 @@ public class BookApiController {
 
     @GetMapping("/")
     public Page<Element> getBooks(Pageable pageable) {
-        //return elementsPaged.findByType("LIBRO", pageable);
         return elementsPaged.repoFindByType("LIBRO", pageable);
     }
 
     @GetMapping("/top")
     public Page<Element> getTop5Books(Pageable pageable) {
-        //return elementRepo.findTopElementsByRating("LIBRO", pageable);
         return elementService.repofindTopElementsByRating("LIBRO", pageable);
     }
 
@@ -87,7 +85,6 @@ public class BookApiController {
 
     @GetMapping("/{id}")
     public ResponseEntity<Element> getBookById(@PathVariable Long id) {
-        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
         Optional<Element> optElement = elementService.repoFindByIdAndType(id, "LIBRO");
 
         if (optElement.isPresent()) {
@@ -110,7 +107,6 @@ public class BookApiController {
             @RequestBody ElementDTO elementDTO,
             HttpServletRequest request) throws URISyntaxException {
 
-        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
         Optional<Element> optElement = elementService.repoFindByIdAndType(id, "LIBRO");
 
         if (optElement.isPresent()) {
