@@ -13,7 +13,7 @@ import { UsersService } from './services/user.service';
 })
 export class ProfileComponent {
   name = '';
-  elementsOfUser: Element [] = [];
+  elementsOfUser:any [] = [];
   actualUser: User | undefined;
 
   constructor(private loginService: LoginService, private router: Router, private profileService: profileService,
@@ -25,7 +25,8 @@ export class ProfileComponent {
     if (this.loginService.isLogged()){
       this.actualUser = this.loginService.currentUser();
       
-      this.elementsOfUser = this.actualUser?.elements;
+      this.elementsOfUser.push(this.actualUser?.elements);
+      
 
     } else {
       this.router.navigate(['LogIn'])

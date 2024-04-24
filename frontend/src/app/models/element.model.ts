@@ -1,3 +1,6 @@
+import { Review } from "./review.model";
+import { User } from "./user.model";
+
 export interface Element {
 	id?: number;
 	name: string;
@@ -10,5 +13,8 @@ export interface Element {
   country: string;
   base64Image: string;
   generos: string[];
-  //imageFile: Blob;
+  users: User[];
+  usersFavourited: User[];
+  reviews: Review[];
+  imageFile: Blob;
 }
