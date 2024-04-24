@@ -30,11 +30,11 @@ export class FilmsService {
 	}
 
 	//ask for 10 films
-	getFilmPage(page: number): Observable<Element[]> {
+	getFilmPage(page: number): Observable<any> {
 		const url = `${BASE_URL}?page=${page}&size=${10}`;
 		return this.httpClient.get(url).pipe(
 			//catchError(error => this.handleError(error))
-		) as Observable<Element[]>;
+		) as any;
 	}
 
 	getFilm(id: number | string): Observable<Element> {

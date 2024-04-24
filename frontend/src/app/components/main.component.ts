@@ -8,7 +8,7 @@ import { FilmsService } from '../services/film.service';
 import { SeriesService } from '../services/serie.service';
 
 @Component({
-  selector: 'main',
+  selector: 'app-main',
   templateUrl: '../Htmls/W-Main.component.html',
   styleUrls: ['../Css/S-Main.css']
 })

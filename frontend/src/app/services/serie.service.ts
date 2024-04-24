@@ -29,11 +29,11 @@ export class SeriesService {
 		return this.httpClient.get(BASE_URL + id + '/image' , { responseType: 'arraybuffer' })
 	}
 	//ask for 10 series
-	getSeriePage(page: number): Observable<Element[]> {
+	getSeriePage(page: number): Observable<any> {
 		const url = `${BASE_URL}?page=${page}&size=${10}`;
 		return this.httpClient.get(url).pipe(
 			//catchError(error => this.handleError(error))
-		) as Observable<Element[]>;
+		) as any;
 	}
 
 	getSerie(id: number | string): Observable<Element> {
