@@ -4,8 +4,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'modifyFragment',
-  templateUrl: './Htmls/W-ModifyFragment.component.html',
-  styleUrls: ['./Css/S-Main.css']
+  templateUrl: '../Htmls/W-ModifyFragment.component.html',
+  styleUrls: ['../Css/S-Main.css']
 })
 export class ModifyFragment  {
   csrfToken: string | undefined;

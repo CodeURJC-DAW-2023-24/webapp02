@@ -6,8 +6,8 @@ const BASE_URL = "/SingleElement/add";
 
 @Component({
   selector: 'admin',
-  templateUrl: './Htmls/W-Admin.component.html',
-  styleUrls: ['./Css/S-Main.css', "./Css/S-Admin.css", "./Css/S-NavBar.css"]
+  templateUrl: '../Htmls/W-Admin.component.html',
+  styleUrls: ['../Css/S-Main.css', "../Css/S-Admin.css", "../Css/S-NavBar.css"]
 })
 export class AdminComponent {
 

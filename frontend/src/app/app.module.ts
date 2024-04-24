@@ -10,8 +10,8 @@ import { LoginComponent } from './components/login.component';
 import { UserDataComponent } from './components/userData.component';
 import { HeaderComponent } from './components/header.component';
 import { LibraryComponent } from './components/library.component';
-import { AdminComponent } from './admin.component';
-import { ModifyFragment } from './modifyFragment.component';
+import { AdminComponent } from './components/admin.component';
+import { ModifyFragment } from './components/modifyFragment.component';
 
 @NgModule({
   declarations: [AppComponent, MainComponent, LoginComponent, HeaderComponent, UserDataComponent, LibraryComponent,AdminComponent,ModifyFragment],

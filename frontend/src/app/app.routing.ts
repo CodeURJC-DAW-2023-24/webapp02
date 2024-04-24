@@ -2,7 +2,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { MainComponent } from './components/main.component';
 import { LoginComponent } from './components/login.component';
 import { LibraryComponent } from './components/library.component';
-import { AdminComponent } from './admin.component';
+import { AdminComponent } from './components/admin.component';
 
 
 const appRoutes: Routes = [
