@@ -49,9 +49,9 @@ export class LibraryComponent implements OnInit{
   getBooks(num: number){
     this.bookService.getBookPage(num).subscribe((response: any) => {
       this.totalPages = response.totalPages;
-      this.hasPrev = response.hasPrev;
-      this.hasNext = response.hasNext;
-      this.elements$ = response.books;
+      this.hasPrev = response.pageable.pageNumber > 0;
+      this.hasNext = response.pageable.pageNumber < response.totalPages - 1;
+      this.elements$ = response.content;
     });
   }
 
