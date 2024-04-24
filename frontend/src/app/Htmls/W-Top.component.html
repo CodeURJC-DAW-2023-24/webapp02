@@ -3,8 +3,10 @@
         <h4>Top Películas Semanales</h4>
     </div>
     <div id="topList" class="container">
-        <div class="row">
-            <app-card *ngFor="let book of topBooks" [element]="book"></app-card>
+        <div id="cardRow" class="row">
+            <div class="col-sm-4" *ngFor="let book of topBooks">
+                <app-card [element]="book"></app-card>
+            </div>
         </div>
     </div>
 </article>
