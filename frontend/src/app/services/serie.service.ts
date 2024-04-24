@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { Element } from '../models/element.model';
 
@@ -14,6 +14,24 @@ export class SeriesService {
 
 	getSeries(): Observable<Element[]> {
 		return this.httpClient.get(BASE_URL).pipe(
+			//catchError(error => this.handleError(error))
+		) as Observable<Element[]>;
+	}
+
+	get5Series(): Observable<Element[]> {
+		return this.httpClient.get(BASE_URL + "top?page=0&size=5").pipe(
+			map((response: any) => response.content),
+			// Puedes agregar catchError aquí si lo necesitas
+		);
+	}
+
+	getSerieImage(id: number | string){
+		return this.httpClient.get(BASE_URL + id + '/image' , { responseType: 'arraybuffer' })
+	}
+	//ask for 10 series
+	getSeriePage(page: number): Observable<Element[]> {
+		const url = `${BASE_URL}?page=${page}&size=${10}`;
+		return this.httpClient.get(url).pipe(
 			//catchError(error => this.handleError(error))
 		) as Observable<Element[]>;
 	}

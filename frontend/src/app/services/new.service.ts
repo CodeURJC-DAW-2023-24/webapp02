@@ -3,17 +3,17 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Element } from '../models/element.model';
+import { New } from '../models/new.model';
 
-const BASE_URL = '/api/elements/';
+const BASE_URL = '/api/news/';
 
 @Injectable({ providedIn: 'root' })
-export class ElementsService {
+export class NewsService {
 
     constructor(private httpClient: HttpClient) { }
 
-    getAllElements(): Observable<Element[]> {
-        return this.httpClient.get<Element[]>(BASE_URL + "fiveNewElements")
+    get5RecentNews(): Observable<New[]> {
+        return this.httpClient.get<New[]>(BASE_URL + 'fiveRecentNews')
             .pipe(
                 catchError((error: HttpErrorResponse) => {
                     console.error('Error:', error);
@@ -21,10 +21,6 @@ export class ElementsService {
                 })
             );
     }
-
-    getElementImage(id: number | string){
-		return this.httpClient.get(BASE_URL + id + '/image' , { responseType: 'arraybuffer' })
-	}
 
     private handleError(error: any) {
         if (error instanceof HttpErrorResponse) {

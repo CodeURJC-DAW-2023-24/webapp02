@@ -25,6 +25,10 @@ export class UsersService {
 		) as Observable<User>;
 	}
 
+  getUserImage(id: number | string){
+		return this.httpClient.get(BASE_URL + id + '/image' , { responseType: 'arraybuffer' })
+	}
+
 	addOrUpdateUser(User: User) {
 		if (!User.id) {
 			return this.addUser(User);

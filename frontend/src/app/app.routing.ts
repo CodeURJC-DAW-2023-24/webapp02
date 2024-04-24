@@ -1,12 +1,14 @@
 import { Routes, RouterModule } from '@angular/router';
-import { MainComponent } from './main.component';
-import { LoginComponent } from './login.component';
+import { MainComponent } from './components/main.component';
+import { LoginComponent } from './components/login.component';
+import { LibraryComponent } from './components/library.component';
 import { ProfileComponent } from './profile.component';
 
 
 const appRoutes: Routes = [
   { path: 'Main', component: MainComponent},
   { path: 'Login', component: LoginComponent},
+  { path: 'Library/:type', component: LibraryComponent },
   {path: 'Profile', component: ProfileComponent},
   { path: '', redirectTo: 'Login', pathMatch: 'full' }
 ]

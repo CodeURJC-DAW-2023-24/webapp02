@@ -1,0 +1,133 @@
+
+
+    <!-- NAVBAR -->
+    <header-comp></header-comp>
+
+    <!-- MAIN -->
+    <main>
+
+        <section id="library">
+            <div class="row" id="libraryHead">
+                <div class="col-md-6" id="libraryTitle">
+                    <h4>Biblioteca de {{libraryType}}</h4>
+                </div>
+            </div>
+
+            <div id="libraryList" class="container" *ngIf="elements$ | async as elements">
+                <div class="row">
+                  <div *ngFor="let element of elements">
+                        <app-card></app-card>
+                  </div>
+                    <br>
+                    <div *ngIf="hasPrev">
+                        <button id="load-prev-btn"(click)="loadPreviousPage()">Resultados anteriores</button>
+                    </div>
+                    <br>
+                    <div *ngIf="hasNext">
+                        <button id="load-more-btn"(click)="loadNextPage()">Mas resultados</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="spinner" style="display: none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+            <script>
+                var contRoute = "{{controllerRoute}}";
+            </script>
+
+
+
+        </section>
+
+        <!-- NEWS ASIDE-->
+        <aside id="filters">
+            <div id="filtersTitle">
+                <h3>Filtros</h3>
+            </div>
+
+            <form id="genreFilterForm">
+                <div id="filterElement">
+                    <div id="elementTitle">
+                        <h4>Género:</h4>
+                    </div>
+                    <select class="form-select" aria-label="Añadir a lista:" name="genre">
+                        <option selected>Género:</option>
+                        <option value="ACCION">ACCION</option>
+                        <option value="TERROR">TERROR</option>
+                        <option value="AVENTURA">AVENTURA</option>
+                        <option value="MISTERIO">MISTERIO</option>
+                        <option value="ROMANCE">ROMANCE</option>
+                        <option value="CIENCIAFICCION">CIENCIAFICCION</option>
+                        <option value="DRAMA">DRAMA</option>
+                        <option value="INFANTIL">INFANTIL</option>
+                        <option value="COMEDIA">COMEDIA</option>
+                        <option value="FANTASIA">FANTASIA</option>
+                        <option value="SOBRENATURAL">SOBRENATURAL</option>
+                        <option value="NOVELA">NOVELA</option>
+                        <option value="JUVENIL">JUVENIL</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" id="genreFilterBtn">Filtrar</button>
+            </form>
+
+            <script>
+                var filter = "";
+            </script>
+
+            <script src="/Scripts/pages.js" defer></script>
+
+            <form id="seasonFilterForm">
+                <div id="filterElement">
+                    <div id="elementTitle">
+                        <h4>Temporada:</h4>
+                    </div>
+                    <select class="form-select" aria-label="Añadir a lista:" name="season">
+                        <option selected>Temporada:</option>
+                        <option value="PRIMAVERA">Primavera</option>
+                        <option value="VERANO">Verano</option>
+                        <option value="OTOÑO">Otoño</option>
+                        <option value="INVIERNO">Invierno</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" id="seasonFilterBtn">Filtrar</button>
+            </form>
+
+            <form id="countryFilterForm">
+                <div id="filterElement">
+                    <div id="elementTitle">
+                        <h4>País:</h4>
+                    </div>
+                    <select class="form-select" aria-label="Añadir a lista:" name="country">
+                        <option selected>País:</option>
+                        <option value="ESTADOS_UNIDOS">Estados Unidos</option>
+                        <option value="JAPON">Japón</option>
+                        <option value="ESPAÑA">España</option>
+                        <option value="COREA">Corea</option>
+                        <option value="CHINA">China</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" id="countryFilterBtn">Filtrar</button>
+            </form>
+
+            <form id="stateFilterForm">
+                <div id="filterElement">
+                    <div id="elementTitle">
+                        <h4>Estado:</h4>
+                    </div>
+                    <select class="form-select" aria-label="Añadir a lista:" name="state">
+                        <option selected>Estado:</option>
+                        <option value="COMPLETO">Completo</option>
+                        <option value="EN_EMISION">En emisión</option>
+                        <option value="POR_ESTRENARSE">Por estrenarse</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary" id="stateFilterBtn">Filtrar</button>
+            </form>
+
+        </aside>
+    </main>
+

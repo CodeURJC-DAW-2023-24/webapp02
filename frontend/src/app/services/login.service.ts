@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
+import { Router } from '@angular/router';
 
 const BASE_URL = '/api/auth';
 
@@ -10,7 +11,7 @@ export class LoginService {
   logged: boolean = false;
   user: User | undefined;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public router: Router) {
   }
 
   reqIsLogged() {
@@ -19,6 +20,7 @@ export class LoginService {
       next: (response) => {
         this.user = response as User;
         this.logged = true;
+        this.router.navigate(['/Main']);
       },
       error: (err) => {
         if (err.status != 404) {
@@ -29,6 +31,7 @@ export class LoginService {
 
   }
 
+  //the callback helps to know
   logIn(user: string, pass: string) {
 
     this.http.post(BASE_URL + "/login", { username: user, password: pass }, { withCredentials: true })
@@ -38,6 +41,7 @@ export class LoginService {
         },
         error: (err) => {
           alert("Wrong credentials");
+          this.logged = false;
         }
       });
   }
@@ -49,11 +53,12 @@ export class LoginService {
         console.log("LOGOUT: Successfully");
         this.logged = false;
         this.user = undefined;
+        this.router.navigate(['/Login']);
       });
 
   }
 
-  isLogged() {
+  isLogged(){
     return this.logged;
   }
 

@@ -1,0 +1,43 @@
+
+    <!-- NAVBAR -->
+    <nav id="nav" class="navbar navbar-expand-lg navbar-dark fixed-top">
+        <div class="container">
+            <!-- LOGO -->
+          <a class="navbar-brand text-white align-text-center text-uppercase" href="/">
+            <img src="../../assets/Images/Logo.png" alt="Logo" width="50" height="50" class="d-inline-block align-text-center rounded-circle">
+            <strong>C&Read</strong></a>
+            <!-- TOGGLE BUTTON-->
+          <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar"
+          aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <!-- SIDEBAR -->
+          <div class="sidebar offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+            <!-- SIDEBAR HEADER-->
+            <div class="offcanvas-header text-white border-bottom">
+              <h5 class="offcanvas-title text-white" id="offcanvasNavbarLabel">Menu</h5>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <!-- SIDEBAR BODY-->
+            <div class="offcanvas-body d-flex flex-column flex-lg-row p-2">
+                <ul class="navbar-nav justify-content-center align-items-center fs-5 flex-grow-1 pe-3">
+                  <!-- RUTAS DINAMICAS -->
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-uppercase" [routerLink]="['/Library', 'Series']">Series</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-uppercase" [routerLink]="['/Library', 'Movies']">Películas</a>
+                    </li>
+                    <li class="nav-item mx-2">
+                        <a class="nav-link text-uppercase" [routerLink]="['/Library', 'Books']">Libros</a>
+                    </li>
+                </ul>
+
+            <!-- SIDEBAR PROFILE OR LOGIN/SINGOUT-->
+                <userData></userData>
+            </div>
+          </div>
+        </div>
+    </nav>
+
