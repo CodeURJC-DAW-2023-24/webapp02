@@ -18,6 +18,14 @@ export class SeriesService {
 		) as Observable<Element[]>;
 	}
 
+  //ask for 10 series
+  getSeriePage(page: number): Observable<Element[]> {
+    const url = `${BASE_URL}?page=${page}&size=${10}`;
+		return this.httpClient.get(url).pipe(
+			//catchError(error => this.handleError(error))
+		) as Observable<Element[]>;
+	}
+
 	getSerie(id: number | string): Observable<Element> {
 		return this.httpClient.get(BASE_URL + id).pipe(
 			//catchError(error => this.handleError(error))

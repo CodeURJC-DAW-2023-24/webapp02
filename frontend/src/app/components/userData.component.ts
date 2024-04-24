@@ -15,13 +15,13 @@ export class UserDataComponent {
   currentUser: User | undefined;
   private name:String | undefined;
   isLogged: boolean | undefined;
-  base64image:string | undefined;
+  userImage:string | undefined;
   isAdmin: boolean | undefined;
 
   constructor(private loginService: LoginService, private userService: UsersService, private router: Router){}
 
-  async ngOnInit(){
-    this.isLogged = await this.loginService.isLogged();
+  ngOnInit(){
+    this.isLogged = this.loginService.isLogged();
 
     if (this.isLogged){
       this.currentUser = this.loginService.currentUser();
@@ -29,20 +29,17 @@ export class UserDataComponent {
       if(this.currentUser && this.currentUser.id !== undefined){
         //this.userService.getUserImage(this.currentUser?.id);
         this.isAdmin = this.loginService.isAdmin();
-        this.userService.getUserImage(this.currentUser?.id).subscribe((imageData: ArrayBuffer) => {
-          this.base64image = this.arrayBufferToBase64(imageData);
+        this.userService.getUserImage(this.currentUser?.id).subscribe((imageData) => {
+          if(imageData){
+            const blob = new Blob([imageData], {type: 'image/jpeg'});
+            this.userImage = URL.createObjectURL(blob);
+          }else{
+            this.userImage= undefined;
+          }
+
         });
       }
     }
-  }
-  arrayBufferToBase64(imageData: ArrayBuffer): string {
-    let binary = '';
-    const bytes = new Uint8Array(imageData);
-    const len = bytes.byteLength;
-    for (let i = 0; i < len; i++) {
-      binary += String.fromCharCode(bytes[i]);
-    }
-    return 'data:image/jpeg;base64,' + btoa(binary);
   }
 
   logout(){
