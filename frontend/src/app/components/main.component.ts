@@ -42,7 +42,18 @@ export class MainComponent implements OnInit {
     this.elementsService.getAllElements().subscribe({
       next: (response: Element[]) => {
         this.elements = response;
-        // Otros procesamientos de la respuesta, si es necesario
+        for (let element of response) {
+          if (element.id !== undefined) {
+            this.elementsService.getElementImage(element.id).subscribe((imageData) => {
+              if (imageData) {
+                const blob = new Blob([imageData], { type: 'image/jpeg' });
+                this.elementsImages[element.name] = URL.createObjectURL(blob)
+              } else {
+                this.elementsImages[element.name] = ''
+              }
+            });
+          }
+        }
       },
       error: (error) => {
         console.error('Error:', error);

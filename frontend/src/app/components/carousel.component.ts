@@ -9,4 +9,5 @@ import { Element } from '../models/element.model';
 export class CarouselComponent {
 
   @Input() elements: Element[] = [];
+  @Input() images: { [key: string]: string } = {};
 }

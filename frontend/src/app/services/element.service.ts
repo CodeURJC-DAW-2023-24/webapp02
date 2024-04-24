@@ -22,6 +22,10 @@ export class ElementsService {
             );
     }
 
+    getElementImage(id: number | string){
+		return this.httpClient.get(BASE_URL + id + '/image' , { responseType: 'arraybuffer' })
+	}
+
     private handleError(error: any) {
         if (error instanceof HttpErrorResponse) {
             // Manejar errores de HTTP
