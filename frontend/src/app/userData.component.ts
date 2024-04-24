@@ -20,8 +20,8 @@ export class UserDataComponent {
 
   constructor(private loginService: LoginService, private userService: UsersService, private router: Router){}
 
-  async ngOnInit(){
-    this.isLogged = await this.loginService.isLogged();
+  ngOnInit(){
+    this.isLogged = this.loginService.isLogged();
 
     if (this.isLogged){
       this.currentUser = this.loginService.currentUser();

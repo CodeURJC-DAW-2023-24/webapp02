@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from './models/user.model';
+import { Router } from '@angular/router';
 
 const BASE_URL = '/api/auth';
 
@@ -10,7 +11,7 @@ export class LoginService {
   logged: boolean = false;
   user: User | undefined;
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, public router: Router) {
   }
 
   reqIsLogged() {
@@ -19,6 +20,7 @@ export class LoginService {
       next: (response) => {
         this.user = response as User;
         this.logged = true;
+        this.router.navigate(['/Main']);
       },
       error: (err) => {
         if (err.status != 404) {
@@ -30,18 +32,16 @@ export class LoginService {
   }
 
   //the callback helps to know
-  logIn(user: string, pass: string, callback: (isLoggedIn: boolean) => void) {
+  logIn(user: string, pass: string) {
 
     this.http.post(BASE_URL + "/login", { username: user, password: pass }, { withCredentials: true })
       .subscribe({
         next: (response) => {
           this.reqIsLogged();
-          callback(true);
         },
         error: (err) => {
           alert("Wrong credentials");
           this.logged = false;
-          callback(false);
         }
       });
   }
@@ -57,21 +57,8 @@ export class LoginService {
 
   }
 
-  isLogged(): Promise<boolean>{
-    return new Promise<boolean>((resolve, reject) => {
-      // Verificar si ya se ha iniciado sesión
-      if (this.logged) {
-        resolve(true);
-      }else{
-        this.reqIsLogged();
-        const interval = setInterval(() => {
-          if (this.logged) {
-            clearInterval(interval);
-            resolve(true);
-          }
-        }, 100);
-      }
-    });
+  isLogged(){
+    return this.logged;
   }
 
   isAdmin() {
