@@ -15,8 +15,8 @@ body{
     overflow-y: auto
 }
 
-#main-content{
-    margin-top: 105px;
+main{
+    margin-top: 200px;
 }
 
 /* TOP FILMS */
