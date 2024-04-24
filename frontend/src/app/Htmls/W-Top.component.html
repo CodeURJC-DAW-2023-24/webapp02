@@ -1,0 +1,10 @@
+<article id="topSection">
+    <div id="topTitle">
+        <h4>Top Películas Semanales</h4>
+    </div>
+    <div id="topList" class="container">
+        <div class="row">
+            <app-card *ngFor="let book of topBooks" [element]="book"></app-card>
+        </div>
+    </div>
+</article>

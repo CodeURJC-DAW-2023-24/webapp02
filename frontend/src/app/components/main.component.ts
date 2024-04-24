@@ -3,6 +3,7 @@ import { ElementsService } from '../services/element.service';
 import { NewsService } from '../services/new.service';
 import { Element } from '../models/element.model';
 import { New } from '../models/new.model';
+import { BooksService } from '../services/book.service';
 
 @Component({
   selector: 'main',
@@ -13,12 +14,17 @@ export class MainComponent implements OnInit {
 
   elements: Element[] = [];
   news: New[] = [];
+  topBooks: Element[] = [];
+  topFilms: Element[] = [];
+  topSeries: Element[] = [];
+  //cojo el top libros, top series y top pelis.
 
-  constructor(private elementsService: ElementsService, private newsService: NewsService) { }
+  constructor(private elementsService: ElementsService, private newsService: NewsService, private booksService: BooksService) { }
 
   ngOnInit(): void {
     this.getAllElements();
     this.get5RecentNews();
+    this.get5Books();
   }
 
   getAllElements(): void {
@@ -43,5 +49,17 @@ export class MainComponent implements OnInit {
       }
     });
   }
+
+  get5Books(): void{
+    this.booksService.get5Books().subscribe({
+      next: (books: Element[]) => {
+        this.topBooks = books;
+      },
+      error: (error) => {
+        console.error('Error al obtener el top libros:', error);
+      }
+    })
+  }
+  
 
 }

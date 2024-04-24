@@ -11,9 +11,11 @@ import { UserDataComponent } from './components/userData.component';
 import { HeaderComponent } from './components/header.component';
 import { CarouselComponent } from './components/carousel.component';
 import { NewsComponent } from './components/news.component';
+import { CardsComponent } from './components/card.component';
+import { TopsComponent } from './components/top.component';
 
 @NgModule({
-  declarations: [AppComponent, MainComponent, LoginComponent, HeaderComponent, UserDataComponent, CarouselComponent, NewsComponent],
+  declarations: [AppComponent, MainComponent, LoginComponent, HeaderComponent, UserDataComponent, CarouselComponent, NewsComponent, CardsComponent, TopsComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   bootstrap: [AppComponent]
 })
