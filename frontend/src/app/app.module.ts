@@ -9,9 +9,10 @@ import { MainComponent } from './components/main.component';
 import { LoginComponent } from './components/login.component';
 import { UserDataComponent } from './components/userData.component';
 import { HeaderComponent } from './components/header.component';
+import { LibraryComponent } from './components/library.component';
 
 @NgModule({
-  declarations: [AppComponent, MainComponent, LoginComponent, HeaderComponent, UserDataComponent],
+  declarations: [AppComponent, MainComponent, LoginComponent, HeaderComponent, UserDataComponent, LibraryComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   bootstrap: [AppComponent]
 })

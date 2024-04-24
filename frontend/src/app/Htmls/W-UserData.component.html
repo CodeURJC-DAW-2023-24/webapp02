@@ -2,8 +2,8 @@
 <div class="d-flex justify-content-center align-item-center gap-3">
 
   <div *ngIf="isLogged; else elseBlock">
-    <a class="navbar-brand text-white align-text-center text-uppercase" href="/{{currentUser?.name}}/Profile">
-        <img src="data:image/jpg;base64, {{base64image}}" alt="Logo" width="50" height="50" class="align-text-center rounded-circle">
+    <a class="navbar-brand text-white align-text-center text-uppercase" routerLink="/{{currentUser?.name}}/Profile">
+        <img [src]="userImage" alt="Logo" width="50" height="50" class="align-text-center rounded-circle">
     <strong>{{currentUser?.name}}</strong></a>
     <div id = "logoutbutton" class = "btn">
       <button (click)="logout()"> Log Out</button>
