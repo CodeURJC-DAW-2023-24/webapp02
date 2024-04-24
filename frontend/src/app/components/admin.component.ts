@@ -2,7 +2,7 @@ import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, of } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
-const BASE_URL = "/SingleElement/add";
+const BASE_URL = "/api/series/";
 
 @Component({
   selector: 'admin',
@@ -20,21 +20,36 @@ export class AdminComponent {
 
 
 
-  addElement(name: string, description: string, author: string, type: string, season: string, state: string, country: string, genres: string, years: number) {
+  addElement(name: string, description: string, author: string, type: string, season: string, state: string, country: string, genres: string, years: string) {
+
+    let yearsN = parseInt(years)
+    const genresString: string = 'yourGenresString'; // Assuming you have the string
+
+    // Convert the string to uppercase and remove leading/trailing whitespace
+    const genresFormatted: string = genres.toUpperCase().trim();
+
+    // Split the formatted string into an array of strings based on commas
+    const genresArray: string[] = genresFormatted.split(',');
+
+    // Trim whitespace from each individual genre string
+    const trimmedGenresArray: string[] = genresArray.map((genre: string) => genre.trim());
 
     const imageInput = document.getElementById("campo10") as HTMLInputElement;
     if (imageInput && imageInput.files) {
       const imageFile = imageInput.files[0];
       this.http.post(BASE_URL,
-        { name: name, description: description, author: author, type: type,
-          season: season, state: state, country: country, genres: genres, years: years },
+        {
+          name: name, description: description, author: author, year: yearsN, type: type,
+          season: season, state: state, country: country, genres: trimmedGenresArray
+        },
         { withCredentials: true }
       ).subscribe({
         next: (response) => {
-          this.http.get("/Admin");
+          console.log(response)
+          // this.http.get("/Admin");
         },
         error: (err) => {
-          alert("Wrong credentials");
+          console.log(err)
         }
       });
     }
