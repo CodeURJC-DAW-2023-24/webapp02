@@ -14,7 +14,7 @@
             <div id="libraryList" class="container" *ngIf="elements$ | async as elements">
                 <div class="row">
                   <div *ngFor="let element of elements">
-                        <app-card></app-card>
+                        <app-card [element]="element" [image]="elementImages[element.name]"></app-card>
                   </div>
                     <br>
                     <div *ngIf="hasPrev">

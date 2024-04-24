@@ -5,6 +5,7 @@ import { FilmsService } from '../services/film.service';
 import { SeriesService } from '../services/serie.service';
 import { Observable, concatMap, of } from 'rxjs';
 import { Element } from '../models/element.model';
+import { ElementsService } from '../services/element.service';
 
 
 @Component({
@@ -21,17 +22,17 @@ export class LibraryComponent implements OnInit{
   hasPrev: boolean = false;
   hasNext: boolean = false;
   loadedElements: { [key: number]: Element[] } = {}; // elements per page
+  elementImages: { [key: string]: string } = {};
 
 
   constructor(private route: ActivatedRoute, private router: Router, private bookService: BooksService,
-    private filmsService: FilmsService, private serieService: SeriesService){}
+    private filmsService: FilmsService, private serieService: SeriesService, private elementService: ElementsService){}
 
   ngOnInit(): void {
     this.route.paramMap.subscribe(params => {
       this.libraryType = params.get('type');
       this.getElements(this.libraryType, 0);
     });
-
   }
 
   getElements(type: string | null, pageNum: number): void{
@@ -56,6 +57,7 @@ export class LibraryComponent implements OnInit{
       this.hasPrev = response.pageable.pageNumber > 0;
       this.hasNext = response.pageable.pageNumber < response.totalPages - 1;
       this.loadedElements[this.page] = response.content;
+      this.loadImages();
       if(!this.elements$){
         this.elements$ = of([]);
       }
@@ -101,5 +103,25 @@ export class LibraryComponent implements OnInit{
   loadNextPage(){
     this.page = this.page + 1;
     this.getElements(this.libraryType, this.page);
+  }
+
+  loadImages(){
+    for (const key in this.loadedElements) {
+      if (this.loadedElements.hasOwnProperty(key)) {
+        const elementsArray = this.loadedElements[key];
+        for (const element of elementsArray) {
+          if (element.id !== undefined) {
+            this.elementService.getElementImage(element.id).subscribe((imageData) => {
+              if (imageData) {
+                const blob = new Blob([imageData], { type: 'image/jpeg' });
+                this.elementImages[element.name] = URL.createObjectURL(blob)
+              } else {
+                this.elementImages[element.name] = ''
+              }
+            });
+          }
+        }
+      }
+    }
   }
 }
