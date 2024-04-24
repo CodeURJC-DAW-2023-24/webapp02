@@ -1,6 +1,6 @@
 import { Routes, RouterModule } from '@angular/router';
-import { MainComponent } from './components/components/main.component';
-import { LoginComponent } from './components/components/login.component';
+import { MainComponent } from './components/main.component';
+import { LoginComponent } from './components/login.component';
 import { LibraryComponent } from './components/library.component';
 
 

@@ -5,10 +5,10 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './components/app.component';
 import { routing } from './app.routing';
-import { MainComponent } from './components/components/main.component';
-import { LoginComponent } from './components/components/login.component';
-import { UserDataComponent } from './components/components/userData.component';
-import { HeaderComponent } from './components/components/header.component';
+import { MainComponent } from './components/main.component';
+import { LoginComponent } from './components/login.component';
+import { UserDataComponent } from './components/userData.component';
+import { HeaderComponent } from './components/header.component';
 import { LibraryComponent } from './components/library.component';
 import { CarouselComponent } from './components/carousel.component';
 import { NewsComponent } from './components/news.component';
