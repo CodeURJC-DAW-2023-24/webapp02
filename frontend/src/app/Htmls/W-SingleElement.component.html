@@ -1,0 +1,30 @@
+<header-comp></header-comp>
+
+<main>
+    <!--MAIN INFO-->
+    <div id="elementContent" class="container">
+        <div id="mainContent" class="row">
+            <div id="mainImg" class="col-md-2">
+                <img src="data:image/jpg;base64, {{element?.imageFile}}" class="img-fluid" alt="...">
+            </div>
+            <div id="mainInfo" class="col-md-8 col-sm-12">
+                <h2 id="mainTitle">{{element?.name}}</h2>
+                <p id="mainDescription">{{element?.description}}</p>
+            </div>
+            <div class="col-md-2">
+                <p id="mainRating">Valoración media: </p>
+            </div>
+        </div>
+        <div id="listGroup" class="row" *ngIf="user">
+            <div class="d-flex align-items-center">
+                <form id="addToUserList" (ngSubmit)="agregarALista($event)" method="post">
+                    <select id="listaSelect" name="listaId" class="form-select" aria-label="Añadir a lista:" [(ngModel)]="selectedLista">
+                        <option selected>Añadir a lista:</option>
+                        <option *ngFor="let lista of userListOfElemens | keyvalue" [value]="lista.key">{{ lista.key }}</option>
+                    </select>
+                    <button type="submit" class="btnAdd">Agregar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

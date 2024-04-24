@@ -35,6 +35,11 @@ public class ElementApiController {
         return elementService.repoFindAll();
     }
 
+    @GetMapping("/{id}")
+    public Optional<Element> getElementById(@PathVariable Long id) {
+        return elementService.repoFindById(id);
+    }
+
     @GetMapping("/{id}/image")
     public ResponseEntity<byte[]> getElementImageById(@PathVariable Long id) {
         // Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");

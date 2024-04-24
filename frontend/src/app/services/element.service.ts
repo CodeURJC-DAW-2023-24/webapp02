@@ -26,6 +26,16 @@ export class ElementsService {
 		return this.httpClient.get(BASE_URL + id + '/image' , { responseType: 'arraybuffer' })
 	}
 
+    getElementById(id:number): Observable<Element>{
+        return this.httpClient.get<Element>(BASE_URL + id)
+            .pipe(
+                catchError((error: HttpErrorResponse) => {
+                    console.error('Error:', error);
+                    return throwError(() => new Error('Server error: ' + error.statusText));
+                })
+            );
+    }
+
     private handleError(error: any) {
         if (error instanceof HttpErrorResponse) {
             // Manejar errores de HTTP

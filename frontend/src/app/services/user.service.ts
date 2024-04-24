@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
@@ -25,8 +25,17 @@ export class UsersService {
 		) as Observable<User>;
 	}
 
-  getUserImage(id: number | string){
-		return this.httpClient.get(BASE_URL + id + '/image' , { responseType: 'arraybuffer' })
+	getCurrentUser(): Observable<User> {
+		return this.httpClient.get<User>(BASE_URL + "me")
+		.pipe(
+			catchError((error: HttpErrorResponse) => {
+				console.error('Error:', error);
+				return throwError(() => new Error('Server error: ' + error.statusText));
+			})
+		);
+	}
+	getUserImage(id: number | string) {
+		return this.httpClient.get(BASE_URL + id + '/image', { responseType: 'arraybuffer' })
 	}
 
 	addOrUpdateUser(User: User) {
