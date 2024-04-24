@@ -4,7 +4,7 @@ import { Element } from '../models/element.model';
 @Component({
   selector: 'carousel-comp',
   templateUrl: '../Htmls/W-Carousel.component.html',
-  styleUrl: '../Css/S-Carousel.component.css'
+  styleUrl: '../Css/S-Carousel.css'
 })
 export class CarouselComponent {
 

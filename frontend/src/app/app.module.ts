@@ -10,9 +10,10 @@ import { LoginComponent } from './components/login.component';
 import { UserDataComponent } from './components/userData.component';
 import { HeaderComponent } from './components/header.component';
 import { CarouselComponent } from './components/carousel.component';
+import { NewsComponent } from './components/news.component';
 
 @NgModule({
-  declarations: [AppComponent, MainComponent, LoginComponent, HeaderComponent, UserDataComponent, CarouselComponent],
+  declarations: [AppComponent, MainComponent, LoginComponent, HeaderComponent, UserDataComponent, CarouselComponent, NewsComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   bootstrap: [AppComponent]
 })
