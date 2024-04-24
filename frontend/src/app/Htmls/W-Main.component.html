@@ -3,7 +3,9 @@
     <div id="main-content">
         <carousel-comp id="Carousel" [elements]="elements"></carousel-comp>
         <section id="tops">
-            <app-tops [topBooks]="topBooks"></app-tops>
+            <app-tops [tops]="topFilms" title = "Top Películas Semanales"></app-tops>
+            <app-tops [tops]="topSeries" title = "Top Series Semanales"></app-tops>
+            <app-tops [tops]="topBooks" title = "Top Libros Semanales"></app-tops>
         </section>
         <app-news [news]="news"></app-news>
     </div>

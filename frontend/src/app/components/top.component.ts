@@ -6,6 +6,9 @@ import { Element } from '../models/element.model';
   templateUrl: '../Htmls/W-Top.component.html',
   styleUrl: '../Css/S-Top.css'
 })
+
 export class TopsComponent {
-  @Input() topBooks: Element[] = [];
+  @Input() tops: Element[] = [];
+  @Input() title: String  | undefined;
+
 }

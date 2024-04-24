@@ -53,8 +53,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 @RequestMapping("api/books")
 public class BookApiController {
 
-    //@Autowired
-    //private PagingRepository elementsPaged;
+    // @Autowired
+    // private PagingRepository elementsPaged;
 
     @Autowired
     private PagingService elementsPaged;
@@ -62,8 +62,7 @@ public class BookApiController {
     @Autowired
     private ElementService elementService;
 
-    //API RESPONSES:
-    
+    // API RESPONSES:
 
     @GetMapping("/")
     public Page<Element> getBooks(Pageable pageable) {
@@ -75,12 +74,12 @@ public class BookApiController {
         return elementService.repofindTopElementsByRating("LIBRO", pageable);
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "200", description = "BOOK FOUND", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "BOOK FOUND", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
     })
 
     @GetMapping("/{id}")
@@ -95,12 +94,12 @@ public class BookApiController {
         }
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "200", description = "BOOK PUT CORRECTLY", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "BOOK PUT CORRECTLY", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
     })
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateBook(@PathVariable Long id,
@@ -123,7 +122,7 @@ public class BookApiController {
             if (elementDTO.getYear() != 0) {
                 element.setYear(elementDTO.getYear());
             }
-            if (elementDTO.getSeason()!= null) {
+            if (elementDTO.getSeason() != null) {
                 Seasons s = Seasons.valueOf(elementDTO.getSeason());
                 element.setSeason(s);
             }
@@ -152,7 +151,7 @@ public class BookApiController {
                 element.setGeneros(genreList);
             }
 
-            //elementRepo.save(element);
+            // elementRepo.save(element);
             elementService.repoSaveElement(element);
             return ResponseEntity.ok(element);
         } else {
@@ -160,12 +159,12 @@ public class BookApiController {
         }
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "201", description = "BOOK POSTED CORRECTLY", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "BOOK POSTED CORRECTLY", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
     })
     @PostMapping("/")
     public ResponseEntity<Object> uploadBook(@RequestBody ElementDTO elementDTO,
@@ -173,8 +172,9 @@ public class BookApiController {
 
         List<String> genresList = elementDTO.getGenres();
         Element element = new Element(elementDTO.getName(), elementDTO.getDescription(), elementDTO.getAuthor(),
-            elementDTO.getType(), elementDTO.getSeason(), elementDTO.getState(), elementDTO.getCountry(), genresList, elementDTO.getYear());
-        //elementRepo.save(element);
+                elementDTO.getType(), elementDTO.getSeason(), elementDTO.getState(), elementDTO.getCountry(),
+                genresList, elementDTO.getYear());
+        // elementRepo.save(element);
         elementService.repoSaveElement(element);
         Long bookId = element.getId();
         String bookUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(bookId)
@@ -183,33 +183,33 @@ public class BookApiController {
         return ResponseEntity.created(new URI(bookUrl)).build();
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "204", description = "BOOK DELETED CORRECTLY", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "BOOK DELETED CORRECTLY", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
     })
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteBook(@PathVariable Long id) {
 
-        //elementRepo.deleteById(id);
+        // elementRepo.deleteById(id);
         elementService.repoDeleteById(id);
 
         return ResponseEntity.noContent().build();
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "200", description = "GET BOOK IMAGE CORRECTLY", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Book image not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "GET BOOK IMAGE CORRECTLY", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Book image not found", content = @Content)
     })
     @GetMapping("/{id}/image")
     public ResponseEntity<byte[]> getBookImageById(@PathVariable Long id) {
-        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
+        // Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
         Optional<Element> optElement = elementService.repoFindByIdAndType(id, "LIBRO");
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
@@ -235,21 +235,18 @@ public class BookApiController {
         }
     }
 
-    
-
-
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "201", description = "BOOK IMAGE POSTED CORRECTLY", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "BOOK IMAGE POSTED CORRECTLY", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
     })
     @PostMapping("/{id}/image")
     public ResponseEntity<Object> uploadBookImageById(@PathVariable Long id,
             @RequestParam("imageFile") MultipartFile imageFile, HttpServletRequest request)
             throws URISyntaxException, IOException {
-        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
+        // Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
         Optional<Element> optElement = elementService.repoFindByIdAndType(id, "LIBRO");
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
@@ -259,7 +256,7 @@ public class BookApiController {
                 element.setImageFile(new SerialBlob(imageData));
                 element.setBase64Image(Base64.getEncoder().encodeToString(imageData));
                 // Save in the database
-                //elementRepo.save(element);
+                // elementRepo.save(element);
                 elementService.repoSaveElement(element);
 
                 String imageUrl = ServletUriComponentsBuilder.fromRequestUri(request).buildAndExpand(id).toUriString();
@@ -276,21 +273,19 @@ public class BookApiController {
         }
     }
 
-    
-
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "200", description = "BOOK IMAGE PUT CORRECTLY", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "BOOK IMAGE PUT CORRECTLY", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
     })
     @PutMapping("/{id}/image")
     public ResponseEntity<Object> updateBookImage(@PathVariable Long id,
-        @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
+            @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
 
         // Verify if the book exists
-        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
+        // Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
         Optional<Element> optElement = elementService.repoFindByIdAndType(id, "LIBRO");
         if (optElement.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -302,7 +297,7 @@ public class BookApiController {
         try {
             book.setImageFile(new SerialBlob(imageBytes));
             book.setBase64Image(Base64.getEncoder().encodeToString(imageBytes));
-            //elementRepo.save(book);
+            // elementRepo.save(book);
             elementService.repoSaveElement(book);
 
         } catch (SerialException e) {
@@ -313,19 +308,17 @@ public class BookApiController {
         return ResponseEntity.noContent().build();
     }
 
-    
-    
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "200", description = "BOOK IMAGE DELETED CORRECTLY", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "BOOK IMAGE DELETED CORRECTLY", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
     })
     @DeleteMapping("/{id}/image")
     public ResponseEntity<Object> deleteBookImage(@PathVariable Long id) {
-        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
+        // Optional<Element> optElement = elementRepo.findByIdAndType(id, "LIBRO");
         Optional<Element> optElement = elementService.repoFindByIdAndType(id, "LIBRO");
         // If the book is not found we return a 404 response
         if (optElement.isEmpty()) {
@@ -336,7 +329,7 @@ public class BookApiController {
         book.setImageFile(null);
         book.setBase64Image(null);
 
-        //elementRepo.save(book);
+        // elementRepo.save(book);
         elementService.repoSaveElement(book);
 
         return ResponseEntity.noContent().build();

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
 
 import { Element } from '../models/element.model';
 
@@ -18,9 +18,16 @@ export class FilmsService {
 		) as Observable<Element[]>;
 	}
 
-  //ask for 10 films
-  getFilmPage(page: number): Observable<Element[]> {
-    const url = `${BASE_URL}?page=${page}&size=${10}`;
+	get5Films(): Observable<Element[]> {
+		return this.httpClient.get(BASE_URL + "top?page=0&size=5").pipe(
+			map((response: any) => response.content),
+			// Puedes agregar catchError aquí si lo necesitas
+		);
+	}
+
+	//ask for 10 films
+	getFilmPage(page: number): Observable<Element[]> {
+		const url = `${BASE_URL}?page=${page}&size=${10}`;
 		return this.httpClient.get(url).pipe(
 			//catchError(error => this.handleError(error))
 		) as Observable<Element[]>;
@@ -60,14 +67,14 @@ export class FilmsService {
 
 	private handleError(error: any) {
 		if (error instanceof HttpErrorResponse) {
-      // Manejar errores de HTTP
-      console.error(`Error de HTTP: ${error.status}`);
-      console.error(`Mensaje: ${error.message}`);
-    } else {
-      // Manejar otros tipos de errores
-      console.error('Se produjo un error:');
-      console.error(error);
-    }
+			// Manejar errores de HTTP
+			console.error(`Error de HTTP: ${error.status}`);
+			console.error(`Mensaje: ${error.message}`);
+		} else {
+			// Manejar otros tipos de errores
+			console.error('Se produjo un error:');
+			console.error(error);
+		}
 		return throwError(() => new Error("Server error (" + error.status + "): " + error.text()));
 	}
 }

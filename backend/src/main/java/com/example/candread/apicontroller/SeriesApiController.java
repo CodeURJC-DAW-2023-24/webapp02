@@ -63,16 +63,21 @@ public class SeriesApiController {
         return elementsPaged.repoFindByType("SERIE", pageable);
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "200", description = "SERIE ID CORRECT", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Serie not found", content = @Content)
+    @GetMapping("/top")
+    public Page<Element> getTop5Series(Pageable pageable) {
+        return elementService.repofindTopElementsByRating("SERIE", pageable);
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "SERIE ID CORRECT", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Serie not found", content = @Content)
     })
     @GetMapping("/{id}")
     public ResponseEntity<Element> getSeriesById(@PathVariable Long id) {
-        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
+        // Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
         Optional<Element> optElement = elementService.repoFindByIdAndType(id, "SERIE");
 
         if (optElement.isPresent()) {
@@ -83,19 +88,19 @@ public class SeriesApiController {
         }
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "200", description = "SERIE PUT CORRECT", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Serie not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "SERIE PUT CORRECT", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Serie not found", content = @Content)
     })
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateSerie(@PathVariable Long id,
             @RequestBody ElementDTO elementDTO,
             HttpServletRequest request) throws URISyntaxException {
 
-        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
+        // Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
         Optional<Element> optElement = elementService.repoFindByIdAndType(id, "SERIE");
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
@@ -140,7 +145,7 @@ public class SeriesApiController {
                 element.setGeneros(genreList);
             }
 
-            //elementRepo.save(element);
+            // elementRepo.save(element);
             elementService.repoSaveElement(element);
             return ResponseEntity.ok(element);
         } else {
@@ -148,12 +153,12 @@ public class SeriesApiController {
         }
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "201", description = "SERIE POST CORRECT", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Serie not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "SERIE POST CORRECT", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Serie not found", content = @Content)
     })
     @PostMapping("/")
     public ResponseEntity<Object> uploadSerie(@RequestBody ElementDTO elementDTO,
@@ -161,8 +166,9 @@ public class SeriesApiController {
 
         List<String> genresList = elementDTO.getGenres();
         Element element = new Element(elementDTO.getName(), elementDTO.getDescription(), elementDTO.getAuthor(),
-            elementDTO.getType(), elementDTO.getSeason(), elementDTO.getState(), elementDTO.getCountry(), genresList, elementDTO.getYear());
-        //elementRepo.save(element);
+                elementDTO.getType(), elementDTO.getSeason(), elementDTO.getState(), elementDTO.getCountry(),
+                genresList, elementDTO.getYear());
+        // elementRepo.save(element);
         elementService.repoSaveElement(element);
         Long bookId = element.getId();
         String bookUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(bookId)
@@ -171,33 +177,33 @@ public class SeriesApiController {
         return ResponseEntity.created(new URI(bookUrl)).build();
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "200", description = "SERIE DELETE CORRECT", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Serie not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "SERIE DELETE CORRECT", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Serie not found", content = @Content)
     })
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteSerie(@PathVariable Long id) {
 
-        //elementRepo.deleteById(id);
+        // elementRepo.deleteById(id);
         elementService.repoDeleteById(id);
 
         return ResponseEntity.noContent().build();
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "200", description = "SERIE IMAGE ID CORRECT", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Serie not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "SERIE IMAGE ID CORRECT", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Serie not found", content = @Content)
     })
     @GetMapping("/{id}/image")
     public ResponseEntity<byte[]> getSerieImageById(@PathVariable Long id) {
-        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
+        // Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
         Optional<Element> optElement = elementService.repoFindByIdAndType(id, "SERIE");
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
@@ -208,7 +214,7 @@ public class SeriesApiController {
                     byte[] imageData = imageBlob.getBytes(1, (int) imageBlob.length());
                     return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageData);
                 } else {
-                    //Image is not found and we print 404 error
+                    // Image is not found and we print 404 error
                     return ResponseEntity.notFound().build();
                 }
             } catch (SQLException e) {
@@ -223,18 +229,18 @@ public class SeriesApiController {
         }
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "201", description = "SERIE IMAGE PUT CORRECT", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Serie not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "SERIE IMAGE PUT CORRECT", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Serie not found", content = @Content)
     })
     @PostMapping("/{id}/image")
     public ResponseEntity<Object> uploadSerieImageById(@PathVariable Long id,
             @RequestParam("imageFile") MultipartFile imageFile, HttpServletRequest request)
             throws URISyntaxException, IOException {
-        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
+        // Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
         Optional<Element> optElement = elementService.repoFindByIdAndType(id, "SERIE");
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
@@ -244,7 +250,7 @@ public class SeriesApiController {
                 element.setImageFile(new SerialBlob(imageData));
                 element.setBase64Image(Base64.getEncoder().encodeToString(imageData));
                 // Save in the database
-                //elementRepo.save(element);
+                // elementRepo.save(element);
                 elementService.repoSaveElement(element);
 
                 String imageUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}/image")
@@ -262,19 +268,19 @@ public class SeriesApiController {
         }
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "200", description = "SERIE IMAGE PUT CORRECT", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Serie not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "SERIE IMAGE PUT CORRECT", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Serie not found", content = @Content)
     })
     @PutMapping("/{id}/image")
     public ResponseEntity<Object> updateSerieImage(@PathVariable Long id,
             @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
 
         // Verify if the book exists
-        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
+        // Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
         Optional<Element> optElement = elementService.repoFindByIdAndType(id, "SERIE");
         if (optElement.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -286,7 +292,7 @@ public class SeriesApiController {
         try {
             serie.setImageFile(new SerialBlob(imageBytes));
             serie.setBase64Image(Base64.getEncoder().encodeToString(imageBytes));
-            //elementRepo.save(serie);
+            // elementRepo.save(serie);
             elementService.repoSaveElement(serie);
 
         } catch (SerialException e) {
@@ -297,17 +303,17 @@ public class SeriesApiController {
         return ResponseEntity.noContent().build();
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "204", description = "SERIE IMAGE DELETE CORRECT", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Serie not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "SERIE IMAGE DELETE CORRECT", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Serie not found", content = @Content)
     })
     @DeleteMapping("/{id}/image")
     public ResponseEntity<Object> deleteSerieImage(@PathVariable Long id) {
-        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
+        // Optional<Element> optElement = elementRepo.findByIdAndType(id, "SERIE");
         Optional<Element> optElement = elementService.repoFindByIdAndType(id, "SERIE");
         if (optElement.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -317,7 +323,7 @@ public class SeriesApiController {
         serie.setImageFile(null);
         serie.setBase64Image(null);
 
-        //elementRepo.save(serie);
+        // elementRepo.save(serie);
         elementService.repoSaveElement(serie);
 
         return ResponseEntity.noContent().build();
