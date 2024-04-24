@@ -3,49 +3,49 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
-import { Element } from './models/element.model';
+import { Element } from '../models/element.model';
 
-const BASE_URL = '/api/series/';
+const BASE_URL = '/api/books/';
 
 @Injectable({ providedIn: 'root' })
-export class SeriesService {
+export class BooksService {
 
 	constructor(private httpClient: HttpClient) { }
 
-	getSeries(): Observable<Element[]> {
+	getBooks(): Observable<Element[]> {
 		return this.httpClient.get(BASE_URL).pipe(
 			//catchError(error => this.handleError(error))
 		) as Observable<Element[]>;
 	}
 
-	getSerie(id: number | string): Observable<Element> {
+	getBook(id: number | string): Observable<Element> {
 		return this.httpClient.get(BASE_URL + id).pipe(
 			//catchError(error => this.handleError(error))
 		) as Observable<Element>;
 	}
 
-	addOrUpdateSerie(Serie: Element) {
-		if (!Serie.id) {
-			return this.addSerie(Serie);
+	addOrUpdateBook(book: Element) {
+		if (!book.id) {
+			return this.addBook(book);
 		} else {
-			return this.updateSerie(Serie);
+			return this.updateBook(book);
 		}
 	}
 
-	private addSerie(Serie: Element) {
-		return this.httpClient.post(BASE_URL, Serie).pipe(
+	private addBook(book: Element) {
+		return this.httpClient.post(BASE_URL, book).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
 
-	private updateSerie(Serie: Element) {
-		return this.httpClient.put(BASE_URL + Serie.id, Serie).pipe(
+	private updateBook(book: Element) {
+		return this.httpClient.put(BASE_URL + book.id, book).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
 
-	removeSerie(Serie: Element) {
-		return this.httpClient.delete(BASE_URL + Serie.id).pipe(
+	removeBook(book: Element) {
+		return this.httpClient.delete(BASE_URL + book.id).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}

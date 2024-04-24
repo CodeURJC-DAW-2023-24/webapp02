@@ -5,11 +5,11 @@ import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { routing } from './app.routing';
-import { MainComponent } from './main.component';
-import { LoginComponent } from './login.component';
-import { UserDataComponent } from './userData.component';
-import { HeaderComponent } from './header.component';
-import { CarouselComponent } from './carousel.component';
+import { MainComponent } from './components/main.component';
+import { LoginComponent } from './components/login.component';
+import { UserDataComponent } from './components/userData.component';
+import { HeaderComponent } from './components/header.component';
+import { CarouselComponent } from './components/carousel.component';
 
 @NgModule({
   declarations: [AppComponent, MainComponent, LoginComponent, HeaderComponent, UserDataComponent, CarouselComponent],

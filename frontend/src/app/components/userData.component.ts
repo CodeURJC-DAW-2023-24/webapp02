@@ -1,14 +1,14 @@
 import { Component } from '@angular/core';
-import { LoginService } from './login.service';
-import { User } from './models/user.model';
-import { UsersService } from './user.service';
+import { LoginService } from '../services/login.service';
+import { User } from '../models/user.model';
+import { UsersService } from '../services/user.service';
 import { Router } from '@angular/router';
 
 
 @Component({
   selector: 'userData',
-  templateUrl: './Htmls/W-UserData.component.html',
-  styleUrl: './Css/S-LogIn.css'
+  templateUrl: '../Htmls/W-UserData.component.html',
+  styleUrl: '../Css/S-LogIn.css'
 })
 export class UserDataComponent {
 

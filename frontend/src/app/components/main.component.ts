@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { ElementsService } from './element.service';
-import { Element } from './models/element.model';
+import { ElementsService } from '../services/element.service';
+import { Element } from '../models/element.model';
 
 
 @Component({
   selector: 'main',
-  templateUrl: './Htmls/W-Main.component.html',
-  styleUrl: './Css/S-Main.css'
+  templateUrl: '../Htmls/W-Main.component.html',
+  styleUrl: '../Css/S-Main.css'
 })
 export class MainComponent {
 
