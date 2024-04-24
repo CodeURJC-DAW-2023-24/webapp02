@@ -34,4 +34,8 @@ public class NewService {
     public List<New> repoFindAll(){
         return newRepository.findAll();
     }
+
+    public List<New> repoFindFirst5(){
+        return newRepository.findFirst5ByOrderByIdDesc();
+    }
 }

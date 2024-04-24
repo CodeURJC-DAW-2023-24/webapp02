@@ -30,4 +30,6 @@ public interface ElementRepository extends JpaRepository<Element,Long>{
 
 
     void deleteByName(String name);
+
+    List<Element> findFirst5ByOrderByIdDesc();
 }

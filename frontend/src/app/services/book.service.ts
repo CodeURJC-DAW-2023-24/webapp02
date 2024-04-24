@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError, tap } from 'rxjs/operators';
+import { catchError, tap, map } from 'rxjs/operators';
 
 import { Element } from '../models/element.model';
 
@@ -17,6 +17,13 @@ export class BooksService {
 			//catchError(error => this.handleError(error))
 		) as Observable<Element[]>;
 	}
+
+	get5Books(): Observable<Element[]> {
+		return this.httpClient.get(BASE_URL + "top?page=0&size=5").pipe(
+		  map((response: any) => response.content),
+		  // Puedes agregar catchError aquí si lo necesitas
+		);
+	  }
 
   //ask for 10 books
   getBookPage(page: number): Observable<any> {

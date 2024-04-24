@@ -10,11 +10,15 @@ import { LoginComponent } from './components/login.component';
 import { UserDataComponent } from './components/userData.component';
 import { HeaderComponent } from './components/header.component';
 import { LibraryComponent } from './components/library.component';
+import { CarouselComponent } from './components/carousel.component';
+import { NewsComponent } from './components/news.component';
+import { CardsComponent } from './components/card.component';
+import { TopsComponent } from './components/top.component';
 import { AdminComponent } from './components/admin.component';
 import { ModifyFragment } from './components/modifyFragment.component';
 
 @NgModule({
-  declarations: [AppComponent, MainComponent, LoginComponent, HeaderComponent, UserDataComponent, LibraryComponent,AdminComponent,ModifyFragment],
+  declarations: [AppComponent, MainComponent, LoginComponent, HeaderComponent, UserDataComponent, LibraryComponent, CarouselComponent, NewsComponent, CardsComponent, TopsComponent,AdminComponent,ModifyFragment],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   bootstrap: [AppComponent]
 })

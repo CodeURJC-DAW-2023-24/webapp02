@@ -1,0 +1,18 @@
+<aside id="news">
+    <div id="newsTitle">
+        <h3>Noticias</h3>
+    </div>
+    <div id="newsContainer">
+        <div id="new" *ngFor="let new of news">
+            <div id="newTitle">
+                <h4>{{new.title}}</h4>
+            </div>
+            <div id="newDescription">
+                <p>{{new.description}}</p>
+            </div>
+            <div id="newLink">
+                <a [href]="new.link">Seguir Leyendo</a>
+            </div>
+        </div>
+    </div>
+</aside>
