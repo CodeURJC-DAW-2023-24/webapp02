@@ -7,7 +7,7 @@ import { LibraryComponent } from './components/library.component';
 const appRoutes: Routes = [
   { path: 'Main', component: MainComponent},
   { path: 'Login', component: LoginComponent},
-  { path: 'Library/:type', component: LibraryComponent },
+  { path: 'Library/:type', component: LibraryComponent},
   { path: '', redirectTo: 'Login', pathMatch: 'full' }
 ]
 

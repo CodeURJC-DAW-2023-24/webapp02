@@ -27,8 +27,11 @@ export class LibraryComponent implements OnInit{
     private filmsService: FilmsService, private serieService: SeriesService){}
 
   ngOnInit(): void {
-    this.libraryType = this.route.snapshot.paramMap.get('type');
-    this.getElements(this.libraryType, 0);
+    this.route.paramMap.subscribe(params => {
+      this.libraryType = params.get('type');
+      this.getElements(this.libraryType, 0);
+    });
+
   }
 
   getElements(type: string | null, pageNum: number): void{
