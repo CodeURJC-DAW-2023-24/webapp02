@@ -46,6 +46,10 @@ export class BooksService {
 		) as Observable<Element>;
 	}
 
+	getBookImage(id: number | string){
+		return this.httpClient.get(BASE_URL + id + '/image' , { responseType: 'arraybuffer' })
+	}
+
 	addOrUpdateBook(book: Element) {
 		if (!book.id) {
 			return this.addBook(book);

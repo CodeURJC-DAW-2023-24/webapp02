@@ -9,6 +9,6 @@ import { Element } from '../models/element.model';
 
 export class TopsComponent {
   @Input() tops: Element[] = [];
+  @Input() topImages: { [key: string]: string } = {};
   @Input() title: String  | undefined;
-
 }

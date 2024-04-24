@@ -25,6 +25,10 @@ export class FilmsService {
 		);
 	}
 
+	getFilmImage(id: number | string){
+		return this.httpClient.get(BASE_URL + id + '/image' , { responseType: 'arraybuffer' })
+	}
+
 	//ask for 10 films
 	getFilmPage(page: number): Observable<Element[]> {
 		const url = `${BASE_URL}?page=${page}&size=${10}`;
