@@ -17,10 +17,10 @@ export class SingleElementComponent {
   elementId: number = 0;
   element: Element | undefined;
   user: User | null = null;
-  userListOfElemens: Map<string, number[]> = new Map<string, number[]>();
+  userListOfElemens: Map<string, number[]>;
   selectedLista: string = '';
 
-  constructor(private route: ActivatedRoute, private elementsService: ElementsService, private usersService: UsersService) { }
+  constructor(private route: ActivatedRoute, private elementsService: ElementsService, private usersService: UsersService) { this.userListOfElemens = new Map<string, number[]>();}
 
   ngOnInit(): void {
     this.elementId = Number(this.route.snapshot.paramMap.get('id'));
@@ -43,7 +43,7 @@ export class SingleElementComponent {
     this.usersService.getCurrentUser().subscribe({
       next: (user: User) => {
         this.user = user;
-        this.userListOfElemens = user.listasDeElementos;
+        this.userListOfElemens = this.convertObjectToMap(user.listasDeElementos);
       },
       error: (error) => {
         console.error('Error:', error);
@@ -51,14 +51,31 @@ export class SingleElementComponent {
     })
   }
 
+  convertObjectToMap(obj: any): Map<string, number[]> {
+    const map = new Map<string, number[]>();
+    for (const key in obj) {
+        if (Object.prototype.hasOwnProperty.call(obj, key)) {
+            map.set(key, obj[key]);
+        }
+    }
+    return map;
+}
+
   agregarALista($event: any) {
     $event.preventDefault(); 
-    const listaDeIds = this.userListOfElemens.get(this.selectedLista);
+    var l: Map<string, number[]> = new Map<string, number[]>();
+    l = this.userListOfElemens;
+    const d = this.selectedLista;
+    const listaDeIds = l.get(d);
 
     if (listaDeIds) {
       if (!listaDeIds.includes(this.elementId)) {
         listaDeIds.push(this.elementId);
         this.userListOfElemens.set(this.selectedLista, listaDeIds);
+        if (this.user!=null){
+          this.user.listasDeElementos = this.userListOfElemens;
+          this.usersService.addOrUpdateUser(this.user);
+        }
       } else {
         console.log('El elemento ya está en la lista.');
       }
