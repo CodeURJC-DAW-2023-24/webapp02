@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { Element } from '../models/element.model';
@@ -28,12 +28,36 @@ export class SeriesService {
 	getSerieImage(id: number | string){
 		return this.httpClient.get(BASE_URL + id + '/image' , { responseType: 'arraybuffer' })
 	}
+
+  getSerieByFilter(filterType:string, filter:string): Observable<Element[]>{
+    switch(filterType){
+      case 'genre':
+        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+          //catchError(error => this.handleError(error))
+        ) as Observable<Element[]>;
+      case 'season':
+        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+          //catchError(error => this.handleError(error))
+        ) as Observable<Element[]>;
+      case 'country':
+        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+          //catchError(error => this.handleError(error))
+        ) as Observable<Element[]>;
+      case 'state':
+        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+          //catchError(error => this.handleError(error))
+        ) as Observable<Element[]>;
+      default:
+        return of([]);
+    }
+  }
+
 	//ask for 10 series
-	getSeriePage(page: number): Observable<Element[]> {
+	getSeriePage(page: number): Observable<any> {
 		const url = `${BASE_URL}?page=${page}&size=${10}`;
 		return this.httpClient.get(url).pipe(
 			//catchError(error => this.handleError(error))
-		) as Observable<Element[]>;
+		) as any;
 	}
 
 	getSerie(id: number | string): Observable<Element> {

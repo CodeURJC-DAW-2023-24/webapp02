@@ -67,6 +67,38 @@ public class FilmApiController {
         return elementsPaged.repoFindByType("PELICULA", pageable);
     }
 
+    @GetMapping("/genre")
+    public Page<Element> getFilmsByGenre(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndGenres("PELICULA", filter, pageable);
+        }
+        return null;
+    }
+
+    @GetMapping("/season")
+    public Page<Element> getFilmsBySeason(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndSeason("PELICULA", filter, pageable);
+        }
+        return null;
+    }
+
+    @GetMapping("/country")
+    public Page<Element> getFilmsByCountry(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndCountry("PELICULA", filter, pageable);
+        }
+        return null;
+    }
+
+    @GetMapping("/state")
+    public Page<Element> getFilmsByState(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndState("PELICULA", filter, pageable);
+        }
+        return null;
+    }
+
     @GetMapping("/top")
     public Page<Element> getTop5Films(Pageable pageable) {
         return elementService.repofindTopElementsByRating("PELICULA", pageable);

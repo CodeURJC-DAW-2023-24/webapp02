@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './components/app.component';
 import { routing } from './app.routing';
@@ -14,6 +15,7 @@ import { CarouselComponent } from './components/carousel.component';
 import { NewsComponent } from './components/news.component';
 import { CardsComponent } from './components/card.component';
 import { TopsComponent } from './components/top.component';
+import { FilterComponent } from './components/filters.component';
 import { SingleElementComponent } from './components/singleElement.component';
 
 @NgModule({
@@ -22,11 +24,12 @@ import { SingleElementComponent } from './components/singleElement.component';
     LoginComponent, 
     HeaderComponent, 
     UserDataComponent, 
-    LibraryComponent, 
+    LibraryComponent,
+    
     CarouselComponent, 
     NewsComponent, 
     CardsComponent, 
-    TopsComponent,
+    TopsComponent, FilterComponent,
     SingleElementComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   bootstrap: [AppComponent]
