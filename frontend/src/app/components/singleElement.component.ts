@@ -20,7 +20,7 @@ export class SingleElementComponent {
   userDTO: UserDTO | null = null;
   user: User | null = null;
   userListOfElemens: Map<string, number[]>;
-  selectedLista: string = '';
+  selectedList: string = '';
 
   constructor(private route: ActivatedRoute, private elementsService: ElementsService, private usersService: UsersService) { this.userListOfElemens = new Map<string, number[]>();}
 
@@ -63,17 +63,17 @@ export class SingleElementComponent {
     return map;
 }
 
-  agregarALista($event: any) {
+  addToList($event: any) {
     $event.preventDefault(); 
     var l: Map<string, number[]> = new Map<string, number[]>();
     l = this.userListOfElemens;
-    const d = this.selectedLista;
+    const d = this.selectedList;
     const listaDeIds = l.get(d);
 
     if (listaDeIds) {
       if (!listaDeIds.includes(this.elementId)) {
         listaDeIds.push(this.elementId);
-        this.userListOfElemens.set(this.selectedLista, listaDeIds);
+        this.userListOfElemens.set(this.selectedList, listaDeIds);
         if (this.user!=null){
           this.userDTO = {
             name:null,
@@ -82,9 +82,6 @@ export class SingleElementComponent {
             listasDeElementos: this.userListOfElemens
           }
           this.usersService.addOrUpdateUser(this.userDTO, this.user).subscribe({
-            next: () => {
-              console.log("HDLRCMQTP POR FAVOR FUNCIONA")
-            },
             error: (error) => {
               console.error('Error:', error);
             }

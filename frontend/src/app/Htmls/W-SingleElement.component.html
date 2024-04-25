@@ -17,8 +17,8 @@
         </div>
         <div id="listGroup" class="row" *ngIf="user">
             <div class="d-flex align-items-center">
-                <form id="addToUserList" (ngSubmit)="agregarALista($event)" method="post">
-                    <select id="listaSelect" name="listaId" class="form-select" aria-label="Añadir a lista:" [(ngModel)]="selectedLista">
+                <form id="addToUserList" (ngSubmit)="addToList($event)" method="post">
+                    <select id="listaSelect" name="listaId" class="form-select" aria-label="Añadir a lista:" [(ngModel)]="selectedList">
                         <option selected>Añadir a lista:</option>
                         <option *ngFor="let lista of userListOfElemens | keyvalue" [value]="lista.key">{{ lista.key }}</option>
                     </select>
