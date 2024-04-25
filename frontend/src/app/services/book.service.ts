@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
 
-import { Element } from '../models/element.model';
+import { Element as ElementComponent } from '../models/element.model';
 
 const BASE_URL = '/api/books/';
 
@@ -12,13 +12,13 @@ export class BooksService {
 
 	constructor(private httpClient: HttpClient) { }
 
-	getBooks(): Observable<Element[]> {
+	getBooks(): Observable<ElementComponent[]> {
 		return this.httpClient.get(BASE_URL).pipe(
 			//catchError(error => this.handleError(error))
-		) as Observable<Element[]>;
+		) as Observable<ElementComponent[]>;
 	}
 
-	get5Books(): Observable<Element[]> {
+	get5Books(): Observable<ElementComponent[]> {
 		return this.httpClient.get(BASE_URL + "top?page=0&size=5").pipe(
 		  map((response: any) => response.content),
 		  // Puedes agregar catchError aquí si lo necesitas
@@ -40,17 +40,41 @@ export class BooksService {
 		)
 	}
 
-	getBook(id: number | string): Observable<Element> {
+	getBook(id: number | string): Observable<ElementComponent> {
 		return this.httpClient.get(BASE_URL + id).pipe(
 			//catchError(error => this.handleError(error))
-		) as Observable<Element>;
+		) as Observable<ElementComponent>;
 	}
 
 	getBookImage(id: number | string){
 		return this.httpClient.get(BASE_URL + id + '/image' , { responseType: 'arraybuffer' })
 	}
 
-	addOrUpdateBook(book: Element) {
+  //we make a get petition to get the books with the filter we want applied
+  getBookByFilter(filterType:string, filter:string): Observable<ElementComponent[]>{
+    switch(filterType){
+      case 'genre':
+        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+          //catchError(error => this.handleError(error))
+        ) as Observable<ElementComponent[]>;
+      case 'season':
+        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+          //catchError(error => this.handleError(error))
+        ) as Observable<ElementComponent[]>;
+      case 'country':
+        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+          //catchError(error => this.handleError(error))
+        ) as Observable<ElementComponent[]>;
+      case 'state':
+        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+          //catchError(error => this.handleError(error))
+        ) as Observable<ElementComponent[]>;
+      default:
+        return of([]);
+    }
+  }
+
+	addOrUpdateBook(book: ElementComponent) {
 		if (!book.id) {
 			return this.addBook(book);
 		} else {
@@ -58,19 +82,19 @@ export class BooksService {
 		}
 	}
 
-	private addBook(book: Element) {
+	private addBook(book: ElementComponent) {
 		return this.httpClient.post(BASE_URL, book).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
 
-	private updateBook(book: Element) {
+	private updateBook(book: ElementComponent) {
 		return this.httpClient.put(BASE_URL + book.id, book).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
 
-	removeBook(book: Element) {
+	removeBook(book: ElementComponent) {
 		return this.httpClient.delete(BASE_URL + book.id).pipe(
 			catchError(error => this.handleError(error))
 		);

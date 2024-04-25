@@ -4,7 +4,7 @@ import { BooksService } from '../services/book.service';
 import { FilmsService } from '../services/film.service';
 import { SeriesService } from '../services/serie.service';
 import { Observable, concatMap, of } from 'rxjs';
-import { Element } from '../models/element.model';
+import { Element as ElementComponent } from '../models/element.model';
 import { ElementsService } from '../services/element.service';
 
 
@@ -16,12 +16,12 @@ import { ElementsService } from '../services/element.service';
 export class LibraryComponent implements OnInit{
 
   libraryType: string | null = null;
-  elements$: Observable<Element[]> | undefined;
+  elements$: Observable<ElementComponent[]> | undefined;
   page: number = 0;
   totalPages: number = 0;
   hasPrev: boolean = false;
   hasNext: boolean = false;
-  loadedElements: { [key: number]: Element[] } = {}; // elements per page
+  loadedElements: { [key: number]: ElementComponent[] } = {}; // elements per page
   elementImages: { [key: string]: string } = {};
 
 
@@ -29,10 +29,21 @@ export class LibraryComponent implements OnInit{
     private filmsService: FilmsService, private serieService: SeriesService, private elementService: ElementsService){}
 
   ngOnInit(): void {
+    //me suscribo a cualquier cambio del parametro ed la ruta
     this.route.paramMap.subscribe(params => {
       this.libraryType = params.get('type');
       this.getElements(this.libraryType, 0);
+      this.loadedElements = {};
     });
+  }
+
+  filteredElements(filteredElements : ElementComponent[]){
+    this.loadedElements = {};
+    this.loadedElements[0] = filteredElements;
+    this.elements$ = of(filteredElements);
+    this.hasNext = false;
+    this.hasPrev = false;
+    this.loadImages();
   }
 
   getElements(type: string | null, pageNum: number): void{
@@ -95,14 +106,38 @@ export class LibraryComponent implements OnInit{
   }
 
   loadPreviousPage(){
-    delete this.loadedElements[this.page];
+    //delete this.loadedElements[this.page];
     this.page = this.page -1;
-    this.getElements(this.libraryType, this.page);
+    this.hasPrev = this.page > 0;
+    this.hasNext = this.page < Object.keys(this.loadedElements).length - 1;
+
+    const allLoadedElements = [];
+    for (let key in this.loadedElements) {
+      if (parseInt(key, 10) <= this.page) {
+          // Adds all elements to the constant allLoadedElements
+          allLoadedElements.push(...this.loadedElements[key]);
+      }
+    }
+    this.elements$ = of(allLoadedElements);
   }
 
   loadNextPage(){
     this.page = this.page + 1;
-    this.getElements(this.libraryType, this.page);
+    if(this.loadedElements[this.page]!= null){
+      const allLoadedElements = [];
+      for (let key in this.loadedElements) {
+        if (parseInt(key, 10) <= this.page) {
+            // Adds all elements to the constant allLoadedElements
+            allLoadedElements.push(...this.loadedElements[key]);
+        }
+      }
+      this.elements$ = of(allLoadedElements);
+      this.hasPrev = this.page > 0;
+      this.hasNext = this.page < Object.keys(this.loadedElements).length - 1;
+    }
+    else{
+      this.getElements(this.libraryType, this.page);
+    }
   }
 
   loadImages(){

@@ -15,9 +15,11 @@ import { CarouselComponent } from './components/carousel.component';
 import { NewsComponent } from './components/news.component';
 import { CardsComponent } from './components/card.component';
 import { TopsComponent } from './components/top.component';
+import { FilterComponent } from './components/filters.component';
 
 @NgModule({
-  declarations: [AppComponent, MainComponent, LoginComponent, HeaderComponent, UserDataComponent, LibraryComponent, CarouselComponent, NewsComponent, CardsComponent, TopsComponent],
+  declarations: [AppComponent, MainComponent, LoginComponent, HeaderComponent, UserDataComponent, LibraryComponent,
+    CarouselComponent, NewsComponent, CardsComponent, TopsComponent, FilterComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   bootstrap: [AppComponent]
 })

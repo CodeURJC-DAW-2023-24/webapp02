@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { Element } from '../models/element.model';
@@ -28,6 +28,29 @@ export class FilmsService {
 	getFilmImage(id: number | string){
 		return this.httpClient.get(BASE_URL + id + '/image' , { responseType: 'arraybuffer' })
 	}
+
+  getFilmByFilter(filterType:string, filter:string): Observable<Element[]>{
+    switch(filterType){
+      case 'genre':
+        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+          //catchError(error => this.handleError(error))
+        ) as Observable<Element[]>;
+      case 'season':
+        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+          //catchError(error => this.handleError(error))
+        ) as Observable<Element[]>;
+      case 'country':
+        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+          //catchError(error => this.handleError(error))
+        ) as Observable<Element[]>;
+      case 'state':
+        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+          //catchError(error => this.handleError(error))
+        ) as Observable<Element[]>;
+      default:
+        return of([]);
+    }
+  }
 
 	//ask for 10 films
 	getFilmPage(page: number): Observable<any> {
