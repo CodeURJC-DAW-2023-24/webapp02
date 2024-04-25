@@ -3,5 +3,6 @@ export interface User {
 	name: string;
   roles: string[];
   elements: Element[];
+  password: string;
   listasDeElementos: Map<string, number[]>;
 }

@@ -4,6 +4,7 @@ import { ElementsService } from '../services/element.service';
 import { Element } from '../models/element.model';
 import { UsersService } from '../services/user.service';
 import { User } from '../models/user.model';
+import { UserDTO } from '../models/userDTO.model';
 
 @Component({
   selector: 'app-singleElement',
@@ -16,6 +17,7 @@ export class SingleElementComponent {
 
   elementId: number = 0;
   element: Element | undefined;
+  userDTO: UserDTO | null = null;
   user: User | null = null;
   userListOfElemens: Map<string, number[]>;
   selectedLista: string = '';
@@ -73,8 +75,20 @@ export class SingleElementComponent {
         listaDeIds.push(this.elementId);
         this.userListOfElemens.set(this.selectedLista, listaDeIds);
         if (this.user!=null){
-          this.user.listasDeElementos = this.userListOfElemens;
-          this.usersService.addOrUpdateUser(this.user);
+          this.userDTO = {
+            name:null,
+            roles:null,
+            password:null,
+            listasDeElementos: this.userListOfElemens
+          }
+          this.usersService.addOrUpdateUser(this.userDTO, this.user).subscribe({
+            next: () => {
+              console.log("HDLRCMQTP POR FAVOR FUNCIONA")
+            },
+            error: (error) => {
+              console.error('Error:', error);
+            }
+          });
         }
       } else {
         console.log('El elemento ya está en la lista.');

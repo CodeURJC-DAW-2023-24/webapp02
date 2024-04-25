@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 
 import { User } from '../models/user.model';
+import { UserDTO } from '../models/userDTO.model';
 
 const BASE_URL = '/api/users/';
 
@@ -27,33 +28,41 @@ export class UsersService {
 
 	getCurrentUser(): Observable<User> {
 		return this.httpClient.get<User>(BASE_URL + "me")
-		.pipe(
-			catchError((error: HttpErrorResponse) => {
-				console.error('Error:', error);
-				return throwError(() => new Error('Server error: ' + error.statusText));
-			})
-		);
+			.pipe(
+				catchError((error: HttpErrorResponse) => {
+					console.error('Error:', error);
+					return throwError(() => new Error('Server error: ' + error.statusText));
+				})
+			);
 	}
 	getUserImage(id: number | string) {
 		return this.httpClient.get(BASE_URL + id + '/image', { responseType: 'arraybuffer' })
 	}
 
-	addOrUpdateUser(User: User) {
-		if (!User.id) {
-			return this.addUser(User);
+	addOrUpdateUser(userDTO: UserDTO, user: User) {
+		if (!user.id) {
+			return this.addUser(user);
 		} else {
-			return this.updateUser(User);
+			return this.updateUser(userDTO, user);
 		}
 	}
 
-	private addUser(User: User) {
-		return this.httpClient.post(BASE_URL, User).pipe(
+	private addUser(user: User) {
+		return this.httpClient.post(BASE_URL, user).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
 
-	private updateUser(User: User) {
-		return this.httpClient.put(BASE_URL + User.id, User).pipe(
+	private updateUser(userDTO: UserDTO, user: User) {
+		const u: any = {
+			listasDeElementos: {}
+		};
+		const x = userDTO.listasDeElementos;
+		x?.forEach((value: number[], key: string) => {
+			u.listasDeElementos[key] = value;
+		});
+		
+		return this.httpClient.put<User>(BASE_URL + user.id, u).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
