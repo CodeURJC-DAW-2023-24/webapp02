@@ -7,7 +7,7 @@ import { AppComponent } from './components/app.component';
 import { routing } from './app.routing';
 import { MainComponent } from './components/main.component';
 import { LoginComponent } from './components/login.component';
-import { ProfileComponent } from './profile.component';
+import { ProfileComponent } from './components/profile.component';
 import { UserDataComponent } from './components/userData.component';
 import { HeaderComponent } from './components/header.component';
 import { LibraryComponent } from './components/library.component';

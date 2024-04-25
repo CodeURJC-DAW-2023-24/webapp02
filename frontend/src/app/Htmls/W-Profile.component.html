@@ -1,3 +1,14 @@
-<h1> PERFIL USUARIO</h1>
+<header-comp id="Header"></header-comp>
 
-<div *ngFor="let elem of elementsOfUser">{{elem.name}} </div>
+
+<main>
+    <h1> PERFIL USUARIO</h1>
+    <!-- <div *ngFor="let elem of elementsOfUser">{{elem.name}} </div> -->
+    <div id="topList" class="container">
+        <div id="cardRow" class="row">
+            <div class="col-sm-4" *ngFor="let elem of elementsOfUser[0]">
+                <app-card [element]="elem" [image]="elementsImages[elem.name]"></app-card>
+            </div>
+        </div>
+    </div>
+</main>
