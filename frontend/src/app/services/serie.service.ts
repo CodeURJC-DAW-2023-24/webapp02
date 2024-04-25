@@ -20,13 +20,13 @@ export class SeriesService {
 
 	get5Series(): Observable<Element[]> {
 		return this.httpClient.get(BASE_URL + "top?page=0&size=5").pipe(
-		  map((response: any) => response.content),
-		  // Puedes agregar catchError aquí si lo necesitas
+			map((response: any) => response.content),
+			// Puedes agregar catchError aquí si lo necesitas
 		);
-	  }
-  //ask for 10 series
-  getSeriePage(page: number): Observable<Element[]> {
-    const url = `${BASE_URL}?page=${page}&size=${10}`;
+	}
+	//ask for 10 series
+	getSeriePage(page: number): Observable<Element[]> {
+		const url = `${BASE_URL}?page=${page}&size=${10}`;
 		return this.httpClient.get(url).pipe(
 			//catchError(error => this.handleError(error))
 		) as Observable<Element[]>;
@@ -36,6 +36,14 @@ export class SeriesService {
 		return this.httpClient.get(BASE_URL + id).pipe(
 			//catchError(error => this.handleError(error))
 		) as Observable<Element>;
+	}
+
+	getSerieByName(name: string): Observable<Element> {
+		var serie = this.getSerie(1)
+		var intento = Object.keys(serie)[0]
+		return serie;
+
+		
 	}
 
 	addOrUpdateSerie(Serie: Element) {

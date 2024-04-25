@@ -23,15 +23,11 @@ export class AdminComponent {
   addElement(name: string, description: string, author: string, type: string, season: string, state: string, country: string, genres: string, years: string) {
 
     let yearsN = parseInt(years)
-    const genresString: string = 'yourGenresString'; // Assuming you have the string
 
-    // Convert the string to uppercase and remove leading/trailing whitespace
     const genresFormatted: string = genres.toUpperCase().trim();
 
-    // Split the formatted string into an array of strings based on commas
     const genresArray: string[] = genresFormatted.split(',');
 
-    // Trim whitespace from each individual genre string
     const trimmedGenresArray: string[] = genresArray.map((genre: string) => genre.trim());
 
     const imageInput = document.getElementById("campo10") as HTMLInputElement;
