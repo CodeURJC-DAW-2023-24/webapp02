@@ -13,7 +13,7 @@
 
             <div id="libraryList" class="container" *ngIf="elements$ | async as elements">
                 <div class="row">
-                  <div *ngFor="let element of elements">
+                  <div class="col-sm-4" *ngFor="let element of elements">
                         <app-card [element]="element" [image]="elementImages[element.name]"></app-card>
                   </div>
                     <br>

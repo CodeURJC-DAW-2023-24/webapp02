@@ -19,6 +19,11 @@ main{
     margin-top: 200px;
 }
 
+.col-sm-4 {
+  width: 12rem;
+  margin: 20px;
+}
+
 /* TOP FILMS */
 #tops
 {
