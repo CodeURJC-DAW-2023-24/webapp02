@@ -3,6 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ElementsService } from '../services/element.service';
 import { Element } from '../models/element.model';
 import { UsersService } from '../services/user.service';
+import { LoginService } from '../services/login.service';
 import { User } from '../models/user.model';
 import { UserDTO } from '../models/userDTO.model';
 
@@ -18,11 +19,11 @@ export class SingleElementComponent {
   elementId: number = 0;
   element: Element | undefined;
   userDTO: UserDTO | null = null;
-  user: User | null = null;
-  userListOfElemens: Map<string, number[]>;
+  user: User | undefined;
+  userListOfElemens: Map<string, number[]> = new Map<string, number[]>();
   selectedList: string = '';
 
-  constructor(private route: ActivatedRoute, private elementsService: ElementsService, private usersService: UsersService) { this.userListOfElemens = new Map<string, number[]>();}
+  constructor(private route: ActivatedRoute, private elementsService: ElementsService, private loginService: LoginService, private usersService: UsersService) {}
 
   ngOnInit(): void {
     this.elementId = Number(this.route.snapshot.paramMap.get('id'));
@@ -42,15 +43,10 @@ export class SingleElementComponent {
   }
 
   getCurrentUser(): void {
-    this.usersService.getCurrentUser().subscribe({
-      next: (user: User) => {
-        this.user = user;
-        this.userListOfElemens = this.convertObjectToMap(user.listasDeElementos);
-      },
-      error: (error) => {
-        console.error('Error:', error);
-      }
-    })
+    this.user = this.loginService.currentUser();
+    if(this.user!= undefined){
+      this.userListOfElemens = this.convertObjectToMap(this.user.listasDeElementos);
+    }
   }
 
   convertObjectToMap(obj: any): Map<string, number[]> {

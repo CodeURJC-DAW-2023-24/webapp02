@@ -25,7 +25,6 @@ import { SingleElementComponent } from './components/singleElement.component';
     HeaderComponent, 
     UserDataComponent, 
     LibraryComponent,
-    
     CarouselComponent, 
     NewsComponent, 
     CardsComponent, 
