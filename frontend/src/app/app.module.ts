@@ -16,9 +16,10 @@ import { NewsComponent } from './components/news.component';
 import { CardsComponent } from './components/card.component';
 import { TopsComponent } from './components/top.component';
 import { StatsComponent } from './components/stats.component';
+import { BannerComponent } from './components/banner.component';
 
 @NgModule({
-  declarations: [AppComponent, MainComponent, LoginComponent, ProfileComponent, HeaderComponent, UserDataComponent, LibraryComponent, CarouselComponent, NewsComponent, CardsComponent, TopsComponent, StatsComponent],
+  declarations: [AppComponent, MainComponent, LoginComponent, ProfileComponent, HeaderComponent, UserDataComponent, LibraryComponent, CarouselComponent, NewsComponent, CardsComponent, TopsComponent, StatsComponent, BannerComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   bootstrap: [AppComponent]
 })

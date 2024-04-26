@@ -12,9 +12,11 @@ export class StatsComponent {
     typeNow: string | undefined;
     genresNow: string[] = [];
     genresUser: string[]=[];
+    amountOfGenres: Map<string, number> = new Map;
     numBooks: number =0;
-    numFilms: number =10;
+    numFilms: number =0;
     numSeries: number =0;
+    actualValue: number | undefined=0;
 
     //@Input() topImages: { [key: string]: string } = {};
     //@Input() title: String  | undefined;
@@ -38,8 +40,15 @@ export class StatsComponent {
                     break;
             }
             this.genresNow = elementX.generos;
-            for(let currentGenre of this.genresNow){
-
+            for(let currentGenre of this.genresNow){    
+                if(!this.amountOfGenres.has(currentGenre)){
+                    this.amountOfGenres.set(currentGenre, 1);
+                } else{
+                    this.actualValue = this.amountOfGenres.get(currentGenre);
+                    this.actualValue = this.actualValue! + 1;
+                    this.amountOfGenres.set(currentGenre, this.actualValue);
+                    this.actualValue = 0;
+                }
             }
         }
     }
