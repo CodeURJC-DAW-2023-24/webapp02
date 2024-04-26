@@ -16,6 +16,7 @@ import { ElementsService } from '../services/element.service';
 export class LibraryComponent implements OnInit{
 
   libraryType: string | null = null;
+  title: string | null = null;
   elements$: Observable<ElementComponent[]> | undefined;
   page: number = 0;
   totalPages: number = 0;
@@ -32,6 +33,14 @@ export class LibraryComponent implements OnInit{
     //me suscribo a cualquier cambio del parametro ed la ruta
     this.route.paramMap.subscribe(params => {
       this.libraryType = params.get('type');
+      if (this.libraryType == 'Books'){
+        this.title = 'Libros';
+      }else if (this.libraryType == 'Films'){
+        this.title = 'Peliculas';
+      }
+      else if (this.libraryType == 'Series'){
+        this.title = 'Series';
+      }
       this.getElements(this.libraryType, 0);
       this.loadedElements = {};
     });
@@ -83,6 +92,7 @@ export class LibraryComponent implements OnInit{
       this.hasPrev = response.pageable.pageNumber > 0;
       this.hasNext = response.pageable.pageNumber < response.totalPages - 1;
       this.loadedElements[this.page] = response.content;
+      this.loadImages();
       if(!this.elements$){
         this.elements$ = of([]);
       }
@@ -97,6 +107,7 @@ export class LibraryComponent implements OnInit{
       this.hasPrev = response.pageable.pageNumber > 0;
       this.hasNext = response.pageable.pageNumber < response.totalPages - 1;
       this.loadedElements[this.page] = response.content;
+      this.loadImages();
       if(!this.elements$){
         this.elements$ = of([]);
       }

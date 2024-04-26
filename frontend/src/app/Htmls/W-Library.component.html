@@ -7,13 +7,13 @@
         <section id="library">
             <div class="row" id="libraryHead">
                 <div class="col-md-6" id="libraryTitle">
-                    <h4>Biblioteca de {{libraryType}}</h4>
+                    <h4>Biblioteca de {{title}}</h4>
                 </div>
             </div>
 
             <div id="libraryList" class="container" *ngIf="elements$ | async as elements">
                 <div class="row">
-                  <div *ngFor="let element of elements">
+                  <div class="col-sm-4" *ngFor="let element of elements">
                         <app-card [element]="element" [image]="elementImages[element.name]"></app-card>
                   </div>
                     <br>
