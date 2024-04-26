@@ -3,12 +3,18 @@
 
 <main>
     <h1> PERFIL USUARIO</h1>
+
+    <section id="tops">
+        <app-tops [tops]="elementsOfUser[0]" [topImages] = "elementsImages" title = "Guardados por el usuario"></app-tops>
+    </section>
+
     <!-- <div *ngFor="let elem of elementsOfUser">{{elem.name}} </div> -->
-    <div id="topList" class="container">
+    <!-- <div id="topList" class="container">
         <div id="cardRow" class="row">
             <div class="col-sm-4" *ngFor="let elem of elementsOfUser[0]">
                 <app-card [element]="elem" [image]="elementsImages[elem.name]"></app-card>
             </div>
         </div>
-    </div>
+    </div> -->
+    <app-stats [elements]="elementsOfUser[0]"></app-stats>
 </main>
