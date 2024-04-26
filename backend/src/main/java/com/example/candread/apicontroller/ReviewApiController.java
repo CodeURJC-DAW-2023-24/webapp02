@@ -1,27 +1,80 @@
 package com.example.candread.apicontroller;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.example.candread.model.Review;
-import com.example.candread.services.ReviewService;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.example.candread.dto.ElementDTO;
+import com.example.candread.dto.ReviewDTO;
+import com.example.candread.model.Element.Countries;
+import com.example.candread.model.Element.Seasons;
+import com.example.candread.model.Element.States;
+import com.example.candread.model.Review;
+import com.example.candread.model.User;
+import com.example.candread.services.ReviewService;
+import com.example.candread.services.UserService;
+
+import jakarta.servlet.http.HttpServletRequest;
 
 @RestController
 @RequestMapping("api/reviews")
 public class ReviewApiController {
 
-
     @Autowired
     private ReviewService reviewService;
 
-    @GetMapping("/")
-    public List<Review> getReviews() {
-        return reviewService.repoFindAll();
+    @Autowired
+    private UserService userService;
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Object> updateReview(@PathVariable Long id,
+            @RequestBody ReviewDTO reviewDTO,
+            HttpServletRequest request) throws URISyntaxException {
+
+        Optional<Review> optReview = reviewService.repoFindById(id);
+
+        if (optReview.isPresent()) {
+            Review review = (Review) optReview.get();
+            if (reviewDTO.getBody() != null) {
+                review.setBody(reviewDTO.getBody());
+            }
+            if (reviewDTO.getRating() != 0) {
+                review.setRating(reviewDTO.getRating());
+            }
+            reviewService.repoSaveReview(review);
+            return ResponseEntity.ok(review);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
-    
+
+    @PostMapping("/")
+    public ResponseEntity<Object> uploadReview(@RequestBody ReviewDTO reviewDTO, @RequestParam Long userId,
+            HttpServletRequest request) throws URISyntaxException {
+
+        Review review = new Review(reviewDTO.getBody(), reviewDTO.getRating());
+        Optional<User> userOptional = userService.repoFindById(userId);
+        User user = userOptional.get();
+        review.setUserLinked(user);
+        reviewService.repoSaveReview(review);
+        Long reviewId = review.getId();
+        String reviewUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(reviewId)
+                .toUriString();
+
+        return ResponseEntity.created(new URI(reviewUrl)).build();
+    }
 
 }
