@@ -10,7 +10,7 @@ import { UserDTO } from '../models/userDTO.model';
 @Component({
   selector: 'app-singleElement',
   templateUrl: '../Htmls/W-SingleElement.component.html',
-  styleUrl: '../Css/S-SingleElement.css'
+  styleUrls: ['../Css/S-Main.css','../Css/S-SingleElement.css']
 })
 
 export class SingleElementComponent {

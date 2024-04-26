@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { BooksService } from '../services/book.service';
 import { FilmsService } from '../services/film.service';
 import { SeriesService } from '../services/serie.service';
-import { Observable, concatMap, of } from 'rxjs';
+import { Observable, of } from 'rxjs';
 import { Element as ElementComponent } from '../models/element.model';
 import { ElementsService } from '../services/element.service';
 
