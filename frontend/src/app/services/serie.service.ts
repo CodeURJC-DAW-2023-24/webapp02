@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
+import { Observable, from, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { filter, switchMap } from 'rxjs/operators';
 
 import { Element } from '../models/element.model';
 
@@ -38,13 +39,7 @@ export class SeriesService {
 		) as Observable<Element>;
 	}
 
-	getSerieByName(name: string): Observable<Element> {
-		var serie = this.getSerie(1)
-		var intento = Object.keys(serie)[0]
-		return serie;
-
-		
-	}
+	
 
 	addOrUpdateSerie(Serie: Element) {
 		if (!Serie.id) {
