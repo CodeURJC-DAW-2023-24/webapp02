@@ -4,6 +4,7 @@ import { User } from '../models/user.model';
 import { Review } from '../models/review.model';
 import { UsersService } from '../services/user.service';
 import { ReviewsService } from '../services/review.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'app-reviews',
@@ -29,18 +30,33 @@ export class ReviewsComponent {
 
   ngOnInit() {
     this.getElementReviews();
-    this.getUsersOfReview();
   }
-  ngOnChanges(changes: SimpleChanges) {
-      this.getElementReviews();
-      this.getUsersOfReview();
+  ngOnChanges() {
       this.setRating();
   }
 
   //get element reviews:
   getElementReviews() {
+    var listReviews: any[] = [];
     if (this.elementR && this.elementR.reviews) {
-      this.reviews = this.elementR.reviews;
+      listReviews = this.elementR.reviews;
+      const observables = listReviews.map(review => {
+        return this.reviewService.getReviewUserById(review.id!);
+      });
+  
+      forkJoin(observables).subscribe({
+        next: (users: User[]) => {
+          // Asignar los usuarios a las reviews correspondientes
+          for (let i = 0; i < listReviews.length; i++) {
+            listReviews[i].userLinked = users[i];
+          }
+          this.reviews = listReviews;
+          this.getUsersOfReview();
+        },
+        error: (error) => {
+          console.error('Error:', error);
+        }
+      });
     }
   }
 
@@ -98,7 +114,7 @@ export class ReviewsComponent {
       id: this.review?.id,
       body: this.reviewBody,
       rating: this.reviewRating,
-      userLinked: this.user,
+      userLinked: this.user!,
       element_id: this.elementR
     };
     this.reviewService.addOrUpdateReview(this.review).subscribe({
