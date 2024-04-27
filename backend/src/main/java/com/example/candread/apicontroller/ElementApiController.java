@@ -37,6 +37,7 @@ public class ElementApiController {
 
     @GetMapping("/{id}")
     public Optional<Element> getElementById(@PathVariable Long id) {
+        Optional<Element> e = elementService.repoFindById(id);
         return elementService.repoFindById(id);
     }
 

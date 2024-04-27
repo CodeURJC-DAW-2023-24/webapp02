@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ElementsService } from '../services/element.service';
-import { Element } from '../models/element.model';
+import { Element as ElementComponent} from '../models/element.model';
 import { UsersService } from '../services/user.service';
 import { LoginService } from '../services/login.service';
 import { User } from '../models/user.model';
@@ -17,7 +17,7 @@ export class SingleElementComponent {
   
 
   elementId: number = 0;
-  element: Element | undefined;
+  element!: ElementComponent;
   userDTO: UserDTO | null = null;
   user: User | undefined;
   userListOfElemens: Map<string, number[]> = new Map<string, number[]>();
@@ -33,7 +33,7 @@ export class SingleElementComponent {
 
   getElementById(): void {
     this.elementsService.getElementById(this.elementId).subscribe({
-      next: (element: Element) => {
+      next: (element: ElementComponent) => {
         this.element = element;
       },
       error: (error) => {

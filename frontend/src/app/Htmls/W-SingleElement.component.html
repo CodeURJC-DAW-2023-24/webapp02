@@ -5,11 +5,11 @@
     <div id="elementContent" class="container">
         <div id="mainContent" class="row">
             <div id="mainImg" class="col-md-2">
-                <img src="data:image/jpg;base64, {{element?.imageFile}}" class="img-fluid" alt="...">
+                <img src="data:image/jpg;base64, {{element.imageFile}}" class="img-fluid" alt="...">
             </div>
             <div id="mainInfo" class="col-md-8 col-sm-12">
-                <h2 id="mainTitle">{{element?.name}}</h2>
-                <p id="mainDescription">{{element?.description}}</p>
+                <h2 id="mainTitle">{{element.name}}</h2>
+                <p id="mainDescription">{{element.description}}</p>
             </div>
             <div class="col-md-2">
                 <p id="mainRating">Valoración media: </p>
@@ -36,11 +36,11 @@
             <!--INFO-->
             <div id="secondInfo" class="col-md-5">
                 <h5 class="campo">Información:</h5>
-                <h6 id="infoElement"><b>Autor:</b> {{element?.author}}</h6>
-                <h6 id="infoElement"><b>Tipo:</b> {{element?.type}}</h6>
-                <h6 id="infoElement"><b>Temporada de Estreno:</b> {{element?.season}}</h6>
-                <h6 id="infoElement"><b>Estado:</b> {{element?.state}}</h6>
-                <h6 id="infoElement"><b>País de Orígen:</b> {{element?.country}}</h6>
+                <h6 id="infoElement"><b>Autor:</b> {{element.author}}</h6>
+                <h6 id="infoElement"><b>Tipo:</b> {{element.type}}</h6>
+                <h6 id="infoElement"><b>Temporada de Estreno:</b> {{element.season}}</h6>
+                <h6 id="infoElement"><b>Estado:</b> {{element.state}}</h6>
+                <h6 id="infoElement"><b>País de Orígen:</b> {{element.country}}</h6>
                 <h6 id="infoElement"><b>Generos:</b></h6>
                 <h6 id="infoElement" *ngFor="let elem of element?.genres">{{elem}}</h6>
             </div>

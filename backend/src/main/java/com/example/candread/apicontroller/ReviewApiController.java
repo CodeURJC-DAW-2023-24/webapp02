@@ -7,7 +7,6 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,13 +16,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.example.candread.dto.ElementDTO;
 import com.example.candread.dto.ReviewDTO;
-import com.example.candread.model.Element.Countries;
-import com.example.candread.model.Element.Seasons;
-import com.example.candread.model.Element.States;
+import com.example.candread.model.Element;
 import com.example.candread.model.Review;
 import com.example.candread.model.User;
+import com.example.candread.services.ElementService;
 import com.example.candread.services.ReviewService;
 import com.example.candread.services.UserService;
 
@@ -38,6 +35,9 @@ public class ReviewApiController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private ElementService elementService;
 
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateReview(@PathVariable Long id,
@@ -62,13 +62,16 @@ public class ReviewApiController {
     }
 
     @PostMapping("/")
-    public ResponseEntity<Object> uploadReview(@RequestBody ReviewDTO reviewDTO, @RequestParam Long userId,
+    public ResponseEntity<Object> uploadReview(@RequestBody ReviewDTO reviewDTO,
             HttpServletRequest request) throws URISyntaxException {
 
         Review review = new Review(reviewDTO.getBody(), reviewDTO.getRating());
-        Optional<User> userOptional = userService.repoFindById(userId);
+        Optional<User> userOptional = userService.repoFindById(reviewDTO.getUserId());
         User user = userOptional.get();
+        Optional<Element> elementOptional = elementService.repoFindById(reviewDTO.getElementId());
+        Element element = elementOptional.get();
         review.setUserLinked(user);
+        review.setElementLinked(element);
         reviewService.repoSaveReview(review);
         Long reviewId = review.getId();
         String reviewUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(reviewId)
