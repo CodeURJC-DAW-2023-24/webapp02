@@ -4,18 +4,18 @@
         Reseña</button>
 </div>
 
-<div id="review" *ngFor="let review of reviews">
+<div id="review" *ngFor="let rev of reviews">
     <div class="perfil align-self-start">
         <img src="../Images/Img-UserProfile2.png" alt="Imagen de perfil">
     </div>
     <div class="información">
-        <h6 class="mb-0">{{review.id !== undefined ? usersReviews.get(review.id) : '' }}</h6>
+        <h6 class="mb-0">{{rev.id !== undefined ? usersReviews.get(rev.id) : '' }}</h6>
         <div class="puntuación">
-            Valoración: {{review.rating}}
+            Valoración: {{rev.rating}}
         </div>
-        <p class="mt-0">{{review.body}}</p>
-        <button *ngIf="review.user_id == user?.id" id="btnEdit" type="button" class="btn"
-            data-bs-toggle="modal" data-bs-target="#modalEditReview" (click)="setModalReviewValues(review)">Editar Reseña</button>
+        <p class="mt-0">{{rev.body}}</p>
+        <button *ngIf="rev.userLinked?.id==user?.id" id="btnEdit" type="button" class="btn"
+            data-bs-toggle="modal" data-bs-target="#modalEditReview" (click)="setModalReviewValues(rev)">Editar Reseña</button>
     </div>
 </div>
 

@@ -25,7 +25,7 @@ export class ReviewsService {
         const reviewJson: any = {
 			body: review.body,
             rating: review.rating,
-            userId: review.user_id?.id,
+            userId: review.userLinked?.id,
 			elementId: review.element_id?.id
 		};
 		return this.httpClient.post(BASE_URL, reviewJson).pipe(
@@ -37,7 +37,7 @@ export class ReviewsService {
         const reviewJson: any = {
 			body: review.body,
             rating: review.rating,
-            userId: review.user_id
+            userId: review.userLinked?.id
 		};
 		return this.httpClient.put<Review>(BASE_URL + review.id, reviewJson).pipe(
 			catchError(error => this.handleError(error))

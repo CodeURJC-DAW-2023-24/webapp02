@@ -6,5 +6,5 @@ export interface Review {
 	body: string;
 	rating: number;
 	element_id?: ElementC;
-	user_id?: User;
+	userLinked?: User;
 }

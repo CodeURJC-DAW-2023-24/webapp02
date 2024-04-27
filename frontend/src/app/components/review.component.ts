@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { Element as ElementComponent} from '../models/element.model';
+import { Element as ElementComponent } from '../models/element.model';
 import { User } from '../models/user.model';
 import { Review } from '../models/review.model';
 import { UsersService } from '../services/user.service';
@@ -35,8 +35,8 @@ export class ReviewsComponent {
 
   getUsersOfReview() {
     for (let review of this.reviews) {
-      if (review.user_id !== undefined) {
-        let u: User = review.user_id;
+      if (review.userLinked !== undefined) {
+        let u: User = review.userLinked;
         if (review.id !== undefined) {
           this.usersReviews.set(review.id, u.name);
         }
@@ -60,14 +60,22 @@ export class ReviewsComponent {
 
   guardarReview() {
     this.review = {
+      id: this.review?.id,
       body: this.reviewBody,
       rating: this.reviewRating,
-      user_id: this.user,
+      userLinked: this.user,
       element_id: this.elementR
     };
     this.reviewService.addOrUpdateReview(this.review).subscribe({
       next: () => {
-        this.reviews.push(this.review!);
+        if (this.review) {
+          const existingReviewIndex = this.reviews.findIndex(r => r.id === this.review!.id);
+          if (existingReviewIndex !== -1) {
+            this.reviews[existingReviewIndex] = this.review;
+          } else {
+            this.reviews.push(this.review);
+          }
+        }
       },
       error: (error) => {
         console.error('Error:', error);
