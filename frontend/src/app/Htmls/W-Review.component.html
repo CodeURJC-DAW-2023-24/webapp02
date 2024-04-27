@@ -6,10 +6,10 @@
 
 <div id="review" *ngFor="let rev of reviews">
     <div class="perfil align-self-start">
-        <img src="../Images/Img-UserProfile2.png" alt="Imagen de perfil">
+        <img [src]="usersReviewsImages.get(rev.id!)" alt="Imagen de perfil">
     </div>
     <div class="información">
-        <h6 class="mb-0">{{rev.id !== undefined ? usersReviews.get(rev.id) : '' }}</h6>
+        <h6 class="mb-0">{{usersReviews.get(rev.id!)?.name}}</h6>
         <div class="puntuación">
             Valoración: {{rev.rating}}
         </div>
@@ -48,7 +48,7 @@
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-              <button id="btnSave" type="submit" class="btn">Guardar</button>
+              <button id="btnSave" type="submit" class="btn" data-bs-dismiss="modal">Guardar</button>
             </div>
             <input id="inputrevid" type="hidden" name="reviewID" />
           </form>

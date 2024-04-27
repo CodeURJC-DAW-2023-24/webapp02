@@ -16,8 +16,9 @@ public class ReviewService {
     @Autowired
     private ReviewRepository reviewRepository;
 
-    public void repoSaveReview(Review reviewToSave){
-        reviewRepository.save(reviewToSave);
+    public Review repoSaveReview(Review reviewToSave){
+        Review review = reviewRepository.save(reviewToSave);
+        return review;
     }
     public void repoDeleteReview(Review reviewToDelete){
         reviewRepository.delete(reviewToDelete);

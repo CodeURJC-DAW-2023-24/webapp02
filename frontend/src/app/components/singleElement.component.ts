@@ -18,10 +18,12 @@ export class SingleElementComponent {
 
   elementId: number = 0;
   element!: ElementComponent;
+  elementImage: string = '';
+  rating: number = 0;
   userDTO: UserDTO | null = null;
   user: User | undefined;
   userListOfElemens: Map<string, number[]> = new Map<string, number[]>();
-  selectedList: string = '';
+  selectedList: string = "Añadir a Lista";
 
   constructor(private route: ActivatedRoute, private elementsService: ElementsService, private loginService: LoginService, private usersService: UsersService) {}
 
@@ -31,10 +33,25 @@ export class SingleElementComponent {
     this.getCurrentUser();
   }
 
+  
+  getRating(rating: number){
+    this.rating = rating;
+  }
+  
   getElementById(): void {
     this.elementsService.getElementById(this.elementId).subscribe({
       next: (element: ElementComponent) => {
         this.element = element;
+        if (element.id !== undefined) {
+          this.elementsService.getElementImage(element.id).subscribe((imageData) => {
+            if (imageData) {
+              const blob = new Blob([imageData], { type: 'image/jpeg' });
+              this.elementImage = URL.createObjectURL(blob)
+            } else {
+              this.elementImage = ''
+            }
+          });
+        }
       },
       error: (error) => {
         console.error('Error:', error);

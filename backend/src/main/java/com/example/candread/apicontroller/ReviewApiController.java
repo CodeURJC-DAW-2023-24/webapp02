@@ -52,8 +52,9 @@ public class ReviewApiController {
             if (reviewDTO.getRating() != 0) {
                 review.setRating(reviewDTO.getRating());
             }
-            reviewService.repoSaveReview(review);
-            return ResponseEntity.ok(review);
+            Review rev = reviewService.repoSaveReview(review);
+
+            return ResponseEntity.ok(rev);
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -70,12 +71,12 @@ public class ReviewApiController {
         Element element = elementOptional.get();
         review.setUserLinked(user);
         review.setElementLinked(element);
-        reviewService.repoSaveReview(review);
+        Review rev = reviewService.repoSaveReview(review);
         Long reviewId = review.getId();
         String reviewUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(reviewId)
                 .toUriString();
 
-        return ResponseEntity.created(new URI(reviewUrl)).build();
+        return ResponseEntity.created(new URI(reviewUrl)).body(rev);
     }
 
 }

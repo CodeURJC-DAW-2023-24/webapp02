@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 import { User } from '../models/user.model';
 import { UserDTO } from '../models/userDTO.model';
 
-const BASE_URL = '/api/users/';
+const BASE_Url = '/api/users/';
 
 @Injectable({ providedIn: 'root' })
 export class UsersService {
@@ -15,19 +15,19 @@ export class UsersService {
 	constructor(private httpClient: HttpClient) { }
 
 	getUsers(): Observable<User[]> {
-		return this.httpClient.get(BASE_URL).pipe(
+		return this.httpClient.get(BASE_Url).pipe(
 			//catchError(error => this.handleError(error))
 		) as Observable<User[]>;
 	}
 
 	getUser(id: number | string): Observable<User> {
-		return this.httpClient.get(BASE_URL + id).pipe(
+		return this.httpClient.get(BASE_Url + id).pipe(
 			//catchError(error => this.handleError(error))
 		) as Observable<User>;
 	}
 
 	getUserImage(id: number | string) {
-		return this.httpClient.get(BASE_URL + id + '/image', { responseType: 'arraybuffer' })
+		return this.httpClient.get(BASE_Url + id + '/image', { responseType: 'arraybuffer' })
 	}
 
 	getUserBannerImage(id: number | string){
@@ -43,7 +43,17 @@ export class UsersService {
 	}
 
 	private addUser(user: User) {
-		return this.httpClient.post(BASE_URL, user).pipe(
+    const u: any = {
+			name: user.name,
+      password: user.password,
+      roles: user.roles,
+      listasDeElementos: user.listasDeElementos
+		};
+		return this.httpClient.post(BASE_Url, u).pipe(
+      tap((response) => {
+        console.log('Solicitud POST completada con éxito:', response);
+        // Puedes realizar acciones adicionales con la respuesta aquí
+      }),
 			catchError(error => this.handleError(error))
 		);
 	}
@@ -56,14 +66,14 @@ export class UsersService {
 		x?.forEach((value: number[], key: string) => {
 			u.listasDeElementos[key] = value;
 		});
-		
-		return this.httpClient.put<User>(BASE_URL + user.id, u).pipe(
+
+		return this.httpClient.put<User>(BASE_Url + user.id, u).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
 
 	removeUser(User: User) {
-		return this.httpClient.delete(BASE_URL + User.id).pipe(
+		return this.httpClient.delete(BASE_Url + User.id).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}

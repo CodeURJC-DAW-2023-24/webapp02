@@ -2,7 +2,6 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { BooksService } from '../services/book.service';
 import { SeriesService } from '../services/serie.service';
 import { FilmsService } from '../services/film.service';
-import { Observable } from 'rxjs';
 import { Element as ElementComponent } from '../models/element.model';
 
 

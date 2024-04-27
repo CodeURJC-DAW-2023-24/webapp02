@@ -208,12 +208,13 @@ public class BookApiController {
                 elementDTO.getType(), elementDTO.getSeason(), elementDTO.getState(), elementDTO.getCountry(),
                 genresList, elementDTO.getYear());
         // elementRepo.save(element);
-        elementService.repoSaveElement(element);
+        Element savedElement = elementService.repoSaveElement(element);
+        //aaa
         Long bookId = element.getId();
         String bookUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(bookId)
                 .toUriString();
 
-        return ResponseEntity.created(new URI(bookUrl)).build();
+        return ResponseEntity.created(new URI(bookUrl)).body(savedElement);
     }
 
     @ApiResponses(value = {

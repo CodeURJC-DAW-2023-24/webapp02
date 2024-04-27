@@ -18,17 +18,24 @@ import { CardsComponent } from './components/card.component';
 import { TopsComponent } from './components/top.component';
 import { FilterComponent } from './components/filters.component';
 import { SingleElementComponent } from './components/singleElement.component';
+import { signInComponent } from './components/signIn.component';
 import { ReviewsComponent } from './components/review.component';
 import { StatsComponent } from './components/stats.component';
 import { BannerComponent } from './components/banner.component';
 
 @NgModule({
-  declarations: [AppComponent, 
-    ProfileComponent, HeaderComponent, 
-    MainComponent, CarouselComponent, NewsComponent, TopsComponent, 
-    LoginComponent, UserDataComponent, 
-    LibraryComponent, CardsComponent, FilterComponent,
-    SingleElementComponent, ReviewsComponent, StatsComponent, BannerComponent],
+  declarations: [AppComponent,
+    MainComponent,
+    LoginComponent,
+    ProfileComponent, HeaderComponent,
+    UserDataComponent,
+    LibraryComponent,
+
+    CarouselComponent,
+    NewsComponent,
+    CardsComponent,
+    TopsComponent, FilterComponent,
+    SingleElementComponent, signInComponent, ReviewsComponent, StatsComponent, BannerComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   bootstrap: [AppComponent]
 })
