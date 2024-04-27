@@ -659,8 +659,9 @@ public class ElementService {
         return elementRepository.findTop5ByOrderByIdDesc();
     }
 
-    public void repoSaveElement(Element elementToSave){
-        elementRepository.save(elementToSave);
+    public Element repoSaveElement(Element elementToSave){
+        Element savedelement= elementRepository.save(elementToSave);
+        return savedelement;
     }
 
     public void repoDeleteById(Long id){
