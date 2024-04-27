@@ -1,3 +1,5 @@
+import { Element } from "../models/element.model";
+
 export interface User {
 	id?: number;
 	name: string;
