@@ -10,11 +10,6 @@
             <canvas id="myChart" style="width:100%;max-width:400px"></canvas>
         </div>
     </div>
-    <div>
-        <h2>Cantidad de libros: {{numBooks}}</h2>
-        <h2>Cantidad de peliculas: {{numFilms}}</h2>
-        <h2>Cantidad de series: {{numSeries}}</h2>
-    </div>
     <div class="col-sm-4" *ngFor="let genre of amountOfGenres">
         <h2>Cantidad de "amountOfGenres[genre.key]" = amountOfGenres[genre.value] </h2>
         <!-- <app-card [element]="top" [image]="topImages[top.name]"></app-card> -->
