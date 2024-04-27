@@ -11,10 +11,6 @@ export interface Element {
   author: string;
   country: string;
   base64Image: string;
-  generos: string[];
-  users: User[];
-  usersFavourited: User[];
-  reviews: Review[];
   imageFile: Blob;
   genres: string[];
   reviews: Review[];

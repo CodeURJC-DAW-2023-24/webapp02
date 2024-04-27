@@ -43,7 +43,7 @@ export class StatsComponent {
                     this.numSeries = this.numSeries + 1;
                     break;
             }
-            this.genresNow = elementX.generos;
+            this.genresNow = elementX.genres;
             for(let currentGenre of this.genresNow){    
                 if(!this.amountOfGenres.has(currentGenre)){
                     this.amountOfGenres.set(currentGenre, 1);
