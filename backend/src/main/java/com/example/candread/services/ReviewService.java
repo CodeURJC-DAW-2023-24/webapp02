@@ -1,5 +1,6 @@
 package com.example.candread.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,10 @@ public class ReviewService {
     }
     public Optional<Review> repoFindById(Long id){
         return reviewRepository.findById(id);
+    }
+
+    public List<Review> repoFindAll(){
+        return reviewRepository.findAll();
     }
 
 }

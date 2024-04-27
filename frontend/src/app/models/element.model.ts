@@ -1,3 +1,5 @@
+import { Review } from "./review.model";
+
 export interface Element {
 	id?: number;
 	name: string;
@@ -9,4 +11,6 @@ export interface Element {
   author: string;
   country: string;
   imageFile: Blob;
+  genres: string[];
+  reviews: Review[];
 }
