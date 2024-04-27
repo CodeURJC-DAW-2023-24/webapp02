@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
 
-const BASE_URL = '/api/auth';
+const BASE_url = '/api/auth';
 
 @Injectable({ providedIn: 'root' })
 export class LoginService {
@@ -34,7 +34,7 @@ export class LoginService {
   //the callback helps to know
   logIn(user: string, pass: string) {
 
-    this.http.post(BASE_URL + "/login", { username: user, password: pass }, { withCredentials: true })
+    this.http.post(BASE_url + "/login", { username: user, password: pass }, { withCredentials: true })
       .subscribe({
         next: (response) => {
           this.reqIsLogged();
@@ -48,7 +48,7 @@ export class LoginService {
 
   logOut() {
 
-    return this.http.post(BASE_URL + '/logout', { withCredentials: true })
+    return this.http.post(BASE_url + '/logout', { withCredentials: true })
       .subscribe((resp: any) => {
         console.log("LOGOUT: Successfully");
         this.logged = false;

@@ -23,7 +23,7 @@ export class SingleElementComponent {
   userDTO: UserDTO | null = null;
   user: User | undefined;
   userListOfElemens: Map<string, number[]> = new Map<string, number[]>();
-  selectedList: string = '';
+  selectedList: string = "Añadir a Lista";
 
   constructor(private route: ActivatedRoute, private elementsService: ElementsService, private loginService: LoginService, private usersService: UsersService) {}
 

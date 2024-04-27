@@ -37,9 +37,6 @@ export class ReviewsComponent {
   getElementReviews() {
     if (this.elementR && this.elementR.reviews) {
       this.reviews = this.elementR.reviews;
-      for (let r of this.reviews){
-
-      }
     }
   }
 
@@ -49,16 +46,20 @@ export class ReviewsComponent {
         let u: User = review.userLinked;
         if (review.id !== undefined) {
           this.usersReviews.set(review.id, u);
-          if(u && u.id !== undefined){
-            this.userService.getUserImage(u.id).subscribe((imageData) => {
-              if(imageData){
-                const blob = new Blob([imageData], {type: 'image/jpeg'});
-                this.usersReviewsImages.set(review.id!, URL.createObjectURL(blob));
-              }
-            });
-          }
+          this.setReviewsImage(u, review);
         }
       }
+    }
+  }
+
+  setReviewsImage(u: User, r: Review){
+    if(u && u.id !== undefined){
+      this.userService.getUserImage(u.id).subscribe((imageData) => {
+        if(imageData){
+          const blob = new Blob([imageData], {type: 'image/jpeg'});
+          this.usersReviewsImages.set(r.id!, URL.createObjectURL(blob));
+        }
+      });
     }
   }
 
@@ -97,13 +98,14 @@ export class ReviewsComponent {
       element_id: this.elementR
     };
     this.reviewService.addOrUpdateReview(this.review).subscribe({
-      next: () => {
+      next: (response: any) => {
         if (this.review) {
           const existingReviewIndex = this.reviews.findIndex(r => r.id === this.review!.id);
           if (existingReviewIndex !== -1) {
             this.reviews[existingReviewIndex] = this.review;
           } else {
             this.reviews.push(this.review);
+            this.setReviewsImage(this.review.userLinked!, response.id);
           }
         }
       },

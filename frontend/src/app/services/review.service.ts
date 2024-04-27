@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 import { Review } from '../models/review.model';
 
@@ -29,6 +29,10 @@ export class ReviewsService {
 			elementId: review.element_id?.id
 		};
 		return this.httpClient.post(BASE_URL, reviewJson).pipe(
+			tap((data: any) => {
+				const id = data.id;
+				return { id } as any;
+			}),
 			catchError(error => this.handleError(error))
 		);
 	}
