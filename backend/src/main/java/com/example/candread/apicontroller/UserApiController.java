@@ -339,4 +339,40 @@ public class UserApiController {
         return ResponseEntity.noContent().build();
     }
     
+    @ApiResponses( value = {
+        @ApiResponse(responseCode = "200", description = "USER ID CORRECT", content = {
+            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+        }),
+        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+        @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+        @ApiResponse(responseCode = "403", description = "Soy el 403 perro", content = @Content),
+        @ApiResponse(responseCode = "404", description = "USER BANNER image not found", content = @Content)
+    })
+    @GetMapping("/{id}/bannerimage")
+    public ResponseEntity<byte[]> getUserBannerImage(@PathVariable Long id) {
+        Optional<User> optUser = userService.repoFindById(id);
+        if (optUser.isPresent()) {
+            User user = (User) optUser.get();
+            //Blob userImage = user.getProfileImage();
+            Blob userBannerImage = user.getBannerImage();
+            try {
+                //if (userImage != null && userImage.length() > 0) {
+                if (userBannerImage != null && userBannerImage.length() > 0) {
+                    byte[] imageData = userBannerImage.getBytes(1, (int) userBannerImage.length());
+                    //byte[] imageData = userImage.getBytes(1, (int) userImage.length());
+                    return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageData);
+                } else {
+                    // Image is not found and we print 404 error
+                    return ResponseEntity.notFound().build();
+                }
+            } catch (SQLException e) {
+                // Possible exceptions because of reading the Blob bytes
+                e.printStackTrace();
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
+        }
+        else{
+            return ResponseEntity.notFound().build();
+        }
+    }
 }

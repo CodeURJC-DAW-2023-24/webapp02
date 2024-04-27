@@ -31,8 +31,6 @@
     border-radius: 50%;
 }
 
-
-
 #bannerUsername{
     position: absolute;
     top: calc(50% + 75px); /* Coloca el #bannerUsername justo debajo del #bannerLogo */

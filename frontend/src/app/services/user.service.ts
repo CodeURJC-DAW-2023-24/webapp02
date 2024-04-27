@@ -30,6 +30,10 @@ export class UsersService {
 		return this.httpClient.get(BASE_URL + id + '/image', { responseType: 'arraybuffer' })
 	}
 
+	getUserBannerImage(id: number | string){
+		return this.httpClient.get(BASE_URL + id + '/bannerimage', {responseType: 'arraybuffer'})
+	}
+
 	addOrUpdateUser(userDTO: UserDTO, user: User) {
 		if (!user.id) {
 			return this.addUser(user);
