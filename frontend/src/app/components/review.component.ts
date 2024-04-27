@@ -16,7 +16,8 @@ export class ReviewsComponent {
   @Input() user: User | undefined;
   @Input() elementR!: ElementComponent;
   reviews: Review[] = [];
-  usersReviews: Map<number, string> = new Map<number, string>;
+  usersReviews: Map<number, User> = new Map<number, User>;
+  usersReviewsImages: Map<number, string> = new Map<number, string>;
   review: Review | undefined;
   reviewRating: number = 0;
   reviewBody: string = '';
@@ -25,11 +26,15 @@ export class ReviewsComponent {
 
   ngOnInit() {
     this.getElementReviews();
+    this.getUsersOfReview();
   }
   //get element reviews:
   getElementReviews() {
     if (this.elementR && this.elementR.reviews) {
       this.reviews = this.elementR.reviews;
+      for (let r of this.reviews){
+
+      }
     }
   }
 
@@ -38,7 +43,15 @@ export class ReviewsComponent {
       if (review.userLinked !== undefined) {
         let u: User = review.userLinked;
         if (review.id !== undefined) {
-          this.usersReviews.set(review.id, u.name);
+          this.usersReviews.set(review.id, u);
+          if(u && u.id !== undefined){
+            this.userService.getUserImage(u.id).subscribe((imageData) => {
+              if(imageData){
+                const blob = new Blob([imageData], {type: 'image/jpeg'});
+                this.usersReviewsImages.set(review.id!, URL.createObjectURL(blob));
+              }
+            });
+          }
         }
       }
     }

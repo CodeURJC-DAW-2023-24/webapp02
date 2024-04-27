@@ -18,6 +18,7 @@ export class SingleElementComponent {
 
   elementId: number = 0;
   element!: ElementComponent;
+  elementImage: string = '';
   userDTO: UserDTO | null = null;
   user: User | undefined;
   userListOfElemens: Map<string, number[]> = new Map<string, number[]>();
@@ -35,6 +36,16 @@ export class SingleElementComponent {
     this.elementsService.getElementById(this.elementId).subscribe({
       next: (element: ElementComponent) => {
         this.element = element;
+        if (element.id !== undefined) {
+          this.elementsService.getElementImage(element.id).subscribe((imageData) => {
+            if (imageData) {
+              const blob = new Blob([imageData], { type: 'image/jpeg' });
+              this.elementImage = URL.createObjectURL(blob)
+            } else {
+              this.elementImage = ''
+            }
+          });
+        }
       },
       error: (error) => {
         console.error('Error:', error);

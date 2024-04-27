@@ -5,7 +5,7 @@
     <div id="elementContent" class="container">
         <div id="mainContent" class="row">
             <div id="mainImg" class="col-md-2">
-                <img src="data:image/jpg;base64, {{element.imageFile}}" class="img-fluid" alt="...">
+                <img [src]="elementImage" class="img-fluid" alt="...">
             </div>
             <div id="mainInfo" class="col-md-8 col-sm-12">
                 <h2 id="mainTitle">{{element.name}}</h2>

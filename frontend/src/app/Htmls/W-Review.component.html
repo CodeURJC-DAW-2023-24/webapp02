@@ -6,10 +6,10 @@
 
 <div id="review" *ngFor="let rev of reviews">
     <div class="perfil align-self-start">
-        <img src="../Images/Img-UserProfile2.png" alt="Imagen de perfil">
+        <img [src]="usersReviewsImages.get(rev.id!)" alt="Imagen de perfil">
     </div>
     <div class="información">
-        <h6 class="mb-0">{{rev.id !== undefined ? usersReviews.get(rev.id) : '' }}</h6>
+        <h6 class="mb-0">{{usersReviews.get(rev.id!)?.name}}</h6>
         <div class="puntuación">
             Valoración: {{rev.rating}}
         </div>
