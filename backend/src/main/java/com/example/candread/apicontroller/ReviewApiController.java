@@ -19,7 +19,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.candread.dto.ReviewDTO;
 import com.example.candread.model.Element;
-import com.example.candread.model.Element.Genres;
 import com.example.candread.model.Review;
 import com.example.candread.model.User;
 import com.example.candread.services.ElementService;
@@ -84,10 +83,10 @@ public class ReviewApiController {
     }
 
     @GetMapping("/{id}/user")
-    public User getReviewUsers(@PathVariable Long id) {
+    public Optional<User> getReviewUsers(@PathVariable Long id) {
         Optional<Review> rev = reviewService.repoFindById(id);
         Review r = rev.get();
-        User user = r.getUserLinked();
+        Optional<User> user = userService.repoFindById(r.getUserLinked().getId());
         return user;
     }
 
