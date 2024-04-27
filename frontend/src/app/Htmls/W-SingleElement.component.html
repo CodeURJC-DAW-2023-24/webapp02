@@ -12,7 +12,7 @@
                 <p id="mainDescription">{{element.description}}</p>
             </div>
             <div class="col-md-2">
-                <p id="mainRating">Valoración media: </p>
+                <p id="mainRating">Valoración media: {{rating}}</p>
             </div>
         </div>
         <div id="listGroup" class="row" *ngIf="user">
@@ -46,7 +46,7 @@
             </div>
 
             <!--REVIEWS-->
-            <app-reviews id="mainReviews" class="col-md-6" [user]="user" [elementR]="element"></app-reviews>
+            <app-reviews id="mainReviews" class="col-md-6" [user]="user" [elementR]="element" (rating)='getRating($event)'></app-reviews>
         </div>
     </div>
 </main>

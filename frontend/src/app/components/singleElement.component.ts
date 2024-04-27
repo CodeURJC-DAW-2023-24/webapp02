@@ -19,6 +19,7 @@ export class SingleElementComponent {
   elementId: number = 0;
   element!: ElementComponent;
   elementImage: string = '';
+  rating: number = 0;
   userDTO: UserDTO | null = null;
   user: User | undefined;
   userListOfElemens: Map<string, number[]> = new Map<string, number[]>();
@@ -32,6 +33,11 @@ export class SingleElementComponent {
     this.getCurrentUser();
   }
 
+  
+  getRating(rating: number){
+    this.rating = rating;
+  }
+  
   getElementById(): void {
     this.elementsService.getElementById(this.elementId).subscribe({
       next: (element: ElementComponent) => {

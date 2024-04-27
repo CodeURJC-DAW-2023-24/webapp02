@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Element as ElementComponent } from '../models/element.model';
 import { User } from '../models/user.model';
 import { Review } from '../models/review.model';
@@ -15,6 +15,9 @@ export class ReviewsComponent {
 
   @Input() user: User | undefined;
   @Input() elementR!: ElementComponent;
+  @Output() 
+  rating = new EventEmitter<number>();
+
   reviews: Review[] = [];
   usersReviews: Map<number, User> = new Map<number, User>;
   usersReviewsImages: Map<number, string> = new Map<number, string>;
@@ -27,7 +30,9 @@ export class ReviewsComponent {
   ngOnInit() {
     this.getElementReviews();
     this.getUsersOfReview();
+    this.setRating();
   }
+
   //get element reviews:
   getElementReviews() {
     if (this.elementR && this.elementR.reviews) {
@@ -71,6 +76,18 @@ export class ReviewsComponent {
     }
   }
 
+  setRating(){
+    let totalRating = 0;
+    const numberOfReviews = this.reviews.length;
+    for(let rev of this.reviews){
+      totalRating += rev.rating;
+    }
+
+    if (numberOfReviews > 0) {
+      const averageRating = totalRating / numberOfReviews;
+      this.rating.emit(averageRating);
+    }
+  }
   guardarReview() {
     this.review = {
       id: this.review?.id,
