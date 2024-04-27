@@ -345,7 +345,7 @@ public class UserApiController {
         }),
         @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
         @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
-        @ApiResponse(responseCode = "403", description = "Soy el 403 perro", content = @Content),
+        @ApiResponse(responseCode = "403", description = "Acción prohibida", content = @Content),
         @ApiResponse(responseCode = "404", description = "USER BANNER image not found", content = @Content)
     })
     @GetMapping("/{id}/bannerimage")
@@ -374,5 +374,85 @@ public class UserApiController {
         else{
             return ResponseEntity.notFound().build();
         }
+    }
+
+    @PostMapping("/{id}/bannerimage")
+    public ResponseEntity<Object> uploadUserBannerImage(@PathVariable Long id,
+            @RequestParam("profileImage") MultipartFile imageFile, HttpServletRequest request)
+            throws URISyntaxException, IOException {
+        
+        Optional<User> optUser = userService.repoFindById(id);
+        if (optUser.isPresent()) {
+            User user = (User) optUser.get();
+            try {
+                // Set the image to the user
+                byte[] imageData = imageFile.getBytes();
+                //user.setProfileImage(new SerialBlob(imageData));
+                user.setBannerImage(new SerialBlob(imageData));
+                user.setBase64BannerImage(Base64.getEncoder().encodeToString(imageData));
+                //user.setBase64ProfileImage(Base64.getEncoder().encodeToString(imageData));
+
+                // Save in the database
+                userService.repoSaveUser(user);
+
+                String imageUrl = ServletUriComponentsBuilder.fromRequestUri(request).buildAndExpand(id).toUriString();
+
+                return ResponseEntity.created(new URI(imageUrl)).build();
+
+            } catch (SQLException e) {
+                e.printStackTrace();
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+            }
+        } else {
+            // User not fount and we return 404 error
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @PutMapping("/{id}/bannerimage")
+    public ResponseEntity<Object> updateUserBannerImage(@PathVariable Long id,
+        @RequestParam("profileImage") MultipartFile imageFile) throws IOException {
+
+        // Verify if the user exists
+        Optional<User> optUser = userService.repoFindById(id);
+        if (optUser.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        User user = (User) optUser.get();
+        byte[] imageBytes = imageFile.getBytes();
+       
+        try {
+            //user.setProfileImage(new SerialBlob(imageBytes));
+            user.setBannerImage(new SerialBlob(imageBytes));
+            user.setBase64BannerImage(Base64.getEncoder().encodeToString(imageBytes));
+            
+            userService.repoSaveUser(user);
+
+        } catch (SerialException e) {
+            e.printStackTrace();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}/bannerimage")
+    public ResponseEntity<Object> deleteUserBannerImage(@PathVariable Long id) {
+        
+        Optional<User> optUser = userService.repoFindById(id);
+        // If the user is not found we return a 404 response
+        if (optUser.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        User user = (User) optUser.get();
+        //user.setProfileImage(null);
+        user.setBannerImage(null);
+        user.setBase64BannerImage(null);
+
+        userService.repoSaveUser(user);
+
+        return ResponseEntity.noContent().build();
     }
 }
