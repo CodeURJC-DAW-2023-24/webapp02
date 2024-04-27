@@ -99,8 +99,9 @@ export class ReviewsComponent {
     };
     this.reviewService.addOrUpdateReview(this.review).subscribe({
       next: (response: any) => {
+        this.review!.id = response.id;
         if (this.review) {
-          const existingReviewIndex = this.reviews.findIndex(r => r.id === this.review!.id);
+          const existingReviewIndex = this.reviews.findIndex(r => r.id === response.id);
           if (existingReviewIndex !== -1) {
             this.reviews[existingReviewIndex] = this.review;
           } else {

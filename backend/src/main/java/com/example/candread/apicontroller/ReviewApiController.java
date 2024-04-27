@@ -52,8 +52,9 @@ public class ReviewApiController {
             if (reviewDTO.getRating() != 0) {
                 review.setRating(reviewDTO.getRating());
             }
-            reviewService.repoSaveReview(review);
-            return ResponseEntity.ok(review);
+            Review rev = reviewService.repoSaveReview(review);
+
+            return ResponseEntity.ok(rev);
         } else {
             return ResponseEntity.notFound().build();
         }
