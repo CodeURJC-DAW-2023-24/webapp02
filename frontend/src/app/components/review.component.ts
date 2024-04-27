@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { Element as ElementComponent } from '../models/element.model';
 import { User } from '../models/user.model';
 import { Review } from '../models/review.model';
@@ -30,7 +30,11 @@ export class ReviewsComponent {
   ngOnInit() {
     this.getElementReviews();
     this.getUsersOfReview();
-    this.setRating();
+  }
+  ngOnChanges(changes: SimpleChanges) {
+      this.getElementReviews();
+      this.getUsersOfReview();
+      this.setRating();
   }
 
   //get element reviews:
@@ -46,18 +50,18 @@ export class ReviewsComponent {
         let u: User = review.userLinked;
         if (review.id !== undefined) {
           this.usersReviews.set(review.id, u);
-          this.setReviewsImage(u, review);
+          this.setReviewsImage(u, review.id);
         }
       }
     }
   }
 
-  setReviewsImage(u: User, r: Review){
+  setReviewsImage(u: User, r: number){
     if(u && u.id !== undefined){
       this.userService.getUserImage(u.id).subscribe((imageData) => {
         if(imageData){
           const blob = new Blob([imageData], {type: 'image/jpeg'});
-          this.usersReviewsImages.set(r.id!, URL.createObjectURL(blob));
+          this.usersReviewsImages.set(r, URL.createObjectURL(blob));
         }
       });
     }
