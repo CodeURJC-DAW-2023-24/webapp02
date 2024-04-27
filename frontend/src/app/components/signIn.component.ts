@@ -1,6 +1,8 @@
 import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { UsersService } from "../services/user.service";
+import { User as UserModel} from "../models/user.model";
+import { UserDTO } from "../models/userDTO.model";
 
 @Component({
   selector: 'signIn',
@@ -20,9 +22,28 @@ export class signInComponent{
   signIn($event: any){
     $event.preventDefault();
     if(this.password != this.password1){
-
+      alert("Las contraseñas no coinciden");
     }else{
+      const userRoles: string[] = [];
+      userRoles.push('USER');
 
+      const userList: Map<string, number[]> = new Map<string, number[]>();
+      userList.set('Favoritos', []);
+
+      const newUser: UserModel = {
+        name: this.userName,
+        password: this.password,
+        roles:userRoles,
+        listasDeElementos: userList
+      };
+
+      const userdto: UserDTO = {};
+      this.userService.addOrUpdateUser(userdto, newUser).subscribe({
+        next: (response) => {
+          this.router.navigate(["/Login"]);
+        },
+        error: (error) => {alert("No se pudo añadir al usuario");}
+      });
     }
   }
 }

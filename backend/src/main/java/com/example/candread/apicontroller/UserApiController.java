@@ -77,7 +77,7 @@ public class UserApiController {
             Long userId = userPrueba.getId();
             String userURL = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(userId)
                     .toUriString();
-            return ResponseEntity.created(new URI(userURL)).build();
+            return ResponseEntity.created(new URI(userURL)).body(userPrueba);
         } catch (Exception e) {
             System.out.print("error:");
         }

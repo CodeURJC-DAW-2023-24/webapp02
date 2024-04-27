@@ -1,8 +1,6 @@
 package com.example.candread.dto;
 
-import jakarta.persistence.Entity;
 
-@Entity
 public class ReviewDTO {
 
     private String body;

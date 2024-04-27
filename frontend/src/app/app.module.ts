@@ -32,7 +32,7 @@ import { ReviewsComponent } from './components/review.component';
     NewsComponent,
     CardsComponent,
     TopsComponent, FilterComponent,
-    SingleElementComponent],
+    SingleElementComponent, signInComponent, ReviewsComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   bootstrap: [AppComponent]
 })
