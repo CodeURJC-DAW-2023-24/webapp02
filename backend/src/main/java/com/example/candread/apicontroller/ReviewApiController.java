@@ -5,7 +5,10 @@ import java.net.URISyntaxException;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -16,6 +19,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.example.candread.dto.ReviewDTO;
 import com.example.candread.model.Element;
+import com.example.candread.model.Element.Genres;
 import com.example.candread.model.Review;
 import com.example.candread.model.User;
 import com.example.candread.services.ElementService;
@@ -77,6 +81,14 @@ public class ReviewApiController {
                 .toUriString();
 
         return ResponseEntity.created(new URI(reviewUrl)).body(rev);
+    }
+
+    @GetMapping("/{id}/user")
+    public User getReviewUsers(@PathVariable Long id) {
+        Optional<Review> rev = reviewService.repoFindById(id);
+        Review r = rev.get();
+        User user = r.getUserLinked();
+        return user;
     }
 
 }

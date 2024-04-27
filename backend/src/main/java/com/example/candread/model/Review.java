@@ -32,6 +32,7 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "user_ID")
+    @JsonIgnore
     private User userLinked;
 
     public Review(){
