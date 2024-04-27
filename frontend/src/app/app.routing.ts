@@ -3,6 +3,7 @@ import { MainComponent } from './components/main.component';
 import { LoginComponent } from './components/login.component';
 import { LibraryComponent } from './components/library.component';
 import { SingleElementComponent } from './components/singleElement.component';
+import { signInComponent} from './components/signIn.component';
 
 
 const appRoutes: Routes = [
@@ -10,6 +11,7 @@ const appRoutes: Routes = [
   { path: 'Login', component: LoginComponent},
   { path: 'Library/:type', component: LibraryComponent },
   { path: 'SingleElement/:id', component: SingleElementComponent },
+  {path: 'SignIn', component: signInComponent},
   { path: '', redirectTo: 'Login', pathMatch: 'full' }
 ]
 
