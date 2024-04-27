@@ -1,5 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Element } from '../models/element.model';
+import { Renderer2, ElementRef } from '@angular/core';
+import Chart from 'chart.js/auto';
 
 @Component({
     selector: 'app-stats',
@@ -7,7 +9,7 @@ import { Element } from '../models/element.model';
     styleUrl: '../Css/S-Stats.css'
 })
 export class StatsComponent {
-    //@Input() numBooks: number = 0; 
+
     @Input() elements: Element[] = [];
     typeNow: string | undefined;
     genresNow: string[] = [];
@@ -23,6 +25,8 @@ export class StatsComponent {
 
     ngOnInit(){
         this.calculateStats();
+        this.renderChart();
+
     }
 
     calculateStats(){
@@ -50,6 +54,29 @@ export class StatsComponent {
                     this.actualValue = 0;
                 }
             }
+        }
+    }
+    renderChart() {
+        const xValues = ["LIBROS", "PELICULAS", "SERIES"];
+        const yValues = [this.numBooks, this.numFilms, this.numSeries];
+        const barColors = ["red", "blue", "#5cd65c"];
+        new Chart('myChart', {
+            type: 'pie',
+            data: {
+                labels: xValues,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: yValues
+                }]
+            }
+        });
+        // Establecer el título del gráfico directamente en el canvas
+        const canvas = document.getElementById('myChart') as HTMLCanvasElement;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+            ctx.font = '24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Medios Guardados', canvas.width / 2, 30);
         }
     }
   }

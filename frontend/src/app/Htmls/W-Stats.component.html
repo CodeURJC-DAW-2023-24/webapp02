@@ -1,5 +1,5 @@
  
- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+ <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script> -->
  <!--SECCION ESTADISTICAS-->
  <aside id="stadisticSection">
     <div id="stadisticTitle">
@@ -7,29 +7,7 @@
     </div>
     <div id="stadisticList" class="container">
         <div class="row">
-            <!--div class="col-sm-2"-->
             <canvas id="myChart" style="width:100%;max-width:400px"></canvas>
-            <script>
-                const xValues = ["LIBROS", "PELICULAS", "SERIES"];
-                const yValues = ["{{numBooks}}", "{{numFilms}}", "{{numSeries}}"];
-                const barColors = ["red", "blue", "#5cd65c"];
-                new Chart("myChart", {
-                    type: "pie",
-                    data: {
-                        labels: xValues,
-                        datasets: [{
-                            backgroundColor: barColors,
-                            data: yValues
-                        }]
-                    },
-                    options: {
-                        title: {
-                            display: false,
-                            text: "Medios Guardados"
-                        }
-                    }
-                });
-            </script>
         </div>
     </div>
     <div>
@@ -38,6 +16,6 @@
         <h2>Cantidad de series: {{numSeries}}</h2>
     </div>
     <div class="col-sm-4" *ngFor="let genre of amountOfGenres">
-        <h2>Cantidad de amountOfGenres[genre.key] = amountOfGenres[genre.value] </h2>
+        <h2>Cantidad de "amountOfGenres[genre.key]" = amountOfGenres[genre.value] </h2>
         <!-- <app-card [element]="top" [image]="topImages[top.name]"></app-card> -->
     </div>
