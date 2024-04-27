@@ -20,13 +20,16 @@ export class StatsComponent {
     numSeries: number =0;
     actualValue: number | undefined=0;
 
+    xValues2: string [] = [];
+    yValues2: number[] = [];
+
     //@Input() topImages: { [key: string]: string } = {};
     //@Input() title: String  | undefined;
 
     ngOnInit(){
         this.calculateStats();
         this.renderChart();
-
+        this.renderChart2();
     }
 
     calculateStats(){
@@ -43,7 +46,7 @@ export class StatsComponent {
                     this.numSeries = this.numSeries + 1;
                     break;
             }
-            this.genresNow = elementX.genres;
+            this.genresNow = elementX.generos;
             for(let currentGenre of this.genresNow){    
                 if(!this.amountOfGenres.has(currentGenre)){
                     this.amountOfGenres.set(currentGenre, 1);
@@ -70,7 +73,6 @@ export class StatsComponent {
                 }]
             }
         });
-        // Establecer el título del gráfico directamente en el canvas
         const canvas = document.getElementById('myChart') as HTMLCanvasElement;
         const ctx = canvas.getContext('2d');
         if (ctx) {
@@ -78,5 +80,36 @@ export class StatsComponent {
             ctx.textAlign = 'center';
             ctx.fillText('Medios Guardados', canvas.width / 2, 30);
         }
-    }
+    } //end of renderChart1
+
+    renderChart2() {
+        //this.amountOfGenres;
+        
+
+        for (let [key, value] of this.amountOfGenres) {
+            //console.log(key, value);                   //Lokesh Raj John
+            this.xValues2.push(key);
+            this.yValues2.push(value)
+        }
+        //const xValues = ["LIBROS", "PELICULAS", "SERIES"];
+        //const yValues = [this.numBooks, this.numFilms, this.numSeries];
+        const barColors = ["red", "black", "#5cd65c", "orange", "yellow", "#00ffcc", "purple", "#99ccff", "#0000b3", "#ffb3cc", "#ffbf80", "#cc0066", "brown"];
+        new Chart('myChart2', {
+            type: 'pie',
+            data: {
+                labels: this.xValues2,
+                datasets: [{
+                    backgroundColor: barColors,
+                    data: this.yValues2
+                }]
+            }
+        });
+        const canvas = document.getElementById('myChart2') as HTMLCanvasElement;
+        const ctx = canvas.getContext('2d');
+        if (ctx) {
+            ctx.font = '24px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Géneros más gustados', canvas.width / 2, 30);
+        }
+    } //end of renderChart1
   }
