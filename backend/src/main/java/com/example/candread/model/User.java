@@ -69,7 +69,6 @@ public class User {
 
     
     @ElementCollection
-    @JsonIgnore
     @CollectionTable(name="user_elements_lists", joinColumns = @JoinColumn(name="user_id"))
     @MapKeyColumn(name = "list_name")
     @Column(name = "element_id")

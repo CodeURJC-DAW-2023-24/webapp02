@@ -1,0 +1,52 @@
+<header-comp></header-comp>
+
+<main>
+    <!--MAIN INFO-->
+    <div id="elementContent" class="container">
+        <div id="mainContent" class="row">
+            <div id="mainImg" class="col-md-2">
+                <img src="data:image/jpg;base64, {{element.imageFile}}" class="img-fluid" alt="...">
+            </div>
+            <div id="mainInfo" class="col-md-8 col-sm-12">
+                <h2 id="mainTitle">{{element.name}}</h2>
+                <p id="mainDescription">{{element.description}}</p>
+            </div>
+            <div class="col-md-2">
+                <p id="mainRating">Valoración media: </p>
+            </div>
+        </div>
+        <div id="listGroup" class="row" *ngIf="user">
+            <div class="d-flex align-items-center">
+                <form id="addToUserList" (ngSubmit)="addToList($event)" method="post">
+                    <select id="listaSelect" name="listaId" class="form-select" aria-label="Añadir a lista:"
+                        [(ngModel)]="selectedList">
+                        <option selected>Añadir a lista:</option>
+                        <option *ngFor="let lista of userListOfElemens | keyvalue" [value]="lista.key">{{ lista.key }}
+                        </option>
+                    </select>
+                    <button type="submit" class="btnAdd">Agregar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!--REVIEWS AND INFO-->
+    <div id="infoReviewContent" class="container">
+        <div id="secondContent" class="row">
+            <!--INFO-->
+            <div id="secondInfo" class="col-md-5">
+                <h5 class="campo">Información:</h5>
+                <h6 id="infoElement"><b>Autor:</b> {{element.author}}</h6>
+                <h6 id="infoElement"><b>Tipo:</b> {{element.type}}</h6>
+                <h6 id="infoElement"><b>Temporada de Estreno:</b> {{element.season}}</h6>
+                <h6 id="infoElement"><b>Estado:</b> {{element.state}}</h6>
+                <h6 id="infoElement"><b>País de Orígen:</b> {{element.country}}</h6>
+                <h6 id="infoElement"><b>Generos:</b></h6>
+                <h6 id="infoElement" *ngFor="let elem of element?.genres">{{elem}}</h6>
+            </div>
+
+            <!--REVIEWS-->
+            <app-reviews id="mainReviews" class="col-md-6" [user]="user" [elementR]="element"></app-reviews>
+        </div>
+    </div>
+</main>

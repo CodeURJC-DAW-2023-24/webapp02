@@ -69,6 +69,39 @@ public class BookApiController {
         return elementsPaged.repoFindByType("LIBRO", pageable);
     }
 
+    @GetMapping("/genre")
+    public Page<Element> getBooksByGenre(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndGenres("LIBRO", filter, pageable);
+        }
+        return null;
+    }
+
+    @GetMapping("/season")
+    public Page<Element> getBooksBySeason(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndSeason("LIBRO", filter, pageable);
+        }
+        return null;
+    }
+
+    @GetMapping("/country")
+    public Page<Element> getBooksByCountry(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndCountry("LIBRO", filter, pageable);
+        }
+        return null;
+    }
+
+    @GetMapping("/state")
+    public Page<Element> getBooksByState(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndState("LIBRO", filter, pageable);
+        }
+        return null;
+    }
+
+
     @GetMapping("/top")
     public Page<Element> getTop5Books(Pageable pageable) {
         return elementService.repofindTopElementsByRating("LIBRO", pageable);

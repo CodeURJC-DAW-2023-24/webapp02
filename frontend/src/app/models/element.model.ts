@@ -1,5 +1,4 @@
 import { Review } from "./review.model";
-import { User } from "./user.model";
 
 export interface Element {
 	id?: number;
@@ -17,4 +16,6 @@ export interface Element {
   usersFavourited: User[];
   reviews: Review[];
   imageFile: Blob;
+  genres: string[];
+  reviews: Review[];
 }
