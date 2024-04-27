@@ -41,7 +41,6 @@ public class User {
     private String password;
 
     @OneToMany (mappedBy = "userLinked", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Review> reviews = new ArrayList<>();
 
     @ManyToMany (mappedBy = "users", cascade = CascadeType.ALL)
