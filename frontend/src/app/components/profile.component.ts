@@ -14,9 +14,12 @@ import { ElementsService } from '../services/element.service';
 export class ProfileComponent {
   name = '';
   elementsImages: { [key: string]: string } = {};
+  titleOfLists: string[] = [];
+  index: number = 0;
   elementsOfUser: any[] = [];
   listOfElements: Element[] = [];
   elementsOfUser2: Map<string, number[]>  = new Map;
+  elementsOfUser3: Map<string, number[]>  = new Map;
   exampleElement!: Element;
   actualUser: User | undefined;
 
@@ -38,7 +41,34 @@ export class ProfileComponent {
 
     this.elementsOfUser2 = this.actualUser!.listasDeElementos;
     console.log(this.elementsOfUser2);
-    for (let [key, value] of Array.from(this.elementsOfUser2)) {
+
+    // for(let key of this.elementsOfUser2){
+    //   console.log(key);
+    // }
+    //console.log(this.elementsOfUser2.get("Favoritos"));
+    // const valuesArray = Array.from(this.elementsOfUser2.values());
+    // console.log(valuesArray);
+    // if (this.elementsOfUser2.has("Favoritos")){
+    //   console.log("Tiene favoritos");
+    // }
+    console.log(Object.keys(this.elementsOfUser2));
+    console.log(Object.values(this.elementsOfUser2));
+    for(let title of Object.keys(this.elementsOfUser2 )){
+      this.titleOfLists.push(title);
+    }
+    console.log("Array titleOfLists:" + this.titleOfLists);
+
+    for(let ids of Object.values(this.elementsOfUser2)){
+      console.log(ids);
+    }
+
+    for(let [key, value] of Object.entries(this.elementsOfUser2)){
+      console.log("KEY: "+ key + " VALUE: " + value);
+      this.elementsOfUser3.set(key, value);
+    }
+    console.log("ELEMENTSOFUSER3==> " + this.elementsOfUser3)
+
+    for (let [key, value] of this.elementsOfUser3) {
       console.log(key, value);
       for (let idX of value) {
         if (idX !== undefined) {

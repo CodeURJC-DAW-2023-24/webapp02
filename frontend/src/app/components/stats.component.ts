@@ -86,7 +86,7 @@ export class StatsComponent {
         for (let [key, value] of this.amountOfGenres) {
             //console.log(key, value);
             this.xValues2.push(key);
-            this.yValues2.push(value)
+            this.yValues2.push(value);
         }
         //const xValues = ["LIBROS", "PELICULAS", "SERIES"];
         //const yValues = [this.numBooks, this.numFilms, this.numSeries];
