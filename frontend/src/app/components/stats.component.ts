@@ -83,11 +83,8 @@ export class StatsComponent {
     } //end of renderChart1
 
     renderChart2() {
-        //this.amountOfGenres;
-        
-
         for (let [key, value] of this.amountOfGenres) {
-            //console.log(key, value);                   //Lokesh Raj John
+            //console.log(key, value);
             this.xValues2.push(key);
             this.yValues2.push(value)
         }
