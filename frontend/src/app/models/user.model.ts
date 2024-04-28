@@ -10,4 +10,5 @@ export interface User {
   profileImage?: Blob;
   bannerImage?: Blob;
   imageURL?: string;
+  bannerImageURL?: string;
 }

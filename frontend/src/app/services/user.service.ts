@@ -11,6 +11,8 @@ const BASE_Url = '/api/users/';
 @Injectable({ providedIn: 'root' })
 export class UsersService {
 
+	user: User | undefined;
+
 
 	constructor(private httpClient: HttpClient) { }
 
@@ -41,7 +43,9 @@ export class UsersService {
 
 		return this.httpClient.put(BASE_Url + id + '/image', formData).pipe(
 			tap((response) => {
-				localStorage.setItem('currentUser', JSON.stringify(response));
+				this.user = response as User;
+				this.user.profileImage = newImage; 
+				localStorage.setItem('currentUser', JSON.stringify(this.user));
 				console.log('Solicitud PUT de imagen completada con éxito:', response);
 			}),
 			catchError(error => this.handleError(error))

@@ -18,7 +18,7 @@ export class BannerComponent {
     name: string | undefined;
     newProfileImage: File | undefined;
     newBannerImage: File | undefined;
-    allUsers: Observable<User[]> | undefined; 
+    allUsers: Observable<User[]> | undefined;
     allUsers2: User[] = [];
     tempImage: File | undefined;
 
@@ -41,7 +41,8 @@ export class BannerComponent {
                 }
             });
         }
-    } //LoadImage end
+    }
+
     loadBannerImage() {
         if (this.user && this.user.id !== undefined) {
             this.userService.getUserBannerImage(this.user?.id).subscribe((imageData) => {
@@ -53,32 +54,29 @@ export class BannerComponent {
                 }
             });
         }
-
     }
 
-    setImages(event : any){
+    setImages(event: any) {
         this.newProfileImage = event.target.files[0] as File;
     }
-    setBanners(event : any){
+    setBanners(event: any) {
         this.newBannerImage = event.target.files[0] as File;
     }
 
     updateProfile() {
-        if(this.newProfileImage !== undefined){
-
+        if (this.newProfileImage !== undefined) {
             console.log("Me has mandado una nueva imagen para cambiarla");
-
             this.userService.setUserImage(this.user!.id!, this.newProfileImage).subscribe({
-                next: (response : any) => { 
+                next: (response: any) => {
                     this.userService.updateCurrentUser(response);
 
                 }
             })
         }
-        if(this.newBannerImage !== undefined){
+        if (this.newBannerImage !== undefined) {
             this.userService.setUserBannerImage(this.user!.id!, this.newBannerImage)
         }
-        const userdto: UserDTO  = {
+        const userdto: UserDTO = {
             name: this.name!,
         };
         this.allUsers = this.userService.getUsers();
