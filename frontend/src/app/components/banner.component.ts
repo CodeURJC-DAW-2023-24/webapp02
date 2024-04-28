@@ -65,6 +65,17 @@ export class BannerComponent {
         };
         this.allUsers = this.userService.getUsers();
         const userdto: UserDTO = {};
+        if(this.newProfileImage !== undefined && this.newProfileImage !== this.userImage){
+            // this.userService.setUserImage(this.user?.id).subscribe({
+            //     next: (response) => {
+
+            //     }
+            // })
+        }
+        if(this.newBannerImage !== undefined && this.newBannerImage !== this.bannerImage){
+            //this.userService.setUserBannerImage(this.user?.id).subscribe()
+        }
+
         this.userService.addOrUpdateUser(userdto, this.user).subscribe({
             next: (response: any) => {
                 this.user!.id = response.id;
