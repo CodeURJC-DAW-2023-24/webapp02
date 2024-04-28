@@ -3,6 +3,8 @@ import { User } from '../models/user.model';
 import { Element } from '../models/element.model';
 import { UsersService } from '../services/user.service';
 import { LoginService } from '../services/login.service';
+import { UserDTO } from '../models/userDTO.model';
+import { Observable } from 'rxjs';
 
 @Component({
     selector: 'app-banner',
@@ -14,17 +16,21 @@ export class BannerComponent {
     userImage: string | undefined;
     bannerImage: string | undefined;
     name: string | undefined;
+    newProfileImage: string | undefined;
+    newBannerImage: string | undefined;
+    allUsers: Observable<User[]> | undefined; 
+    allUsers2: User[] = [];
 
     constructor(private loginService: LoginService, private userService: UsersService) { }
 
     ngOnInit() {
-        this.name=this.user?.name;
+        this.name = this.user?.name;
         this.loadLogoImage();
         this.loadBannerImage();
     }
 
     loadLogoImage() {
-        if(this.user && this.user.id !== undefined){
+        if (this.user && this.user.id !== undefined) {
             this.userService.getUserImage(this.user?.id).subscribe((imageData) => {
                 if (imageData) {
                     const blob = new Blob([imageData], { type: 'image/jpeg' });
@@ -35,11 +41,11 @@ export class BannerComponent {
             });
         }
     } //LoadImage end
-    loadBannerImage(){
-        if(this.user && this.user.id !== undefined){
-            this.userService.getUserBannerImage(this.user?.id).subscribe((imageData) =>{
-                if(imageData){
-                    const blob = new Blob([imageData], {type: 'image/jpeg'});
+    loadBannerImage() {
+        if (this.user && this.user.id !== undefined) {
+            this.userService.getUserBannerImage(this.user?.id).subscribe((imageData) => {
+                if (imageData) {
+                    const blob = new Blob([imageData], { type: 'image/jpeg' });
                     this.bannerImage = URL.createObjectURL(blob);
                 } else {
                     this.bannerImage = undefined;
@@ -48,7 +54,28 @@ export class BannerComponent {
         }
 
     }
-    changeName(entryname:string){
-        this.name = entryname;
+
+    updateProfile() {
+        this.user = {
+            name: this.name!,
+            roles: this.user?.roles!,
+            password: this.user?.password!,
+            listasDeElementos: this.user?.listasDeElementos!,
+            id: this.user?.id
+        };
+        this.allUsers = this.userService.getUsers();
+        const userdto: UserDTO = {};
+        this.userService.addOrUpdateUser(userdto, this.user).subscribe({
+            next: (response: any) => {
+                this.user!.id = response.id;
+                if (this.user) {
+                    //const existingUserIndex = this.allUsers!.findIndex(u => u.id === response.id);
+                    this.allUsers2.findIndex
+                }
+            },
+            error: (error) => {
+                console.error('Error:', error);
+            }
+        })
     }
 }
