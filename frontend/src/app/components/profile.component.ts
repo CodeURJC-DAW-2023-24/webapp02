@@ -17,9 +17,11 @@ export class ProfileComponent {
   titleOfLists: string[] = [];
   index: number = 0;
   elementsOfUser: any[] = [];
-  listOfElements: Element[] = [];
+  allElements: Element[] = [];
+  elementList: Element[] | undefined = [];
   elementsOfUser2: Map<string, number[]>  = new Map;
   elementsOfUser3: Map<string, number[]>  = new Map;
+  newMap: Map<string, Element[]> = new Map;
   exampleElement!: Element;
   actualUser: User | undefined;
 
@@ -33,34 +35,18 @@ export class ProfileComponent {
   profileWindow() {
     //Checking that the user is logged
     this.actualUser = this.loginService.currentUser();
-
-
-    //TO-DO make a for in thisActualUser.elements to get all elements 1 by 1
-    //this.elementsOfUser.push(this.actualUser?.elements);
-    //this.elementsOfUser.push(this.actualUser?.listasDeElementos);
-
     this.elementsOfUser2 = this.actualUser!.listasDeElementos;
-    console.log(this.elementsOfUser2);
 
-    // for(let key of this.elementsOfUser2){
-    //   console.log(key);
+    // console.log(this.elementsOfUser2);
+    // console.log(Object.keys(this.elementsOfUser2));
+    // console.log(Object.values(this.elementsOfUser2));
+    // for(let title of Object.keys(this.elementsOfUser2 )){
+    //   this.titleOfLists.push(title);
     // }
-    //console.log(this.elementsOfUser2.get("Favoritos"));
-    // const valuesArray = Array.from(this.elementsOfUser2.values());
-    // console.log(valuesArray);
-    // if (this.elementsOfUser2.has("Favoritos")){
-    //   console.log("Tiene favoritos");
+    // console.log("Array titleOfLists:" + this.titleOfLists);
+    // for(let ids of Object.values(this.elementsOfUser2)){
+    //   console.log(ids);
     // }
-    console.log(Object.keys(this.elementsOfUser2));
-    console.log(Object.values(this.elementsOfUser2));
-    for(let title of Object.keys(this.elementsOfUser2 )){
-      this.titleOfLists.push(title);
-    }
-    console.log("Array titleOfLists:" + this.titleOfLists);
-
-    for(let ids of Object.values(this.elementsOfUser2)){
-      console.log(ids);
-    }
 
     for(let [key, value] of Object.entries(this.elementsOfUser2)){
       console.log("KEY: "+ key + " VALUE: " + value);
@@ -78,7 +64,21 @@ export class ProfileComponent {
                 if (imageData2) {
                   const blob = new Blob([imageData2], { type: 'image/jpeg' });
                   this.elementsImages[element.name] = URL.createObjectURL(blob);
-                  this.listOfElements.push(element);
+                  this.allElements.push(element);
+                  if (!this.newMap.has(key)){
+                    // console.log(element);
+                    // if(this.allElements.includes(element)){
+                    //   this.allElements.push(element);
+                    // }
+                    this.allElements.push(element);
+                    this.newMap.set(key, this.elementList!);
+                  } else {
+                    this.elementList = [];
+                    this.elementList = this.newMap.get(key);
+                    this.elementList!.push(element);
+                    this.newMap.set(key, this.elementList!);
+                    this.elementList = [];
+                  }
 
                   //this.elementsImages[this.elementService.getElementById(idX).name] = URL.createObjectURL(blob)
                   // } else { this.elementsImages[this.elementService.getElementById(idX).name] = ''}
@@ -94,13 +94,18 @@ export class ProfileComponent {
           });
           //this.exampleElement = this.elementService.getElementById(idX);
 
-
         } //if idx not undefined
 
       }//for let idx of value
+
     }    //for let key and value 
+
   }//profile window
+
 }//Export Class
+
+
+
         //ANTERIOR muestra de elements pues no se usaban las listas:
         // for (let elementX of this.elementsOfUser[0]){
         //   for(let elementX of elements){

@@ -7,7 +7,7 @@
     <app-banner [user] = "actualUser"></app-banner>
 
     <section id="tops">
-        <app-tops [tops]="elementsOfUser[0]" [topImages] = "elementsImages" title = "Guardados por el usuario"></app-tops>
+        <app-tops [tops]="allElements" [topImages] = "elementsImages" title = {{newMap.keys}}> </app-tops>
     </section>
 
     <!-- <div *ngFor="let elem of elementsOfUser">{{elem.name}} </div> -->
@@ -18,5 +18,5 @@
             </div>
         </div>
     </div> -->
-    <app-stats [elements]="listOfElements"></app-stats>
+    <app-stats [elements]="allElements"></app-stats>
 </main>

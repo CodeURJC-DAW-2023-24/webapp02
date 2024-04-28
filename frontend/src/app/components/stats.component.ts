@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Element } from '../models/element.model';
 import { Renderer2, ElementRef } from '@angular/core';
 import Chart from 'chart.js/auto';
@@ -11,33 +11,51 @@ import Chart from 'chart.js/auto';
 export class StatsComponent {
 
     @Input() elements: Element[] = [];
+    previousElements: Element[] = [];
     typeNow: string | undefined;
     genresNow: string[] = [];
-    genresUser: string[]=[];
+    genresUser: string[] = [];
     amountOfGenres: Map<string, number> = new Map;
-    numBooks: number =0;
-    numFilms: number =0;
-    numSeries: number =0;
-    actualValue: number | undefined=0;
+    numBooks: number = 0;
+    numFilms: number = 0;
+    numSeries: number = 0;
+    actualValue: number | undefined = 0;
 
-    xValues2: string [] = [];
+    xValues2: string[] = [];
     yValues2: number[] = [];
 
     //@Input() topImages: { [key: string]: string } = {};
     //@Input() title: String  | undefined;
 
-    ngOnInit(){
+    ngOnInit() {
         this.calculateStats();
         this.renderChart();
         this.renderChart2();
     }
 
-    calculateStats(){
-        for(let elementX of this.elements){
+    ngOnChanges(changes: SimpleChanges): void {
+        if (changes['elements'] && this.elements) {
+            this.calculateStats();
+            this.renderChart();
+            this.renderChart2();
+            // this.typeSelector(this.type, this.element);
+        }
+    }
+
+    // ngOnCheck() {
+    //     if (this.elements !== this.previousElements) {
+    //         console.log(`Value changed from ${this.previousElements} to ${this.elements}`);
+    //         this.previousElements = this.elements;
+    //     }
+    // }
+
+
+    calculateStats() {
+        for (let elementX of this.elements) {
             this.typeNow = elementX.type;
-            switch(this.typeNow){
+            switch (this.typeNow) {
                 case "LIBRO":
-                    this.numBooks = this.numBooks +1;
+                    this.numBooks = this.numBooks + 1;
                     break;
                 case "PELICULA":
                     this.numFilms = this.numFilms + 1;
@@ -47,10 +65,10 @@ export class StatsComponent {
                     break;
             }
             this.genresNow = elementX.generos;
-            for(let currentGenre of this.genresNow){    
-                if(!this.amountOfGenres.has(currentGenre)){
+            for (let currentGenre of this.genresNow) {
+                if (!this.amountOfGenres.has(currentGenre)) {
                     this.amountOfGenres.set(currentGenre, 1);
-                } else{
+                } else {
                     this.actualValue = this.amountOfGenres.get(currentGenre);
                     this.actualValue = this.actualValue! + 1;
                     this.amountOfGenres.set(currentGenre, this.actualValue);
@@ -109,4 +127,4 @@ export class StatsComponent {
             ctx.fillText('Géneros más gustados', canvas.width / 2, 30);
         }
     } //end of renderChart1
-  }
+}
