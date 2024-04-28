@@ -84,6 +84,13 @@ public class User {
         this.roles = List.of(roles);
 	}
 
+    // public User(String name, String password, Blob profileImage, String... roles) {
+	// 	this.name = name;
+	// 	this.password = password;
+    //     this.roles = List.of(roles);
+    //     this.profileImage = profileImage;
+	// }
+
     //GETTERS&SETTERS
     public String getName() {
         return name;

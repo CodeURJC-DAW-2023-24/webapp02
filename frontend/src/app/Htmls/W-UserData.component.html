@@ -3,7 +3,7 @@
 
   <div *ngIf="isLogged; else elseBlock">
     <a class="navbar-brand text-white align-text-center text-uppercase" routerLink="/{{currentUser?.name}}/Profile">
-        <img [src]="userImage" alt="Logo" width="50" height="50" class="align-text-center rounded-circle">
+        <img src="{{currentUser?.imageURL}}" alt="Logo" width="50" height="50" class="align-text-center rounded-circle">
     <strong>{{currentUser?.name}}</strong></a>
     <div id = "logoutbutton" class = "btn">
       <button (click)="logout()"> Log Out</button>

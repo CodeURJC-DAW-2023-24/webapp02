@@ -7,4 +7,5 @@ export interface User {
   elements?: Element[];
   password: string;
   listasDeElementos: Map<string, number[]>;
+  imageURL?: string;
 }
