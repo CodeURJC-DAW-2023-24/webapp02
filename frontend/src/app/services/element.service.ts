@@ -36,6 +36,12 @@ export class ElementsService {
             );
     }
 
+    addGenre(genreName: string) {
+        let genre = new FormData()
+        genre.append("genre",genreName)
+        this.httpClient.post(BASE_URL+ "genres", genre).subscribe()
+    }
+
     private handleError(error: any) {
         if (error instanceof HttpErrorResponse) {
             // Manejar errores de HTTP

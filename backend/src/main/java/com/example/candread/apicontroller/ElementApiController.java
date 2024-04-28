@@ -12,7 +12,9 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.example.candread.model.Element;
 import com.example.candread.model.Element.Genres;
@@ -20,6 +22,7 @@ import com.example.candread.model.Element.Seasons;
 import com.example.candread.model.Element.States;
 import com.example.candread.model.Element.Types;
 import com.example.candread.services.ElementService;
+
 
 
 @RestController
@@ -74,9 +77,16 @@ public class ElementApiController {
     }
     
     @GetMapping("/genres")
-    public Genres[] getGenres(Pageable pageable) {
-        Genres[] genres = Element.Genres.values();
-        return genres;
+    public List<String> getGenres(Pageable pageable) {
+        return this.elementService.baseGenres;
+        
+    }
+
+    @PostMapping("/genres")
+    public List<String> addGenres(@RequestParam("genre") String genre) {
+         this.elementService.baseGenres.add(genre);
+         return this.elementService.baseGenres;
+        
     }
 
     @GetMapping("/types")

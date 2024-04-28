@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { SeriesService } from '../services/serie.service';
 import { FilmsService } from '../services/film.service';
 import { BooksService } from '../services/book.service';
+import { ElementsService } from '../services/element.service';
+import { Router } from '@angular/router';
 
 const BASE_URL = "/api/series/";
 
@@ -17,7 +19,8 @@ export class AdminComponent {
 
 
   constructor(private http: HttpClient, private seriesService: SeriesService,
-    private bookService: BooksService, private filmService: FilmsService) { }
+    private bookService: BooksService, private filmService: FilmsService,
+    private elementService : ElementsService, private router : Router) {     }
 
   // ngOnInit() {
   // }
@@ -77,8 +80,9 @@ export class AdminComponent {
         next: (element) => {
           if (element.id) {
             this.bookService.uploadBookImage(element.id, imageFile).subscribe()
+            window.location.reload()
           }
-
+          window.location.reload()
         },
         error: (err) => {
           if (err.status != 404) {
@@ -97,8 +101,9 @@ export class AdminComponent {
         next: (element) => {
           if (element.id) {
             this.filmService.addFilmImage(element.id, imageFile).subscribe()
+            window.location.reload()
           }
-
+          window.location.reload()
         },
         error: (err) => {
           if (err.status != 404) {
@@ -115,7 +120,9 @@ export class AdminComponent {
         next: (element) => {
           if (element.id) {
             this.seriesService.addSerieImage(element.id, imageFile).subscribe()
-          }
+            window.location.reload()
+          }            
+          window.location.reload()
         },
         error: (err) => {
           if (err.status != 404) {
@@ -135,6 +142,12 @@ export class AdminComponent {
         formElement.style.display = "none";
       }
     }
+  }
+
+  addGenre(genre: string) {
+     this.elementService.addGenre(genre);
+    // window.location.reload()
+    
   }
 }
 

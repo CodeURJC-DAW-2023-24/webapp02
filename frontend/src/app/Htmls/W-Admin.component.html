@@ -175,7 +175,11 @@
                                     <!-- Columna para los campos de entrada -->
                                     <div class="col-md-6 mb-3">
                                         <label for="campo1" class="form-label">Nombre:</label>
-                                        <input type="text" name="genreName" class="form-control" id="campo1">
+                                        <input type="text" name="genreName" class="form-control" id="campo1" #genreName>
+                                    </div>
+                                    <div class="col-md-12">
+                                        <button
+                                            (click)="(addGenre(genreName.value))">Agregar</button>
                                     </div>
                                 </div>
                             </div>

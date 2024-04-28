@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -42,6 +43,11 @@ public class ElementService {
 
     @Autowired
     private UserRepository userRepository;
+    
+    public List<String> baseGenres = new ArrayList<>(Arrays.asList(
+            "ACCION", "AVENTURA", "TERROR",  "MISTERIO", "ROMANCE", "CIENCIAFICCION", "DRAMA",
+            "INFANTIL", "COMEDIA", "FANTASIA", "SOBRENATURAL", "NOVELA", "JUVENIL"
+        ));
 
     // @PostConstruct
     public void insertElement() throws IOException, SerialException, SQLException {
