@@ -83,6 +83,9 @@ export class UsersService {
 		});
 
 		return this.httpClient.put<User>(BASE_Url + user.id, u).pipe(
+      tap((response) => {
+				localStorage.setItem('currentUser', JSON.stringify(response));
+			}),
 			catchError(error => this.handleError(error))
 		);
 	}
@@ -97,4 +100,8 @@ export class UsersService {
 		console.error(error);
 		return throwError("Server error (" + error.status + "): " + error.text())
 	}
+
+  updateCurrentUser(user: User){
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
 }

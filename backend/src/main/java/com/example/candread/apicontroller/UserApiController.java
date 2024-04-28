@@ -179,8 +179,8 @@ public class UserApiController {
                 user.setListasDeElementos(listOfList);
             }
             // We save the user in the DDBB
-            userService.repoSaveUser(user);
-            return ResponseEntity.ok(user);
+            User userResponse = userService.repoSaveUser(user);
+            return ResponseEntity.ok(userResponse);
         } else {
             return ResponseEntity.notFound().build();
         }
