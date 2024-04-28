@@ -13,7 +13,7 @@
     
 </head>
 
-<form id="addSerieForm"  method="post"action = "/SingleElement/edit/add" enctype="multipart/form-data" accept-charset="UTF-8">
+<div id="addSerieForm"  method="post"action = "/SingleElement/edit/add" enctype="multipart/form-data" accept-charset="UTF-8">
     <div class="col-md-12 mt-5 mb-5">
         <h4>Modificar Elemento</h4>
         <div class="card rounded">
@@ -22,17 +22,17 @@
                     <!-- Columna para los campos de entrada -->
                     <div class="col-md-6 mb-3">
                         <label for="campo1" class="form-label">Nombre:</label>
-                        <input type="text" name="name" class="form-control" id="campo1" [(ngModel)]="nombre">
+                        <input type="text" name="name" class="form-control" id="elementName" >
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="campo2" class="form-label">Descripción:</label>
-                        <input type="text" name="description" class="form-control datepicker" id="campo2" value="{{elemen.description}}" >
+                        <input type="text" name="description" class="form-control datepicker" id="elementDescription" >
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="campo3" class="form-label">Autor:</label>
-                        <input type="text" name="author" class="form-control" id="campo3" value="{{elemen.author}}" >
+                        <input type="text" name="author" class="form-control" id="elementAuthor"  >
                     </div>
-                    <div id="elementType" data-type="{{elemen.type}}" style="display: none;"></div>
+                    <div id="elementType"  style="display: none;"></div>
                     <div class="col-md-12 mb-3">
                         <label for="campo4" class="form-label">Tipo:</label>
                         <select name="type" class="form-select" id="type-select">
@@ -41,10 +41,10 @@
                             <option value="PELÍCULA">PELÍCULA</option>
                         </select>
                     </div>
-                    <div id="elementSeason" data-season="{{elemen.season}}" style="display: none;"></div>
+                    <div id="elementSeason"  style="display: none;"></div>
                     <div class="col-md-12 mb-3">
                         <label for="campo5" class="form-label">Estación:</label>
-                        <select [(ngModel)]="selectedSeason" name="season" id="season-select" class="form-select">
+                        <select  name="season" id="season-select" class="form-select">
                             <option value="VERANO">VERANO</option>
                             <option value="PRIMAVERA">PRIMAVERA</option>
                             <option value="OTOÑO">OTOÑO</option>
@@ -53,7 +53,7 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="campo6" class="form-label">Estado:</label>
-                        <div id="elementState" data-state="{{elemen.state}}" style="display: none;"></div>
+                        <div id="elementState"  style="display: none;"></div>
                         <select name="state" class="form-select" id="state-select">
                             <option value="COMPLETO">COMPLETO</option>
                             <option value="EN_EMISION">EN EMISION</option>
@@ -62,16 +62,16 @@
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="campo7" class="form-label">País:</label>
-                        <input type="text" name="country" class="form-control" id="campo7" value="{{elemen.country}}">
+                        <input type="text" name="country" class="form-control" id="elementCountry" >
                     </div>
-                    <div id="elementGenre" data-genre="{{genres}}" style="display: none;"></div>
+                    <div id="elementGenre"  style="display: none;"></div>
                     <div class="col-md-12 mb-3">
                         <label for="campo8" class="form-label">Géneros:</label>
-                        <input type="text" name="genres" class="form-control" id="campo7" value="{{genres}}">
+                        <input type="text" name="genres" class="form-control" id="campo7" >
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="campo9" class="form-label">Año:</label>
-                        <input type="text" name="years" class="form-control" id="campo9" value="{{elemen.year}}">
+                        <input type="text" name="years" class="form-control" id="elementYear" >
                     </div>
                     <div class="col-md-12 mb-3">
                         <label for="campo10" class="form-label">Sube su imagen:</label>
@@ -84,8 +84,8 @@
                 </div>
             </div>
         </div>
-        <input type="hidden" name="elementId" value="{{elemen.id}}">
+        <!-- <input type="hidden" name="elementId" value="{{elemen.id}}"> -->
     </div>
-    <input type="hidden" name="_csrf" value="{{token}}">
-</form>
+   
+</div>
 

@@ -329,4 +329,17 @@ public class SeriesApiController {
         return ResponseEntity.noContent().build();
     }
 
+
+    @GetMapping("/{name}/")
+    public ResponseEntity<Element> getSerieByName(@PathVariable String name) {
+        Optional<Element> optElement = elementService.repoFindByNameAndType(name,"SERIE");
+
+        if (optElement.isPresent()) {
+            Element element = (Element) optElement.get();
+            return ResponseEntity.ok(element);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

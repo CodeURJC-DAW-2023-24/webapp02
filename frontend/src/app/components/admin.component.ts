@@ -41,8 +41,8 @@ export class AdminComponent {
         { withCredentials: true }
       ).subscribe({
         next: (response) => {
-          console.log(response)
-          // this.http.get("/Admin");
+          // console.log(response)
+           this.http.get("/Admin");
         },
         error: (err) => {
           console.log(err)

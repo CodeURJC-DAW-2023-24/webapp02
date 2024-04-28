@@ -335,4 +335,17 @@ public class BookApiController {
         return ResponseEntity.noContent().build();
     }
 
+
+    @GetMapping("/{name}/")
+    public ResponseEntity<Element> getBookByname(@PathVariable String name) {
+        Optional<Element> optElement = elementService.repoFindByNameAndType(name,"LIBRO");
+
+        if (optElement.isPresent()) {
+            Element element = (Element) optElement.get();
+            return ResponseEntity.ok(element);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

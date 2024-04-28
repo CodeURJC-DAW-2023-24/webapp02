@@ -5,7 +5,7 @@ import { catchError, map } from 'rxjs/operators';
 
 import { Element } from '../models/element.model';
 
-const BASE_URL = '/api/films/';
+const BASE_URL_FILMS = '/api/films/';
 
 @Injectable({ providedIn: 'root' })
 export class FilmsService {
@@ -13,13 +13,13 @@ export class FilmsService {
 	constructor(private httpClient: HttpClient) { }
 
 	getFilms(): Observable<Element[]> {
-		return this.httpClient.get(BASE_URL).pipe(
+		return this.httpClient.get(BASE_URL_FILMS).pipe(
 			//catchError(error => this.handleError(error))
 		) as Observable<Element[]>;
 	}
 
 	get5Films(): Observable<Element[]> {
-		return this.httpClient.get(BASE_URL + "top?page=0&size=5").pipe(
+		return this.httpClient.get(BASE_URL_FILMS + "top?page=0&size=5").pipe(
 			map((response: any) => response.content),
 			// Puedes agregar catchError aquí si lo necesitas
 		);
@@ -27,14 +27,14 @@ export class FilmsService {
 
 	//ask for 10 films
 	getFilmPage(page: number): Observable<Element[]> {
-		const url = `${BASE_URL}?page=${page}&size=${10}`;
+		const url = `${BASE_URL_FILMS}?page=${page}&size=${10}`;
 		return this.httpClient.get(url).pipe(
 			//catchError(error => this.handleError(error))
 		) as Observable<Element[]>;
 	}
 
 	getFilm(id: number | string): Observable<Element> {
-		return this.httpClient.get(BASE_URL + id).pipe(
+		return this.httpClient.get(BASE_URL_FILMS + id).pipe(
 			//catchError(error => this.handleError(error))
 		) as Observable<Element>;
 	}
@@ -48,19 +48,19 @@ export class FilmsService {
 	}
 
 	private addFilm(Film: Element) {
-		return this.httpClient.post(BASE_URL, Film).pipe(
+		return this.httpClient.post(BASE_URL_FILMS, Film).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
 
 	private updateFilm(Film: Element) {
-		return this.httpClient.put(BASE_URL + Film.id, Film).pipe(
+		return this.httpClient.put(BASE_URL_FILMS + Film.id, Film).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
 
 	removeFilm(Film: Element) {
-		return this.httpClient.delete(BASE_URL + Film.id).pipe(
+		return this.httpClient.delete(BASE_URL_FILMS + Film.id).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
@@ -76,5 +76,12 @@ export class FilmsService {
 			console.error(error);
 		}
 		return throwError(() => new Error("Server error (" + error.status + "): " + error.text()));
+	}
+
+
+	getFilmByName(name: string): Observable<Element> {
+		return this.httpClient.get(BASE_URL_FILMS + name + "/").pipe(
+			//catchError(error => this.handleError(error))
+		) as Observable<Element>;
 	}
 }

@@ -336,4 +336,17 @@ public class FilmApiController {
         return ResponseEntity.noContent().build();
     }
 
+
+    @GetMapping("/{name}/")
+    public ResponseEntity<Element> getFilmByname(@PathVariable String name) {
+        Optional<Element> optElement = elementService.repoFindByNameAndType(name,"PELICULA");
+
+        if (optElement.isPresent()) {
+            Element element = (Element) optElement.get();
+            return ResponseEntity.ok(element);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

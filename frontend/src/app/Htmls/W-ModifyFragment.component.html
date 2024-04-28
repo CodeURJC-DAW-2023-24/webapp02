@@ -1,7 +1,7 @@
 <script src="/Scripts/editElement.js"></script>
 
-<div id="modifyBookForm" >
-    <div id="modifyForm"  method="post" enctype="multipart/form-data" accept-charset="UTF-8">
+<div *ngIf="found == undefined || found == false; else Found" id="modifyBookForm" style="display: none;">
+    <div id="modifyForm" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
         <div class="col-md-12 mt-5 mb-5">
             <h4>Modificar Elemento</h4>
             <div class="card rounded">
@@ -11,13 +11,30 @@
                         <div class="col-md-6 mb-3">
                             <label for="campo1" class="form-label">Nombre del elemento a modificar:</label>
                             <input type="text" name="nameSearch" class="form-control" id="campo1" #nombre>
-                            <button (click)="edit(nombre.value)">Buscar</button>
+                            <select name="season" id="season-select" class="form-select" #type>
+                                <option value="LIBRO">LIBRO</option>
+                                <option value="PELICULA">PELICULA</option>
+                                <option value="SERIE">SERIE</option>
+                            </select>
+                            <button (click)="search(nombre.value, type.value)">Buscar</button>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-        
-        <!-- <input type="hidden" name="_csrf" value="{{token}}"> -->
     </div>
 </div>
+
+<ng-template #Found>
+    <div id="addSerieForm" method="post" action="/SingleElement/edit/add" enctype="multipart/form-data" accept-charset="UTF-8">
+        <div class="col-md-12 mt-5 mb-5">
+            <h4>Modificar Elemento</h4>
+            <div class="card rounded">
+                <div *ngIf="observableElement | async as elementFound" class="card-body">
+                    <formComponent [element]="elementFound"></formComponent>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+

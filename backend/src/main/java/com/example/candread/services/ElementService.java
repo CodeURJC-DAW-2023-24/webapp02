@@ -671,4 +671,10 @@ public class ElementService {
         elementRepository.deleteByName(name);
     }
 
+    public Optional<Element> repoFindByNameAndType(String name, String type){
+        //Optional<Element> elementOptional = elementRepository.findById(id);
+        //return elementOptional;
+        return elementRepository.findByNameAndType(name,type);
+    }
+
 }
