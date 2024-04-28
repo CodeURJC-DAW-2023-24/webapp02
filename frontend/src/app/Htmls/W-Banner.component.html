@@ -1,10 +1,11 @@
 <section id="bannerSection" class="bannerSection">
     <img [src]="bannerImage" alt="Banner" class="ib">
     <img [src]="userImage" alt="Logo" width="50" height="50" id="bannerLogo">
-    <p type="text" [(ngModel)]="name" id="bannerUsername" href="#exampleModal">
+    <p id="bannerUsername">{{user?.name}}<a href="#exampleModal"></a>
+    <!-- <p type="text" [(ngModel)]="name" id="bannerUsername" href="#exampleModal"> -->
     <!-- <p id="bannerUsername">{{user.name}}<a href="#exampleModal"> -->
     <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <img src="frontend\src\assets\Images\Icon-Edit.png" alt="HTML tutorial" style="width:30px;height:30px;">
+        <img src="frontend\src\assets\Images\Icon-Edit.png" alt="Edit_Button" style="width:30px;height:30px;">
     </button>
     <!-- <button (click)="changeName('')"> Editar nombre {{name}}</button> -->
     <!-- <img [src]="userImage" alt="Logo" width="50" height="50" class="align-text-center rounded-circle"> -->

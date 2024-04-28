@@ -2,6 +2,7 @@ import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { Element } from '../models/element.model';
 import { Renderer2, ElementRef } from '@angular/core';
 import Chart from 'chart.js/auto';
+import { ProfileComponent } from '../components/profile.component';
 
 @Component({
     selector: 'app-stats',
@@ -24,16 +25,40 @@ export class StatsComponent {
     xValues2: string[] = [];
     yValues2: number[] = [];
 
+    constructor(private profileComponent: ProfileComponent) { }
+
     //@Input() topImages: { [key: string]: string } = {};
     //@Input() title: String  | undefined;
 
+    // async ngOnInit() {
+    //     this.calculateStats();
+    //     this.renderChart();
+    //     this.renderChart2();
+    // }
+    // ngOnInit() {
+    //     this.getAllElements().then(() => {
+    //         this.calculateStats();
+    //         this.renderChart();
+    //         this.renderChart2();
+    //     });
+    // }
+
+    // async getAllElements(): Promise<void> {
+    //     if (!this.elements || this.elements.length === 0) {
+    //         if (this.profileComponent && this.profileComponent.allElementsPromise) {
+    //             this.elements = await this.profileComponent.allElementsPromise;
+    //         }
+    //     }
+    // }
     ngOnInit() {
-        this.calculateStats();
-        this.renderChart();
-        this.renderChart2();
+        this.profileComponent.dataLoaded.subscribe(() => {
+            this.calculateStats();
+            this.renderChart();
+            this.renderChart2();
+        });
     }
 
-    ngOnChanges(changes: SimpleChanges): void {
+    async ngOnChanges(changes: SimpleChanges): Promise<void> {
         if (changes['elements'] && this.elements) {
             this.calculateStats();
             this.renderChart();
@@ -50,7 +75,7 @@ export class StatsComponent {
     // }
 
 
-    calculateStats() {
+    async calculateStats(): Promise<void> {
         for (let elementX of this.elements) {
             this.typeNow = elementX.type;
             switch (this.typeNow) {

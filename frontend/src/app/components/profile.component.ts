@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../models/user.model';
 import { Element } from '../models/element.model';
@@ -12,12 +12,14 @@ import { ElementsService } from '../services/element.service';
   styleUrls: ['../Css/S-Profile.css', '../Css/S-Main.css']
 })
 export class ProfileComponent {
+  @Output() dataLoaded: EventEmitter<void> = new EventEmitter<void>();
+
   name = '';
   elementsImages: { [key: string]: string } = {};
   titleOfLists: string[] = [];
   index: number = 0;
   elementsOfUser: any[] = [];
-  allElements: Element[] = [];
+  @Output() allElements: Element[] = [];
   elementList: Element[] | undefined = [];
   elementsOfUser2: Map<string, number[]>  = new Map;
   elementsOfUser3: Map<string, number[]>  = new Map;
@@ -25,28 +27,34 @@ export class ProfileComponent {
   exampleElement!: Element;
   actualUser: User | undefined;
 
+  allElementsPromise: Promise<Element[]> | undefined;
+
   constructor(private loginService: LoginService, private router: Router,
     private userService: UsersService, private elementService: ElementsService) { }
 
+  // ngOnInit() {
+  //   this.profileWindow();
+  // }
+  // ngOnInit() {
+  //   this.allElementsPromise = this.fetchAllElements();
+  // }
+
+  // async fetchAllElements(): Promise<Element[]> {
+  //   const allElements: Element[] = [];
+  //   this.profileWindow();
+  //   return allElements;
+  // }
+  
   ngOnInit() {
-    this.profileWindow();
+    this.profileWindow().then(() => {
+      this.dataLoaded.emit();
+    });
   }
 
-  profileWindow() {
+  async profileWindow(): Promise<void>{
     //Checking that the user is logged
     this.actualUser = this.loginService.currentUser();
     this.elementsOfUser2 = this.actualUser!.listasDeElementos;
-
-    // console.log(this.elementsOfUser2);
-    // console.log(Object.keys(this.elementsOfUser2));
-    // console.log(Object.values(this.elementsOfUser2));
-    // for(let title of Object.keys(this.elementsOfUser2 )){
-    //   this.titleOfLists.push(title);
-    // }
-    // console.log("Array titleOfLists:" + this.titleOfLists);
-    // for(let ids of Object.values(this.elementsOfUser2)){
-    //   console.log(ids);
-    // }
 
     for(let [key, value] of Object.entries(this.elementsOfUser2)){
       console.log("KEY: "+ key + " VALUE: " + value);
@@ -60,11 +68,7 @@ export class ProfileComponent {
         if (idX !== undefined) {
           this.elementService.getElementById(idX).subscribe((element: Element) => {
             if (element) {
-              this.elementService.getElementImage(idX).subscribe((imageData2) => {
-                if (imageData2) {
-                  const blob = new Blob([imageData2], { type: 'image/jpeg' });
-                  this.elementsImages[element.name] = URL.createObjectURL(blob);
-                  this.allElements.push(element);
+              this.allElements.push(element);
                   if (!this.newMap.has(key)){
                     // console.log(element);
                     // if(this.allElements.includes(element)){
@@ -80,7 +84,10 @@ export class ProfileComponent {
                     this.newMap.set(key, this.elementList!);
                     this.elementList = [];
                   }
-
+              this.elementService.getElementImage(idX).subscribe((imageData2) => {
+                if (imageData2) {
+                  const blob = new Blob([imageData2], { type: 'image/jpeg' });
+                  this.elementsImages[element.name] = URL.createObjectURL(blob);
                   //this.elementsImages[this.elementService.getElementById(idX).name] = URL.createObjectURL(blob)
                   // } else { this.elementsImages[this.elementService.getElementById(idX).name] = ''}
 
@@ -88,7 +95,6 @@ export class ProfileComponent {
                   this.elementsImages[element.name] = '';
                 }
               });
-
             } else { //element not found
               console.log("Elemento no encontrado");
             }
@@ -104,24 +110,5 @@ export class ProfileComponent {
   }//profile window
 
 }//Export Class
-
-
-
-        //ANTERIOR muestra de elements pues no se usaban las listas:
-        // for (let elementX of this.elementsOfUser[0]){
-        //   for(let elementX of elements){
-        //     if(elementX.id !== undefined){
-        //       this.elementService.getElementImage(elementX.id).subscribe((imageData) => {
-        //         if (imageData){
-        //           const blob = new Blob([imageData], {type: 'image/jpeg'});
-        //           this.elementsImages[elementX.name] = URL.createObjectURL(blob)
-        //         } else {
-        //           this.elementsImages[elementX.name] = ''
-        //         }
-        //       });
-        //     }
-        //   }
-
-        // }
 
 
