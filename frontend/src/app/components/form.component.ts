@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Element } from '../models/element.model';
-import { Observable } from 'rxjs';
+import { Observable, windowWhen } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { SeriesService } from '../services/serie.service';
 import { BooksService } from '../services/book.service';
@@ -82,7 +82,7 @@ export class FormComponent implements OnChanges {
                 }
 
             }
-            this.router.navigateByUrl("/Admin")
+            window.location.reload()
         }
 
         else if (this.type == "PELICULA" || this.type == "PELÍCULA") {
@@ -96,9 +96,10 @@ export class FormComponent implements OnChanges {
                 if (this.element.id) {
                     this.filmService.uploadFilmImage(this.element.id, imageFile).subscribe()
                 }
-                this.router.navigateByUrl("/Admin")
 
             }
+            window.location.reload()
+
         }
 
 
@@ -113,7 +114,8 @@ export class FormComponent implements OnChanges {
                     this.seriesService.uploadSerieImage(this.element.id, imageFile).subscribe()
                 }
             }
-            this.router.navigateByUrl("Admin")
+            window.location.reload()
+
         }
     }
 
