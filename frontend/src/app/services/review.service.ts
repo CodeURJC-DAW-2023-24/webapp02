@@ -1,11 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { throwError } from 'rxjs';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 
 import { Review } from '../models/review.model';
+import { User } from '../models/user.model';
 
-const BASE_URL = '/api/reviews/';
+const BASE_URL_REVIEWS = '/api/reviews/';
 
 @Injectable({ providedIn: 'root' })
 export class ReviewsService {
@@ -21,6 +22,16 @@ export class ReviewsService {
 		}
 	}
 
+	getReviewUserById(id:number): Observable<User>{
+        return this.httpClient.get<User>(BASE_URL_REVIEWS + id + "/user")
+            .pipe(
+                catchError((error: HttpErrorResponse) => {
+                    console.error('Error:', error);
+                    return throwError(() => new Error('Server error: ' + error.statusText));
+                })
+            );
+    }
+
 	private addReview(review: Review) {
         const reviewJson: any = {
 			body: review.body,
@@ -28,7 +39,7 @@ export class ReviewsService {
             userId: review.userLinked?.id,
 			elementId: review.element_id?.id
 		};
-		return this.httpClient.post(BASE_URL, reviewJson).pipe(
+		return this.httpClient.post(BASE_URL_REVIEWS, reviewJson).pipe(
 			tap((data: any) => {
 				const id = data.id;
 				return { id } as any;
@@ -43,7 +54,7 @@ export class ReviewsService {
             rating: review.rating,
             userId: review.userLinked?.id
 		};
-		return this.httpClient.put<Review>(BASE_URL + review.id, reviewJson).pipe(
+		return this.httpClient.put<Review>(BASE_URL_REVIEWS + review.id, reviewJson).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
