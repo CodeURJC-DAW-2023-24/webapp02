@@ -29,10 +29,12 @@ export class UserDataComponent {
       if(this.currentUser && this.currentUser.id !== undefined){
         //this.userService.getUserImage(this.currentUser?.id);
         this.isAdmin = this.loginService.isAdmin();
+        this.currentUser!.imageURL = "../../assets/Images/Aladdin.jpg";
         this.userService.getUserImage(this.currentUser?.id).subscribe((imageData) => {
           if(imageData){
             const blob = new Blob([imageData], {type: 'image/jpeg'});
             this.userImage = URL.createObjectURL(blob);
+            this.currentUser!.imageURL = URL.createObjectURL(blob);
           }else{
             this.userImage= undefined;
           }

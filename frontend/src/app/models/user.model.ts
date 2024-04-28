@@ -7,4 +7,7 @@ export interface User {
   elements?: Element[];
   password: string;
   listasDeElementos: Map<string, number[]>;
+  profileImage?: Blob;
+  bannerImage?: Blob;
+  imageURL?: string;
 }

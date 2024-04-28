@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { UsersService } from "../services/user.service";
 import { User as UserModel} from "../models/user.model";
 import { UserDTO } from "../models/userDTO.model";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'signIn',
@@ -30,11 +31,13 @@ export class signInComponent{
       const userList: Map<string, number[]> = new Map<string, number[]>();
       userList.set('Favoritos', []);
 
+
       const newUser: UserModel = {
         name: this.userName,
         password: this.password,
         roles:userRoles,
-        listasDeElementos: userList
+        listasDeElementos: userList,
+        imageURL: "../../assets/Images/Aladdin.jpg",
       };
 
       const userdto: UserDTO = {};
@@ -46,4 +49,5 @@ export class signInComponent{
       });
     }
   }
+
 }

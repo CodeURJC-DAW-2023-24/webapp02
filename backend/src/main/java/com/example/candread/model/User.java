@@ -41,7 +41,6 @@ public class User {
     private String password;
 
     @OneToMany (mappedBy = "userLinked", cascade = CascadeType.ALL)
-    //@JsonIgnore
     private List<Review> reviews = new ArrayList<>();
 
     @ManyToMany (mappedBy = "users", cascade = CascadeType.ALL)
@@ -84,6 +83,13 @@ public class User {
 		this.password = password;
         this.roles = List.of(roles);
 	}
+
+    // public User(String name, String password, Blob profileImage, String... roles) {
+	// 	this.name = name;
+	// 	this.password = password;
+    //     this.roles = List.of(roles);
+    //     this.profileImage = profileImage;
+	// }
 
     //GETTERS&SETTERS
     public String getName() {
