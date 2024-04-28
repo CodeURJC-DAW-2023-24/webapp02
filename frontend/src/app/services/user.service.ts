@@ -47,12 +47,22 @@ export class UsersService {
 		};
 		return this.httpClient.post(BASE_Url, u).pipe(
       tap((response) => {
+        this.updateUserImage(user);
         console.log('Solicitud POST completada con éxito:', response);
-        // Puedes realizar acciones adicionales con la respuesta aquí
       }),
 			catchError(error => this.handleError(error))
 		);
+
 	}
+
+  private updateUserImage(user: User){
+    return this.httpClient.post(BASE_Url + user.id + '/image', user.imageURL).pipe(
+      tap((response) => {
+        console.log('Solicitud POST de imagen completada con éxito:', response);
+      }),
+			catchError(error => this.handleError(error))
+		);
+  }
 
 	private updateUser(userDTO: UserDTO, user: User) {
 		const u: any = {

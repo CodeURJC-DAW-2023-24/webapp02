@@ -19,7 +19,9 @@ export class LoginService {
     this.http.get('/api/users/me', { withCredentials: true }).subscribe({
       next: (response) => {
         this.user = response as User;
+        localStorage.setItem('currentUser', JSON.stringify(this.user));
         this.logged = true;
+        localStorage.setItem('isLoggedIn', 'true');
         this.router.navigate(['/Main']);
       },
       error: (err) => {
@@ -59,6 +61,10 @@ export class LoginService {
   }
 
   isLogged(){
+    if (!this.logged){
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      this.logged = isLoggedIn === 'true';
+    }
     return this.logged;
   }
 
@@ -67,6 +73,12 @@ export class LoginService {
   }
 
   currentUser() {
+    if (!this.user){
+      const currUser = localStorage.getItem('currentUser');
+      if (currUser){
+        this.user = JSON.parse(currUser) as User;
+      }
+    }
     return this.user;
   }
 }
