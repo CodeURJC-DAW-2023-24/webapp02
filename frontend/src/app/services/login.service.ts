@@ -56,6 +56,7 @@ export class LoginService {
         this.logged = false;
         this.user = undefined;
         this.router.navigate(['/Login']);
+        localStorage.removeItem('isLoggedIn');
       });
 
   }
