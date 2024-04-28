@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -77,6 +78,14 @@ public class ReviewApiController {
                 .toUriString();
 
         return ResponseEntity.created(new URI(reviewUrl)).body(rev);
+    }
+
+    @GetMapping("/{id}/user")
+    public Optional<User> getReviewUsers(@PathVariable Long id) {
+        Optional<Review> rev = reviewService.repoFindById(id);
+        Review r = rev.get();
+        Optional<User> user = userService.repoFindById(r.getUserLinked().getId());
+        return user;
     }
 
 }
