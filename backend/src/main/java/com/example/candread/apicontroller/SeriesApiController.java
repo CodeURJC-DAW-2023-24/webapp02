@@ -63,6 +63,38 @@ public class SeriesApiController {
         return elementsPaged.repoFindByType("SERIE", pageable);
     }
 
+    @GetMapping("/genre")
+    public Page<Element> getSeriesByGenre(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndGenres("SERIE", filter, pageable);
+        }
+        return null;
+    }
+
+    @GetMapping("/season")
+    public Page<Element> getSeriesBySeason(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndSeason("SERIE", filter, pageable);
+        }
+        return null;
+    }
+
+    @GetMapping("/country")
+    public Page<Element> getSeriesByCountry(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndCountry("SERIE", filter, pageable);
+        }
+        return null;
+    }
+
+    @GetMapping("/state")
+    public Page<Element> getSeriesByState(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndState("SERIE", filter, pageable);
+        }
+        return null;
+    }
+
     @GetMapping("/top")
     public Page<Element> getTop5Series(Pageable pageable) {
         return elementService.repofindTopElementsByRating("SERIE", pageable);

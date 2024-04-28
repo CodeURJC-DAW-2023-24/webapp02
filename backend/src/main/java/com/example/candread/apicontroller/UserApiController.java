@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import javax.sql.rowset.serial.SerialBlob;
@@ -24,6 +25,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -50,6 +52,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 @RequestMapping("api/users")
 public class UserApiController {
     @Autowired
@@ -74,7 +77,7 @@ public class UserApiController {
             Long userId = userPrueba.getId();
             String userURL = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(userId)
                     .toUriString();
-            return ResponseEntity.created(new URI(userURL)).build();
+            return ResponseEntity.created(new URI(userURL)).body(userPrueba);
         } catch (Exception e) {
             System.out.print("error:");
         }
@@ -160,6 +163,22 @@ public class UserApiController {
                     }
                 }
                 user.setRoles(rolesList);
+            }
+            if (userDTO.getListasDeElementos() != null){
+                Map<String, List<Long>> newlistOfList = userDTO.getListasDeElementos();
+                Map<String, List<Long>> listOfList = user.getListasDeElementos();
+                for (Map.Entry<String, List<Long>> entry : newlistOfList.entrySet()) {
+                    String key = entry.getKey();
+                    List<Long> sourceList = entry.getValue();
+                    List<Long> targetList = listOfList.getOrDefault(key, new ArrayList<>());
+                    for (Long element : sourceList) {
+                        if (!targetList.contains(element)) {
+                            targetList.add(element);
+                        }
+                    }
+                    listOfList.put(key, targetList);
+                }
+                user.setListasDeElementos(listOfList);
             }
             //We save the user in the DDBB
             userService.repoSaveUser(user);

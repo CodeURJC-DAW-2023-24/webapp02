@@ -15,8 +15,13 @@ body{
     overflow-y: auto
 }
 
-#main-content{
-    margin-top: 105px;
+main{
+    margin-top: 150px;
+}
+
+.col-sm-4 {
+  width: 12rem;
+  margin: 20px;
 }
 
 /* TOP FILMS */
@@ -26,50 +31,3 @@ body{
     width: 60%;
 }
 
-#topSection{
-    width: fit-content;
-    margin:30px;
-    padding: 10px;
-    background-color: white;
-    border-radius: 10px;
-    border:3px;
-    border-color: #D4D8FF;
-    border-style: solid;
-}
-
-#topTitle{
-    background-color: #8357b1;
-    color:white;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 1px;
-    border-radius: 5px;
-    width: max-content;
-    font-size: 30px;
-}
-
-#topTitleUser{
-    background-color: #8357b1;
-    color:white;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 1px;
-    border-radius: 5px;
-    width: max-content;
-    font-size: 30px;
-}
-
-#topTitleUser2{
-    background-color: #e2b632;
-    color:white;
-    padding-left: 10px;
-    padding-right: 10px;
-    padding-bottom: 1px;
-    border-radius: 5px;
-    width: max-content;
-    font-size: 30px;
-}
-
-#topList{
-    margin: 15px;
-}

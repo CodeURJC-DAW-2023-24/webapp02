@@ -21,7 +21,6 @@ public class NewApiController {
 
     @GetMapping("/fiveRecentNews")
     public List<New> get5RecentNews(Pageable pageable) {
-        List<New> n = newService.repoFindFirst5();
         return newService.repoFindFirst5();
     }
     

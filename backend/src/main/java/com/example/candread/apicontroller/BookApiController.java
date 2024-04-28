@@ -69,6 +69,39 @@ public class BookApiController {
         return elementsPaged.repoFindByType("LIBRO", pageable);
     }
 
+    @GetMapping("/genre")
+    public Page<Element> getBooksByGenre(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndGenres("LIBRO", filter, pageable);
+        }
+        return null;
+    }
+
+    @GetMapping("/season")
+    public Page<Element> getBooksBySeason(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndSeason("LIBRO", filter, pageable);
+        }
+        return null;
+    }
+
+    @GetMapping("/country")
+    public Page<Element> getBooksByCountry(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndCountry("LIBRO", filter, pageable);
+        }
+        return null;
+    }
+
+    @GetMapping("/state")
+    public Page<Element> getBooksByState(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndState("LIBRO", filter, pageable);
+        }
+        return null;
+    }
+
+
     @GetMapping("/top")
     public Page<Element> getTop5Books(Pageable pageable) {
         return elementService.repofindTopElementsByRating("LIBRO", pageable);
@@ -175,12 +208,13 @@ public class BookApiController {
                 elementDTO.getType(), elementDTO.getSeason(), elementDTO.getState(), elementDTO.getCountry(),
                 genresList, elementDTO.getYear());
         // elementRepo.save(element);
-        elementService.repoSaveElement(element);
+        Element savedElement = elementService.repoSaveElement(element);
+        //aaa
         Long bookId = element.getId();
         String bookUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(bookId)
                 .toUriString();
 
-        return ResponseEntity.created(new URI(bookUrl)).build();
+        return ResponseEntity.created(new URI(bookUrl)).body(savedElement);
     }
 
     @ApiResponses(value = {

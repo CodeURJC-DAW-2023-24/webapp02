@@ -1,12 +1,12 @@
 <body>
     <header-comp id="Header"></header-comp>
-    <div id="main-content">
-        <carousel-comp id="Carousel" [elements]="elements"></carousel-comp>
+    <main>
+        <carousel-comp id="Carousel" [elements]="elements" [images] = "elementsImages"></carousel-comp>
         <section id="tops">
-            <app-tops [tops]="topFilms" title = "Top Películas Semanales"></app-tops>
-            <app-tops [tops]="topSeries" title = "Top Series Semanales"></app-tops>
-            <app-tops [tops]="topBooks" title = "Top Libros Semanales"></app-tops>
+            <app-tops [tops]="topFilms" [topImages] = "topSeriesImages" title = "Top Películas Semanales"></app-tops>
+            <app-tops [tops]="topSeries" [topImages] = "topSeriesImages" title = "Top Series Semanales"></app-tops>
+            <app-tops [tops]="topBooks" [topImages] = "topSeriesImages" title = "Top Libros Semanales"></app-tops>
         </section>
         <app-news [news]="news"></app-news>
-    </div>
+    </main>
 </body>

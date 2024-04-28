@@ -1,8 +1,10 @@
+import { Element } from "../models/element.model";
+
 export interface User {
 	id?: number;
 	name: string;
   roles: string[];
-  // banner_image: Blob;
-  // profile_image: Blob;
-  elements: Element[];
+  elements?: Element[];
+  password: string;
+  listasDeElementos: Map<string, number[]>;
 }

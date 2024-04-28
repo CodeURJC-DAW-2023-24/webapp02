@@ -1,7 +1,10 @@
+import { User } from "./user.model";
+import { Element as ElementC } from "./element.model";
+
 export interface Review {
 	id?: number;
 	body: string;
-	element_id?: number;
-  user_id?: number;
-  rating: number;
+	rating: number;
+	element_id?: ElementC;
+	userLinked?: User;
 }

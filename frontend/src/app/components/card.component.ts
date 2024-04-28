@@ -8,4 +8,5 @@ import { Element } from '../models/element.model';
 })
 export class CardsComponent {
   @Input() element: Element | undefined;
+  @Input() image: String | undefined;
 }
