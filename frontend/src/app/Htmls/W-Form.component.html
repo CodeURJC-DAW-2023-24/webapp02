@@ -47,7 +47,7 @@
     <div id="elementGenre" style="display: none;"></div>
     <div class="col-md-12 mb-3">
         <label for="elementGenres" class="form-label">Géneros:</label>
-        <input type="text" name="genres" class="form-control" id="elementGenres"  >
+        <input type="text" name="genres" class="form-control" id="elementGenres"  [(ngModel)] = "generos">
     </div>
     <div class="col-md-12 mb-3">
         <label for="elementYear" class="form-label">Año:</label>
@@ -55,10 +55,10 @@
     </div>
     <div class="col-md-12 mb-3">
         <label for="campo10" class="form-label">Sube su imagen:</label>
-        <input type="file" name="image" class="form-control" id="campo10" accept="image/jpeg,image/png,image/jpg" >
+        <input type="file" name="image" class="form-control" id="imageInput" accept="image/jpeg,image/png,image/jpg" >
     </div>
     <!-- Columna para el botón "Agregar" -->
     <div class="col-md-12">
-        <button class="btn btn-primary">Agregar</button>
+        <button  (click)="update()" class="btn btn-primary">Modificar</button>
     </div>
 </div>

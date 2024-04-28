@@ -178,8 +178,11 @@ public class SeriesApiController {
             }
 
             // elementRepo.save(element);
-            elementService.repoSaveElement(element);
-            return ResponseEntity.ok(element);
+            Element savedElement = elementService.repoSaveElement(element);
+            Long serieId = element.getId();
+            String serieUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(serieId)
+                    .toUriString();
+            return ResponseEntity.created(new URI(serieUrl)).body(savedElement);
         } else {
             return ResponseEntity.notFound().build();
         }

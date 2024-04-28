@@ -185,9 +185,12 @@ public class BookApiController {
             }
 
             // elementRepo.save(element);
-            elementService.repoSaveElement(element);
-            return ResponseEntity.ok(element);
-        } else {
+            Element savedElement = elementService.repoSaveElement(element);
+            Long bookId = element.getId();
+            String bookUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(bookId)
+                    .toUriString();
+            return ResponseEntity.created(new URI(bookUrl)).body(savedElement);
+            } else {
             return ResponseEntity.notFound().build();
         }
     }

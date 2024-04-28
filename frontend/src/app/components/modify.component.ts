@@ -60,16 +60,20 @@ export class ModifyComponent {
     }
 
     else if (type == "PELICULA") {
-      this.filmService.getFilmByName(name).subscribe((response: any) => {
+      this.observableElement = this.filmService.getFilmByName(name)
+      var observableElementCopy = this.filmService.getFilmByName(name).subscribe((response: any) => {
       this.elementSearched = response;
+        // console.log(this.elementSearched.id)
       this.found = this.elementSearched != null
       return this.observableElement
       })
     }
 
     else if (type == "SERIE") {
-      this.bookService.getBookByName(name).subscribe((response: any) => {
+      this.observableElement = this.seriesService.getSerieByName(name)
+      var observableElementCopy = this.seriesService.getSerieByName(name).subscribe((response: any) => {
       this.elementSearched = response;
+        // console.log(this.elementSearched.id)
       this.found = this.elementSearched != null
       return this.observableElement
       })
