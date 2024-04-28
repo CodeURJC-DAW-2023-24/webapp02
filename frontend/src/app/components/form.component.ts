@@ -45,7 +45,7 @@ export  class FormComponent implements OnChanges {
                 this.element = response;
                 this.name = this.element.name
                 this.description = this.element.description
-                this.author = this.element.name
+                this.author = this.element.author
                 this.type= this.element.type
                 this.state = this.element.state
                 this.season = this.element.season
