@@ -30,6 +30,20 @@ export class SeriesService {
 		return this.httpClient.get(BASE_URL_SERIES + id + '/image' , { responseType: 'arraybuffer' })
 	}
 
+	uploadSerieImage(id: number | string, file: File){
+		let imageFile = new FormData();
+		imageFile.append("imageFile",file)
+		
+		return this.httpClient.put(BASE_URL_SERIES + id + '/image' ,imageFile )
+	}
+
+	addSerieImage(id: number | string, file: File){
+		let imageFile = new FormData();
+		imageFile.append("imageFile",file)
+		
+		return this.httpClient.post(BASE_URL_SERIES + id + '/image' ,imageFile )
+	}
+
   getSerieByFilter(filterType:string, filter:string): Observable<Element[]>{
     switch(filterType){
       case 'genre':

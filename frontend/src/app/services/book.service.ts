@@ -51,6 +51,20 @@ export class BooksService {
 		return this.httpClient.get(BASE_URL_BOOKS + id + '/image' , { responseType: 'arraybuffer' })
 	}
 
+
+	uploadBookImage(id: number | string, file: File){
+		let imageFile = new FormData();
+		imageFile.append("imageFile",file)
+		
+		return this.httpClient.put(BASE_URL_BOOKS + id + '/image' ,imageFile )
+	}
+
+	addBookImage(id: number | string, file: File){
+		let imageFile = new FormData();
+		imageFile.append("imageFile",file)
+		
+		return this.httpClient.post(BASE_URL_BOOKS + id + '/image' ,imageFile )
+	}
   //we make a get petition to get the books with the filter we want applied
   getBookByFilter(filterType:string, filter:string): Observable<ElementComponent[]>{
     switch(filterType){

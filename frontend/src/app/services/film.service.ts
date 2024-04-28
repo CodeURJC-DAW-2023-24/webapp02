@@ -29,6 +29,21 @@ export class FilmsService {
 		return this.httpClient.get(BASE_URL_FILMS + id + '/image' , { responseType: 'arraybuffer' })
 	}
 
+
+	uploadFilmImage(id: number | string, file: File){
+		let imageFile = new FormData();
+		imageFile.append("imageFile",file)
+		
+		return this.httpClient.put(BASE_URL_FILMS + id + '/image' ,imageFile )
+	}
+
+	addFilmImage(id: number | string, file: File){
+		let imageFile = new FormData();
+		imageFile.append("imageFile",file)
+		
+		return this.httpClient.post(BASE_URL_FILMS + id + '/image' ,imageFile )
+	}
+
   getFilmByFilter(filterType:string, filter:string): Observable<Element[]>{
     switch(filterType){
       case 'genre':

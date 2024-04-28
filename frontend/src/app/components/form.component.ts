@@ -35,7 +35,7 @@ export class FormComponent implements OnChanges {
     //genres : string[] = this.element.genres
 
     constructor(private http: HttpClient, private seriesService: SeriesService,
-        private bookService: BooksService, private filmService: FilmsService, private router : Router
+        private bookService: BooksService, private filmService: FilmsService, private router: Router
     ) { }
 
     ngOnChanges(changes: SimpleChanges): void {
@@ -71,35 +71,47 @@ export class FormComponent implements OnChanges {
     public update() {
         if (this.type == "LIBRO") {
             this.changeElement();
-            var elementEdited = this.bookService.addOrUpdateBook(this.element)
-            elementEdited.subscribe()
+            var editUrl = this.bookService.addOrUpdateBook(this.element)
+            editUrl.subscribe()
             const imageInput = document.getElementById("imageInput") as HTMLInputElement;
-            this.router.navigateByUrl("/Admin")
-            if (imageInput && imageInput.files) {
+            
+            if (imageInput && imageInput.value && imageInput.files) {
                 const imageFile = imageInput.files[0];
+                if (this.element.id) {
+                    this.bookService.uploadBookImage(this.element.id, imageFile).subscribe()
+                }
+
             }
+            this.router.navigateByUrl("/Admin")
         }
 
-        else if (this.type == "PELICULA") {
+        else if (this.type == "PELICULA" || this.type == "PELÍCULA") {
             this.changeElement();
-            this.filmService.addOrUpdateFilm(this.element)
-            var elementEdited = this.filmService.addOrUpdateFilm(this.element)
+            this.element.type ="PELICULA"
+            var editUrl = this.filmService.addOrUpdateFilm(this.element)
+            editUrl.subscribe()
             const imageInput = document.getElementById("imageInput") as HTMLInputElement;
-            if (imageInput && imageInput.files) {
+            if (imageInput && imageInput.value && imageInput.files) {
                 const imageFile = imageInput.files[0];
-            }
-            this.router.navigateByUrl("/Admin")
+                if (this.element.id) {
+                    this.filmService.uploadFilmImage(this.element.id, imageFile).subscribe()
+                }
+                this.router.navigateByUrl("/Admin")
 
+            }
         }
 
 
         else if (this.type == "SERIE") {
             this.changeElement();
-            this.seriesService.addOrUpdateSerie(this.element)
-            var elementEdited = this.seriesService.addOrUpdateSerie(this.element)
+            var editUrl = this.seriesService.addOrUpdateSerie(this.element)
+            editUrl.subscribe()
             const imageInput = document.getElementById("imageInput") as HTMLInputElement;
-            if (imageInput && imageInput.files) {
+            if (imageInput && imageInput.value && imageInput.files) {
                 const imageFile = imageInput.files[0];
+                if (this.element.id) {
+                    this.seriesService.uploadSerieImage(this.element.id, imageFile).subscribe()
+                }
             }
             this.router.navigateByUrl("Admin")
         }
@@ -109,7 +121,7 @@ export class FormComponent implements OnChanges {
         this.element.name = this.name;
         this.element.description = this.description;
         this.element.author = this.author;
-        this.element.type = this.type 
+        this.element.type = this.type
         this.element.state = this.state;
         this.element.season = this.season;
         this.element.country = this.country;

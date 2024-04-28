@@ -1,6 +1,9 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, of } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
+import { SeriesService } from '../services/serie.service';
+import { FilmsService } from '../services/film.service';
+import { BooksService } from '../services/book.service';
 
 const BASE_URL = "/api/series/";
 
@@ -13,7 +16,8 @@ export class AdminComponent {
 
 
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private seriesService: SeriesService,
+    private bookService: BooksService, private filmService: FilmsService) { }
 
   // ngOnInit() {
   // }
@@ -31,7 +35,7 @@ export class AdminComponent {
     const trimmedGenresArray: string[] = genresArray.map((genre: string) => genre.trim());
 
     const imageInput = document.getElementById("campo10") as HTMLInputElement;
-    if (imageInput && imageInput.files) {
+    if (imageInput && imageInput.value && imageInput.files) {
       const imageFile = imageInput.files[0];
       this.http.post(BASE_URL,
         {
@@ -40,14 +44,17 @@ export class AdminComponent {
         },
         { withCredentials: true }
       ).subscribe({
-        next: (response) => {
-          // console.log(response)
-           this.http.get("/Admin");
+
+        next: () => {
+          this.searchType(name, type, imageFile)
         },
+
         error: (err) => {
           console.log(err)
         }
       });
+
+
     }
 
     else {
@@ -59,6 +66,63 @@ export class AdminComponent {
           alert("Wrong credentials");
         }
       });
+    }
+  }
+
+  searchType(name: string, type: string, imageFile: File) {
+    if (type == "LIBRO") {
+
+      var elementObserver = this.bookService.getBookByName(name)
+      elementObserver.subscribe({
+        next: (element) => {
+          if (element.id) {
+            this.bookService.uploadBookImage(element.id, imageFile).subscribe()
+          }
+
+        },
+        error: (err) => {
+          if (err.status != 404) {
+            console.error('Error when asking if logged: ' + JSON.stringify(err));
+          }
+        }
+      })
+
+
+    }
+
+    else if (type == "PELICULA" || type == "PELÍCULA") {
+      type = "PELICULA"
+      var elementObserver = this.filmService.getFilmByName(name)
+      elementObserver.subscribe({
+        next: (element) => {
+          if (element.id) {
+            this.filmService.addFilmImage(element.id, imageFile).subscribe()
+          }
+
+        },
+        error: (err) => {
+          if (err.status != 404) {
+            console.error('Error when asking if logged: ' + JSON.stringify(err));
+          }
+        }
+      })
+    }
+
+
+    else if (type == "SERIE") {
+      var elementObserver = this.seriesService.getSerieByName(name)
+      elementObserver.subscribe({
+        next: (element) => {
+          if (element.id) {
+            this.seriesService.addSerieImage(element.id, imageFile).subscribe()
+          }
+        },
+        error: (err) => {
+          if (err.status != 404) {
+            console.error('Error when asking if logged: ' + JSON.stringify(err));
+          }
+        }
+      })
     }
   }
 
