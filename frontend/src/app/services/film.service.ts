@@ -26,25 +26,25 @@ export class FilmsService {
 	}
 
 	getFilmImage(id: number | string){
-		return this.httpClient.get(BASE_URL + id + '/image' , { responseType: 'arraybuffer' })
+		return this.httpClient.get(BASE_URL_FILMS + id + '/image' , { responseType: 'arraybuffer' })
 	}
 
   getFilmByFilter(filterType:string, filter:string): Observable<Element[]>{
     switch(filterType){
       case 'genre':
-        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+        return this.httpClient.get(BASE_URL_FILMS+ filterType + '?filter=' + filter).pipe(
           //catchError(error => this.handleError(error))
         ) as Observable<Element[]>;
       case 'season':
-        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+        return this.httpClient.get(BASE_URL_FILMS+ filterType + '?filter=' + filter).pipe(
           //catchError(error => this.handleError(error))
         ) as Observable<Element[]>;
       case 'country':
-        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+        return this.httpClient.get(BASE_URL_FILMS+ filterType + '?filter=' + filter).pipe(
           //catchError(error => this.handleError(error))
         ) as Observable<Element[]>;
       case 'state':
-        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+        return this.httpClient.get(BASE_URL_FILMS+ filterType + '?filter=' + filter).pipe(
           //catchError(error => this.handleError(error))
         ) as Observable<Element[]>;
       default:
@@ -54,7 +54,7 @@ export class FilmsService {
 
 	//ask for 10 films
 	getFilmPage(page: number): Observable<any> {
-		const url = `${BASE_URL}?page=${page}&size=${10}`;
+		const url = `${BASE_URL_FILMS}?page=${page}&size=${10}`;
 		return this.httpClient.get(url).pipe(
 			//catchError(error => this.handleError(error))
 		) as any;

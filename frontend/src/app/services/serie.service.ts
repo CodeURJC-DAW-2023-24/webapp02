@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable, of, from, of, throwError } from 'rxjs';
+import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 import { filter, switchMap } from 'rxjs/operators';
 
@@ -20,32 +20,32 @@ export class SeriesService {
 	}
 
 	get5Series(): Observable<Element[]> {
-		return this.httpClient.get(BASE_URL + "top?page=0&size=5").pipe(
+		return this.httpClient.get(BASE_URL_SERIES + "top?page=0&size=5").pipe(
 			map((response: any) => response.content),
 			// Puedes agregar catchError aquí si lo necesitas
 		);
 	}
 
 	getSerieImage(id: number | string){
-		return this.httpClient.get(BASE_URL + id + '/image' , { responseType: 'arraybuffer' })
+		return this.httpClient.get(BASE_URL_SERIES + id + '/image' , { responseType: 'arraybuffer' })
 	}
 
   getSerieByFilter(filterType:string, filter:string): Observable<Element[]>{
     switch(filterType){
       case 'genre':
-        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+        return this.httpClient.get(BASE_URL_SERIES+ filterType + '?filter=' + filter).pipe(
           //catchError(error => this.handleError(error))
         ) as Observable<Element[]>;
       case 'season':
-        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+        return this.httpClient.get(BASE_URL_SERIES+ filterType + '?filter=' + filter).pipe(
           //catchError(error => this.handleError(error))
         ) as Observable<Element[]>;
       case 'country':
-        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+        return this.httpClient.get(BASE_URL_SERIES+ filterType + '?filter=' + filter).pipe(
           //catchError(error => this.handleError(error))
         ) as Observable<Element[]>;
       case 'state':
-        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
+        return this.httpClient.get(BASE_URL_SERIES+ filterType + '?filter=' + filter).pipe(
           //catchError(error => this.handleError(error))
         ) as Observable<Element[]>;
       default:
@@ -55,7 +55,7 @@ export class SeriesService {
 
 	//ask for 10 series
 	getSeriePage(page: number): Observable<any> {
-		const url = `${BASE_URL}?page=${page}&size=${10}`;
+		const url = `${BASE_URL_SERIES}?page=${page}&size=${10}`;
 		return this.httpClient.get(url).pipe(
 			//catchError(error => this.handleError(error))
 		) as any;
