@@ -34,11 +34,31 @@ export class UsersService {
 		return this.httpClient.get(BASE_Url + id + '/bannerimage', {responseType: 'arraybuffer'})
 	}
 
-	setUserImage(id: number | string){
-		return this.httpClient.put(BASE_Url + id + '/image', {responseType: 'arraybuffer'})
+	setUserImage(id: number | string, newImage: File){
+		// return this.httpClient.put(BASE_Url + id + '/image', {responseType: 'arraybuffer'})
+		const formData = new FormData();
+		formData.append('profileImage', newImage);
+
+		return this.httpClient.put(BASE_Url + id + '/image', formData).pipe(
+			tap((response) => {
+				localStorage.setItem('currentUser', JSON.stringify(response));
+				console.log('Solicitud PUT de imagen completada con éxito:', response);
+			}),
+			catchError(error => this.handleError(error))
+		);
 	}
-	setUserBannerImage(id: number | string){
-		return this.httpClient.put(BASE_Url + id + '/bannerimage', {responseType: 'arraybuffer'})
+
+	setUserBannerImage(id: number | string, newBannerImage: File){
+		const formData = new FormData();
+		formData.append('bannerImage', newBannerImage);
+
+		return this.httpClient.put(BASE_Url + id + '/bannerimage', formData).pipe(
+			tap((response) => {
+				localStorage.setItem('currentUser', JSON.stringify(response));
+				console.log('Solicitud PUT de imagen completada con éxito:', response);
+			}),
+			catchError(error => this.handleError(error))
+		);
 	}
 
 	addOrUpdateUser(userDTO: UserDTO, user: User) {
@@ -78,10 +98,16 @@ export class UsersService {
 		formData.append('imageUrl', user.imageURL!);
 		return this.httpClient.post(BASE_Url + id + '/image', formData).pipe(
 			tap((response) => {
+				localStorage.setItem('currentUser', JSON.stringify(response));
 				console.log('Solicitud POST de imagen completada con éxito:', response);
 			}),
 			catchError(error => this.handleError(error))
 		);
+	}
+
+	private updateProfileImage(user: User, id: number){
+		const formData = new FormData();
+
 	}
 
 	private updateUser(userDTO: UserDTO, user: User) {

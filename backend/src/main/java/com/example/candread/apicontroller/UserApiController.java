@@ -163,7 +163,7 @@ public class UserApiController {
                 }
                 user.setRoles(rolesList);
             }
-             Map<String, List<Long>> mapaPrueba = new HashMap<>();
+            Map<String, List<Long>> mapaPrueba = new HashMap<>();
             if (userDTO.getListasDeElementos() != null && userDTO.getListasDeElementos().size() != 0) {
                 Map<String, List<Long>> newlistOfList = userDTO.getListasDeElementos();
                 Map<String, List<Long>> listOfList = user.getListasDeElementos();
@@ -274,15 +274,15 @@ public class UserApiController {
                     e.printStackTrace();
                     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
                 }
-            }else if (imageUrl != null){
+            } else if (imageUrl != null) {
                 Blob blobAladdin = userService.getBlob(imageUrl);
                 user.setProfileImage(blobAladdin);
                 user.setBase64ProfileImage(imageUrl);
                 userService.repoSaveUser(user);
                 String imageFileUrl = ServletUriComponentsBuilder.fromRequestUri(request).buildAndExpand(id)
-                            .toUriString();
+                        .toUriString();
                 return ResponseEntity.created(new URI(imageFileUrl)).build();
-            }else{
+            } else {
                 return ResponseEntity.badRequest().body("Either profileImage or imageUrl parameter is required.");
             }
         } else {
@@ -312,18 +312,21 @@ public class UserApiController {
         User user = (User) optUser.get();
         byte[] imageBytes = imageFile.getBytes();
 
+        User userResponse = new User();
         try {
             user.setProfileImage(new SerialBlob(imageBytes));
             user.setBase64ProfileImage(Base64.getEncoder().encodeToString(imageBytes));
 
-            userService.repoSaveUser(user);
+            userResponse = userService.repoSaveUser(user);
 
         } catch (SerialException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return ResponseEntity.noContent().build();
+        // return ResponseEntity.status(HttpStatus.NO_CONTENT).body(userResponse);
+        // return ResponseEntity.noContent().build(userResponse);
+        return ResponseEntity.ok(userResponse);
     }
 
     @ApiResponses(value = {
@@ -351,28 +354,28 @@ public class UserApiController {
 
         return ResponseEntity.noContent().build();
     }
-    
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "200", description = "USER ID CORRECT", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
-        @ApiResponse(responseCode = "403", description = "Acción prohibida", content = @Content),
-        @ApiResponse(responseCode = "404", description = "USER BANNER image not found", content = @Content)
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "USER ID CORRECT", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+            @ApiResponse(responseCode = "403", description = "Acción prohibida", content = @Content),
+            @ApiResponse(responseCode = "404", description = "USER BANNER image not found", content = @Content)
     })
     @GetMapping("/{id}/bannerimage")
     public ResponseEntity<byte[]> getUserBannerImage(@PathVariable Long id) {
         Optional<User> optUser = userService.repoFindById(id);
         if (optUser.isPresent()) {
             User user = (User) optUser.get();
-            //Blob userImage = user.getProfileImage();
+            // Blob userImage = user.getProfileImage();
             Blob userBannerImage = user.getBannerImage();
             try {
-                //if (userImage != null && userImage.length() > 0) {
+                // if (userImage != null && userImage.length() > 0) {
                 if (userBannerImage != null && userBannerImage.length() > 0) {
                     byte[] imageData = userBannerImage.getBytes(1, (int) userBannerImage.length());
-                    //byte[] imageData = userImage.getBytes(1, (int) userImage.length());
+                    // byte[] imageData = userImage.getBytes(1, (int) userImage.length());
                     return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageData);
                 } else {
                     // Image is not found and we print 404 error
@@ -383,8 +386,7 @@ public class UserApiController {
                 e.printStackTrace();
                 return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
             }
-        }
-        else{
+        } else {
             return ResponseEntity.notFound().build();
         }
     }
@@ -393,17 +395,17 @@ public class UserApiController {
     public ResponseEntity<Object> uploadUserBannerImage(@PathVariable Long id,
             @RequestParam("profileImage") MultipartFile imageFile, HttpServletRequest request)
             throws URISyntaxException, IOException {
-        
+
         Optional<User> optUser = userService.repoFindById(id);
         if (optUser.isPresent()) {
             User user = (User) optUser.get();
             try {
                 // Set the image to the user
                 byte[] imageData = imageFile.getBytes();
-                //user.setProfileImage(new SerialBlob(imageData));
+                // user.setProfileImage(new SerialBlob(imageData));
                 user.setBannerImage(new SerialBlob(imageData));
                 user.setBase64BannerImage(Base64.getEncoder().encodeToString(imageData));
-                //user.setBase64ProfileImage(Base64.getEncoder().encodeToString(imageData));
+                // user.setBase64ProfileImage(Base64.getEncoder().encodeToString(imageData));
 
                 // Save in the database
                 userService.repoSaveUser(user);
@@ -422,9 +424,17 @@ public class UserApiController {
         }
     }
 
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "USER IMAGE PUT CORRECT", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+            @ApiResponse(responseCode = "404", description = "USER not found", content = @Content)
+    })
     @PutMapping("/{id}/bannerimage")
     public ResponseEntity<Object> updateUserBannerImage(@PathVariable Long id,
-        @RequestParam("profileImage") MultipartFile imageFile) throws IOException {
+            @RequestParam("bannerImage") MultipartFile imageFile) throws IOException {
 
         // Verify if the user exists
         Optional<User> optUser = userService.repoFindById(id);
@@ -434,25 +444,29 @@ public class UserApiController {
 
         User user = (User) optUser.get();
         byte[] imageBytes = imageFile.getBytes();
-       
+
+        User userResponse = new User();
         try {
-            //user.setProfileImage(new SerialBlob(imageBytes));
+            // user.setProfileImage(new SerialBlob(imageBytes));
             user.setBannerImage(new SerialBlob(imageBytes));
+            // user.setBase64ProfileImage(Base64.getEncoder().encodeToString(imageBytes));
             user.setBase64BannerImage(Base64.getEncoder().encodeToString(imageBytes));
-            
-            userService.repoSaveUser(user);
+
+            userResponse = userService.repoSaveUser(user);
 
         } catch (SerialException e) {
             e.printStackTrace();
         } catch (SQLException e) {
             e.printStackTrace();
         }
-        return ResponseEntity.noContent().build();
+        // return ResponseEntity.status(HttpStatus.NO_CONTENT).body(userResponse);
+        // return ResponseEntity.noContent().build(userResponse);
+        return ResponseEntity.ok(userResponse);
     }
 
     @DeleteMapping("/{id}/bannerimage")
     public ResponseEntity<Object> deleteUserBannerImage(@PathVariable Long id) {
-        
+
         Optional<User> optUser = userService.repoFindById(id);
         // If the user is not found we return a 404 response
         if (optUser.isEmpty()) {
@@ -460,7 +474,7 @@ public class UserApiController {
         }
 
         User user = (User) optUser.get();
-        //user.setProfileImage(null);
+        // user.setProfileImage(null);
         user.setBannerImage(null);
         user.setBase64BannerImage(null);
 
