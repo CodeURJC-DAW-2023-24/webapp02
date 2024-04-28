@@ -8,6 +8,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Base64;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -162,7 +163,8 @@ public class UserApiController {
                 }
                 user.setRoles(rolesList);
             }
-            if (userDTO.getListasDeElementos() != null) {
+             Map<String, List<Long>> mapaPrueba = new HashMap<>();
+            if (userDTO.getListasDeElementos() != null && userDTO.getListasDeElementos().size() != 0) {
                 Map<String, List<Long>> newlistOfList = userDTO.getListasDeElementos();
                 Map<String, List<Long>> listOfList = user.getListasDeElementos();
                 for (Map.Entry<String, List<Long>> entry : newlistOfList.entrySet()) {

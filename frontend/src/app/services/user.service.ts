@@ -86,13 +86,13 @@ export class UsersService {
 
 	private updateUser(userDTO: UserDTO, user: User) {
 		const u: any = {
+			name: userDTO.name,
 			listasDeElementos: {}
 		};
 		const x = userDTO.listasDeElementos;
 		x?.forEach((value: number[], key: string) => {
 			u.listasDeElementos[key] = value;
 		});
-
 		return this.httpClient.put<User>(BASE_Url + user.id, u).pipe(
       tap((response) => {
 				localStorage.setItem('currentUser', JSON.stringify(response));

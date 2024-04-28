@@ -56,15 +56,6 @@ export class BannerComponent {
     }
 
     updateProfile() {
-        this.user = {
-            name: this.name!,
-            roles: this.user?.roles!,
-            password: this.user?.password!,
-            listasDeElementos: this.user?.listasDeElementos!,
-            id: this.user?.id
-        };
-        this.allUsers = this.userService.getUsers();
-        const userdto: UserDTO = {};
         if(this.newProfileImage !== undefined && this.newProfileImage !== this.userImage){
             // this.userService.setUserImage(this.user?.id).subscribe({
             //     next: (response) => {
@@ -76,7 +67,11 @@ export class BannerComponent {
             //this.userService.setUserBannerImage(this.user?.id).subscribe()
         }
 
-        this.userService.addOrUpdateUser(userdto, this.user).subscribe({
+        const userdto: UserDTO  = {
+            name: this.name!,
+        };
+        this.allUsers = this.userService.getUsers();
+        this.userService.addOrUpdateUser(userdto, this.user!).subscribe({
             next: (response: any) => {
                 this.user!.id = response.id;
                 if (this.user) {
