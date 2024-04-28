@@ -162,9 +162,9 @@ public class UserService {
 
     }
 
-    public void repoSaveUser(User userToSave) {
-        userRepository.save(userToSave);
-        return;
+    public User repoSaveUser(User userToSave) {
+        User userResponse = userRepository.save(userToSave);
+        return userResponse;
     }
 
     public Optional<User> repoFindById(Long id) {

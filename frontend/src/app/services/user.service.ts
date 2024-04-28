@@ -50,30 +50,39 @@ export class UsersService {
 	}
 
 	private addUser(user: User) {
-    const u: any = {
+		const u: any = {
 			name: user.name,
-      password: user.password,
-      roles: user.roles,
-      listasDeElementos: user.listasDeElementos
+			password: user.password,
+			roles: user.roles,
+			listasDeElementos: {"Favoritos": []}
 		};
 		return this.httpClient.post(BASE_Url, u).pipe(
-      tap((response) => {
-        this.updateUserImage(user);
-        console.log('Solicitud POST completada con éxito:', response);
-      }),
+			tap((response: any) => {
+				this.updateUserImage(user, response.id).subscribe({
+					next: (response) => {
+						console.log('Solicitud POST de imagen completada con éxito:', response);
+					},
+					error: (error) => {
+						console.error('Error al actualizar la imagen del usuario:', error);
+					}
+				});
+				console.log('Solicitud POST completada con éxito:', response);
+			}),
 			catchError(error => this.handleError(error))
 		);
 
 	}
 
-  private updateUserImage(user: User){
-    return this.httpClient.post(BASE_Url + user.id + '/image', user.imageURL).pipe(
-      tap((response) => {
-        console.log('Solicitud POST de imagen completada con éxito:', response);
-      }),
+	private updateUserImage(user: User, id: number) {
+		const formData = new FormData();
+		formData.append('imageUrl', user.imageURL!);
+		return this.httpClient.post(BASE_Url + id + '/image', formData).pipe(
+			tap((response) => {
+				console.log('Solicitud POST de imagen completada con éxito:', response);
+			}),
 			catchError(error => this.handleError(error))
 		);
-  }
+	}
 
 	private updateUser(userDTO: UserDTO, user: User) {
 		const u: any = {
@@ -85,6 +94,9 @@ export class UsersService {
 		});
 
 		return this.httpClient.put<User>(BASE_Url + user.id, u).pipe(
+      tap((response) => {
+				localStorage.setItem('currentUser', JSON.stringify(response));
+			}),
 			catchError(error => this.handleError(error))
 		);
 	}
@@ -99,4 +111,8 @@ export class UsersService {
 		console.error(error);
 		return throwError("Server error (" + error.status + "): " + error.text())
 	}
+
+  updateCurrentUser(user: User){
+    localStorage.setItem('currentUser', JSON.stringify(user));
+  }
 }
