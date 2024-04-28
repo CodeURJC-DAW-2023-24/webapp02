@@ -30,9 +30,10 @@
         <div class="col-md-12 mt-5 mb-5">
             <h4>Modificar Elemento</h4>
             <div class="card rounded">
-                <div *ngIf="observableElement | async as elementFound" class="card-body">
-                    <formComponent [element]="elementFound"></formComponent>
+                <div *ngIf="observableElement | async " class="card-body">
+                    <formComponent [observer]="observableElement"></formComponent>
                 </div>
+                <!-- <formComponent *ngIf="observableElement | async"  [observer]="observableElement"></formComponent> -->
             </div>
         </div>
     </div>
