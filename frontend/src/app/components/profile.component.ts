@@ -70,6 +70,7 @@ export class ProfileComponent {
                     // if(this.allElements.includes(element)){
                     //   this.allElements.push(element);
                     // }
+                    this.elementList?.push(element);
                     this.allElements.push(element);
                     this.newMap.set(key, this.elementList!);
                   } else {

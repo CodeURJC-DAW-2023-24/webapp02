@@ -1,7 +1,8 @@
 <section id="bannerSection" class="bannerSection">
     <img [src]="bannerImage" alt="Banner" class="ib">
     <img [src]="userImage" alt="Logo" width="50" height="50" id="bannerLogo">
-    <input type="text" [(ngModel)]="name" id="bannerUsername">
+    <p type="text" [(ngModel)]="name" id="bannerUsername" href="#exampleModal">
+    <!-- <p id="bannerUsername">{{user.name}}<a href="#exampleModal"> -->
     <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
         <img src="frontend\src\assets\Images\Icon-Edit.png" alt="HTML tutorial" style="width:30px;height:30px;">
     </button>
