@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Observable, forkJoin, map } from 'rxjs';
 import { SeriesService } from '../services/serie.service';
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Element } from '../models/element.model';
 import { BooksService } from '../services/book.service';
 import { FilmsService } from '../services/film.service';
@@ -15,6 +15,7 @@ import { FilmsService } from '../services/film.service';
 
 export class ModifyComponent {
 
+  
   public found: boolean | undefined;
   public elementSearched!: Element;
   public observableElement! : Observable<Element>
@@ -83,6 +84,11 @@ export class ModifyComponent {
 
     
   }
+
+  elementEdited(edited: boolean){
+    this.found = !edited
+    }
+   
 
   
 }

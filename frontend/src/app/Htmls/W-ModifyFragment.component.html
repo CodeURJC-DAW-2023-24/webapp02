@@ -1,6 +1,6 @@
 <header-comp></header-comp>
 
-<div *ngIf="found == undefined || found == false; else Found" id="modifyBookForm" style="display: none;">
+<div *ngIf="found == undefined || found == false ; else Found" id="modifyBookForm" style="display: none;">
     <div id="modifyForm" method="post" enctype="multipart/form-data" accept-charset="UTF-8">
         <div class="col-md-12 mt-5 mb-5">
             <h4>Modificar Elemento</h4>
@@ -31,7 +31,7 @@
             <h4>Modificar Elemento</h4>
             <div class="card rounded">
                 <div *ngIf="observableElement | async " class="card-body">
-                    <formComponent [observer]="observableElement"></formComponent>
+                    <formComponent [observer]="observableElement" (edited)='elementEdited($event)' ></formComponent>
                 </div>
                 <!-- <formComponent *ngIf="observableElement | async"  [observer]="observableElement"></formComponent> -->
             </div>

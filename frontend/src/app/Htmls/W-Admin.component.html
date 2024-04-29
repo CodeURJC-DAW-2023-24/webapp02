@@ -79,8 +79,9 @@
                 </div>
             </div>
 
+            <!-- Columna para los campos de entrada -->
 
-            <div id="serieForm" style="display: none;">
+            <div id="serieForm" [style.display]="classes.shown ? 'block' : 'none'">
                 <div id="addSerieForm"  method="post" enctype="multipart/form-data"
                     accept-charset="UTF-8">
                     <div class="col-md-12 mt-5 mb-5">
@@ -107,7 +108,7 @@
                                         <select name="type" class="form-select" id="campo4" #type>
                                             <option value="SERIE">SERIE</option>
                                             <option value="LIBRO">LIBRO</option>
-                                            <option value="PELCULA">PELCULA</option>
+                                            <option value="PELICULA">PELICULA</option>
                                         </select>
                                     </div>
                                     <div class="col-md-12 mb-3">
@@ -164,7 +165,7 @@
             <!-- {{> W-ModifyFragment}} -->
 
 
-            <div id="addGenre" style="display: none;">
+            <div id="addGenre"  [style.display]="classesFormGenre.shown ? 'block' : 'none'">
                 <div id="addGenreForm" action="/SingleElement/addGenre" method="post" enctype="multipart/form-data"
                     accept-charset="UTF-8">
                     <div class="col-md-12 mt-5 mb-5">

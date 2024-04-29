@@ -1,10 +1,11 @@
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { catchError, of } from 'rxjs';
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { SeriesService } from '../services/serie.service';
 import { FilmsService } from '../services/film.service';
 import { BooksService } from '../services/book.service';
 import { ElementsService } from '../services/element.service';
+import { Element as Elem } from '../models/element.model';
 import { Router } from '@angular/router';
 
 const BASE_URL = "/api/series/";
@@ -17,10 +18,19 @@ const BASE_URL = "/api/series/";
 export class AdminComponent {
 
 
+  classes = {
+
+    "shown": false
+  }
+
+
+  classesFormGenre = {
+    "shown": false
+  }
 
   constructor(private http: HttpClient, private seriesService: SeriesService,
     private bookService: BooksService, private filmService: FilmsService,
-    private elementService : ElementsService, private router : Router) {     }
+    private elementService: ElementsService) { }
 
   // ngOnInit() {
   // }
@@ -40,23 +50,70 @@ export class AdminComponent {
     const imageInput = document.getElementById("campo10") as HTMLInputElement;
     if (imageInput && imageInput.value && imageInput.files) {
       const imageFile = imageInput.files[0];
-      this.http.post(BASE_URL,
-        {
-          name: name, description: description, author: author, year: yearsN, type: type,
-          season: season, state: state, country: country, genres: trimmedGenresArray
-        },
-        { withCredentials: true }
-      ).subscribe({
+      if (type == "SERIE") {
+        var element = this.makeElement(name, description, author, type, season, state, country, trimmedGenresArray, yearsN)
+        // this.http.post(BASE_URL,
+        //   {
+        //     name: name, description: description, author: author, year: yearsN, type: type,
+        //     season: season, state: state, country: country, genres: trimmedGenresArray
+        //   },
+        //   { withCredentials: true }
+        // ).subscribe({
 
-        next: () => {
-          this.searchType(name, type, imageFile)
-        },
+        //   next: () => {
+        //     this.searchType(name, type, imageFile)
+        //   },
 
-        error: (err) => {
-          console.log(err)
-        }
-      });
+        //   error: (err) => {
+        //     console.log(err)
+        //   }
+        // });
+        this.seriesService.addOrUpdateSerie(element).subscribe({
+          next: (element) => {
+            this.searchType(name,type,imageFile)
+          },
+          error: (err) => {
+            if (err.status != 404) {
+              console.error('Error:' + JSON.stringify(err));
+            }
+          }
+        })
+        
+      }
+      else if (type == "LIBRO") {
 
+        var element = this.makeElement(name, description, author, type, season, state, country, trimmedGenresArray, yearsN)
+        this.bookService.addOrUpdateBook(element).subscribe({
+          next: (element) => {
+            this.searchType(name,type,imageFile)
+          },
+          error: (err) => {
+            if (err.status != 404) {
+              console.error('Error:' + JSON.stringify(err));
+            }
+          }
+        })
+
+
+      }
+      else if (type == "PELICULA" || type == "PELÍCULA") {
+        type = "PELICULA"
+        var element = this.makeElement(name, description, author, type, season, state, country, trimmedGenresArray, yearsN)
+        this.filmService.addOrUpdateFilm(element).subscribe({
+          next: (element) => {
+            this.searchType(name,type,imageFile)
+          },
+          error: (err) => {
+            if (err.status != 404) {
+              console.error('Error:' + JSON.stringify(err));
+            }
+          }
+        })
+
+      }
+
+
+      this.classes.shown = false
 
     }
 
@@ -79,10 +136,8 @@ export class AdminComponent {
       elementObserver.subscribe({
         next: (element) => {
           if (element.id) {
-            this.bookService.uploadBookImage(element.id, imageFile).subscribe()
-            window.location.reload()
+            this.bookService.addBookImage(element.id, imageFile).subscribe()
           }
-          window.location.reload()
         },
         error: (err) => {
           if (err.status != 404) {
@@ -101,9 +156,7 @@ export class AdminComponent {
         next: (element) => {
           if (element.id) {
             this.filmService.addFilmImage(element.id, imageFile).subscribe()
-            window.location.reload()
           }
-          window.location.reload()
         },
         error: (err) => {
           if (err.status != 404) {
@@ -120,9 +173,7 @@ export class AdminComponent {
         next: (element) => {
           if (element.id) {
             this.seriesService.addSerieImage(element.id, imageFile).subscribe()
-            window.location.reload()
-          }            
-          window.location.reload()
+          }
         },
         error: (err) => {
           if (err.status != 404) {
@@ -141,13 +192,60 @@ export class AdminComponent {
       } else {
         formElement.style.display = "none";
       }
+
+      // if (!this.classes.shown) {
+      //   this.classes.shown = true;
+      // }
+      // if (!this.classesFormGenre.shown) {
+      //   this.classesFormGenre.shown = true;
+      // }
     }
   }
 
   addGenre(genre: string) {
-     this.elementService.addGenre(genre);
+    this.elementService.addGenre(genre);
+    this.classesFormGenre.shown = false;
     // window.location.reload()
-    
+
   }
+
+  makeElement(name: string, description: string, author: string, type: string, season: string, state: string, country: string, genres: string[], years: number): Elem {
+    // Crear una nueva instancia de Element
+
+    const newElement: Elem = {
+      name: name,
+      description: description,
+      year: years,
+      type: type,
+      season: season,
+      state: state,
+      author: author,
+      country: country,
+      generos: genres,
+      imageFile: new Blob(),
+      reviews: []
+    };
+
+
+    // Asignar los valores recibidos como parámetros a las propiedades del nuevo elemento
+    newElement.name = name;
+    newElement.description = description;
+    newElement.author = author;
+    newElement.type = type;
+    newElement.season = season;
+    newElement.state = state;
+    newElement.country = country;
+    newElement.generos = genres;
+    newElement.year = years;
+
+
+
+    // Ahora puedes usar el nuevo elemento como desees
+    return newElement
+
+    // Resto de tu lógica aquí...
+  }
+
+
 }
 

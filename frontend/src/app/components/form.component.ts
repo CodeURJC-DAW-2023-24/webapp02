@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, Output, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { Element } from '../models/element.model';
 import { Observable, windowWhen } from 'rxjs';
@@ -18,7 +18,11 @@ export class FormComponent implements OnChanges {
 
 
     @Input()
-    observer!: Observable<Element>
+    observer!: Observable<Element>;
+
+    @Output()
+    edited = new EventEmitter<boolean>();
+
     element!: Element;
 
     name: string = "";
@@ -82,7 +86,7 @@ export class FormComponent implements OnChanges {
                 }
 
             }
-            window.location.reload()
+            this.edited.emit(true)
         }
 
         else if (this.type == "PELICULA" || this.type == "PELÍCULA") {
@@ -98,7 +102,7 @@ export class FormComponent implements OnChanges {
                 }
 
             }
-            window.location.reload()
+            this.edited.emit(true)
 
         }
 
@@ -114,8 +118,8 @@ export class FormComponent implements OnChanges {
                     this.seriesService.uploadSerieImage(this.element.id, imageFile).subscribe()
                 }
             }
-            window.location.reload()
 
+            this.edited.emit(true)
         }
     }
 
