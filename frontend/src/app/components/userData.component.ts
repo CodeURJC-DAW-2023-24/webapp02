@@ -24,12 +24,15 @@ export class UserDataComponent {
     this.isLogged = this.loginService.isLogged();
 
     if (this.isLogged){
-      this.currentUser = this.loginService.currentUser();
+      if(this.currentUser == undefined){
+        this.currentUser = this.loginService.currentUser();
+      }
+
       this.isLogged = true;
       if(this.currentUser && this.currentUser.id !== undefined){
         //this.userService.getUserImage(this.currentUser?.id);
         this.isAdmin = this.loginService.isAdmin();
-        this.currentUser!.imageURL = "../../assets/Images/Aladdin.jpg";
+        //this.currentUser!.imageURL = "../../assets/Images/Aladdin.jpg";
         this.userService.getUserImage(this.currentUser?.id).subscribe((imageData) => {
           if(imageData){
             const blob = new Blob([imageData], {type: 'image/jpeg'});
@@ -41,6 +44,16 @@ export class UserDataComponent {
 
         });
       }
+
+      //observer to update the current user when it detects any changes
+      this.loginService.user$.subscribe(user => {
+        if(user != undefined){
+          this.currentUser = user;
+        }
+      });
+
+      localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
+
     }
   }
 

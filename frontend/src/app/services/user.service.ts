@@ -44,7 +44,8 @@ export class UsersService {
 		return this.httpClient.put(BASE_Url + id + '/image', formData).pipe(
 			tap((response) => {
 				this.user = response as User;
-				this.user.profileImage = newImage; 
+				this.user.profileImage = newImage;
+        this.user.imageURL = URL.createObjectURL(newImage);
 				localStorage.setItem('currentUser', JSON.stringify(this.user));
 				console.log('Solicitud PUT de imagen completada con éxito:', response);
 			}),
@@ -59,8 +60,8 @@ export class UsersService {
 		return this.httpClient.put(BASE_Url + id + '/bannerimage', formData).pipe(
 			tap((response) => {
 				this.user = response as User;
-				this.user.bannerImage = newBannerImage; 
-				localStorage.setItem('currentUser', JSON.stringify(response));
+				this.user.bannerImage = newBannerImage;
+				localStorage.setItem('currentUser', JSON.stringify(this.user));
 				console.log('Solicitud PUT de imagen de banner completada con éxito:', response);
 			}),
 			catchError(error => this.handleError(error))
