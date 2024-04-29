@@ -33,19 +33,6 @@ export class ProfileComponent {
   constructor(private loginService: LoginService, private router: Router,
     private userService: UsersService, private elementService: ElementsService) { }
 
-  // ngOnInit() {
-  //   this.profileWindow();
-  // }
-  // ngOnInit() {
-  //   this.allElementsPromise = this.fetchAllElements();
-  // }
-
-  // async fetchAllElements(): Promise<Element[]> {
-  //   const allElements: Element[] = [];
-  //   this.profileWindow();
-  //   return allElements;
-  // }
-
   ngOnInit() {
     this.profileWindow();
   }

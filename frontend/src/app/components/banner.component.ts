@@ -12,16 +12,14 @@ import { Observable } from 'rxjs';
   styleUrl: '../Css/S-Banner.css'
 })
 export class BannerComponent {
+
   @Input() user: User | undefined;
-  //@Output() userToSend: User | undefined;
-  @Output()
-  userToSend: EventEmitter<User> = new EventEmitter();
 
-
+  userPrueba: User | undefined;
   userImage: string | undefined;
   bannerImage: string | undefined;
   name: string | undefined;
-  originalName: string|undefined;
+  originalName: string | undefined;
   newProfileImage: File | undefined;
   newBannerImage: File | undefined;
   allUsers: Observable<User[]> | undefined;
@@ -33,7 +31,7 @@ export class BannerComponent {
 
   ngOnInit() {
     this.name = this.user?.name;
-    this.originalName = this.name;
+    this.originalName = this.user?.name;
     this.loadLogoImage();
     this.loadBannerImage();
   }
@@ -67,11 +65,41 @@ export class BannerComponent {
   }
 
   updateProfile() {
+
+    if (this.name !== this.originalName) {
+      const userdto: UserDTO = {
+        name: this.name,
+        profileImageUrl: this.user?.imageURL,
+        bannerImageUrl: this.user?.bannerImageURL
+      };
+      this.userService.addOrUpdateUser(userdto, this.user!).subscribe({
+        next: (response: any) => {
+          this.userUpdateVar = response as User;
+          this.loginService.updateCurrentUser(this.userUpdateVar);
+          this.userService.updateCurrentUser(this.userUpdateVar);
+          this.user= JSON.parse(localStorage.getItem('currentUser')!) as User;
+          //this.name = this.user.name;
+          this.user!.id = response.id;
+          if (this.user) {
+            this.allUsers2.findIndex;
+          }
+        },
+        error: (error) => {
+          console.error('Error:', error);
+        }
+      })
+    }
+
     if (this.newProfileImage !== undefined) {
       console.log("Me has mandado una nueva imagen para cambiarla");
-      this.userService.setUserImage(this.user!.id!, this.newProfileImage).subscribe({
-        next: (response: any) => {
+      const userdto: UserDTO = {
+        profileImageUrl: URL.createObjectURL(this.newProfileImage!),
+        bannerImageUrl: this.user?.bannerImageURL,
+        profileImage: this.newProfileImage
+      };
 
+      this.userService.setUserImage(this.user!.id!, userdto).subscribe({
+        next: (response: any) => {
           this.userUpdateVar = response as User;
           const urlNewProfileImg = URL.createObjectURL(this.newProfileImage!);
           this.userUpdateVar.imageURL = urlNewProfileImg;
@@ -86,10 +114,13 @@ export class BannerComponent {
       });
     }
     if (this.newBannerImage !== undefined) {
-      this.userService.setUserBannerImage(this.user!.id!, this.newBannerImage).subscribe({
+      const userdto: UserDTO = {
+        profileImageUrl: this.user?.imageURL,
+        bannerImageUrl: URL.createObjectURL(this.newBannerImage!),
+        bannerImage: this.newBannerImage
+      };
+      this.userService.setUserBannerImage(this.user!.id!, userdto).subscribe({
         next: (response: any) => {
-          //this.userService.updateCurrentUser(response);
-
           this.userUpdateVar = response as User;
           const urlNewBannerImg = URL.createObjectURL(this.newBannerImage!);
           this.userUpdateVar.bannerImageURL = urlNewBannerImg;
@@ -100,25 +131,5 @@ export class BannerComponent {
         }
       });
     }
-
-    if(this.name !== this.originalName){
-      const userdto: UserDTO = {
-      name: this.name!,
-      };
-
-      this.userService.addOrUpdateUser(userdto, this.user!).subscribe({
-        next: (response: any) => {
-          this.user!.id = response.id;
-          if (this.user) {
-            //const existingUserIndex = this.allUsers!.findIndex(u => u.id === response.id);
-            this.allUsers2.findIndex
-          }
-        },
-        error: (error) => {
-          console.error('Error:', error);
-        }
-      })
-    }
-
   }
 }

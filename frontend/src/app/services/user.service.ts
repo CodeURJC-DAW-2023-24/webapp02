@@ -13,7 +13,6 @@ export class UsersService {
 
 	user: User | undefined;
 
-
 	constructor(private httpClient: HttpClient) { }
 
 	getUsers(): Observable<User[]> {
@@ -32,40 +31,8 @@ export class UsersService {
 		return this.httpClient.get(BASE_Url + id + '/image', { responseType: 'arraybuffer' })
 	}
 
-	getUserBannerImage(id: number | string){
-		return this.httpClient.get(BASE_Url + id + '/bannerimage', {responseType: 'arraybuffer'})
-	}
-
-	setUserImage(id: number | string, newImage: File){
-		// return this.httpClient.put(BASE_Url + id + '/image', {responseType: 'arraybuffer'})
-		const formData = new FormData();
-		formData.append('profileImage', newImage);
-
-		return this.httpClient.put(BASE_Url + id + '/image', formData).pipe(
-			tap((response) => {
-				this.user = response as User;
-				this.user.profileImage = newImage;
-        this.user.imageURL = URL.createObjectURL(newImage);
-				localStorage.setItem('currentUser', JSON.stringify(this.user));
-				console.log('Solicitud PUT de imagen completada con éxito:', response);
-			}),
-			catchError(error => this.handleError(error))
-		);
-	}
-
-	setUserBannerImage(id: number | string, newBannerImage: File){
-		const formData = new FormData();
-		formData.append('bannerImage', newBannerImage);
-
-		return this.httpClient.put(BASE_Url + id + '/bannerimage', formData).pipe(
-			tap((response) => {
-				this.user = response as User;
-				this.user.bannerImage = newBannerImage;
-				localStorage.setItem('currentUser', JSON.stringify(this.user));
-				console.log('Solicitud PUT de imagen de banner completada con éxito:', response);
-			}),
-			catchError(error => this.handleError(error))
-		);
+	getUserBannerImage(id: number | string) {
+		return this.httpClient.get(BASE_Url + id + '/bannerimage', { responseType: 'arraybuffer' })
 	}
 
 	addOrUpdateUser(userDTO: UserDTO, user: User) {
@@ -81,11 +48,11 @@ export class UsersService {
 			name: user.name,
 			password: user.password,
 			roles: user.roles,
-			listasDeElementos: {"Favoritos": []}
+			listasDeElementos: { "Favoritos": [] }
 		};
 		return this.httpClient.post(BASE_Url, u).pipe(
 			tap((response: any) => {
-				this.updateUserImage(user, response.id).subscribe({
+				this.uploadUserImage(user, response.id).subscribe({
 					next: (response) => {
 						console.log('Solicitud POST de imagen completada con éxito:', response);
 					},
@@ -100,7 +67,7 @@ export class UsersService {
 
 	}
 
-	private updateUserImage(user: User, id: number) {
+	private uploadUserImage(user: User, id: number) {
 		const formData = new FormData();
 		formData.append('imageUrl', user.imageURL!);
 		return this.httpClient.post(BASE_Url + id + '/image', formData).pipe(
@@ -124,8 +91,51 @@ export class UsersService {
 		});
 
 		return this.httpClient.put<User>(BASE_Url + user.id, u).pipe(
-      tap((response) => {
-				localStorage.setItem('currentUser', JSON.stringify(response));
+			tap((response) => {
+				this.user = response as User;
+				this.user.name = userDTO.name!;
+				this.user.profileImage = userDTO.profileImage;
+				this.user.bannerImage = userDTO.bannerImage;
+				this.user.imageURL = userDTO.profileImageUrl;
+				this.user.bannerImageURL = userDTO.bannerImageUrl;
+				localStorage.setItem('currentUser', JSON.stringify(this.user));
+			}),
+			catchError(error => this.handleError(error))
+		);
+	}
+
+	setUserImage(id: number | string, userDTO: UserDTO) {
+		// return this.httpClient.put(BASE_Url + id + '/image', {responseType: 'arraybuffer'})
+		const formData = new FormData();
+		formData.append('profileImage', userDTO.profileImage!);
+
+		return this.httpClient.put(BASE_Url + id + '/image', formData).pipe(
+			tap((response) => {
+				this.user = response as User;
+				this.user.profileImage = userDTO.profileImage;
+				this.user.bannerImage = userDTO.bannerImage;
+				this.user.imageURL = userDTO.profileImageUrl;
+				this.user.bannerImageURL = userDTO.bannerImageUrl;
+				localStorage.setItem('currentUser', JSON.stringify(this.user));
+				console.log('Solicitud PUT de imagen completada con éxito:', response);
+			}),
+			catchError(error => this.handleError(error))
+		);
+	}
+
+	setUserBannerImage(id: number | string, userDTO: UserDTO) {
+		const formData = new FormData();
+		formData.append('bannerImage', userDTO.bannerImage!);
+
+		return this.httpClient.put(BASE_Url + id + '/bannerimage', formData).pipe(
+			tap((response) => {
+				this.user = response as User;
+				this.user.profileImage = userDTO.profileImage;
+				this.user.bannerImage = userDTO.bannerImage;
+				this.user.imageURL = userDTO.profileImageUrl;
+				this.user.bannerImageURL = userDTO.bannerImageUrl;
+				localStorage.setItem('currentUser', JSON.stringify(this.user));
+				console.log('Solicitud PUT de imagen de banner completada con éxito:', response);
 			}),
 			catchError(error => this.handleError(error))
 		);
@@ -142,7 +152,7 @@ export class UsersService {
 		return throwError("Server error (" + error.status + "): " + error.text())
 	}
 
-  updateCurrentUser(user: User){
-    localStorage.setItem('currentUser', JSON.stringify(user));
-  }
+	updateCurrentUser(user: User) {
+		localStorage.setItem('currentUser', JSON.stringify(user));
+	}
 }

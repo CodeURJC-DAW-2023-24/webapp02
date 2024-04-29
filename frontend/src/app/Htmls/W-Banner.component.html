@@ -1,7 +1,7 @@
 <section id="bannerSection" class="bannerSection">
     <img src = "{{user?.bannerImageURL}}"alt="Banner" class="ib">
     <img src="{{user?.imageURL}}" alt="Logo" width="50" height="50" id="bannerLogo">
-    <p id="bannerUsername">{{user?.name}}<a href="#exampleModal"></a>
+    <p id="bannerUsername">{{user!.name}}<a href="#exampleModal"></a>
     <!-- <p type="text" [(ngModel)]="name" id="bannerUsername" href="#exampleModal"> -->
     <!-- <p id="bannerUsername">{{user.name}}<a href="#exampleModal"> -->
     <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
