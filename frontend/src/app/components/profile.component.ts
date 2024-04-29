@@ -5,6 +5,7 @@ import { Element } from '../models/element.model';
 import { LoginService } from '../services/login.service';
 import { UsersService } from '../services/user.service';
 import { ElementsService } from '../services/element.service';
+import { forkJoin } from 'rxjs';
 
 @Component({
   selector: 'profile',
@@ -12,7 +13,7 @@ import { ElementsService } from '../services/element.service';
   styleUrls: ['../Css/S-Profile.css', '../Css/S-Main.css']
 })
 export class ProfileComponent {
-  @Output() dataLoaded: EventEmitter<void> = new EventEmitter<void>();
+  @Output() dataLoaded: EventEmitter<Element[]> = new EventEmitter();
 
   name = '';
   elementsImages: { [key: string]: string } = {};
@@ -46,12 +47,10 @@ export class ProfileComponent {
   // }
 
   ngOnInit() {
-    this.profileWindow().then(() => {
-      this.dataLoaded.emit();
-    });
+    this.profileWindow();
   }
 
-  async profileWindow(): Promise<void> {
+  profileWindow() {
     //Checking that the user is logged
     this.actualUser = this.loginService.currentUser();
     this.elementsOfUser2 = this.actualUser!.listasDeElementos;
@@ -64,18 +63,22 @@ export class ProfileComponent {
 
     for (let [key, value] of this.elementsOfUser3) {
       console.log(key, value);
+      const observables = [];
       for (let idX of value) {
         if (idX !== undefined) {
-          this.elementService.getElementById(idX).subscribe((element: Element) => {
+          const elementObs = this.elementService.getElementById(idX);
+          const imageObs = this.elementService.getElementImage(idX);
+          observables.push(forkJoin([elementObs, imageObs]));
+        }
+      }
+      if (observables.length > 0) {
+        forkJoin(observables).subscribe((results: [Element, ArrayBuffer][]) => {
+          results.forEach(([element, imageData]) => {
             if (element) {
               this.allElements.push(element);
               if (!this.newMap.has(key)) {
-                // console.log(element);
-                // if(this.allElements.includes(element)){
-                //   this.allElements.push(element);
-                // }
                 this.elementList?.push(element);
-                this.allElements.push(element);
+                //this.allElements.push(element);
                 this.newMap.set(key, this.elementList!);
               } else {
                 this.elementList = [];
@@ -84,28 +87,22 @@ export class ProfileComponent {
                 this.newMap.set(key, this.elementList!);
                 this.elementList = [];
               }
-              this.elementService.getElementImage(idX).subscribe((imageData2) => {
-                if (imageData2) {
-                  const blob = new Blob([imageData2], { type: 'image/jpeg' });
-                  this.elementsImages[element.name] = URL.createObjectURL(blob);
-                  //this.elementsImages[this.elementService.getElementById(idX).name] = URL.createObjectURL(blob)
-                  // } else { this.elementsImages[this.elementService.getElementById(idX).name] = ''}
-
-                } else {
-                  this.elementsImages[element.name] = '';
-                }
-              });
+              if (imageData) {
+                const blob = new Blob([imageData], { type: 'image/jpeg' });
+                this.elementsImages[element.name] = URL.createObjectURL(blob);
+              } else {
+                this.elementsImages[element.name] = '';
+              }
+              //this.dataLoaded.emit(this.allElements);
             } else { //element not found
               console.log("Elemento no encontrado");
             }
           });
-          //this.exampleElement = this.elementService.getElementById(idX);
-
-        } //if idx not undefined
-
-      }//for let idx of value
-
-    }    //for let key and value 
+          this.dataLoaded.emit(this.allElements); //al mandarlo desde aquí solo pilla la 1ªlista
+        });
+        //this.dataLoaded.emit(this.allElements);
+      }
+    }
 
   }//profile window
 

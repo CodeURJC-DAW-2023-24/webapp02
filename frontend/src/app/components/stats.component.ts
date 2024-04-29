@@ -53,19 +53,20 @@ export class StatsComponent {
     ngOnInit() {
         this.profileComponent.dataLoaded.subscribe(() => {
             this.calculateStats();
+            //Suscribirme a elements y esperar a que no sea nulo para ejecutar calculatestats
             this.renderChart();
             this.renderChart2();
         });
     }
 
-    async ngOnChanges(changes: SimpleChanges): Promise<void> {
-        if (changes['elements'] && this.elements) {
-            this.calculateStats();
-            this.renderChart();
-            this.renderChart2();
-            // this.typeSelector(this.type, this.element);
-        }
-    }
+    // angOnChanges(changes: SimpleChanges):void {
+    //     if (changes['elements'] && this.elements) {
+    //         this.calculateStats();
+    //         this.renderChart();
+    //         this.renderChart2();
+    //         // this.typeSelector(this.type, this.element);
+    //     }
+    // }
 
     // ngOnCheck() {
     //     if (this.elements !== this.previousElements) {
@@ -75,7 +76,7 @@ export class StatsComponent {
     // }
 
 
-    async calculateStats(): Promise<void> {
+    calculateStats() {
         for (let elementX of this.elements) {
             this.typeNow = elementX.type;
             switch (this.typeNow) {
