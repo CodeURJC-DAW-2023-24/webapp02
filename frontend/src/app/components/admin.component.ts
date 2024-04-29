@@ -5,7 +5,7 @@ import { SeriesService } from '../services/serie.service';
 import { FilmsService } from '../services/film.service';
 import { BooksService } from '../services/book.service';
 import { ElementsService } from '../services/element.service';
-import { Element as Elem } from '../models/element.model';
+import { Element as elementDTO } from '../models/elementDTO.model';
 import { Router } from '@angular/router';
 
 const BASE_URL = "/api/series/";
@@ -69,7 +69,7 @@ export class AdminComponent {
         //   }
         // });
         this.seriesService.addOrUpdateSerie(element).subscribe({
-          next: (element) => {
+          next: (elementSubscribed) => {
             this.searchType(name,type,imageFile)
           },
           error: (err) => {
@@ -84,7 +84,7 @@ export class AdminComponent {
 
         var element = this.makeElement(name, description, author, type, season, state, country, trimmedGenresArray, yearsN)
         this.bookService.addOrUpdateBook(element).subscribe({
-          next: (element) => {
+          next: (elementSubscribed) => {
             this.searchType(name,type,imageFile)
           },
           error: (err) => {
@@ -100,7 +100,7 @@ export class AdminComponent {
         type = "PELICULA"
         var element = this.makeElement(name, description, author, type, season, state, country, trimmedGenresArray, yearsN)
         this.filmService.addOrUpdateFilm(element).subscribe({
-          next: (element) => {
+          next: (elementSubscribed) => {
             this.searchType(name,type,imageFile)
           },
           error: (err) => {
@@ -209,10 +209,10 @@ export class AdminComponent {
 
   }
 
-  makeElement(name: string, description: string, author: string, type: string, season: string, state: string, country: string, genres: string[], years: number): Elem {
+  makeElement(name: string, description: string, author: string, type: string, season: string, state: string, country: string, generos: string[], years: number): elementDTO {
     // Crear una nueva instancia de Element
 
-    const newElement: Elem = {
+    const newElement: elementDTO = {
       name: name,
       description: description,
       year: years,
@@ -221,7 +221,7 @@ export class AdminComponent {
       state: state,
       author: author,
       country: country,
-      generos: genres,
+      genres: generos,
       imageFile: new Blob(),
       reviews: []
     };
@@ -235,7 +235,7 @@ export class AdminComponent {
     newElement.season = season;
     newElement.state = state;
     newElement.country = country;
-    newElement.generos = genres;
+    newElement.genres = generos;
     newElement.year = years;
 
 

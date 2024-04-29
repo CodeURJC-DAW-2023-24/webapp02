@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, tap, map } from 'rxjs/operators';
+import { Element as elementDTO } from '../models/elementDTO.model';
 
 import { Element as ElementComponent } from '../models/element.model';
 
@@ -89,7 +90,7 @@ export class BooksService {
     }
   }
 
-	addOrUpdateBook(book: ElementComponent) {
+	addOrUpdateBook(book: ElementComponent | elementDTO ) {
 		if (!book.id) {
 			return this.addBook(book);
 		} else {
@@ -97,13 +98,13 @@ export class BooksService {
 		}
 	}
 
-	private addBook(book: ElementComponent) {
+	private addBook(book: ElementComponent | elementDTO ) {
 		return this.httpClient.post(BASE_URL_BOOKS, book).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
 
-	private updateBook(book: ElementComponent) {
+	private updateBook(book: ElementComponent | elementDTO) {
 		return this.httpClient.put(BASE_URL_BOOKS + book.id, book).pipe(
 			catchError(error => this.handleError(error))
 		);

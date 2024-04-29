@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { Element as elementDTO } from '../models/elementDTO.model';
 import { filter, switchMap } from 'rxjs/operators';
 
 import { Element } from '../models/element.model';
@@ -83,7 +84,7 @@ export class SeriesService {
 
 
 
-	addOrUpdateSerie(Serie: Element) {
+	addOrUpdateSerie(Serie: Element | elementDTO)  {
 		if (!Serie.id) {
 			return this.addSerie(Serie);
 		} else {
@@ -91,13 +92,13 @@ export class SeriesService {
 		}
 	}
 
-	private addSerie(Serie: Element) {
+	private addSerie(Serie: Element | elementDTO) {
 		return this.httpClient.post(BASE_URL_SERIES, Serie).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
 
-	private updateSerie(Serie: Element) {
+	private updateSerie(Serie: Element | elementDTO) {
 		return this.httpClient.put(BASE_URL_SERIES + Serie.id, Serie).pipe(
 			catchError(error => this.handleError(error))
 		);

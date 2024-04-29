@@ -6,6 +6,9 @@ import { HttpClient } from '@angular/common/http';
 import { SeriesService } from '../services/serie.service';
 import { BooksService } from '../services/book.service';
 import { FilmsService } from '../services/film.service';
+import { Element as elementDTO } from '../models/elementDTO.model';
+
+
 
 
 
@@ -18,12 +21,12 @@ export class FormComponent implements OnChanges {
 
 
     @Input()
-    observer!: Observable<Element>;
+    observer!: Observable<elementDTO> | Observable<Element>;
 
     @Output()
     edited = new EventEmitter<boolean>();
 
-    element!: Element;
+    element!: elementDTO;
 
     name: string = "";
     description: string = "";
@@ -33,7 +36,7 @@ export class FormComponent implements OnChanges {
     state: string = "";
     author: string = ""
     country: string = "";
-    generos: string[] = [];
+    genres: string = "";
 
 
     //genres : string[] = this.element.genres
@@ -44,22 +47,23 @@ export class FormComponent implements OnChanges {
 
     ngOnChanges(changes: SimpleChanges): void {
         if (changes['observer'] && this.observer) {
+            var observerElement = this.observer as Observable<Element>
 
 
-            this.observer.subscribe((response: any) => {
+            observerElement.subscribe((response: any) => {
                 this.element = response;
-                this.name = this.element.name
-                this.description = this.element.description
-                this.author = this.element.author
-                this.type = this.element.type
+                this.name = response.name
+                this.description = response.description
+                this.author = response.author
+                this.type = response.type
                 if (this.type == "PELICULA") {
                     this.type = "PELÍCULA"
                 }
-                this.state = this.element.state
-                this.season = this.element.season
-                this.country = this.element.country
-                this.year = this.element.year
-                this.generos = this.element.generos
+                this.state = response.state
+                this.season = response.season
+                this.country = response.country
+                this.year = response.year
+                this.genres = response.generos
 
                 // this.typeSelector(this.type, this.element);
 
@@ -78,7 +82,7 @@ export class FormComponent implements OnChanges {
             var editUrl = this.bookService.addOrUpdateBook(this.element)
             editUrl.subscribe()
             const imageInput = document.getElementById("imageInput") as HTMLInputElement;
-            
+
             if (imageInput && imageInput.value && imageInput.files) {
                 const imageFile = imageInput.files[0];
                 if (this.element.id) {
@@ -91,7 +95,7 @@ export class FormComponent implements OnChanges {
 
         else if (this.type == "PELICULA" || this.type == "PELÍCULA") {
             this.changeElement();
-            this.element.type ="PELICULA"
+            this.element.type = "PELICULA"
             var editUrl = this.filmService.addOrUpdateFilm(this.element)
             editUrl.subscribe()
             const imageInput = document.getElementById("imageInput") as HTMLInputElement;
@@ -132,6 +136,11 @@ export class FormComponent implements OnChanges {
         this.element.season = this.season;
         this.element.country = this.country;
         this.element.year = this.year;
-        this.element.generos = this.generos;
+        const genresFormatted: string = this.genres.toUpperCase().trim();
+
+        const genresArray: string[] = genresFormatted.split(',');
+
+        const trimmedGenresArray: string[] = genresArray.map((genre: string) => genre.trim());
+        this.element.genres = trimmedGenresArray;
     }
 }
