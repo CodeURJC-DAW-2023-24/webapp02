@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from '../models/user.model';
 
 
 
@@ -9,7 +10,12 @@ import { Router } from '@angular/router';
   styleUrl: '../Css/S-Header.css'
 })
 export class HeaderComponent {
+  @Input() userUpdated: User | undefined;
+  
+
   constructor(private router: Router){}
+
+
 
 
 

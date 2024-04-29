@@ -21,8 +21,8 @@ export class ProfileComponent {
   elementsOfUser: any[] = [];
   @Output() allElements: Element[] = [];
   elementList: Element[] | undefined = [];
-  elementsOfUser2: Map<string, number[]>  = new Map;
-  elementsOfUser3: Map<string, number[]>  = new Map;
+  elementsOfUser2: Map<string, number[]> = new Map;
+  elementsOfUser3: Map<string, number[]> = new Map;
   newMap: Map<string, Element[]> = new Map;
   exampleElement!: Element;
   actualUser: User | undefined;
@@ -44,20 +44,20 @@ export class ProfileComponent {
   //   this.profileWindow();
   //   return allElements;
   // }
-  
+
   ngOnInit() {
     this.profileWindow().then(() => {
       this.dataLoaded.emit();
     });
   }
 
-  async profileWindow(): Promise<void>{
+  async profileWindow(): Promise<void> {
     //Checking that the user is logged
     this.actualUser = this.loginService.currentUser();
     this.elementsOfUser2 = this.actualUser!.listasDeElementos;
 
-    for(let [key, value] of Object.entries(this.elementsOfUser2)){
-      console.log("KEY: "+ key + " VALUE: " + value);
+    for (let [key, value] of Object.entries(this.elementsOfUser2)) {
+      console.log("KEY: " + key + " VALUE: " + value);
       this.elementsOfUser3.set(key, value);
     }
     console.log("ELEMENTSOFUSER3==> " + this.elementsOfUser3)
@@ -69,21 +69,21 @@ export class ProfileComponent {
           this.elementService.getElementById(idX).subscribe((element: Element) => {
             if (element) {
               this.allElements.push(element);
-                  if (!this.newMap.has(key)){
-                    // console.log(element);
-                    // if(this.allElements.includes(element)){
-                    //   this.allElements.push(element);
-                    // }
-                    this.elementList?.push(element);
-                    this.allElements.push(element);
-                    this.newMap.set(key, this.elementList!);
-                  } else {
-                    this.elementList = [];
-                    this.elementList = this.newMap.get(key);
-                    this.elementList!.push(element);
-                    this.newMap.set(key, this.elementList!);
-                    this.elementList = [];
-                  }
+              if (!this.newMap.has(key)) {
+                // console.log(element);
+                // if(this.allElements.includes(element)){
+                //   this.allElements.push(element);
+                // }
+                this.elementList?.push(element);
+                this.allElements.push(element);
+                this.newMap.set(key, this.elementList!);
+              } else {
+                this.elementList = [];
+                this.elementList = this.newMap.get(key);
+                this.elementList!.push(element);
+                this.newMap.set(key, this.elementList!);
+                this.elementList = [];
+              }
               this.elementService.getElementImage(idX).subscribe((imageData2) => {
                 if (imageData2) {
                   const blob = new Blob([imageData2], { type: 'image/jpeg' });
@@ -109,6 +109,11 @@ export class ProfileComponent {
 
   }//profile window
 
+  recieveUser(userRecieved: User) {
+    this.actualUser = userRecieved;
+  }
+
 }//Export Class
+
 
 

@@ -58,8 +58,10 @@ export class UsersService {
 
 		return this.httpClient.put(BASE_Url + id + '/bannerimage', formData).pipe(
 			tap((response) => {
+				this.user = response as User;
+				this.user.bannerImage = newBannerImage; 
 				localStorage.setItem('currentUser', JSON.stringify(response));
-				console.log('Solicitud PUT de imagen completada con éxito:', response);
+				console.log('Solicitud PUT de imagen de banner completada con éxito:', response);
 			}),
 			catchError(error => this.handleError(error))
 		);
