@@ -36,7 +36,7 @@ export class FormComponent implements OnChanges {
     state: string = "";
     author: string = ""
     country: string = "";
-    genres: string = "";
+    genres: string[] = [];
 
 
     //genres : string[] = this.element.genres
@@ -135,12 +135,12 @@ export class FormComponent implements OnChanges {
         this.element.state = this.state;
         this.element.season = this.season;
         this.element.country = this.country;
-        this.element.year = this.year;
-        const genresFormatted: string = this.genres.toUpperCase().trim();
+        // this.element.year = this.year;
+        // const genresFormatted: string = this.genres.toUpperCase().trim();
 
-        const genresArray: string[] = genresFormatted.split(',');
+        // const genresArray: string[] = genresFormatted.split(',');
 
-        const trimmedGenresArray: string[] = genresArray.map((genre: string) => genre.trim());
-        this.element.genres = trimmedGenresArray;
+        // const trimmedGenresArray: string[] = genresArray.map((genre: string) => genre.trim());
+        this.element.genres = this.genres;
     }
 }
