@@ -77,6 +77,19 @@ export class StatsComponent {
 
 
     calculateStats() {
+        const existingChart1 = Chart.getChart("myChart");
+        if (existingChart1) {
+            existingChart1.destroy();
+            this.numBooks = 0;
+            this.numFilms = 0;
+            this.numSeries = 0;
+            this.amountOfGenres.clear;
+        }
+        const existingCHart2 = Chart.getChart("myChart2");
+        if(existingCHart2){
+            existingCHart2.destroy();
+        }
+
         for (let elementX of this.elements) {
             this.typeNow = elementX.type;
             switch (this.typeNow) {
@@ -107,6 +120,10 @@ export class StatsComponent {
         const xValues = ["LIBROS", "PELICULAS", "SERIES"];
         const yValues = [this.numBooks, this.numFilms, this.numSeries];
         const barColors = ["red", "blue", "#5cd65c"];
+
+        // Destruir la tabla anterior:
+        
+
         new Chart('myChart', {
             type: 'pie',
             data: {

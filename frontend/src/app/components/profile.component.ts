@@ -75,7 +75,9 @@ export class ProfileComponent {
         forkJoin(observables).subscribe((results: [Element, ArrayBuffer][]) => {
           results.forEach(([element, imageData]) => {
             if (element) {
-              this.allElements.push(element);
+              if(!(this.allElements.includes(element))){
+                this.allElements.push(element);
+              }
               if (!this.newMap.has(key)) {
                 this.elementList?.push(element);
                 //this.allElements.push(element);
