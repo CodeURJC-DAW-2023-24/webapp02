@@ -118,14 +118,61 @@ export class AdminComponent {
     }
 
     else {
-      this.http.post(BASE_URL, { name: name, description: description, author: author, type: type, season: season, state: state, country: country, genres: genres, years: years }).subscribe({
-        next: (response) => {
-          this.http.get("/Admin");
-        },
-        error: (err) => {
-          alert("Wrong credentials");
-        }
-      });
+      if (type == "SERIE") {
+        var element = this.makeElement(name, description, author, type, season, state, country, trimmedGenresArray, yearsN)
+        // this.http.post(BASE_URL,
+        //   {
+        //     name: name, description: description, author: author, year: yearsN, type: type,
+        //     season: season, state: state, country: country, genres: trimmedGenresArray
+        //   },
+        //   { withCredentials: true }
+        // ).subscribe({
+
+        //   next: () => {
+        //     this.searchType(name, type, imageFile)
+        //   },
+
+        //   error: (err) => {
+        //     console.log(err)
+        //   }
+        // });
+        this.seriesService.addOrUpdateSerie(element).subscribe({
+          error: (err) => {
+            if (err.status != 404) {
+              console.error('Error:' + JSON.stringify(err));
+            }
+          }
+        })
+        
+      }
+
+      else if (type == "LIBRO") {
+
+        var element = this.makeElement(name, description, author, type, season, state, country, trimmedGenresArray, yearsN)
+        this.bookService.addOrUpdateBook(element).subscribe({
+          error: (err) => {
+            if (err.status != 404) {
+              console.error('Error:' + JSON.stringify(err));
+            }
+          }
+        })
+
+
+      }
+
+      else if (type == "PELICULA" || type == "PELÍCULA") {
+        type = "PELICULA"
+        var element = this.makeElement(name, description, author, type, season, state, country, trimmedGenresArray, yearsN)
+        this.filmService.addOrUpdateFilm(element).subscribe({
+          error: (err) => {
+            if (err.status != 404) {
+              console.error('Error:' + JSON.stringify(err));
+            }
+          }
+        })
+
+      }
+
     }
   }
 
