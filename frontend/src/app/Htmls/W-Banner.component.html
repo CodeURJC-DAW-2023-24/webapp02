@@ -1,0 +1,95 @@
+<section id="bannerSection" class="bannerSection">
+    <img src = "{{user?.bannerImageURL}}"alt="Banner" class="ib">
+    <img src="{{user?.imageURL}}" alt="Logo" width="50" height="50" id="bannerLogo">
+    <p id="bannerUsername">{{user?.name}}<a href="#exampleModal"></a>
+    <!-- <p type="text" [(ngModel)]="name" id="bannerUsername" href="#exampleModal"> -->
+    <!-- <p id="bannerUsername">{{user.name}}<a href="#exampleModal"> -->
+    <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <img src="../assets/Images/Icon-Edit.png" alt="Edit_Button" style="width:30px;height:30px;">
+    </button>
+    <!-- <button (click)="changeName('')"> Editar nombre {{name}}</button> -->
+    <!-- <img [src]="userImage" alt="Logo" width="50" height="50" class="align-text-center rounded-circle"> -->
+</section>
+
+<!-- MODAL PARA BOTÓN DE MODIFICAR USUARIO -->
+<div class="modal" id="exampleModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!--form action="/users/update" method="post" enctype="multipart/form-data"-->
+            <form (ngSubmit)="updateProfile()">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"
+                        aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="profileImage">Profile Image</label>
+                        <input type="file" class="form-control" id="profileImage" name="base64ProfileImage" [(ngModel)] = "newProfileImage"
+                        accept="image/jpeg,image/png,image/jpg" (change) = setImages($event)>
+                        <!-- <input type="file" name="image" class="form-control" id="campo10"
+                                            accept="image/jpeg,image/png,image/jpg" #image> -->
+                    </div>
+                    <div class="form-group">
+                        <label for="bannerImage">Banner Image</label>
+                        <input type="file" class="form-control" id="bannerImage" name="base64BannerImage" [(ngModel)] = "newBannerImage"
+                        accept="image/jpeg,image/png,image/jpg" (change) =setBanners($event)>
+                        
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" id="username" name="name" [(ngModel)] = "name">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary" >Save changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- 
+    <div id="prueba">
+        <p id="bannerUsername">{{user.name}}<a href="#exampleModal">
+                <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
+                        src="/Images/Icon-Edit.png" alt="HTML tutorial" style="width:30px;height:30px;"></button>
+            </a></p>
+
+        Modal
+        <div class="modal" id="exampleModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <form action="/users/update" method="post" enctype="multipart/form-data">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit Profile</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="form-group">
+                                <label for="profileImage">Profile Image</label>
+                                <input type="file" class="form-control" id="profileImage" name="base64ProfileImage">
+                            </div>
+                            <div class="form-group">
+                                <label for="bannerImage">Banner Image</label>
+                                <input type="file" class="form-control" id="bannerImage" name="base64BannerImage">
+                            </div>
+                            <div class="form-group">
+                                <label for="username">Username</label>
+                                <input type="text" class="form-control" id="username" name="name">
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Save changes</button>
+                        </div>
+                         <input type="hidden" name="_csrf" value="{{token}}" /> 
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+ -->

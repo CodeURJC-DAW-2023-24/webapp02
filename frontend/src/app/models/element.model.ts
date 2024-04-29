@@ -10,6 +10,7 @@ export interface Element {
   state: string;
   author: string;
   country: string;
+  base64Image: string;
   imageFile: Blob;
   generos: string[];
   reviews: Review[];

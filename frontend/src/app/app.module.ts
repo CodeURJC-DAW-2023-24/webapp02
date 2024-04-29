@@ -8,6 +8,7 @@ import { AppComponent } from './components/app.component';
 import { routing } from './app.routing';
 import { MainComponent } from './components/main.component';
 import { LoginComponent } from './components/login.component';
+import { ProfileComponent } from './components/profile.component';
 import { UserDataComponent } from './components/userData.component';
 import { HeaderComponent } from './components/header.component';
 import { LibraryComponent } from './components/library.component';
@@ -19,6 +20,8 @@ import { FilterComponent } from './components/filters.component';
 import { SingleElementComponent } from './components/singleElement.component';
 import { signInComponent } from './components/signIn.component';
 import { ReviewsComponent } from './components/review.component';
+import { StatsComponent } from './components/stats.component';
+import { BannerComponent } from './components/banner.component';
 import { AdminComponent } from './components/admin.component';
 import { ModifyComponent } from './components/modify.component';
 import { FormComponent } from './components/form.component';
@@ -29,7 +32,7 @@ import { FormComponent } from './components/form.component';
   declarations: [AppComponent,
     MainComponent,
     LoginComponent,
-    HeaderComponent,
+    ProfileComponent, HeaderComponent,
     UserDataComponent,
     LibraryComponent,
 
@@ -37,7 +40,7 @@ import { FormComponent } from './components/form.component';
     NewsComponent,
     CardsComponent,
     TopsComponent, FilterComponent,
-    SingleElementComponent, signInComponent, ReviewsComponent,AdminComponent,ModifyComponent,FormComponent],
+    SingleElementComponent, signInComponent, ReviewsComponent, StatsComponent, BannerComponent,AdminComponent,ModifyComponent,FormComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   bootstrap: [AppComponent]
 })

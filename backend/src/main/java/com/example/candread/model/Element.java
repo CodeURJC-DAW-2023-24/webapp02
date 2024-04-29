@@ -80,6 +80,7 @@ public class Element {
     private List<String> genres;
 
     @OneToMany (mappedBy = "elementLinked", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<Review> reviews = new ArrayList<>();
 
 

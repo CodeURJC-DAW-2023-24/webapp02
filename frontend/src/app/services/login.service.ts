@@ -57,6 +57,7 @@ export class LoginService {
         this.user = undefined;
         this.router.navigate(['/Login']);
         localStorage.removeItem('isLoggedIn');
+        localStorage.removeItem('currentUser');
       });
 
   }
