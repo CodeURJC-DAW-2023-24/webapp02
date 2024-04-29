@@ -112,12 +112,8 @@ export class UsersService {
 		);
 	}
 
-	private updateProfileImage(user: User, id: number){
-		const formData = new FormData();
-
-	}
-
 	private updateUser(userDTO: UserDTO, user: User) {
+		//make the Json that will be sent to the api.
 		const u: any = {
 			name: userDTO.name,
 			listasDeElementos: {}
@@ -126,6 +122,7 @@ export class UsersService {
 		x?.forEach((value: number[], key: string) => {
 			u.listasDeElementos[key] = value;
 		});
+
 		return this.httpClient.put<User>(BASE_Url + user.id, u).pipe(
       tap((response) => {
 				localStorage.setItem('currentUser', JSON.stringify(response));

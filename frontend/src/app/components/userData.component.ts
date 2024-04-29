@@ -30,14 +30,13 @@ export class UserDataComponent {
 
       this.isLogged = true;
       if(this.currentUser && this.currentUser.id !== undefined){
-        //this.userService.getUserImage(this.currentUser?.id);
         this.isAdmin = this.loginService.isAdmin();
-        //this.currentUser!.imageURL = "../../assets/Images/Aladdin.jpg";
         this.userService.getUserImage(this.currentUser?.id).subscribe((imageData) => {
           if(imageData){
             const blob = new Blob([imageData], {type: 'image/jpeg'});
             this.userImage = URL.createObjectURL(blob);
             this.currentUser!.imageURL = URL.createObjectURL(blob);
+            localStorage.setItem('currentUser', JSON.stringify(this.currentUser));
           }else{
             this.userImage= undefined;
           }
