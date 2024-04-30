@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { User } from '../models/user.model';
 import { Router } from '@angular/router';
+import { BehaviorSubject } from 'rxjs';
 
 const BASE_url = '/api/auth';
 
@@ -10,6 +11,8 @@ export class LoginService {
 
   logged: boolean = false;
   user: User | undefined;
+  private userSource = new BehaviorSubject<User | undefined>(undefined);
+  user$ = this.userSource.asObservable();
 
   constructor(private http: HttpClient, public router: Router) {
   }
@@ -20,6 +23,7 @@ export class LoginService {
       next: (response) => {
         this.user = response as User;
         localStorage.setItem('currentUser', JSON.stringify(this.user));
+        this.updateCurrentUser(this.user);
         this.logged = true;
         localStorage.setItem('isLoggedIn', 'true');
         this.router.navigate(['/Main']);
@@ -82,5 +86,9 @@ export class LoginService {
       }
     }
     return this.user;
+  }
+
+  updateCurrentUser(user: User | undefined) {
+    this.userSource.next(user);
   }
 }

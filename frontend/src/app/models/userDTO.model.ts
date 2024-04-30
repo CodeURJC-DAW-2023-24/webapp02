@@ -3,4 +3,8 @@ export interface UserDTO {
     roles?: string[] | null;
     password?: string | null;
     listasDeElementos?: Map<string, number[]> | null;
+    profileImageUrl?: string;
+    bannerImageUrl?: string;
+    profileImage?: File;
+    bannerImage?: File;
 }
