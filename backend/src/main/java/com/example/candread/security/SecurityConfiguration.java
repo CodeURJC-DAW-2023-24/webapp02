@@ -64,7 +64,7 @@ public class SecurityConfiguration {
 
         http.authorizeHttpRequests((authorize) -> authorize
                 .requestMatchers("/", "/CSS/**", "/Images/**", "/Scripts/**","/downloadNames/**", "/SignIn", "/users/**", "/Library/**", "/new/**",
-                        "/SingleElement/**", "/loginerror", "/error","/EditFragment")
+                        "/SingleElement/**", "/loginerror", "/error","/EditFragment", "/images/**")
                 .permitAll()
                 .requestMatchers("/*/Profile/**", "/*/Main", "/review/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/Admin/**", "/news/add","/SingleElement/edit").hasRole("ADMIN")

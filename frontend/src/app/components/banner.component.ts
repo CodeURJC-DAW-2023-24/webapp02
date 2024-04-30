@@ -39,6 +39,7 @@ export class BannerComponent {
   loadLogoImage() {
     if (this.user && this.user.id !== undefined) {
       this.user = JSON.parse(localStorage.getItem('currentUser')!) as User;
+      this.newProfileImage = undefined;
     }
   }
   loadBannerImage() {
@@ -49,6 +50,7 @@ export class BannerComponent {
           this.bannerImage = URL.createObjectURL(blob);
           this.user = JSON.parse(localStorage.getItem('currentUser')!) as User;
           this.user.bannerImageURL = URL.createObjectURL(blob);
+          this.newBannerImage = undefined;
 
         } else {
           this.bannerImage = undefined;

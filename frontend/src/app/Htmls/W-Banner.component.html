@@ -5,7 +5,7 @@
     <!-- <p type="text" [(ngModel)]="name" id="bannerUsername" href="#exampleModal"> -->
     <!-- <p id="bannerUsername">{{user.name}}<a href="#exampleModal"> -->
     <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
-        <img src="../assets/Images/Icon-Edit.png" alt="Edit_Button" style="width:30px;height:30px;">
+        <img src="https://localhost:8443/images/Icon-Edit.png" alt="Edit_Button" style="width:30px;height:30px;">
     </button>
     <!-- <button (click)="changeName('')"> Editar nombre {{name}}</button> -->
     <!-- <img [src]="userImage" alt="Logo" width="50" height="50" class="align-text-center rounded-circle"> -->
@@ -34,7 +34,7 @@
                         <label for="bannerImage">Banner Image</label>
                         <input type="file" class="form-control" id="bannerImage" name="base64BannerImage" [(ngModel)] = "newBannerImage"
                         accept="image/jpeg,image/png,image/jpg" (change) =setBanners($event)>
-                        
+
                     </div>
                     <div class="form-group">
                         <label for="username">Username</label>
@@ -43,13 +43,13 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="submit" class="btn btn-primary" >Save changes</button>
+                    <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Save changes</button>
                 </div>
             </form>
         </div>
     </div>
 </div>
-<!-- 
+<!--
     <div id="prueba">
         <p id="bannerUsername">{{user.name}}<a href="#exampleModal">
                 <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"><img
@@ -84,7 +84,7 @@
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             <button type="submit" class="btn btn-primary">Save changes</button>
                         </div>
-                         <input type="hidden" name="_csrf" value="{{token}}" /> 
+                         <input type="hidden" name="_csrf" value="{{token}}" />
                     </form>
                 </div>
             </div>
