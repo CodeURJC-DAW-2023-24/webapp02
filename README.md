@@ -348,19 +348,20 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
       - 5: Form component html: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JaviFase4/frontend/src/app/Htmls/W-Form.component.html
         
 - Juan Álvarez Loeches:
-    - Descripción:
+    - Descripción: Creación y desarrollo de todos los componentes necesarios para adaptar la pantalla de perfil a Angular | Función que crea estadísticas en base a los elementos de las listas de elementos del usuario | Adición de mappings (GET, POST, PUT, DELETE) para la imagen para el banner de usuario en la api de usuarios +  modificación de las funciones de actualización del User | Función para subir imágenes para la modificación del Usuario (Banner y Profile) 
+
     - 5 Commits más destacados:
-      - 1:
-      - 2:
-      - 3:
-      - 4:
-      - 5:
+      - 1: UserProfile and Banner Images Functions Added: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/302766b4c18082fb37bf65cab521b5032f2f7f3a
+      - 2: Put Request to change name on process: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/15424e4b1f02a24eabc03b95d9a95f970daa8ac1
+      - 3: Put Methods of BImage & PImage added (light error): https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/de761162f9781a45e9c17345958f28f5d1e229c0
+      - 4: Iteration Problem & New System to get ElementsUser: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/c172ce52dbe02931254db504cd64984bb029b5e7
+      - 5: User Element Stadistics Completed: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/cacda075c699a45936144c718681085476150f52
     - 5 Ficheros:
-      - 1:
-      - 2:
-      - 3:
-      - 4:
-      - 5:
+      - 1: profile.component.ts: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JuanFase4/frontend/src/app/components/profile.component.ts
+      - 2: banner.component.ts: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JuanFase4/frontend/src/app/components/banner.component.ts
+      - 3: stats.component.ts: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JuanFase4/frontend/src/app/components/stats.component.ts
+      - 4: user.service.ts: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JuanFase4/frontend/src/app/services/user.service.ts
+      - 5: W-Profile.component.html: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JuanFase4/frontend/src/app/Htmls/W-Profile.component.html
         
 - Aurora María Fernández Basanta:
     - Descripción:
@@ -375,4 +376,4 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
       - 2:
       - 3:
       - 4:
-      - 5:
+      - 5: 
