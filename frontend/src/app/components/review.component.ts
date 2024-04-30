@@ -31,9 +31,6 @@ export class ReviewsComponent {
   ngOnInit() {
     this.getElementReviews();
   }
-  ngOnChanges() {
-      this.setRating();
-  }
 
   //get element reviews:
   getElementReviews() {
@@ -51,6 +48,7 @@ export class ReviewsComponent {
             listReviews[i].userLinked = users[i];
           }
           this.reviews = listReviews;
+          this.setRating();
           this.getUsersOfReview();
         },
         error: (error) => {
@@ -98,10 +96,11 @@ export class ReviewsComponent {
   }
 
   setRating(){
-    let totalRating = 0;
+    let totalRating: number = 0;
     const numberOfReviews = this.reviews.length;
     for(let rev of this.reviews){
-      totalRating += rev.rating;
+      const rat: number = Number(rev.rating);
+      totalRating = totalRating + rat;
     }
 
     if (numberOfReviews > 0) {
@@ -124,9 +123,11 @@ export class ReviewsComponent {
           const existingReviewIndex = this.reviews.findIndex(r => r.id === response.id);
           if (existingReviewIndex !== -1) {
             this.reviews[existingReviewIndex] = this.review;
+            this.setRating();
           } else {
             this.reviews.push(this.review);
             this.setReviewsImage(this.review.userLinked!, response.id);
+            this.setRating();
           }
         }
       },
