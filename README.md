@@ -303,3 +303,71 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
      - 4: ProfileLists.js: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase3/backend/src/main/resources/static/Scripts/profileLists.js
      - 5: BookApiController: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase3/backend/src/main/java/com/example/candread/apicontroller/BookApiController.java
      - 6: User.java: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase3/backend/src/main/java/com/example/candread/model/User.java
+
+# FASE 4:
+## Preparación del entorno de desarrollo:
+
+
+## Diagrama de clases y templates de la aplicación SPA:
+![diagramaClasesSpa](https://github.com/CodeURJC-DAW-2023-24/webapp02/assets/80918054/34573375-cdf3-4e51-8109-9878e2608e33)
+
+
+## Participación:
+- David Ovidio Rubio Caballero:
+    - Descripción:
+    - 5 Commits más destacados:
+      - 1:
+      - 2:
+      - 3:
+      - 4:
+      - 5:
+    - 5 Ficheros:
+      - 1:
+      - 2:
+      - 3:
+      - 4:
+      - 5:
+
+- Javier Vallejo Fernández:
+    - Descripción:
+    - 5 Commits más destacados:
+      - 1:
+      - 2:
+      - 3:
+      - 4:
+      - 5:
+    - 5 Ficheros:
+      - 1:
+      - 2:
+      - 3:
+      - 4:
+      - 5:
+- Juan Álvarez Loeches:
+    - Descripción:
+    - 5 Commits más destacados:
+      - 1:
+      - 2:
+      - 3:
+      - 4:
+      - 5:
+    - 5 Ficheros:
+      - 1:
+      - 2:
+      - 3:
+      - 4:
+      - 5:
+      - 
+- Aurora María Fernández Basanta:
+    - Descripción:
+    - 5 Commits más destacados:
+      - 1:
+      - 2:
+      - 3:
+      - 4:
+      - 5:
+    - 5 Ficheros:
+      - 1:
+      - 2:
+      - 3:
+      - 4:
+      - 5:
