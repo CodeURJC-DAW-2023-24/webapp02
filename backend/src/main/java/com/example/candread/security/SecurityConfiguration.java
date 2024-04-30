@@ -63,7 +63,7 @@ public class SecurityConfiguration {
         http.authenticationProvider(authenticationProvider());
 
         http.authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/", "/CSS/**", "/Images/**", "/Scripts/**","/downloadNames/**", "/SignIn", "/users/**", "/Library/**",
+                .requestMatchers("/", "/CSS/**", "/Images/**", "/Scripts/**","/downloadNames/**", "/SignIn", "/users/**", "/Library/**", "/new/**",
                         "/SingleElement/**", "/loginerror", "/error","/EditFragment")
                 .permitAll()
                 .requestMatchers("/*/Profile/**", "/*/Main", "/review/**").hasAnyRole("USER", "ADMIN")
