@@ -185,9 +185,12 @@ public class BookApiController {
             }
 
             // elementRepo.save(element);
-            elementService.repoSaveElement(element);
-            return ResponseEntity.ok(element);
-        } else {
+            Element savedElement = elementService.repoSaveElement(element);
+            Long bookId = element.getId();
+            String bookUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(bookId)
+                    .toUriString();
+            return ResponseEntity.created(new URI(bookUrl)).body(savedElement);
+            } else {
             return ResponseEntity.notFound().build();
         }
     }
@@ -367,6 +370,19 @@ public class BookApiController {
         elementService.repoSaveElement(book);
 
         return ResponseEntity.noContent().build();
+    }
+
+
+    @GetMapping("/{name}/")
+    public ResponseEntity<Element> getBookByname(@PathVariable String name) {
+        Optional<Element> optElement = elementService.repoFindByNameAndType(name,"LIBRO");
+
+        if (optElement.isPresent()) {
+            Element element = (Element) optElement.get();
+            return ResponseEntity.ok(element);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

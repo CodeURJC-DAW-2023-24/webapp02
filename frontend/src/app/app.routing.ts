@@ -5,9 +5,11 @@ import { LibraryComponent } from './components/library.component';
 import { ProfileComponent } from './components/profile.component';
 import { SingleElementComponent } from './components/singleElement.component';
 import { signInComponent} from './components/signIn.component';
+import { AdminComponent } from './components/admin.component';
 
 
 const appRoutes: Routes = [
+  { path: 'Admin', component: AdminComponent},
   { path: 'Main', component: MainComponent},
   { path: 'Login', component: LoginComponent},
   { path: 'Library/:type', component: LibraryComponent },

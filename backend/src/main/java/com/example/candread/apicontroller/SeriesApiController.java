@@ -178,8 +178,11 @@ public class SeriesApiController {
             }
 
             // elementRepo.save(element);
-            elementService.repoSaveElement(element);
-            return ResponseEntity.ok(element);
+            Element savedElement = elementService.repoSaveElement(element);
+            Long serieId = element.getId();
+            String serieUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(serieId)
+                    .toUriString();
+            return ResponseEntity.created(new URI(serieUrl)).body(savedElement);
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -359,6 +362,19 @@ public class SeriesApiController {
         elementService.repoSaveElement(serie);
 
         return ResponseEntity.noContent().build();
+    }
+
+
+    @GetMapping("/{name}/")
+    public ResponseEntity<Element> getSerieByName(@PathVariable String name) {
+        Optional<Element> optElement = elementService.repoFindByNameAndType(name,"SERIE");
+
+        if (optElement.isPresent()) {
+            Element element = (Element) optElement.get();
+            return ResponseEntity.ok(element);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

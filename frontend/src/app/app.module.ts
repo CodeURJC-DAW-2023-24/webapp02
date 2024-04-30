@@ -22,6 +22,11 @@ import { signInComponent } from './components/signIn.component';
 import { ReviewsComponent } from './components/review.component';
 import { StatsComponent } from './components/stats.component';
 import { BannerComponent } from './components/banner.component';
+import { AdminComponent } from './components/admin.component';
+import { ModifyComponent } from './components/modify.component';
+import { FormComponent } from './components/form.component';
+
+
 
 @NgModule({
   declarations: [AppComponent,
@@ -35,7 +40,7 @@ import { BannerComponent } from './components/banner.component';
     NewsComponent,
     CardsComponent,
     TopsComponent, FilterComponent,
-    SingleElementComponent, signInComponent, ReviewsComponent, StatsComponent, BannerComponent],
+    SingleElementComponent, signInComponent, ReviewsComponent, StatsComponent, BannerComponent,AdminComponent,ModifyComponent,FormComponent],
   imports: [BrowserModule, FormsModule, HttpClientModule, routing],
   bootstrap: [AppComponent]
 })

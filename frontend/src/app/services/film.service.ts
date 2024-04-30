@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, of, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
-
+import { Element as elementDTO } from '../models/elementDTO.model';
 import { Element } from '../models/element.model';
 
-const BASE_URL = '/api/films/';
+const BASE_URL_FILMS = '/api/films/';
 
 @Injectable({ providedIn: 'root' })
 export class FilmsService {
@@ -13,81 +13,96 @@ export class FilmsService {
 	constructor(private httpClient: HttpClient) { }
 
 	getFilms(): Observable<Element[]> {
-		return this.httpClient.get(BASE_URL).pipe(
+		return this.httpClient.get(BASE_URL_FILMS).pipe(
 			//catchError(error => this.handleError(error))
 		) as Observable<Element[]>;
 	}
 
 	get5Films(): Observable<Element[]> {
-		return this.httpClient.get(BASE_URL + "top?page=0&size=5").pipe(
+		return this.httpClient.get(BASE_URL_FILMS + "top?page=0&size=5").pipe(
 			map((response: any) => response.content),
 			// Puedes agregar catchError aquí si lo necesitas
 		);
 	}
 
-	getFilmImage(id: number | string){
-		return this.httpClient.get(BASE_URL + id + '/image' , { responseType: 'arraybuffer' })
+	getFilmImage(id: number | string) {
+		return this.httpClient.get(BASE_URL_FILMS + id + '/image', { responseType: 'arraybuffer' })
 	}
 
-  getFilmByFilter(filterType:string, filter:string): Observable<Element[]>{
-    switch(filterType){
-      case 'genre':
-        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
-          //catchError(error => this.handleError(error))
-        ) as Observable<Element[]>;
-      case 'season':
-        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
-          //catchError(error => this.handleError(error))
-        ) as Observable<Element[]>;
-      case 'country':
-        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
-          //catchError(error => this.handleError(error))
-        ) as Observable<Element[]>;
-      case 'state':
-        return this.httpClient.get(BASE_URL+ filterType + '?filter=' + filter).pipe(
-          //catchError(error => this.handleError(error))
-        ) as Observable<Element[]>;
-      default:
-        return of([]);
-    }
-  }
+
+	uploadFilmImage(id: number | string, file: File) {
+		let imageFile = new FormData();
+		imageFile.append("imageFile", file)
+
+		return this.httpClient.put(BASE_URL_FILMS + id + '/image', imageFile)
+	}
+
+	addFilmImage(id: number | string, file: File) {
+		let imageFile = new FormData();
+		imageFile.append("imageFile", file)
+
+		return this.httpClient.post(BASE_URL_FILMS + id + '/image', imageFile)
+	}
+
+	getFilmByFilter(filterType: string, filter: string): Observable<Element[]> {
+		switch (filterType) {
+			case 'genre':
+				return this.httpClient.get(BASE_URL_FILMS + filterType + '?filter=' + filter).pipe(
+					//catchError(error => this.handleError(error))
+				) as Observable<Element[]>;
+			case 'season':
+				return this.httpClient.get(BASE_URL_FILMS + filterType + '?filter=' + filter).pipe(
+					//catchError(error => this.handleError(error))
+				) as Observable<Element[]>;
+			case 'country':
+				return this.httpClient.get(BASE_URL_FILMS + filterType + '?filter=' + filter).pipe(
+					//catchError(error => this.handleError(error))
+				) as Observable<Element[]>;
+			case 'state':
+				return this.httpClient.get(BASE_URL_FILMS + filterType + '?filter=' + filter).pipe(
+					//catchError(error => this.handleError(error))
+				) as Observable<Element[]>;
+			default:
+				return of([]);
+		}
+	}
 
 	//ask for 10 films
 	getFilmPage(page: number): Observable<any> {
-		const url = `${BASE_URL}?page=${page}&size=${10}`;
+		const url = `${BASE_URL_FILMS}?page=${page}&size=${10}`;
 		return this.httpClient.get(url).pipe(
 			//catchError(error => this.handleError(error))
 		) as any;
 	}
 
 	getFilm(id: number | string): Observable<Element> {
-		return this.httpClient.get(BASE_URL + id).pipe(
+		return this.httpClient.get(BASE_URL_FILMS + id).pipe(
 			//catchError(error => this.handleError(error))
 		) as Observable<Element>;
 	}
 
-	addOrUpdateFilm(Film: Element) {
-		if (!Film.id) {
-			return this.addFilm(Film);
+	addOrUpdateFilm(film: Element | elementDTO) {
+		if (!film.id) {
+			return this.addFilm(film);
 		} else {
-			return this.updateFilm(Film);
+			return this.updateFilm(film);
 		}
 	}
 
-	private addFilm(Film: Element) {
-		return this.httpClient.post(BASE_URL, Film).pipe(
+	private addFilm(film: Element | elementDTO) {
+		return this.httpClient.post(BASE_URL_FILMS, film).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
 
-	private updateFilm(Film: Element) {
-		return this.httpClient.put(BASE_URL + Film.id, Film).pipe(
+	private updateFilm(film: Element | elementDTO) {
+		return this.httpClient.put(BASE_URL_FILMS + film.id, film).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
 
 	removeFilm(Film: Element) {
-		return this.httpClient.delete(BASE_URL + Film.id).pipe(
+		return this.httpClient.delete(BASE_URL_FILMS + Film.id).pipe(
 			catchError(error => this.handleError(error))
 		);
 	}
@@ -103,5 +118,12 @@ export class FilmsService {
 			console.error(error);
 		}
 		return throwError(() => new Error("Server error (" + error.status + "): " + error.text()));
+	}
+
+
+	getFilmByName(name: string): Observable<Element> {
+		return this.httpClient.get(BASE_URL_FILMS + name + "/").pipe(
+			//catchError(error => this.handleError(error))
+		) as Observable<Element>;
 	}
 }

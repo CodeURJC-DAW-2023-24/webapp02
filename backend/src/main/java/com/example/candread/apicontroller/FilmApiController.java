@@ -183,8 +183,11 @@ public class FilmApiController {
             }
 
             // elementRepo.save(element);
-            elementService.repoSaveElement(element);
-            return ResponseEntity.ok(element);
+            Element savedElement = elementService.repoSaveElement(element);
+            Long filmId = element.getId();
+            String filmUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(filmId)
+                    .toUriString();
+            return ResponseEntity.created(new URI(filmUrl)).body(savedElement);
         } else {
             return ResponseEntity.notFound().build();
         }
@@ -366,6 +369,19 @@ public class FilmApiController {
         elementService.repoSaveElement(film);
 
         return ResponseEntity.noContent().build();
+    }
+
+
+    @GetMapping("/{name}/")
+    public ResponseEntity<Element> getFilmByname(@PathVariable String name) {
+        Optional<Element> optElement = elementService.repoFindByNameAndType(name,"PELICULA");
+
+        if (optElement.isPresent()) {
+            Element element = (Element) optElement.get();
+            return ResponseEntity.ok(element);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
 }

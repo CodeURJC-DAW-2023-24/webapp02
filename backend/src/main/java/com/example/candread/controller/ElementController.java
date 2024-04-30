@@ -45,10 +45,7 @@ public class ElementController {
     @Autowired
     private UserService userService;
     
-    public List<String> baseGenres = new ArrayList<>(Arrays.asList(
-            "ACCION", "AVENTURA", "TERROR",  "MISTERIO", "ROMANCE", "CIENCIAFICCION", "DRAMA",
-            "INFANTIL", "COMEDIA", "FANTASIA", "SOBRENATURAL", "NOVELA", "JUVENIL"
-        ));
+    
 
     @GetMapping("/{id}")
     public String getSingleElement(@PathVariable("id") Long id, Model model) throws SQLException, IOException {
@@ -223,8 +220,8 @@ public class ElementController {
             Element newElement = new Element(name, description, author, type, season, state, country, genreList, years);
             if (genres != null) {
                 for (String genre : genreList) {
-                    if (!this.baseGenres.contains(genre.strip())) {
-                        this.baseGenres.add(genre);
+                    if (!this.elementService.baseGenres.contains(genre.strip())) {
+                        this.elementService.baseGenres.add(genre);
                     }
                 }
             }
@@ -429,7 +426,7 @@ public class ElementController {
     public String addGenre(@RequestParam(value = "genreName") String name,
     Model model, HttpServletRequest request) {
 
-        baseGenres.add(name);
+        this.elementService.baseGenres.add(name);
 
         if (request.getAttribute("_csrf") != null) {
             model.addAttribute("token", request.getAttribute("_csrf").toString());
