@@ -305,6 +305,10 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
      - 6: User.java: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase3/backend/src/main/java/com/example/candread/model/User.java
 
 # FASE 4:
+
+## Vídeo en YouTube de muestra:
+:
+
 ## Preparación del entorno de desarrollo:
 
 
@@ -329,19 +333,20 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
       - 5:
 
 - Javier Vallejo Fernández:
-    - Descripción:
+    - Descripción: Realizacion de componentes de admin modificar elemento y formulario | funcionalidad de añadir elemento con o sin imagen | funcionalidad de editar elemento | funcionalidad de añadir genero y visualizacion de este a traves de api | funcionalidad de añadir imagen a los services.ts | funcionalidad de editar imagen a los services.ts | creacion de element DTO
     - 5 Commits más destacados:
-      - 1:
-      - 2:
-      - 3:
-      - 4:
-      - 5:
+      - 1: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/a5dac42f6663e9f08ee3cd65ee211968cb6fa982
+      - 2: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/fad9a630abc7cfff17dafca3c18f1bc7ee66b782
+      - 3: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/320cf60bfb295836848fa3446f19a46545cb5d00
+      - 4: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/09af5204320a936457fec82300284e77e2cb665e
+      - 5: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/68c2c7389136aa9e7343166371ec2364d7ec34cb
     - 5 Ficheros:
-      - 1:
-      - 2:
-      - 3:
-      - 4:
-      - 5:
+      - 1: Admin component:https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JaviFase4/frontend/src/app/components/admin.component.ts
+      - 2: Modify Component: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JaviFase4/frontend/src/app/components/modify.component.ts
+      - 3: Form Component: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JaviFase4/frontend/src/app/components/form.component.ts
+      - 4: Modify Component Html: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JaviFase4/frontend/src/app/Htmls/W-ModifyFragment.component.html
+      - 5: Form component html: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JaviFase4/frontend/src/app/Htmls/W-Form.component.html
+        
 - Juan Álvarez Loeches:
     - Descripción:
     - 5 Commits más destacados:
@@ -356,7 +361,7 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
       - 3:
       - 4:
       - 5:
-      - 
+        
 - Aurora María Fernández Basanta:
     - Descripción:
     - 5 Commits más destacados:
