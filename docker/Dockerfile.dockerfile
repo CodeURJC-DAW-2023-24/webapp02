@@ -3,17 +3,17 @@ FROM node:20.12.2
 WORKDIR /angular
 
 # Copy the dependencies
-COPY /frontend/package.json /angular/package.json
-COPY /frontend/package-lock.json /angular/package-lock.json
-COPY /frontend/angular.json /angular/angular.json
-COPY /frontend/tsconfig.json /angular/tsconfig.json
-COPY /frontend/tsconfig.app.json /angular/tsconfig.app.json
-COPY /frontend/tsconfig.spec.json /angular/tsconfig.spec.json
+COPY frontend/package.json /angular/package.json
+COPY frontend/package-lock.json /angular/package-lock.json
+COPY frontend/angular.json /angular/angular.json
+COPY frontend/tsconfig.json /angular/tsconfig.json
+COPY frontend/tsconfig.app.json /angular/tsconfig.app.json
+COPY frontend/tsconfig.spec.json /angular/tsconfig.spec.json
 
 # Install the dependencies
 RUN npm install
 
-COPY /frontend/src  /angular/src
+COPY frontend/src  /angular/src
 
 #We run this command because we want to generate the angular archives and we can't use the 'ng' command
 RUN npm run prod && mv /angular/dist/browser /angular/dist/new
@@ -23,11 +23,11 @@ FROM maven:3.8.5-openjdk-17-slim AS builder
 
 WORKDIR /project
 
-COPY /backend/pom.xml .
+COPY backend/pom.xml .
 
 RUN mvn dependency:go-offline
 
-COPY /backend/src ./src
+COPY backend/src ./src
 
 RUN mvn clean package -DskipTests
 
