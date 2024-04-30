@@ -16,7 +16,7 @@ export class ReviewsComponent {
 
   @Input() user: User | undefined;
   @Input() elementR!: ElementComponent;
-  @Output() 
+  @Output()
   rating = new EventEmitter<number>();
 
   reviews: Review[] = [];
@@ -43,7 +43,7 @@ export class ReviewsComponent {
       const observables = listReviews.map(review => {
         return this.reviewService.getReviewUserById(review.id!);
       });
-  
+
       forkJoin(observables).subscribe({
         next: (users: User[]) => {
           // Asignar los usuarios a las reviews correspondientes
