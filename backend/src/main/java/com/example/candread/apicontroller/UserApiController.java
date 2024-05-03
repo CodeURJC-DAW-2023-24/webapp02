@@ -238,6 +238,51 @@ public class UserApiController {
         }
     }
 
+    @PostMapping("/{id}/bannerImage")
+    public ResponseEntity<Object> uploadUserBannerImage(@PathVariable Long id,
+            @RequestParam(value = "profileBannerImage", required = false) MultipartFile bannerFile,
+            @RequestParam(value = "bannerImageURL", required = false) String bannerImageURL,
+            HttpServletRequest request) throws URISyntaxException, IOException, SerialException, SQLException {
+
+        Optional<User> optUser = userService.repoFindById(id);
+        if (optUser.isPresent()) {
+            User user = (User) optUser.get();
+            if (bannerFile != null) {
+                try {
+                    // Set the image to the user
+                    byte[] imageData = bannerFile.getBytes();
+                    user.setBannerImage(new SerialBlob(imageData));
+                    user.setBase64BannerImage(Base64.getEncoder().encodeToString(imageData));
+
+                    // Save in the database
+                    userService.repoSaveUser(user);
+
+                    String imageFileUrl = ServletUriComponentsBuilder.fromRequestUri(request).buildAndExpand(id)
+                            .toUriString();
+
+                    return ResponseEntity.created(new URI(imageFileUrl)).build();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+                }
+            } else if (bannerImageURL != null) {
+                Blob blob = userService.getBlob(bannerImageURL);
+                user.setBannerImage(blob);
+                user.setBase64BannerImage(bannerImageURL);
+                userService.repoSaveUser(user);
+                String imageFileUrl = ServletUriComponentsBuilder.fromRequestUri(request).buildAndExpand(id)
+                        .toUriString();
+                return ResponseEntity.created(new URI(imageFileUrl)).build();
+            } else {
+                return ResponseEntity.badRequest().body("Either bannerImage or bannerUrl parameter is required.");
+            }
+        } else {
+            // User not fount and we return 404 error
+            return ResponseEntity.notFound().build();
+        }
+    }
+
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "USER IMAGE POST CORRECT", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
