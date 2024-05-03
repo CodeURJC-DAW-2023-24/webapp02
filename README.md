@@ -318,19 +318,19 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
 
 ## Participación:
 - David Ovidio Rubio Caballero:
-    - Descripción:
+    - Descripción: Creación de estructura base del proyecto angular | Creación de los componentes necesarios para la gestion de usuarios | Creación de componentes para las pantallas de SignIn y LogIn |  Creación de componentes para el Header| Adaptación a Angular de la paginación | Creación de los componentes necesarios para la pantalla de "Library" | Modificación del DockerFile para conseguir hacer la imagen de la nueva aplicación con angular en la ruta /new 
     - 5 Commits más destacados:
-      - 1:
-      - 2:
-      - 3:
-      - 4:
-      - 5:
+      - 1: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/eec210a855a8a53a316fcccdfcc580689b773a38
+      - 2: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/5885e8439c2212d25dc0cc1577426d9cb655f5b2, https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/59f0051f5e7ad013dfba8ead2f3174ab247711d7
+      - 3: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/1db44f2b95c1f02067b3bb8b0735585216eacc1d
+      - 4: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/0f060499bfe9622e61243c3e48cb0260bb68a9c7
+      - 5: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/0f7331d1263dfb799fe50e0d7a7e6a056147dbd9
     - 5 Ficheros:
-      - 1:
-      - 2:
-      - 3:
-      - 4:
-      - 5:
+      - 1: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/DavidFase4/docker/Dockerfile.dockerfile
+      - 2: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/DavidFase4/frontend/src/app/components/signIn.component.ts
+      - 3: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/DavidFase4/frontend/src/app/components/library.component.ts
+      - 4: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/DavidFase4/frontend/src/app/components/userData.component.ts
+      - 5: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/DavidFase4/frontend/src/app/components/login.component.ts
 
 - Javier Vallejo Fernández:
     - Descripción: Realizacion de componentes de admin modificar elemento y formulario | funcionalidad de añadir elemento con o sin imagen | funcionalidad de editar elemento | funcionalidad de añadir genero y visualizacion de este a traves de api | funcionalidad de añadir imagen a los services.ts | funcionalidad de editar imagen a los services.ts | creacion de element DTO
