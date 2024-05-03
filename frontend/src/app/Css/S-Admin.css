@@ -2,8 +2,14 @@
     margin-top: 5rem!important;
 }
 
+#editForms{
+  align-items: center;
+  justify-content: center;
+  margin: 10rem!important;
+}
+
 .campo-group {
-    border-bottom: 1px solid #ccc; 
-    padding-bottom: 15px; 
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 15px;
 }
 

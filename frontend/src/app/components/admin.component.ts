@@ -13,7 +13,7 @@ const BASE_URL = "/api/series/";
 @Component({
   selector: 'admin',
   templateUrl: '../Htmls/W-Admin.component.html',
-  styleUrls: ['../Css/S-Main.css', "../Css/S-Admin.css", "../Css/S-NavBar.css"]
+  styleUrls: ["../Css/S-Main.css", "../Css/S-Admin.css", "../Css/S-NavBar.css"]
 })
 export class AdminComponent {
 
@@ -78,7 +78,7 @@ export class AdminComponent {
             }
           }
         })
-        
+
       }
       else if (type == "LIBRO") {
 
@@ -143,7 +143,7 @@ export class AdminComponent {
             }
           }
         })
-        
+
       }
 
       else if (type == "LIBRO") {
