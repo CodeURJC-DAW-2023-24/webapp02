@@ -8,10 +8,6 @@ import { BooksService } from '../services/book.service';
 import { FilmsService } from '../services/film.service';
 import { Element as elementDTO } from '../models/elementDTO.model';
 
-
-
-
-
 @Component({
     selector: 'formComponent',
     templateUrl: '../Htmls/W-Form.component.html',
@@ -27,7 +23,6 @@ export class FormComponent implements OnChanges {
     edited = new EventEmitter<boolean>();
 
     element!: elementDTO;
-
     name: string = "";
     description: string = "";
     year: number = 0;
@@ -39,7 +34,6 @@ export class FormComponent implements OnChanges {
     genres: string[] = [];
     imageFile!: File
 
-
     //genres : string[] = this.element.genres
 
     constructor(private http: HttpClient, private seriesService: SeriesService,
@@ -50,33 +44,23 @@ export class FormComponent implements OnChanges {
         if (changes['observer'] && this.observer) {
             var observerElement = this.observer as Observable<Element>
 
-
             observerElement.subscribe((response: any) => {
                 this.element = response
                 this.name = response.name
                 this.description = response.description
                 this.author = response.author
                 this.type = response.type
-                if (this.type == "PELICULA") {
-                    this.type = "PELÍCULA"
-                }
+                // if (this.type == "PELICULA") {
+                //     this.type = "PELÍCULA"
+                // }
                 this.state = response.state
                 this.season = response.season
                 this.country = response.country
                 this.year = response.year
                 this.genres = response.generos
-
-
                 // this.typeSelector(this.type, this.element);
-
-
-
             })
-
-
-
         }
-
     }
 
 
@@ -93,15 +77,11 @@ export class FormComponent implements OnChanges {
                         if (this.element.id) {
                             this.bookService.uploadBookImage(this.element.id, imageFile).subscribe()
                         }
-
                     }
                     this.edited.emit(true)
                 }
             })
-
-
         }
-
         else if (this.type == "PELICULA" || this.type == "PELÍCULA") {
             this.changeElement();
             this.element.type = "PELICULA"
@@ -113,17 +93,11 @@ export class FormComponent implements OnChanges {
                         if (this.element.id) {
                             this.filmService.uploadFilmImage(this.element.id, imageFile).subscribe()
                         }
-
                     }
                     this.edited.emit(true)
                 }
             })
-
-
-
         }
-
-
         else if (this.type == "SERIE") {
             this.changeElement();
             this.seriesService.addOrUpdateSerie(this.element).subscribe({
