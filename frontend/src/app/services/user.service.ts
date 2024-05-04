@@ -71,7 +71,7 @@ export class UsersService {
 		);
 	}
 
-  private uploadUserBannerImage(user: User, id: number) {
+	private uploadUserBannerImage(user: User, id: number) {
 		const formData = new FormData();
 		formData.append('bannerImageURL', user.bannerImageURL!);
 		return this.httpClient.post(BASE_Url + id + '/bannerimage', formData).pipe(

@@ -1,7 +1,7 @@
 <header-comp id="Header"></header-comp>
 
 <main>
-    <app-banner [user] = "actualUser"></app-banner>
+    <app-banner [user] = "actualUser" (actualBannerURL)="recieveBannerURL($event)"></app-banner>
     
     <button class="btnAdd" data-bs-toggle="modal" data-bs-target="#newListModal">
         =NUEVA LISTA=
@@ -37,7 +37,6 @@
                         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
                     </div>
-                    <!-- <input type="hidden" name="_csrf" value="{{token}}" /> -->
                 </form>
             </div>
         </div>

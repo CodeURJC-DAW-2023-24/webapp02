@@ -14,6 +14,7 @@ import { Observable } from 'rxjs';
 export class BannerComponent {
 
   @Input() user: User | undefined;
+  @Output() actualBannerURL:EventEmitter<string> = new EventEmitter();
 
   userPrueba: User | undefined;
   userImage: string | undefined;
@@ -50,6 +51,9 @@ export class BannerComponent {
           this.bannerImage = URL.createObjectURL(blob);
           this.user = JSON.parse(localStorage.getItem('currentUser')!) as User;
           this.user.bannerImageURL = URL.createObjectURL(blob);
+          this.loginService.updateCurrentUser(this.user);
+          this.userService.updateCurrentUser(this.user!);
+          this.actualBannerURL.emit(this.user.bannerImageURL);
           this.newBannerImage = undefined;
 
         } else {

@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../models/user.model';
 import { Element } from '../models/element.model';
@@ -40,6 +40,10 @@ export class ProfileComponent {
 
   ngOnInit() {
     this.profileWindow();
+  }
+
+  recieveBannerURL($event: string){
+    this.actualUser!.bannerImageURL = $event;
   }
 
   profileWindow() {
