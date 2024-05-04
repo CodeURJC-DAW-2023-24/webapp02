@@ -2,12 +2,9 @@
 
 <main>
     <app-banner [user] = "actualUser"></app-banner>
-
-    <!-- <div class="col-sm-4" *ngFor="let top of tops; let i = index">
-        <app-card [element]="top" [image]="topImages[top.name]"></app-card>
-    </div> -->
-    <button class="btn" data-bs-toggle="modal" data-bs-target="#newListModal">
-        =AÑADIR LISTA=
+    
+    <button class="btnAdd" data-bs-toggle="modal" data-bs-target="#newListModal">
+        =NUEVA LISTA=
     </button>
 
     <section id="tops">
@@ -16,14 +13,6 @@
         </div>
     </section>
 
-    <!-- <div *ngFor="let elem of elementsOfUser">{{elem.name}} </div> -->
-    <!-- <div id="topList" class="container">
-        <div id="cardRow" class="row">
-            <div class="col-sm-4" *ngFor="let elem of elementsOfUser[0]">
-                <app-card [element]="elem" [image]="elementsImages[elem.name]"></app-card>
-            </div>
-        </div>
-    </div> -->
     <app-stats [elements]="allElements"></app-stats>
 
     <!-- MODAL PARA AÑADIR UNA-->

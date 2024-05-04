@@ -82,9 +82,9 @@ export class BannerComponent {
           this.user= JSON.parse(localStorage.getItem('currentUser')!) as User;
           //this.name = this.user.name;
           this.user!.id = response.id;
-          if (this.user) {
-            this.allUsers2.findIndex;
-          }
+          // if (this.user) {
+          //   this.allUsers2.findIndex;
+          // }
         },
         error: (error) => {
           console.error('Error:', error);
