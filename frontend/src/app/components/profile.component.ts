@@ -6,6 +6,7 @@ import { LoginService } from '../services/login.service';
 import { UsersService } from '../services/user.service';
 import { ElementsService } from '../services/element.service';
 import { forkJoin } from 'rxjs';
+import { UserDTO } from '../models/userDTO.model';
 
 @Component({
   selector: 'profile',
@@ -28,6 +29,10 @@ export class ProfileComponent {
   exampleElement!: Element;
   actualUser: User | undefined;
 
+  newUserListToAdd: Map<string, number[]> = new Map;
+  newNameList: string = '';
+  userUpdateVar: User | undefined;
+
   allElementsPromise: Promise<Element[]> | undefined;
 
   constructor(private loginService: LoginService, private router: Router,
@@ -42,6 +47,11 @@ export class ProfileComponent {
     this.actualUser = this.loginService.currentUser();
     this.elementsOfUser2 = this.actualUser!.listasDeElementos;
 
+    //for (let [key, value] of this.elementsOfUser2.entries()) {
+    //Object.
+    const llaves = Object.keys(this.elementsOfUser2);
+    const valores = Object.values(this.elementsOfUser2);
+    console.log(llaves, valores);
     for (let [key, value] of Object.entries(this.elementsOfUser2)) {
       console.log("KEY: " + key + " VALUE: " + value);
       this.elementsOfUser3.set(key, value);
@@ -62,13 +72,30 @@ export class ProfileComponent {
         forkJoin(observables).subscribe((results: [Element, ArrayBuffer][]) => {
           results.forEach(([element, imageData]) => {
             if (element) {
-              if(!(this.allElements.includes(element))){
+              console.log("ELEMENTO: ", element)
+              if (!this.allElements.some(el =>
+                el.name === element.name &&
+                el.description === element.description &&
+                el.year === element.year &&
+                el.type === element.type &&
+                el.season === element.season &&
+                el.state === element.state &&
+                el.author === element.author &&
+                el.country === element.country &&
+                el.base64Image === element.base64Image &&
+                el.generos.length === element.generos.length && 
+                el.generos.every((genre, index) => genre === element.generos[index])
+              )) {
                 this.allElements.push(element);
               }
+              // if (!(this.allElements.includes(element))) {
+              //   this.allElements.push(element);
+              // }
               if (!this.newMap.has(key)) {
                 this.elementList?.push(element);
                 //this.allElements.push(element);
                 this.newMap.set(key, this.elementList!);
+                this.elementList = [];
               } else {
                 this.elementList = [];
                 this.elementList = this.newMap.get(key);
@@ -94,6 +121,50 @@ export class ProfileComponent {
     }
 
   }//profile window
+  addList(nameList: string) {
+    this.newNameList = nameList;
+    if (this.newNameList !== '') {
+      this.elementsOfUser2 = this.actualUser!.listasDeElementos;
+      //this.actualUser?.listasDeElementos.newNameList = [];
+
+      for (let [key, value] of Object.entries(this.elementsOfUser2)) {
+        //console.log("KEY: " + key + " VALUE: " + value);
+        this.elementsOfUser3.set(key, value);
+      }
+
+      //this.actualUser!.listasDeElementos.set(this.newNameList, []);
+      this.elementsOfUser3.set(this.newNameList, []);
+      this.actualUser!.listasDeElementos = this.elementsOfUser3;
+
+      const userdto: UserDTO = {
+        listasDeElementos: this.actualUser?.listasDeElementos
+      };
+
+      //Actualizar el usuario en la base de datos:
+      this.userService.addOrUpdateUser(userdto, this.actualUser!).subscribe({
+        next: (response: any) => {
+          // this.userUpdateVar = response as User;
+          this.actualUser!.listasDeElementos = response.listasDeElementos;
+
+          //this.userUpdateVar = response as User;
+          this.loginService.updateCurrentUser(this.actualUser);
+          this.userService.updateCurrentUser(this.actualUser!);
+          //this.user= JSON.parse(localStorage.getItem('currentUser')!) as User;
+
+          this.actualUser = JSON.parse(localStorage.getItem('currentUser')!) as User;
+          console.log("Lista de Usuario Actualizada");
+          //this.profileWindow();
+        },
+        error: (error) => {
+          console.error('Error:', error);
+        }
+      });
+    }
+
+
+
+
+  }
 
   recieveUser(userRecieved: User) {
     this.actualUser = userRecieved;

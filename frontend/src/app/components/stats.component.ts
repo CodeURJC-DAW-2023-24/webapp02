@@ -83,11 +83,14 @@ export class StatsComponent {
             this.numBooks = 0;
             this.numFilms = 0;
             this.numSeries = 0;
-            this.amountOfGenres.clear;
+            this.amountOfGenres.clear();
+            this.xValues2 = [];
+            this.yValues2 = [];
         }
         const existingCHart2 = Chart.getChart("myChart2");
         if(existingCHart2){
             existingCHart2.destroy();
+            this.amountOfGenres.clear();
         }
 
         for (let elementX of this.elements) {
