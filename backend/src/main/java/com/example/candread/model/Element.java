@@ -224,6 +224,21 @@ public class Element {
         this.usersFavourited = usersFavourited;
     }
 
+    public boolean countriInENum(String country, Countries[] countries) {
+
+        for (Countries c: countries) {
+            if (c.name().equals(country)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void setNewCountry(String country) {
+        this.country = country;
+    }
+
     
     
 }

@@ -21,15 +21,9 @@ const BASE_URL = "/api/series/";
 export class AdminComponent {
 
 
-  classes = {
 
-    "shown": false
-  }
-
-
-  classesFormGenre = {
-    "shown": false
-  }
+  public hiddenAdd:boolean = true
+  public hiddenGenre:boolean = true
 
   actualNew: New | undefined;
 
@@ -77,6 +71,7 @@ export class AdminComponent {
         this.seriesService.addOrUpdateSerie(element).subscribe({
           next: (elementSubscribed) => {
             this.searchType(name,type,imageFile)
+            this.hiddenAdd = true
           },
           error: (err) => {
             if (err.status != 404) {
@@ -92,6 +87,8 @@ export class AdminComponent {
         this.bookService.addOrUpdateBook(element).subscribe({
           next: (elementSubscribed) => {
             this.searchType(name,type,imageFile)
+            this.hiddenAdd = true
+
           },
           error: (err) => {
             if (err.status != 404) {
@@ -108,6 +105,7 @@ export class AdminComponent {
         this.filmService.addOrUpdateFilm(element).subscribe({
           next: (elementSubscribed) => {
             this.searchType(name,type,imageFile)
+            this.hiddenAdd = true
           },
           error: (err) => {
             if (err.status != 404) {
@@ -119,7 +117,6 @@ export class AdminComponent {
       }
 
 
-      this.classes.shown = false
 
     }
 
@@ -127,6 +124,10 @@ export class AdminComponent {
       if (type == "SERIE") {
         var element = this.makeElement(name, description, author, type, season, state, country, trimmedGenresArray, yearsN);
         this.seriesService.addOrUpdateSerie(element).subscribe({
+          next: () => {
+            this.hiddenAdd = true
+
+          },
           error: (err) => {
             if (err.status != 404) {
               console.error('Error:' + JSON.stringify(err));
@@ -140,6 +141,10 @@ export class AdminComponent {
 
         var element = this.makeElement(name, description, author, type, season, state, country, trimmedGenresArray, yearsN)
         this.bookService.addOrUpdateBook(element).subscribe({
+          next: () => {
+            this.hiddenAdd = true
+
+          },
           error: (err) => {
             if (err.status != 404) {
               console.error('Error:' + JSON.stringify(err));
@@ -154,6 +159,10 @@ export class AdminComponent {
         type = "PELICULA"
         var element = this.makeElement(name, description, author, type, season, state, country, trimmedGenresArray, yearsN)
         this.filmService.addOrUpdateFilm(element).subscribe({
+          next: () => {
+            this.hiddenAdd = true
+
+          },
           error: (err) => {
             if (err.status != 404) {
               console.error('Error:' + JSON.stringify(err));
@@ -232,9 +241,22 @@ export class AdminComponent {
     }
   }
 
+
+
+
+  showFormAdmin() {
+    this.hiddenAdd = !this.hiddenAdd
+
+  }
+
+  showFormAdminGenre() {
+    this.hiddenGenre = !this.hiddenGenre
+
+  }
+
   addGenre(genre: string) {
     this.elementService.addGenre(genre);
-    this.classesFormGenre.shown = false;
+    this.hiddenGenre = true;
     // window.location.reload()
 
   }

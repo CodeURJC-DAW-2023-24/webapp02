@@ -170,8 +170,19 @@ public class BookApiController {
             }
 
             if (elementDTO.getCountry() != null) {
-                Countries c = Countries.valueOf(elementDTO.getCountry());
-                element.setCountry(c);
+
+                Countries[] countries = Element.Countries.values();
+                if(element.countriInENum(elementDTO.getCountry(), countries)) {
+                    Countries c = Countries.valueOf(elementDTO.getCountry());
+                    element.setCountry(c);
+                    
+                }
+                
+                else {
+                    element.setNewCountry(elementDTO.getCountry());
+                }
+
+                
             }
             if (elementDTO.getGenres() != null) {
                 List<String> newGenresList = elementDTO.getGenres();

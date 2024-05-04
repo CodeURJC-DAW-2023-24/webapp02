@@ -5,6 +5,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -163,8 +164,19 @@ public class SeriesApiController {
             }
 
             if (elementDTO.getCountry() != null) {
-                Countries c = Countries.valueOf(elementDTO.getCountry());
-                element.setCountry(c);
+
+                Countries[] countries = Element.Countries.values();
+                if(element.countriInENum(elementDTO.getCountry(), countries)) {
+                    Countries c = Countries.valueOf(elementDTO.getCountry());
+                    element.setCountry(c);
+                    
+                }
+                
+                else {
+                    element.setNewCountry(elementDTO.getCountry());
+                }
+
+                
             }
             if (elementDTO.getGenres() != null) {
                 List<String> newGenresList = elementDTO.getGenres();
@@ -187,6 +199,10 @@ public class SeriesApiController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    
+
+   
 
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "SERIE POST CORRECT", content = {
@@ -364,10 +380,9 @@ public class SeriesApiController {
         return ResponseEntity.noContent().build();
     }
 
-
     @GetMapping("/{name}/")
     public ResponseEntity<Element> getSerieByName(@PathVariable String name) {
-        Optional<Element> optElement = elementService.repoFindByNameAndType(name,"SERIE");
+        Optional<Element> optElement = elementService.repoFindByNameAndType(name, "SERIE");
 
         if (optElement.isPresent()) {
             Element element = (Element) optElement.get();
@@ -376,5 +391,7 @@ public class SeriesApiController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    
 
 }
