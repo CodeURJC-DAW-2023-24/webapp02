@@ -37,6 +37,7 @@ export class FormComponent implements OnChanges {
     author: string = ""
     country: string = "";
     genres: string[] = [];
+    imageFile!: File
 
 
     //genres : string[] = this.element.genres
@@ -51,7 +52,7 @@ export class FormComponent implements OnChanges {
 
 
             observerElement.subscribe((response: any) => {
-                this.element = response;
+                this.element = response
                 this.name = response.name
                 this.description = response.description
                 this.author = response.author
@@ -65,10 +66,14 @@ export class FormComponent implements OnChanges {
                 this.year = response.year
                 this.genres = response.generos
 
+
                 // this.typeSelector(this.type, this.element);
 
 
+
             })
+
+
 
         }
 
@@ -79,51 +84,63 @@ export class FormComponent implements OnChanges {
     public update() {
         if (this.type == "LIBRO") {
             this.changeElement();
-            var editUrl = this.bookService.addOrUpdateBook(this.element)
-            editUrl.subscribe()
-            const imageInput = document.getElementById("imageInput") as HTMLInputElement;
+            this.bookService.addOrUpdateBook(this.element).subscribe({
+                next: () => {
+                    const imageInput = document.getElementById("imageInput") as HTMLInputElement;
 
-            if (imageInput && imageInput.value && imageInput.files) {
-                const imageFile = imageInput.files[0];
-                if (this.element.id) {
-                    this.bookService.uploadBookImage(this.element.id, imageFile).subscribe()
+                    if (imageInput && imageInput.value && imageInput.files) {
+                        const imageFile = imageInput.files[0];
+                        if (this.element.id) {
+                            this.bookService.uploadBookImage(this.element.id, imageFile).subscribe()
+                        }
+
+                    }
+                    this.edited.emit(true)
                 }
+            })
 
-            }
-            this.edited.emit(true)
+
         }
 
         else if (this.type == "PELICULA" || this.type == "PELÍCULA") {
             this.changeElement();
             this.element.type = "PELICULA"
-            var editUrl = this.filmService.addOrUpdateFilm(this.element)
-            editUrl.subscribe()
-            const imageInput = document.getElementById("imageInput") as HTMLInputElement;
-            if (imageInput && imageInput.value && imageInput.files) {
-                const imageFile = imageInput.files[0];
-                if (this.element.id) {
-                    this.filmService.uploadFilmImage(this.element.id, imageFile).subscribe()
-                }
+            this.filmService.addOrUpdateFilm(this.element).subscribe({
+                next: () => {
+                    const imageInput = document.getElementById("imageInput") as HTMLInputElement;
+                    if (imageInput && imageInput.value && imageInput.files) {
+                        const imageFile = imageInput.files[0];
+                        if (this.element.id) {
+                            this.filmService.uploadFilmImage(this.element.id, imageFile).subscribe()
+                        }
 
-            }
-            this.edited.emit(true)
+                    }
+                    this.edited.emit(true)
+                }
+            })
+
+
 
         }
 
 
         else if (this.type == "SERIE") {
             this.changeElement();
-            var editUrl = this.seriesService.addOrUpdateSerie(this.element)
-            editUrl.subscribe()
-            const imageInput = document.getElementById("imageInput") as HTMLInputElement;
-            if (imageInput && imageInput.value && imageInput.files) {
-                const imageFile = imageInput.files[0];
-                if (this.element.id) {
-                    this.seriesService.uploadSerieImage(this.element.id, imageFile).subscribe()
-                }
-            }
+            this.seriesService.addOrUpdateSerie(this.element).subscribe({
+                next: () => {
+                    const imageInput = document.getElementById("imageInput") as HTMLInputElement;
+                    if (imageInput && imageInput.value && imageInput.files) {
+                        const imageFile = imageInput.files[0];
+                        if (this.element.id) {
+                            this.seriesService.uploadSerieImage(this.element.id, imageFile).subscribe()
+                        }
 
-            this.edited.emit(true)
+                    }
+                    this.edited.emit(true)
+                }
+
+            })
+
         }
     }
 
@@ -142,5 +159,8 @@ export class FormComponent implements OnChanges {
 
         // const trimmedGenresArray: string[] = genresArray.map((genre: string) => genre.trim());
         this.element.genres = this.genres;
+
+
+
     }
 }
