@@ -38,4 +38,8 @@ public class NewService {
     public List<New> repoFindFirst5(){
         return newRepository.findFirst5ByOrderByIdDesc();
     }
+
+    public New repoSaveNew(New new1){
+        return newRepository.save(new1);
+    }
 }
