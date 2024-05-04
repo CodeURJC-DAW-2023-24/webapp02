@@ -73,6 +73,11 @@ public class UserApiController {
             // se crea un usuario y se le asigna uno o varios roles
             User userPrueba = new User(userDTO.getName(), passwordEncoder.encode(userDTO.getPassword()), "USER");
             userPrueba.setListasDeElementos(userDTO.getListasDeElementos());
+            Blob profileblob = userService.getBlob("static/Images/Aladdin.jpg");
+            Blob bannerblob = userService.getBlob("static/Images/imagenBanner.jpg");
+            userPrueba.setBannerImage(bannerblob);
+            userPrueba.setProfileImage(profileblob);
+
             // We save the user in the DDBB
             userService.repoSaveUser(userPrueba);
             Long userId = userPrueba.getId();
@@ -238,6 +243,8 @@ public class UserApiController {
         }
     }
 
+    
+
     @ApiResponses(value = {
             @ApiResponse(responseCode = "201", description = "USER IMAGE POST CORRECT", content = {
                     @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
@@ -393,30 +400,42 @@ public class UserApiController {
 
     @PostMapping("/{id}/bannerimage")
     public ResponseEntity<Object> uploadUserBannerImage(@PathVariable Long id,
-            @RequestParam("profileImage") MultipartFile imageFile, HttpServletRequest request)
-            throws URISyntaxException, IOException {
+            @RequestParam(value = "profileBannerImage", required = false) MultipartFile bannerFile,
+            @RequestParam(value = "bannerImageURL", required = false) String bannerImageURL,
+            HttpServletRequest request) throws URISyntaxException, IOException, SerialException, SQLException {
 
         Optional<User> optUser = userService.repoFindById(id);
         if (optUser.isPresent()) {
             User user = (User) optUser.get();
-            try {
-                // Set the image to the user
-                byte[] imageData = imageFile.getBytes();
-                // user.setProfileImage(new SerialBlob(imageData));
-                user.setBannerImage(new SerialBlob(imageData));
-                user.setBase64BannerImage(Base64.getEncoder().encodeToString(imageData));
-                // user.setBase64ProfileImage(Base64.getEncoder().encodeToString(imageData));
+            if (bannerFile != null) {
+                try {
+                    // Set the image to the user
+                    byte[] imageData = bannerFile.getBytes();
+                    user.setBannerImage(new SerialBlob(imageData));
+                    user.setBase64BannerImage(Base64.getEncoder().encodeToString(imageData));
 
-                // Save in the database
+                    // Save in the database
+                    userService.repoSaveUser(user);
+
+                    String imageFileUrl = ServletUriComponentsBuilder.fromRequestUri(request).buildAndExpand(id)
+                            .toUriString();
+
+                    return ResponseEntity.created(new URI(imageFileUrl)).build();
+
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+                }
+            } else if (bannerImageURL != null) {
+                Blob blob = userService.getBlob(bannerImageURL);
+                user.setBannerImage(blob);
+                user.setBase64BannerImage(bannerImageURL);
                 userService.repoSaveUser(user);
-
-                String imageUrl = ServletUriComponentsBuilder.fromRequestUri(request).buildAndExpand(id).toUriString();
-
-                return ResponseEntity.created(new URI(imageUrl)).build();
-
-            } catch (SQLException e) {
-                e.printStackTrace();
-                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+                String imageFileUrl = ServletUriComponentsBuilder.fromRequestUri(request).buildAndExpand(id)
+                        .toUriString();
+                return ResponseEntity.created(new URI(imageFileUrl)).build();
+            } else {
+                return ResponseEntity.badRequest().body("Either bannerImage or bannerUrl parameter is required.");
             }
         } else {
             // User not fount and we return 404 error

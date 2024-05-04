@@ -1,4 +1,4 @@
-FROM node:20.12.2
+FROM node:20.12.2 as angularBuilder
 
 WORKDIR /angular
 
@@ -16,7 +16,7 @@ RUN npm install
 COPY frontend/src  /angular/src
 
 #We run this command because we want to generate the angular archives and we can't use the 'ng' command
-RUN npm run prod && mv /angular/dist/browser /angular/dist/new
+RUN npm run build -- --configuration production --base-href="/new/"
 
 #Create the .jar
 FROM maven:3.8.5-openjdk-17-slim AS builder
@@ -28,6 +28,8 @@ COPY backend/pom.xml .
 RUN mvn dependency:go-offline
 
 COPY backend/src ./src
+
+COPY --from=angularBuilder /angular/dist/frontend/browser/ ./src/main/resources/static/new
 
 RUN mvn clean package -DskipTests
 

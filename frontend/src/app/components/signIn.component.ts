@@ -37,7 +37,6 @@ export class signInComponent{
         password: this.password,
         roles:userRoles,
         listasDeElementos: userList,
-        imageURL: "static/Images/Aladdin.jpg",
       };
 
       const userdto: UserDTO = {};
