@@ -7,6 +7,9 @@ import { BooksService } from '../services/book.service';
 import { ElementsService } from '../services/element.service';
 import { Element as elementDTO } from '../models/elementDTO.model';
 import { Router } from '@angular/router';
+import { New } from '../models/new.model';
+import { NewsService } from '../services/new.service';
+
 
 const BASE_URL = "/api/series/";
 
@@ -22,14 +25,33 @@ export class AdminComponent {
   public hiddenAdd:boolean = true
   public hiddenGenre:boolean = true
 
+  actualNew: New | undefined;
+
   constructor(private http: HttpClient, private seriesService: SeriesService,
     private bookService: BooksService, private filmService: FilmsService,
-    private elementService: ElementsService) { }
+    private elementService: ElementsService, private newsService: NewsService) { }
 
   // ngOnInit() {
   // }
 
+  addNew(title: string, date: string, description: string, link: string){
+    const localeDate: Date = new Date(date);
+    const new1: New = {
+      title: title,
+      description: description,
+      date: localeDate,
+      link: link
+    };
 
+    this.newsService.addNews(new1).subscribe({
+      next: (response: any) => {
+        this.actualNew = response as New;
+      },
+      error: (error) => {
+        console.error('Error:', error);
+      }
+    })
+  }
 
   addElement(name: string, description: string, author: string, type: string, season: string, state: string, country: string, genres: string, years: string) {
 
@@ -45,23 +67,7 @@ export class AdminComponent {
     if (imageInput && imageInput.value && imageInput.files) {
       const imageFile = imageInput.files[0];
       if (type == "SERIE") {
-        var element = this.makeElement(name, description, author, type, season, state, country, trimmedGenresArray, yearsN)
-        // this.http.post(BASE_URL,
-        //   {
-        //     name: name, description: description, author: author, year: yearsN, type: type,
-        //     season: season, state: state, country: country, genres: trimmedGenresArray
-        //   },
-        //   { withCredentials: true }
-        // ).subscribe({
-
-        //   next: () => {
-        //     this.searchType(name, type, imageFile)
-        //   },
-
-        //   error: (err) => {
-        //     console.log(err)
-        //   }
-        // });
+        var element = this.makeElement(name, description, author, type, season, state, country, trimmedGenresArray, yearsN);
         this.seriesService.addOrUpdateSerie(element).subscribe({
           next: (elementSubscribed) => {
             this.searchType(name,type,imageFile)
@@ -77,7 +83,7 @@ export class AdminComponent {
       }
       else if (type == "LIBRO") {
 
-        var element = this.makeElement(name, description, author, type, season, state, country, trimmedGenresArray, yearsN)
+        var element = this.makeElement(name, description, author, type, season, state, country, trimmedGenresArray, yearsN);
         this.bookService.addOrUpdateBook(element).subscribe({
           next: (elementSubscribed) => {
             this.searchType(name,type,imageFile)
@@ -95,7 +101,7 @@ export class AdminComponent {
       }
       else if (type == "PELICULA" || type == "PELÍCULA") {
         type = "PELICULA"
-        var element = this.makeElement(name, description, author, type, season, state, country, trimmedGenresArray, yearsN)
+        var element = this.makeElement(name, description, author, type, season, state, country, trimmedGenresArray, yearsN);
         this.filmService.addOrUpdateFilm(element).subscribe({
           next: (elementSubscribed) => {
             this.searchType(name,type,imageFile)
@@ -116,23 +122,7 @@ export class AdminComponent {
 
     else {
       if (type == "SERIE") {
-        var element = this.makeElement(name, description, author, type, season, state, country, trimmedGenresArray, yearsN)
-        // this.http.post(BASE_URL,
-        //   {
-        //     name: name, description: description, author: author, year: yearsN, type: type,
-        //     season: season, state: state, country: country, genres: trimmedGenresArray
-        //   },
-        //   { withCredentials: true }
-        // ).subscribe({
-
-        //   next: () => {
-        //     this.searchType(name, type, imageFile)
-        //   },
-
-        //   error: (err) => {
-        //     console.log(err)
-        //   }
-        // });
+        var element = this.makeElement(name, description, author, type, season, state, country, trimmedGenresArray, yearsN);
         this.seriesService.addOrUpdateSerie(element).subscribe({
           next: () => {
             this.hiddenAdd = true
@@ -248,13 +238,6 @@ export class AdminComponent {
       } else {
         formElement.style.display = "none";
       }
-
-      // if (!this.classes.shown) {
-      //   this.classes.shown = true;
-      // }
-      // if (!this.classesFormGenre.shown) {
-      //   this.classesFormGenre.shown = true;
-      // }
     }
   }
 

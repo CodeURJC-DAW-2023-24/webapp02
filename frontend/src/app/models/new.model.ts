@@ -4,6 +4,6 @@ export interface New {
     id?: number;
     title: string;
     description: string;
-    date: Locale;
+    date: Date;
     link: string;
 }

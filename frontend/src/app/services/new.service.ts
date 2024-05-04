@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 
 import { New } from '../models/new.model';
 
@@ -9,6 +9,7 @@ const BASE_URL = '/api/news/';
 
 @Injectable({ providedIn: 'root' })
 export class NewsService {
+    new1: New | undefined;
 
     constructor(private httpClient: HttpClient) { }
 
@@ -21,6 +22,16 @@ export class NewsService {
                 })
             );
     }
+
+    addNews(new1: New){
+      return this.httpClient.post(BASE_URL , new1).pipe(
+        tap((response) => {
+          this.new1 = response as New;
+          console.log('Solicitud POST de noticia completada con éxito:', response);
+        }),
+        catchError(error => this.handleError(error))
+      );
+  }
 
     private handleError(error: any) {
         if (error instanceof HttpErrorResponse) {
