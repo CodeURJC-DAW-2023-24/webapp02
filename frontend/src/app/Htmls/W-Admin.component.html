@@ -48,20 +48,20 @@
 
       <div class="row">
         <div class="col-md-4">
-          <button (click)="showForm('serieForm')">Agregar Elemento</button>
+          <button (click)="showFormAdmin()">Agregar Elemento</button>
         </div>
         <div class="col-md-4">
           <button (click)="showForm('modifyBookForm')">Modificar
             Elemento</button>
         </div>
         <div class="col-md-4">
-          <button (click)="showForm('addGenre')">Añadir Genero</button>
+          <button (click)="showFormAdminGenre()">Añadir Genero</button>
         </div>
       </div>
 
       <!-- Columna para los campos de entrada -->
 
-      <div id="serieForm" [style.display]="classes.shown ? 'block' : 'none'">
+      <div *ngIf="hiddenAdd == false" id="serieForm">
         <div id="addSerieForm" method="post" enctype="multipart/form-data"
           accept-charset="UTF-8">
           <div class="col-md-12 mt-5 mb-5">
@@ -155,7 +155,7 @@
       <!-- {{> W-ModifyFragment}} -->
 
       <div id="addGenre"
-        [style.display]="classesFormGenre.shown ? 'block' : 'none'">
+      *ngIf="hiddenGenre == false">
         <div id="addGenreForm" action="/SingleElement/addGenre" method="post"
           enctype="multipart/form-data"
           accept-charset="UTF-8">
