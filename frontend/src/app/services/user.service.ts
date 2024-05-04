@@ -52,25 +52,7 @@ export class UsersService {
 		};
 		return this.httpClient.post(BASE_Url, u).pipe(
 			tap((response: any) => {
-				this.uploadUserImage(user, response.id).subscribe({
-					next: (response) => {
-						console.log('Solicitud POST de imagen de perfil completada con éxito:', response);
-					},
-					error: (error) => {
-						console.error('Error al actualizar la imagen del usuario:', error);
-					}
-				});
-
-        this.uploadUserBannerImage(user, response.id).subscribe({
-					next: (response) => {
-						console.log('Solicitud POST de imagen baner completada con éxito:', response);
-					},
-					error: (error) => {
-						console.error('Error al actualizar la imagen del usuario:', error);
-					}
-				});
-
-				console.log('Solicitud POST completada con éxito:', response);
+				localStorage.setItem('currentUser', JSON.stringify(response));
 			}),
 			catchError(error => this.handleError(error))
 		);
@@ -92,7 +74,7 @@ export class UsersService {
   private uploadUserBannerImage(user: User, id: number) {
 		const formData = new FormData();
 		formData.append('bannerImageURL', user.bannerImageURL!);
-		return this.httpClient.post(BASE_Url + id + '/bannerImage', formData).pipe(
+		return this.httpClient.post(BASE_Url + id + '/bannerimage', formData).pipe(
 			tap((response) => {
 				localStorage.setItem('currentUser', JSON.stringify(response));
 				console.log('Solicitud POST de imagen completada con éxito:', response);
