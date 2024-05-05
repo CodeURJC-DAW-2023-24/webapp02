@@ -364,16 +364,16 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
       - 5: W-Profile.component.html: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/JuanFase4/frontend/src/app/Htmls/W-Profile.component.html
         
 - Aurora María Fernández Basanta:
-    - Descripción:
+    - Descripción: Creación de los componentes necesarios para la pantalla principal/main | Creación de componentes necesarios para la pantalla SingleElement |  Creación delcomponente de laos cards y su muestra en escena usado tanto en main como en profile| Ayuda en la inetgración del banner de la pantalla perfil |  Modificación de la api de usuarios para su añadido de imagenes +  modificación de las funciones de actualización del User | Creación de la api de reviews + su .service y model | Creación de la función para añadir y editar reviews en SingleElement y creación tambien de su función para añadir el elemento a la lista del usuario deseada | Instalación de Bootstrap en el proyecto.
     - 5 Commits más destacados:
-      - 1:
-      - 2:
-      - 3:
-      - 4:
-      - 5:
+      - 1: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/90e5210708ef53627e60b3a33f4a293e3ee14c04
+      - 2: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/877f21a639a15c90d7ffbf388ee8b930fc1f85da
+      - 3: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/50bd1722e047dffb84356fa4efec825649258254
+      - 4: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/8431d8a4b3d40e8fa8e53cf552ac981255d32900
+      - 5: https://github.com/CodeURJC-DAW-2023-24/webapp02/commit/50bd1722e047dffb84356fa4efec825649258254
     - 5 Ficheros:
-      - 1:
-      - 2:
-      - 3:
-      - 4:
-      - 5: 
+      - 1: main.component.ts: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase4/frontend/src/app/components/main.component.ts
+      - 2: singleElement.component.ts: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase4/frontend/src/app/components/singleElement.component.ts
+      - 3: reviewApiController.java: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase4/backend/src/main/java/com/example/candread/apicontroller/ReviewApiController.java
+      - 4: review.service.ts: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase4/frontend/src/app/services/review.service.ts
+      - 5: W-SingleElement.component.html: https://github.com/CodeURJC-DAW-2023-24/webapp02/blob/AuroraFase4/frontend/src/app/Htmls/W-SingleElement.component.html
