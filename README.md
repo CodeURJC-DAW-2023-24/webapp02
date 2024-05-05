@@ -1,5 +1,8 @@
 # webapp02
 
+## Vídeo en YouTube de muestra de aplicación cliente SPA de Angular:
+: https://youtu.be/Fq0tWZYqE6A :
+
 # FASE 0:
 
 ## Nombre de la Aplicación
@@ -306,11 +309,18 @@ Para ver la aplicación en el navegador introduzca la siguiente ruta: https://lo
 
 # FASE 4:
 
-## Vídeo en YouTube de muestra:
-:
-
 ## Preparación del entorno de desarrollo:
+Primero de todo debemos acceder a la máquina virtual de nuestro grupo, el 02, tal y como explicamos en la documentación de la fase 3, pero volveremos a repasarlo:
+ - Debemos acceder a la máquina virtual del equipo 02 mediante una terminal desde el directorio donde poseamos nuestra key y ejecutar la siguiente instrucción:
+  - ssh -i prAppWeb02.key vmuser@10.100.139.218
+ - Dentro de la máquina virtual, ejecutar el script de shell que hay puesto en la raíz del proyecto, ya que ejecutará el docker que contiene la aplicación y sus dependencias necesarias.
+ - Tras la construcción y ejecución de la aplicación esta se encontrará en el siguiente enlace:
+  - https://10.100.139.218:8443/new
 
+Si se ha instalado la aplicación en local y se desea acceder a esta localmente se debe de estar ejecutando el backend y desde el directorio frontend de la aplicación ejecutar los siguientes comandos:
+ - npm install
+ - ng serve --proxy-config proxy.conf.json
+ - El directorio de acceso a la aplicación SPA de Angular será el localhost:4200
 
 ## Diagrama de clases y templates de la aplicación SPA:
 ![diagramaClasesSpa](https://github.com/CodeURJC-DAW-2023-24/webapp02/assets/80918054/34573375-cdf3-4e51-8109-9878e2608e33)
