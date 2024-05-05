@@ -1,0 +1,43 @@
+   <!-- NAVBAR -->
+    <header-comp></header-comp>
+
+    <!-- MAIN -->
+    <main>
+
+        <section id="library">
+            <div class="row" id="libraryHead">
+                <div class="col-md-6" id="libraryTitle">
+                    <h4>Biblioteca de {{title}}</h4>
+                </div>
+            </div>
+
+            <div id="libraryList" class="container" *ngIf="elements$ | async as elements">
+                <div class="row">
+                  <div class="col-sm-4" *ngFor="let element of elements">
+                        <app-card [element]="element" [image]="elementImages[element.name]"></app-card>
+                  </div>
+                    <br>
+                    <div *ngIf="hasPrev">
+                        <button id="load-prev-btn"(click)="loadPreviousPage()">Resultados anteriores</button>
+                    </div>
+                    <br>
+                    <div *ngIf="hasNext">
+                        <button id="load-more-btn"(click)="loadNextPage()">Mas resultados</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="spinner" style="display: none;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+        </section>
+
+        <!-- FILTERS ASIDE-->
+        <lib-filter [elementType]="libraryType" (filteredElementsOutput)="filteredElements($event)"></lib-filter>
+    </main>
+
+
+

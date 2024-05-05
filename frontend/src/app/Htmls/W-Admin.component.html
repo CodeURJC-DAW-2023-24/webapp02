@@ -1,0 +1,187 @@
+ <header-comp></header-comp>
+<div id="editForms">
+  <!-- Contenido principal -->
+  <div class="container mt-5">
+    <div class="row">
+      <!-- Caja 1 con margen-top y margen-bottom -->
+      <div id="addNewsForm" action="/news/add" method="post">
+        <div class="col-md-12 mt-5 mb-5">
+          <h4>Añadir noticias</h4>
+          <div class="card rounded">
+            <div class="card-body">
+              <div class="row">
+                <!-- Columna para los campos de entrada -->
+                <div class="col-md-6 mb-3">
+                  <label for="campo1" class="form-label" >Título:</label>
+                  <input type="text" name="title" class="form-control"
+                    id="campo1" #Title>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="campo2" class="form-label" >Fecha:</label>
+                  <input type="date" name="date" class="form-control datepicker"
+                    id="campo2" #Date>
+                </div>
+                <div class="col-md-12 mb-3">
+                  <label for="campo3" class="form-label" >Descripción:</label>
+                  <input type="text" name="description" class="form-control"
+                    id="campo3" #Description>
+                </div>
+                <div class="col-md-12 mb-3">
+                  <label for="campo4" class="form-label" >Enlace:</label>
+                  <input type="text" name="link" class="form-control"
+                    id="campo4" #Link>
+                </div>
+              </div>
+
+              <div class="row">
+                <!-- Columna para el botón "Agregar" -->
+                <div class="col-md-12">
+                  <button class="btn btn-primary" (click)="addNew(Title.value, Date.value, Description.value, Link.value)">Agregar</button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <!-- <input type="hidden" name="_csrf" value="{{token}}"/> -->
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-4">
+          <button (click)="showFormAdmin()">Agregar Elemento</button>
+        </div>
+        <div class="col-md-4">
+          <button (click)="showForm('modifyBookForm')">Modificar
+            Elemento</button>
+        </div>
+        <div class="col-md-4">
+          <button (click)="showFormAdminGenre()">Añadir Genero</button>
+        </div>
+      </div>
+
+      <!-- Columna para los campos de entrada -->
+
+      <div *ngIf="hiddenAdd == false" id="serieForm">
+        <div id="addSerieForm" method="post" enctype="multipart/form-data"
+          accept-charset="UTF-8">
+          <div class="col-md-12 mt-5 mb-5">
+            <h4>Añadir Elemento</h4>
+            <div class="card rounded">
+              <div class="card-body">
+                <div class="row">
+                  <!-- Columna para los campos de entrada -->
+                  <div class="col-md-6 mb-3">
+                    <label for="campo1" class="form-label">Nombre:</label>
+                    <input type="text" name="name" class="form-control"
+                      id="campo1" #name>
+                  </div>
+                  <div class="col-md-6 mb-3">
+                    <label for="campo2" class="form-label">Descripción:</label>
+                    <input type="text" name="description"
+                      class="form-control datepicker"
+                      id="campo2" #description>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <label for="campo3" class="form-label">Autor:</label>
+                    <input type="text" name="author" class="form-control"
+                      id="campo3" #author>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <label for="campo4" class="form-label">Tipo:</label>
+                    <select name="type" class="form-select" id="campo4" #type>
+                      <option value="SERIE">SERIE</option>
+                      <option value="LIBRO">LIBRO</option>
+                      <option value="PELICULA">PELICULA</option>
+                    </select>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <label for="campo5" class="form-label">Estación:</label>
+                    <select name="season" class="form-select" id="campo5"
+                      #season>
+                      <option value="VERANO">VERANO</option>
+                      <option value="PRIMAVERA">PRIMAVERA</option>
+                      <option value="OTOÑO">OTOÑO</option>
+                      <option value="INVIERNO">INVIERNO</option>
+                    </select>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <label for="campo6" class="form-label">Estado:</label>
+                    <select name="state" class="form-select" id="campo6" #state>
+                      <option value="COMPLETO">COMPLETO</option>
+                      <option value="EN_EMISION">EN EMISION</option>
+                      <option value="POR_ESTRENARSE">POR_ESTRENARSE</option>
+                    </select>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <label for="campo7" class="form-label">País:</label>
+                    <input type="text" name="country" class="form-control"
+                      id="campo7" #country>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <label for="campo8" class="form-label">Géneros:</label>
+                    <input type="text" name="genres" class="form-control"
+                      id="campo8"
+                      placeholder="Ingrese los géneros separados por coma"
+                      #genres>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <label for="campo9" class="form-label">Año:</label>
+                    <input type="text" name="years" class="form-control"
+                      id="campo9" #year>
+                  </div>
+                  <div class="col-md-12 mb-3">
+                    <label for="campo10" class="form-label">Sube su
+                      imagen:</label>
+                    <input type="file" name="image" class="form-control"
+                      id="campo10"
+                      accept="image/jpeg,image/png,image/jpg" #image>
+                  </div>
+                  <!-- Columna para el botón "Agregar" -->
+                  <div class="col-md-12">
+                    <button
+                      (click)="(addElement(name.value, description.value, author.value, type.value, season.value ,state.value ,country.value ,genres.value ,year.value))"
+                      class="btn btn-primary">Agregar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <input type="hidden" name="_csrf" value="{{token}}"> -->
+        </div>
+      </div>
+
+      <modifyFragment></modifyFragment>
+
+      <!-- {{> W-ModifyFragment}} -->
+
+      <div id="addGenre"
+      *ngIf="hiddenGenre == false">
+        <div id="addGenreForm" action="/SingleElement/addGenre" method="post"
+          enctype="multipart/form-data"
+          accept-charset="UTF-8">
+          <div class="col-md-12 mt-5 mb-5">
+            <h4>Añadir Genero</h4>
+            <div class="card rounded">
+              <div class="card-body">
+                <div class="row">
+                  <!-- Columna para los campos de entrada -->
+                  <div class="col-md-6 mb-3">
+                    <label for="campo1" class="form-label">Nombre:</label>
+                    <input type="text" name="genreName" class="form-control"
+                      id="campo1" #genreName>
+                  </div>
+                  <div class="col-md-12">
+                    <button
+                      (click)="(addGenre(genreName.value))">Agregar</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- <input type="hidden" name="_csrf" value="{{token}}"> -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

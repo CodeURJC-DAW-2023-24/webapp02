@@ -1,0 +1,33 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    background: linear-gradient(90deg, rgb(182, 186, 255), rgb(180, 180, 180));
+    width: 100%;
+    min-height: 100vh;
+    background-blend-mode: multiply;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    overflow-y: auto
+}
+
+main{
+    margin-top: 150px;
+}
+
+.col-sm-4 {
+  width: 12rem;
+  margin: 20px;
+}
+
+/* TOP FILMS */
+#tops
+{
+    float: left;
+    width: 60%;
+}
+

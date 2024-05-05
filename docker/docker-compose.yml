@@ -2,9 +2,7 @@ version: '3.8'
 
 services:
   app:
-    build:
-      context: ../
-      dockerfile: docker/Dockerfile.dockerfile
+    image: araxah/webapp02:0.0.3
     ports:
       - "8443:8443"
     environment:

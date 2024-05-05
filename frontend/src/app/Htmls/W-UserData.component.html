@@ -1,0 +1,25 @@
+<!-- Cogeré los usuarios de un service -->
+<div class="d-flex justify-content-center align-item-center gap-3">
+
+  <div *ngIf="isLogged; else elseBlock">
+    <a class="navbar-brand text-white align-text-center text-uppercase" routerLink="/{{currentUser?.name}}/Profile">
+        <img src="{{currentUser?.imageURL}}" alt="Logo" width="50" height="50" class="align-text-center rounded-circle">
+    <strong>{{currentUser?.name}}</strong></a>
+    <div id = "logoutbutton" class = "btn">
+      <button (click)="logout()"> Log Out</button>
+    </div>
+
+    <div class="d-flex justify-content-center align-item-center gap-3" *ngIf="isAdmin">
+      <a routerLink="/Admin">Admin</a>
+    </div>
+  </div>
+
+  <ng-template #elseBlock>
+      <div class="navbar-brand text-white align-text-center">
+          <a routerLink="/Login">Iniciar sesión</a>
+          <span class="text-white">/</span>
+          <a routerLink="/SignIn">Registrarse</a>
+      </div>
+  </ng-template>
+</div>
+

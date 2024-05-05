@@ -15,8 +15,10 @@ import com.example.candread.security.jwt.AuthResponse.Status;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.web.bind.annotation.CrossOrigin;
 
 @RestController
+@CrossOrigin(origins = "http://localhost:4200", allowCredentials = "true")
 @RequestMapping("/api/auth")
 public class LoginController {
 

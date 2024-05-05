@@ -1,5 +1,6 @@
 package com.example.candread.services;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,14 +16,19 @@ public class ReviewService {
     @Autowired
     private ReviewRepository reviewRepository;
 
-    public void repoSaveReview(Review reviewToSave){
-        reviewRepository.save(reviewToSave);
+    public Review repoSaveReview(Review reviewToSave){
+        Review review = reviewRepository.save(reviewToSave);
+        return review;
     }
     public void repoDeleteReview(Review reviewToDelete){
         reviewRepository.delete(reviewToDelete);
     }
     public Optional<Review> repoFindById(Long id){
         return reviewRepository.findById(id);
+    }
+
+    public List<Review> repoFindAll(){
+        return reviewRepository.findAll();
     }
 
 }

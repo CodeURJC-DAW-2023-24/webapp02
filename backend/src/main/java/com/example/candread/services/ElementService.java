@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.sql.Blob;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
@@ -42,6 +43,11 @@ public class ElementService {
 
     @Autowired
     private UserRepository userRepository;
+    
+    public List<String> baseGenres = new ArrayList<>(Arrays.asList(
+            "ACCION", "AVENTURA", "TERROR",  "MISTERIO", "ROMANCE", "CIENCIAFICCION", "DRAMA",
+            "INFANTIL", "COMEDIA", "FANTASIA", "SOBRENATURAL", "NOVELA", "JUVENIL"
+        ));
 
     // @PostConstruct
     public void insertElement() throws IOException, SerialException, SQLException {
@@ -629,6 +635,10 @@ public class ElementService {
         return elementRepository.findAll();
     }
 
+    public List<Element> repoFind5NewElements(){
+        return elementRepository.findFirst5ByOrderByIdDesc();
+    }
+
     public Optional<Element> repoFindById(long id){
         //Optional<Element> elementOptional = elementRepository.findById(id);
         //return elementOptional;
@@ -655,8 +665,9 @@ public class ElementService {
         return elementRepository.findTop5ByOrderByIdDesc();
     }
 
-    public void repoSaveElement(Element elementToSave){
-        elementRepository.save(elementToSave);
+    public Element repoSaveElement(Element elementToSave){
+        Element savedelement= elementRepository.save(elementToSave);
+        return savedelement;
     }
 
     public void repoDeleteById(Long id){
@@ -665,6 +676,12 @@ public class ElementService {
 
     public void repoDeleteByName(String name){
         elementRepository.deleteByName(name);
+    }
+
+    public Optional<Element> repoFindByNameAndType(String name, String type){
+        //Optional<Element> elementOptional = elementRepository.findById(id);
+        //return elementOptional;
+        return elementRepository.findByNameAndType(name,type);
     }
 
 }

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registro</title>
+</head>
+<body>
+
+<form id="registerForm" (ngSubmit)="signIn($event)">
+    <h2>Registro</h2>
+    <br>
+    <input type="text" id="nombre" name="name" placeholder="Nombre" required [(ngModel)]="userName">
+    <br>
+    <input type="password" id="contrasena1" name="password" placeholder="Contraseña" required [(ngModel)]="password">
+    <br>
+    <input type="password" id="contrasena2" name="password2" placeholder="Repetir Contraseña" required [(ngModel)]="password1">
+    <br>
+    <input type="submit" value="Registrarse">
+    <br>
+    <div class="links">
+        <a routerLink="/Login">¿Ya tienes cuenta? Iniciar Sesión</a>
+    </div>
+</form>
+
+</body>
+</html>

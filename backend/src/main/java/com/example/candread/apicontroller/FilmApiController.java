@@ -50,8 +50,10 @@ import jakarta.servlet.http.HttpServletRequest;
 @RequestMapping("api/films")
 public class FilmApiController {
 
-    /**@Autowired
-    private PagingRepository elementsPaged;**/
+    /**
+     * @Autowired
+     *            private PagingRepository elementsPaged;
+     **/
 
     @Autowired
     private PagingService elementsPaged;
@@ -65,16 +67,53 @@ public class FilmApiController {
         return elementsPaged.repoFindByType("PELICULA", pageable);
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "200", description = "FILM ID CORRECT", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Film not found", content = @Content)
+    @GetMapping("/genre")
+    public Page<Element> getFilmsByGenre(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndGenres("PELICULA", filter, pageable);
+        }
+        return null;
+    }
+
+    @GetMapping("/season")
+    public Page<Element> getFilmsBySeason(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndSeason("PELICULA", filter, pageable);
+        }
+        return null;
+    }
+
+    @GetMapping("/country")
+    public Page<Element> getFilmsByCountry(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndCountry("PELICULA", filter, pageable);
+        }
+        return null;
+    }
+
+    @GetMapping("/state")
+    public Page<Element> getFilmsByState(@RequestParam(required = false) String filter, Pageable pageable) {
+        if (filter != null) {
+            return elementsPaged.repoFindByTypeAndState("PELICULA", filter, pageable);
+        }
+        return null;
+    }
+
+    @GetMapping("/top")
+    public Page<Element> getTop5Films(Pageable pageable) {
+        return elementService.repofindTopElementsByRating("PELICULA", pageable);
+    }
+
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "FILM ID CORRECT", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Film not found", content = @Content)
     })
     @GetMapping("/{id}")
     public ResponseEntity<Element> getFilmsById(@PathVariable Long id) {
-        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
+        // Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
         Optional<Element> optElement = elementService.repoFindByIdAndType(id, "PELICULA");
 
         if (optElement.isPresent()) {
@@ -85,19 +124,19 @@ public class FilmApiController {
         }
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "200", description = "FILM PUT CORRECTLY", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Film not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "FILM PUT CORRECTLY", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Film not found", content = @Content)
     })
     @PutMapping("/{id}")
     public ResponseEntity<Object> updateFilm(@PathVariable Long id,
             @RequestBody ElementDTO elementDTO,
             HttpServletRequest request) throws URISyntaxException {
 
-        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
+        // Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
         Optional<Element> optElement = elementService.repoFindByIdAndType(id, "PELICULA");
 
         if (optElement.isPresent()) {
@@ -129,8 +168,19 @@ public class FilmApiController {
             }
 
             if (elementDTO.getCountry() != null) {
-                Countries c = Countries.valueOf(elementDTO.getCountry());
-                element.setCountry(c);
+
+                Countries[] countries = Element.Countries.values();
+                if(element.countriInENum(elementDTO.getCountry(), countries)) {
+                    Countries c = Countries.valueOf(elementDTO.getCountry());
+                    element.setCountry(c);
+                    
+                }
+                
+                else {
+                    element.setNewCountry(elementDTO.getCountry());
+                }
+
+                
             }
             if (elementDTO.getGenres() != null) {
                 List<String> newGenresList = elementDTO.getGenres();
@@ -143,20 +193,23 @@ public class FilmApiController {
                 element.setGeneros(genreList);
             }
 
-            //elementRepo.save(element);
-            elementService.repoSaveElement(element);
-            return ResponseEntity.ok(element);
+            // elementRepo.save(element);
+            Element savedElement = elementService.repoSaveElement(element);
+            Long filmId = element.getId();
+            String filmUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(filmId)
+                    .toUriString();
+            return ResponseEntity.created(new URI(filmUrl)).body(savedElement);
         } else {
             return ResponseEntity.notFound().build();
         }
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "201", description = "FILM POST CORRECT", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "FILM POST CORRECT", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Book not found", content = @Content)
     })
     @PostMapping("/")
     public ResponseEntity<Object> uploadFilm(@RequestBody ElementDTO elementDTO,
@@ -164,8 +217,9 @@ public class FilmApiController {
 
         List<String> genresList = elementDTO.getGenres();
         Element element = new Element(elementDTO.getName(), elementDTO.getDescription(), elementDTO.getAuthor(),
-            elementDTO.getType(), elementDTO.getSeason(), elementDTO.getState(), elementDTO.getCountry(), genresList, elementDTO.getYear());
-        //elementRepo.save(element);
+                elementDTO.getType(), elementDTO.getSeason(), elementDTO.getState(), elementDTO.getCountry(),
+                genresList, elementDTO.getYear());
+        // elementRepo.save(element);
         elementService.repoSaveElement(element);
         Long bookId = element.getId();
         String bookUrl = ServletUriComponentsBuilder.fromRequestUri(request).path("/{id}").buildAndExpand(bookId)
@@ -174,33 +228,33 @@ public class FilmApiController {
         return ResponseEntity.created(new URI(bookUrl)).build();
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "200", description = "FILM DELETED CORRECT", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
-        @ApiResponse(responseCode = "404", description = "FILM not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "FILM DELETED CORRECT", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+            @ApiResponse(responseCode = "404", description = "FILM not found", content = @Content)
     })
     @DeleteMapping("/{id}")
     public ResponseEntity<Object> deleteFilm(@PathVariable Long id) {
 
-        //elementRepo.deleteById(id);
+        // elementRepo.deleteById(id);
         elementService.repoDeleteById(id);
 
         return ResponseEntity.noContent().build();
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "200", description = "FILM IMAGE CORRECT", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Film not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "FILM IMAGE CORRECT", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Film not found", content = @Content)
     })
     @GetMapping("/{id}/image")
     public ResponseEntity<byte[]> getFilmImageById(@PathVariable Long id) {
-        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
+        // Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
         Optional<Element> optElement = elementService.repoFindByIdAndType(id, "PELICULA");
 
         if (optElement.isPresent()) {
@@ -212,7 +266,7 @@ public class FilmApiController {
                     byte[] imageData = imageBlob.getBytes(1, (int) imageBlob.length());
                     return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageData);
                 } else {
-                    //Image is not found and we print 404 error
+                    // Image is not found and we print 404 error
                     return ResponseEntity.notFound().build();
                 }
             } catch (SQLException e) {
@@ -227,18 +281,18 @@ public class FilmApiController {
         }
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "201", description = "FILM IMAGE POST CORRECT", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Film not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "FILM IMAGE POST CORRECT", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Film not found", content = @Content)
     })
     @PostMapping("/{id}/image")
     public ResponseEntity<Object> uploadFilmImageById(@PathVariable Long id,
             @RequestParam("imageFile") MultipartFile imageFile, HttpServletRequest request)
             throws URISyntaxException, IOException {
-        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
+        // Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
         Optional<Element> optElement = elementService.repoFindByIdAndType(id, "PELICULA");
 
         if (optElement.isPresent()) {
@@ -267,19 +321,19 @@ public class FilmApiController {
         }
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "200", description = "FILM IMAGE PUT CORRECT", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Film not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "FILM IMAGE PUT CORRECT", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Film not found", content = @Content)
     })
     @PutMapping("/{id}/image")
     public ResponseEntity<Object> updateFilmImage(@PathVariable Long id,
             @RequestParam("imageFile") MultipartFile imageFile) throws IOException {
 
         // Verify if the film exists
-        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
+        // Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
         Optional<Element> optElement = elementService.repoFindByIdAndType(id, "PELICULA");
         if (optElement.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -291,7 +345,7 @@ public class FilmApiController {
         try {
             film.setImageFile(new SerialBlob(imageBytes));
             film.setBase64Image(Base64.getEncoder().encodeToString(imageBytes));
-            //elementRepo.save(film);
+            // elementRepo.save(film);
             elementService.repoSaveElement(film);
 
         } catch (SerialException e) {
@@ -302,17 +356,17 @@ public class FilmApiController {
         return ResponseEntity.noContent().build();
     }
 
-    @ApiResponses( value = {
-        @ApiResponse(responseCode = "204", description = "FILM IMAGE DELETE CORRECT", content = {
-            @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
-        }),
-        @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
-        @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
-        @ApiResponse(responseCode = "404", description = "Film not found", content = @Content)
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "FILM IMAGE DELETE CORRECT", content = {
+                    @Content(mediaType = "application/json", schema = @Schema(implementation = Element.class))
+            }),
+            @ApiResponse(responseCode = "400", description = "Invalid id supplied", content = @Content),
+            @ApiResponse(responseCode = "401", description = "Unauthorized", content = @Content),
+            @ApiResponse(responseCode = "404", description = "Film not found", content = @Content)
     })
     @DeleteMapping("/{id}/image")
     public ResponseEntity<Object> deleteFilmImage(@PathVariable Long id) {
-        //Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
+        // Optional<Element> optElement = elementRepo.findByIdAndType(id, "PELICULA");
         Optional<Element> optElement = elementService.repoFindByIdAndType(id, "PELICULA");
         if (optElement.isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -322,11 +376,23 @@ public class FilmApiController {
         film.setImageFile(null);
         film.setBase64Image(null);
 
-        //elementRepo.save(film);
+        // elementRepo.save(film);
         elementService.repoSaveElement(film);
 
         return ResponseEntity.noContent().build();
     }
 
-}
 
+    @GetMapping("/{name}/")
+    public ResponseEntity<Element> getFilmByname(@PathVariable String name) {
+        Optional<Element> optElement = elementService.repoFindByNameAndType(name,"PELICULA");
+
+        if (optElement.isPresent()) {
+            Element element = (Element) optElement.get();
+            return ResponseEntity.ok(element);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+}

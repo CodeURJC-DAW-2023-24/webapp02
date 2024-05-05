@@ -1,0 +1,64 @@
+<div class="row">
+    <!-- Columna para los campos de entrada -->
+    <div class="col-md-6 mb-3">
+        <label for="elementName" class="form-label">Nombre:</label>
+        <input type="text" name="name" class="form-control" id="elementName" [(ngModel)] = "name">
+    </div>
+    <div class="col-md-6 mb-3">
+        <label for="elementDescription" class="form-label">Descripción:</label>
+        <input type="text" name="description" class="form-control datepicker" id="elementDescription"  [(ngModel)] = "description">
+    </div>
+    <div class="col-md-12 mb-3">
+        <label for="elementAuthor" class="form-label">Autor:</label>
+        <input type="text" name="author" class="form-control" id="elementAuthor"  [(ngModel)] = "author">
+    </div>
+    <div id="elementType" style="display: none;"></div>
+    <div class="col-md-12 mb-3">
+        <label for="type-select" class="form-label">Tipo:</label>
+        <select name="type" class="form-select" id="type-select"  [(ngModel)] = "type">
+            <option value="SERIE">SERIE</option>
+            <option value="LIBRO">LIBRO</option>
+            <option value="PELICULA">PELÍCULA</option>
+        </select>
+    </div>
+    <div id="elementSeason" style="display: none;"></div>
+    <div class="col-md-12 mb-3">
+        <label for="season-select" class="form-label">Estación:</label>
+        <select name="season" id="season-select" class="form-select"  [(ngModel)] = "season">
+            <option value="VERANO">VERANO</option>
+            <option value="PRIMAVERA">PRIMAVERA</option>
+            <option value="OTOÑO">OTOÑO</option>
+            <option value="INVIERNO">INVIERNO</option>
+        </select>
+    </div>
+    <div class="col-md-12 mb-3">
+        <label for="state-select" class="form-label">Estado:</label>
+        <div id="elementState" style="display: none;"></div>
+        <select name="state" class="form-select" id="state-select"  [(ngModel)] = "state">
+            <option value="COMPLETO">COMPLETO</option>
+            <option value="EN_EMISION">EN EMISIÓN</option>
+            <option value="POR_ESTRENARSE">POR ESTRENARSE</option>
+        </select>
+    </div>
+    <div class="col-md-12 mb-3">
+        <label for="elementCountry" class="form-label">País:</label>
+        <input type="text" name="country" class="form-control" id="elementCountry"  [(ngModel)] = "country"> 
+    </div>
+    <div id="elementGenre" style="display: none;"></div>
+    <div class="col-md-12 mb-3">
+        <label for="elementGenres" class="form-label">Géneros:</label>
+        <input type="text" name="genres" class="form-control" id="elementGenres"  [(ngModel)] = "genres">
+    </div>
+    <div class="col-md-12 mb-3">
+        <label for="elementYear" class="form-label">Año:</label>
+        <input type="text" name="years" class="form-control" id="elementYear"  [(ngModel)] = "year">
+    </div>
+    <div class="col-md-12 mb-3">
+        <label for="campo10" class="form-label">Sube su imagen:</label>
+        <input type="file" name="image" class="form-control" id="imageInput" accept="image/jpeg,image/png,image/jpg" >
+    </div>
+    <!-- Columna para el botón "Agregar" -->
+    <div class="col-md-12">
+        <button  (click)="update()" class="btn btn-primary">Modificar</button>
+    </div>
+</div>

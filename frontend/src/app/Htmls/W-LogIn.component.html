@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciar Sesión</title>
+</head>
+<body>
+
+    <div id="loginForm">
+        <h2>Iniciar Sesion</h2>
+        <br>
+        <input type="text" id="usuario" name="username" placeholder="Usuario" required #name>
+        <br>
+        <input type="password" id="contrasena" name="password" placeholder="Contraseña" required #password>
+        <br>
+        <button (click)="submitForm(name.value, password.value)">Iniciar Sesión </button>
+
+        <div class="links">
+          <!-- Permite navegar a esas rutas usando el ruting -->
+          <a routerLink="/SignIn">Registrarse</a> |
+          <a routerLink="/Main">Continuar sin iniciar sesión</a>
+        </div>
+        <!-- <input type="hidden" name="_csrf" value="{{token}}"/> -->
+    </div>
+
+</body>
+</html>
