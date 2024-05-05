@@ -1,0 +1,81 @@
+<section id="carouselSection">
+    <div id="carouselTitle">
+        <h4>Estrenos</h4>
+    </div>
+    <div id="carouselMain" class="carousel slide ">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carouselMain" data-bs-slide-to="0" class="active"
+                aria-current="true" aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carouselMain" data-bs-slide-to="1"
+                aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carouselMain" data-bs-slide-to="2"
+                aria-label="Slide 3"></button>
+            <button type="button" data-bs-target="#carouselMain" data-bs-slide-to="3"
+                aria-label="Slide 4"></button>
+            <button type="button" data-bs-target="#carouselMain" data-bs-slide-to="4"
+                aria-label="Slide 0"></button>
+
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <div class="d-flex align-items-center">
+                    <div class="col-md-3" id="itemImg">
+                        <img [src]="images[elements[0].name]" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="col-md-9" id="itemSinopsis">
+                        <p>{{ elements[0].description }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex align-items-center">
+                    <div class="col-md-3" id="itemImg">
+                        <img [src]="images[elements[1].name]" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="col-md-9" id="itemSinopsis">
+                        <p>{{ elements[1].description }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex align-items-center">
+                    <div class="col-md-3" id="itemImg">
+                        <img [src]="images[elements[2].name]" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="col-md-9" id="itemSinopsis">
+                        <p>{{ elements[2].description }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex align-items-center">
+                    <div class="col-md-3" id="itemImg">
+                        <img [src]="images[elements[3].name]" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="col-md-9" id="itemSinopsis">
+                        <p>{{ elements[3].description }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <div class="d-flex align-items-center">
+                    <div class="col-md-3" id="itemImg">
+                        <img [src]="images[elements[4].name]" class="d-block w-100" alt="...">
+                    </div>
+                    <div class="col-md-9" id="itemSinopsis">
+                        <p>{{ elements[4].description }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselMain" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselMain" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</section>

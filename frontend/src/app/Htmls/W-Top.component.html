@@ -1,0 +1,12 @@
+<article id="topSection">
+    <div id="topTitle">
+        <h4>{{title}}</h4>
+    </div>
+    <div id="topList" class="container">
+        <div id="cardRow" class="row">
+            <div class="col-sm-4" *ngFor="let top of tops; let i = index">
+                <app-card [element]="top" [image]="topImages[top.name]"></app-card>
+            </div>
+        </div>
+    </div>
+</article>

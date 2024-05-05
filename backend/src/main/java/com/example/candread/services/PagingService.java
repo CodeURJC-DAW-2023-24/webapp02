@@ -49,4 +49,6 @@ public class PagingService {
         return pagingRepository.findByTypeAndRecommendations(type, recomendation, pageable);
     }
 
+    
+
 }

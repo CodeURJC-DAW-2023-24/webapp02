@@ -1,0 +1,58 @@
+<h5 class="campo">Reseñas:</h5>
+<div id="addReview" *ngIf="user!=undefined">
+    <button id="btnAdd" type="button" class="btn" data-bs-toggle="modal" data-bs-target="#modalEditReview" (click)="setModalReviewValues(undefined)">Añadir
+        Reseña</button>
+</div>
+
+<div id="review" *ngFor="let rev of reviews">
+    <div class="perfil align-self-start">
+        <img [src]="usersReviewsImages.get(rev.id!)" alt="Imagen de perfil">
+    </div>
+    <div class="información">
+        <h6 class="mb-0">{{usersReviews.get(rev.id!)?.name}}</h6>
+        <div class="puntuación">
+            Valoración: {{rev.rating}}
+        </div>
+        <p class="mt-0">{{rev.body}}</p>
+        <button *ngIf="rev.userLinked?.id==user?.id" id="btnEdit" type="button" class="btn"
+            data-bs-toggle="modal" data-bs-target="#modalEditReview" (click)="setModalReviewValues(rev)">Editar Reseña</button>
+    </div>
+</div>
+
+<!-- Modal para editar una reseña -->
+<div class="modal fade" id="modalEditReview" tabindex="-1" aria-labelledby="modalAddReviewLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="modalAddReviewLabel" *ngIf="review != undefined">Editar Reseña</h5>
+          <h5 class="modal-title" id="modalAddReviewLabel" *ngIf="review == undefined">Guardar Reseña</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <!-- Contenido del formulario para editar la reseña -->
+          <form id="editReviewForm" (ngSubmit)="guardarReview()">
+            <div class="mb-3">
+              <label for="userRating" class="form-label">Puntuación</label>
+              <select class="form-select" id="userRating" name="userRating" [(ngModel)]="reviewRating">
+                <option [value] = "0" [selected]="reviewRating == 0">Selecione opción</option>
+                <option [value] ="1" [selected]="reviewRating === 1">1 estrella</option>
+                <option [value] ="2" [selected]="reviewRating === 2">2 estrellas</option>
+                <option [value] ="3" [selected]="reviewRating === 3">3 estrellas</option>
+                <option [value] ="4" [selected]="reviewRating === 4">4 estrellas</option>
+                <option [value] ="5" [selected]="reviewRating === 5">5 estrellas</option>
+              </select>
+            </div>
+            <div class="mb-3">
+              <label for="userReview" class="form-label">Review:</label>
+              <textarea class="form-control" id="userReview" name="userReview" rows="3" [(ngModel)]="reviewBody">{{ reviewBody }}</textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+              <button id="btnSave" type="submit" class="btn" data-bs-dismiss="modal">Guardar</button>
+            </div>
+            <input id="inputrevid" type="hidden" name="reviewID" />
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>

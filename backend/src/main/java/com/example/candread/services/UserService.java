@@ -45,17 +45,14 @@ public class UserService {
     @Autowired
     private ElementService elementService;
 
-    
-
     @PostConstruct
     public void insertUsers() throws Exception {
-
 
         Blob profileblob = getBlob("static/Images/Img-UserProfile2.png");
         Blob bannerblob = getBlob("static/Images/imagenBanner.jpg");
 
-        //BASE USERS IN THE SYSTEM: 1 ADMIN 1 USER 1 ADMIN-USER
-        if(!existsByUsernameAndPassword("admin1", "pass")){
+        // BASE USERS IN THE SYSTEM: 1 ADMIN 1 USER 1 ADMIN-USER
+        if (!existsByUsernameAndPassword("admin1", "pass")) {
             User userPrueba = new User("admin1", passwordEncoder.encode("pass"), "USER", "ADMIN");
             userPrueba.setBannerImage(bannerblob);
             userPrueba.setProfileImage(profileblob);
@@ -68,8 +65,8 @@ public class UserService {
             userPrueba.setProfileImage(profileblob);
             userRepository.save(userPrueba);
         }
-        if(!existsByUsernameAndPassword("admin3", "123")){
-            User userPrueba = new User("admin3", passwordEncoder.encode("123"),  "ADMIN");
+        if (!existsByUsernameAndPassword("admin3", "123")) {
+            User userPrueba = new User("admin3", passwordEncoder.encode("123"), "ADMIN");
             userPrueba.setBannerImage(bannerblob);
             Map<String, List<Long>> listaE = new HashMap<>();
             List<Long> idEl = new ArrayList<>();
@@ -78,7 +75,7 @@ public class UserService {
             userRepository.save(userPrueba);
         }
 
-        if(!existsByUsernameAndPassword("Antonio27", "pass")){
+        if (!existsByUsernameAndPassword("Antonio27", "pass")) {
             User userPrueba = new User("Antonio27", passwordEncoder.encode("pass"), "USER");
             Map<String, List<Long>> listaE = new HashMap<>();
             List<Long> idEl = new ArrayList<>();
@@ -89,43 +86,43 @@ public class UserService {
 
         }
 
-        //ElementService created to execute after users creation
+        // ElementService created to execute after users creation
         elementService.insertElement();
         elementService.insertSeries();
         elementService.inserFilms();
     }
 
-    public Page<User> getAllUsers(Pageable pageable){
+    public Page<User> getAllUsers(Pageable pageable) {
         return userPagedRepository.findAll(pageable);
     }
-    
+
     public boolean existsByUsernameAndPassword(String username, String password) {
         return userRepository.findByName(username)
-        .map(user -> passwordEncoder.matches(password, user.getPassword()))
-        .orElse(false);
+                .map(user -> passwordEncoder.matches(password, user.getPassword()))
+                .orElse(false);
     }
 
     public Blob getBlob(String path) throws IOException, SerialException, SQLException {
         if (path == null) {
             throw new IllegalArgumentException("Path cannot be null");
         }
-    
+
         Resource resource = new ClassPathResource(path);
         InputStream inputStream = resource.getInputStream();
-        
+
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         byte[] buffer = new byte[2048];
         int bytesRead;
-        while ((bytesRead = inputStream.read(buffer)) != -1){
+        while ((bytesRead = inputStream.read(buffer)) != -1) {
             outputStream.write(buffer, 0, bytesRead);
         }
-    
+
         byte[] imageBytes = outputStream.toByteArray();
         Blob blobi = new SerialBlob(imageBytes);
         return blobi;
     }
 
-        public void fullSet64Image() throws SQLException, IOException {
+    public void fullSet64Image() throws SQLException, IOException {
         List<User> users = userRepository.findAll();
         int size = users.size();
         long longSize = size;
@@ -138,7 +135,7 @@ public class UserService {
         Optional<User> userOptional = userRepository.findById(id);
         User user = userOptional.orElseThrow();
         Blob blob = user.getProfileImage();
-        if (blob != null){
+        if (blob != null) {
             InputStream inputStream = blob.getBinaryStream();
             byte[] imageBytes = inputStream.readAllBytes();
             String base64Image = Base64.getEncoder().encodeToString(imageBytes);
@@ -148,10 +145,9 @@ public class UserService {
             imageBytes = inputStream.readAllBytes();
             base64Image = Base64.getEncoder().encodeToString(imageBytes);
             user.setBase64BannerImage(base64Image);
-            
-            inputStream.close();  
-        }
-        else{
+
+            inputStream.close();
+        } else {
             Blob blobAladdin = getBlob("static/Images/Aladdin.jpg");
             InputStream inputStream = blobAladdin.getBinaryStream();
             byte[] imageBytes = inputStream.readAllBytes();
@@ -163,37 +159,40 @@ public class UserService {
             String base64BannerImage = Base64.getEncoder().encodeToString(bannerImageBytes);
             user.setBase64BannerImage(base64BannerImage);
         }
-        
 
-        
-   }
+    }
 
-   public void repoSaveUser(User userToSave){
-    userRepository.save(userToSave);
-   }
-   
-   public Optional<User> repoFindById(Long id){
-    return userRepository.findById(id);
-   }
+    public User repoSaveUser(User userToSave) {
+        User userResponse = userRepository.save(userToSave);
+        return userResponse;
+    }
 
-   public void repoDeleteById(Long id){
+    public Optional<User> repoFindById(Long id) {
+        return userRepository.findById(id);
+    }
+
+    public void repoDeleteById(Long id) {
         userRepository.deleteById(id);
         return;
-   }
+    }
 
-   public User repoFindByName(String name){
-    return userRepository.findByName(name).orElseThrow();
-   }
+    public User repoFindByName(String name) {
+        return userRepository.findByName(name).orElseThrow();
+    }
 
-   public Optional<User> repoFindByNameOpt(String name){
-    return userRepository.findByName(name);
-   }
+    public Optional<User> repoFindByNameOpt(String name) {
+        return userRepository.findByName(name);
+    }
 
-   public Page<User> repoFindAll(Pageable pageable){
-    return userRepository.findAll(pageable);
-   }
+    public Page<User> repoFindAll(Pageable pageable) {
+        return userRepository.findAll(pageable);
+    }
 
-   public List<User> repoFindAll(){
-    return userRepository.findAll();
-   }
+    public List<User> repoFindAll() {
+        return userRepository.findAll();
+    }
+
+    public Optional<User> repoFindByNameAndRoles(String username, List<String> roles) {
+        return userRepository.findByName(username);
+    }
 }

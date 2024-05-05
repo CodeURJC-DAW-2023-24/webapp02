@@ -80,7 +80,6 @@ public class Element {
     private List<String> genres;
 
     @OneToMany (mappedBy = "elementLinked", cascade = CascadeType.ALL)
-    @JsonIgnore
     private List<Review> reviews = new ArrayList<>();
 
 
@@ -223,6 +222,21 @@ public class Element {
 
     public void setUsersFavourited(List<User> usersFavourited) {
         this.usersFavourited = usersFavourited;
+    }
+
+    public boolean countriInENum(String country, Countries[] countries) {
+
+        for (Countries c: countries) {
+            if (c.name().equals(country)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public void setNewCountry(String country) {
+        this.country = country;
     }
 
     

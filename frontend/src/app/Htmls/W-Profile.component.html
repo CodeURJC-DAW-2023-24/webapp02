@@ -1,0 +1,44 @@
+<header-comp id="Header"></header-comp>
+
+<main>
+    <app-banner [user] = "actualUser" (actualBannerURL)="recieveBannerURL($event)"></app-banner>
+    
+    <button class="btnAdd" data-bs-toggle="modal" data-bs-target="#newListModal">
+        =NUEVA LISTA=
+    </button>
+
+    <section id="tops">
+        <div *ngFor="let entrada of newMap | keyvalue">
+            <app-tops [tops]="entrada.value" [topImages] = "elementsImages" title = {{entrada.key}}> </app-tops>
+        </div>
+    </section>
+
+    <app-stats [elements]="allElements"></app-stats>
+
+    <!-- MODAL PARA AÑADIR UNA-->
+    <div class="modal" id="newListModal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- <form (ngSubmit)="updateProfile()"></form> -->
+                <!-- <form action="/users/updateNewList" method="post" enctype="multipart/form-data"> -->
+                <form (ngSubmit)="addList(newNameList.value)">
+                    <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">Nueva Lista:</h1>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                            aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="listName">Nombre de la Lista: </label>
+                            <input type="text" class="form-control" id="listName" #newNameList>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">Guardar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</main>

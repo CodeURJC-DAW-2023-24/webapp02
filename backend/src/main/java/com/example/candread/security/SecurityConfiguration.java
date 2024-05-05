@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
@@ -62,8 +63,8 @@ public class SecurityConfiguration {
         http.authenticationProvider(authenticationProvider());
 
         http.authorizeHttpRequests((authorize) -> authorize
-                .requestMatchers("/", "/CSS/**", "/Images/**", "/Scripts/**","/downloadNames/**", "/SignIn", "/users/**", "/Library/**",
-                        "/SingleElement/**", "/loginerror", "/error","/EditFragment")
+                .requestMatchers("/", "/CSS/**", "/Images/**", "/Scripts/**","/downloadNames/**", "/SignIn", "/users/**", "/Library/**", "/new/**",
+                        "/SingleElement/**", "/loginerror", "/error","/EditFragment", "/images/**")
                 .permitAll()
                 .requestMatchers("/*/Profile/**", "/*/Main", "/review/**").hasAnyRole("USER", "ADMIN")
                 .requestMatchers("/Admin/**", "/news/add","/SingleElement/edit").hasRole("ADMIN")
@@ -102,7 +103,7 @@ public class SecurityConfiguration {
             http
 			.authorizeHttpRequests(authorize -> authorize
                     // PRIVATE ENDPOINTS
-                    .requestMatchers("/api/users/**").hasRole("ADMIN")
+                    .requestMatchers(HttpMethod.DELETE, "/api/users/{id}").hasRole("ADMIN")
 					// PUBLIC ENDPOINTS
 					.anyRequest().permitAll()
 			);

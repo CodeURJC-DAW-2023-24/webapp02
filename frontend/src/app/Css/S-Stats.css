@@ -1,0 +1,33 @@
+/* STADISTICS */
+#stadisticSection{
+    width : 30%;
+    float: left;
+    margin:30px;
+    padding: 10px;
+    background-color: white;
+    border-radius: 5px;
+    border:3px;
+    border-color: #b4d2ff;
+    border-style: solid;
+}
+#stadisticTitle{
+    background-color: #3253ad;
+    color:white;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 1px;
+    padding-top: 5px;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    width: max-content;
+    font-size: 30px;
+}
+#stadisticList{
+    margin: 15px;
+}
+#tops
+{
+    float: left;
+    width: 60%;
+}
